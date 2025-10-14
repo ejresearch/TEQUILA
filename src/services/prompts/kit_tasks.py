@@ -1087,6 +1087,138 @@ def task_guidelines(
 
 
 # ============================================================================
+# DAY DOCUMENT PROMPT (Field 06) - Structured JSON lesson plan
+# ============================================================================
+
+def task_document_day(
+    week_number: int,
+    day_number: int,
+    class_name: str,
+    week_spec: Optional[Dict[str, Any]] = None,
+    prior_knowledge_digest: Optional[Dict[str, Any]] = None,
+    role_context: Optional[Dict[str, Any]] = None,
+    guidelines: Optional[str] = None
+) -> Tuple[str, str, Dict[str, Any]]:
+    """
+    Generate 06_document_for_sparky.json - Structured JSON lesson plan.
+
+    This prompt produces the core schema-based learning document that drives
+    both validation and AI tutoring. It compiles all prior fields into a
+    complete DayDocument with lesson steps, vocabulary, grammar, chant,
+    virtue/faith integration, and spiral content references.
+
+    Output structure (DayDocument schema):
+    - metadata: {week, day, class_name, grade, time_total_minutes, license,
+                 validated_by, originality_attestation, provenance}
+    - lesson_steps: array of 4-6 steps (each with: step_number, title,
+                    duration_minutes, instruction, activity_type, materials,
+                    spiral_content, virtue_link, faith_phrase)
+    - vocabulary_today: array of strings (≥3 words)
+    - grammar_focus: string
+    - chant_focus: string
+    - checks_for_understanding: array of strings
+    - success_criteria: array of strings
+    - constraints: {tone, no_translation_key}
+
+    Pedagogical features:
+    - Lesson steps sum to 20-25 minutes total
+    - At least one step includes spiral_content references
+    - Virtue and faith integrated naturally in 1-2 steps
+    - Grade 3 appropriate language throughout
+    - Activity types: chant, recitation, translation, discussion, reflection
+
+    Args:
+        week_number: Week number (1-35)
+        day_number: Day number (1-4)
+        class_name: Class name from prompt_for_class_name
+        week_spec: Optional week spec data
+        prior_knowledge_digest: Optional prior knowledge digest
+        role_context: Optional role context from prompt_for_role_context
+        guidelines: Optional guidelines markdown from prompt_for_guidelines
+
+    Returns:
+        (system_prompt, user_prompt, config_dict)
+
+    Output:
+        JSON with single key: {"day_document": {...DayDocument schema...}}
+    """
+    prompt_spec = _load_prompt_json("day/day_document.json")
+
+    # Build user prompt with interpolated values
+    user_content = "\n".join(prompt_spec["messages"][1]["content_template"])
+    user_content = user_content.replace("{{week_number}}", str(week_number))
+    user_content = user_content.replace("{{day_number}}", str(day_number))
+    user_content = user_content.replace("{{class_name}}", class_name)
+    user_content = user_content.replace("{{grade_level}}", prompt_spec["inputs"]["grade_level"])
+
+    # If week_spec provided, serialize it (excerpt: first 500 chars to save tokens)
+    if week_spec:
+        week_spec_json = json.dumps(week_spec, indent=2)
+        # Truncate if very large
+        if len(week_spec_json) > 2000:
+            week_spec_excerpt = week_spec_json[:2000] + "\n... (truncated)"
+        else:
+            week_spec_excerpt = week_spec_json
+        user_content = user_content.replace("{{week_spec}}", week_spec_excerpt)
+    else:
+        user_content = user_content.replace(
+            "{{week_spec}}",
+            f"[Load from curriculum/LatinA/Week{week_number:02d}/Week_Spec/99_compiled_week_spec.json]"
+        )
+
+    # If prior_knowledge_digest provided, serialize it (excerpt)
+    if prior_knowledge_digest:
+        digest_json = json.dumps(prior_knowledge_digest, indent=2)
+        if len(digest_json) > 1000:
+            digest_excerpt = digest_json[:1000] + "\n... (truncated)"
+        else:
+            digest_excerpt = digest_json
+        user_content = user_content.replace("{{prior_knowledge_digest}}", digest_excerpt)
+    else:
+        user_content = user_content.replace(
+            "{{prior_knowledge_digest}}",
+            f"[Load from curriculum/LatinA/Week{week_number:02d}/Week_Spec/07_prior_knowledge_digest.json]"
+        )
+
+    # If role_context provided, serialize it (excerpt)
+    if role_context:
+        role_context_json = json.dumps(role_context, indent=2)
+        if len(role_context_json) > 1500:
+            role_context_excerpt = role_context_json[:1500] + "\n... (truncated)"
+        else:
+            role_context_excerpt = role_context_json
+        user_content = user_content.replace("{{role_context}}", role_context_excerpt)
+    else:
+        user_content = user_content.replace(
+            "{{role_context}}",
+            f"[Load from curriculum/LatinA/Week{week_number:02d}/Day{day_number:02d}/04_role_context.json]"
+        )
+
+    # If guidelines provided, use excerpt (first 1000 chars)
+    if guidelines:
+        if len(guidelines) > 1000:
+            guidelines_excerpt = guidelines[:1000] + "\n... (truncated)"
+        else:
+            guidelines_excerpt = guidelines
+        user_content = user_content.replace("{{guidelines}}", guidelines_excerpt)
+    else:
+        user_content = user_content.replace(
+            "{{guidelines}}",
+            f"[Load from curriculum/LatinA/Week{week_number:02d}/Day{day_number:02d}/05_guidelines_for_sparky.md]"
+        )
+
+    system_content = prompt_spec["messages"][0]["content_template"]
+
+    config = {
+        "temperature": prompt_spec["model_preferences"]["temperature"],
+        "max_tokens": prompt_spec["model_preferences"]["max_tokens"],
+        "model": prompt_spec["model_preferences"]["model"]  # gpt-4o
+    }
+
+    return (system_content, user_content, config)
+
+
+# ============================================================================
 # LEGACY ROLE_CONTEXT PROMPT (Field 04) - Week-level variant
 # ============================================================================
 

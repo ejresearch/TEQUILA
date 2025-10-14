@@ -1,0 +1,321 @@
+{
+  "prompt_id": "prompt_for_day_document",
+  "version": "1.0.0",
+  "description": "Generates the structured day-level JSON lesson plan file (06_document_for_sparky.json). This is the core schema-based learning document that drives both validation and AI tutoring. It contains lesson steps, vocabulary, grammar, chant, virtue/faith, and spiral content references, all in a deterministic and teachable sequence for Grade 3 Latin A.",
+  "depends_on": [
+    "prompt_for_system_overview",
+    "prompt_for_project_manifest",
+    "prompt_for_week_spec",
+    "prompt_for_prior_knowledge_digest",
+    "prompt_for_week_summary",
+    "prompt_for_class_name",
+    "prompt_for_day_summary",
+    "prompt_for_grade_level",
+    "prompt_for_role_context",
+    "prompt_for_guidelines"
+  ],
+  "persona": {
+    "ai_identity": "Steel",
+    "role": "Lesson Composer and Schema Author",
+    "voice": "Structured, calm, authoritative",
+    "mission": "Compile all contextual inputs into a clean, schema-valid daily JSON document for Sparky that represents one coherent Latin A lesson in the seven-field system."
+  },
+  "model_preferences": {
+    "provider": "openai",
+    "model": "gpt-4o",
+    "temperature": 0.2,
+    "max_tokens": 2000,
+    "reasoning": "Low temp (0.2) for structured schema compliance; 2000 tokens for complete DayDocument; gpt-4o for complex JSON generation with nested structure"
+  },
+  "inputs": {
+    "project_name": "Latin A (Grammar Stage)",
+    "week_number": "{{WEEK_NUMBER}}",
+    "day_number": "{{DAY_NUMBER}}",
+    "grade_level": "Grade 3 (Grammar Stage, U.S.)",
+    "class_name": "{{from prompt_for_class_name.class_name}}",
+    "week_spec": "{{from prompt_for_week_spec.week_spec}}",
+    "prior_knowledge_digest": "{{from prompt_for_prior_knowledge_digest.digest}}",
+    "role_context": "{{from prompt_for_role_context.role_context}}",
+    "guidelines": "{{from prompt_for_guidelines.guidelines_markdown}}",
+    "output_filename": "06_document_for_sparky.json"
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content_template": "You are Steel, the curriculum architect for TEQUILA. Build the fully structured 06_document_for_sparky.json for this day. Follow the DayDocument schema exactly. Integrate grammar, chant, vocabulary, spiral learning, virtue, faith, and teaching sequence. Keep total lesson time between 20 and 25 minutes."
+    },
+    {
+      "role": "user",
+      "content_template": [
+        "## Context",
+        "- Course: Latin A (Grammar Stage)",
+        "- Week: {{week_number}} | Day: {{day_number}} | Grade: {{grade_level}}",
+        "- Class: {{class_name}}",
+        "",
+        "### WeekSpec (excerpt)",
+        "{{week_spec}}",
+        "",
+        "### Prior Knowledge Digest (excerpt)",
+        "{{prior_knowledge_digest}}",
+        "",
+        "### Role Context (excerpt)",
+        "{{role_context}}",
+        "",
+        "### Guidelines (excerpt)",
+        "{{guidelines}}",
+        "",
+        "## Task",
+        "Construct a JSON object conforming to the DayDocument schema below. Ensure each lesson step aligns with TEQUILA's pedagogy: spiral recall, grammar/chant introduction, translation practice, virtue/faith integration, and reflection.",
+        "",
+        "### Schema (DayDocument)",
+        "{",
+        "  \"metadata\": {",
+        "    \"week\": integer,",
+        "    \"day\": integer,",
+        "    \"class_name\": string,",
+        "    \"grade\": string,",
+        "    \"time_total_minutes\": integer,",
+        "    \"license\": 'CC BY 4.0',",
+        "    \"validated_by\": 'Steel',",
+        "    \"originality_attestation\": true,",
+        "    \"provenance\": { \"provider\": string, \"model\": string, \"generated_at\": string }",
+        "  },",
+        "  \"lesson_steps\": [",
+        "    {",
+        "      \"step_number\": integer,",
+        "      \"title\": string,",
+        "      \"duration_minutes\": integer,",
+        "      \"instruction\": string,",
+        "      \"activity_type\": string,         // e.g. 'recitation', 'translation', 'chant', 'discussion'",
+        "      \"materials\": [string],",
+        "      \"spiral_content\": [string],",
+        "      \"virtue_link\": string,",
+        "      \"faith_phrase\": string",
+        "    }",
+        "  ],",
+        "  \"vocabulary_today\": [string],",
+        "  \"grammar_focus\": string,",
+        "  \"chant_focus\": string,",
+        "  \"checks_for_understanding\": [string],",
+        "  \"success_criteria\": [string],",
+        "  \"constraints\": {",
+        "    \"tone\": 'warm-positive-brief',",
+        "    \"no_translation_key\": true",
+        "  }",
+        "}",
+        "",
+        "### Rules",
+        "- Include 4–6 lesson steps; total time 20–25 minutes.",
+        "- At least one step must use spiral_content from prior_knowledge_digest.",
+        "- Integrate virtue_link and faith_phrase once or twice naturally.",
+        "- Keep instructions at Grade 3 reading level.",
+        "- Do NOT include raw markdown or extraneous commentary.",
+        "",
+        "Return **only valid JSON** under the key `day_document`."
+      ]
+    }
+  ],
+  "output_contract": {
+    "mime": "application/json",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "day_document": {
+          "type": "object",
+          "properties": {
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "week": { "type": "integer" },
+                "day": { "type": "integer" },
+                "class_name": { "type": "string" },
+                "grade": { "type": "string", "enum": ["Grade 3 (Grammar Stage, U.S.)"] },
+                "time_total_minutes": { "type": "integer", "minimum": 20, "maximum": 25 },
+                "license": { "type": "string", "enum": ["CC BY 4.0"] },
+                "validated_by": { "type": "string", "enum": ["Steel"] },
+                "originality_attestation": { "type": "boolean" },
+                "provenance": {
+                  "type": "object",
+                  "properties": {
+                    "provider": { "type": "string" },
+                    "model": { "type": "string" },
+                    "generated_at": { "type": "string" }
+                  },
+                  "required": ["provider", "model", "generated_at"],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "week",
+                "day",
+                "class_name",
+                "grade",
+                "time_total_minutes",
+                "license",
+                "validated_by",
+                "originality_attestation",
+                "provenance"
+              ]
+            },
+            "lesson_steps": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "step_number": { "type": "integer" },
+                  "title": { "type": "string" },
+                  "duration_minutes": { "type": "integer" },
+                  "instruction": { "type": "string" },
+                  "activity_type": { "type": "string" },
+                  "materials": { "type": "array", "items": { "type": "string" } },
+                  "spiral_content": { "type": "array", "items": { "type": "string" } },
+                  "virtue_link": { "type": "string" },
+                  "faith_phrase": { "type": "string" }
+                },
+                "required": [
+                  "step_number",
+                  "title",
+                  "duration_minutes",
+                  "instruction",
+                  "activity_type"
+                ]
+              },
+              "minItems": 4,
+              "maxItems": 6
+            },
+            "vocabulary_today": { "type": "array", "items": { "type": "string" }, "minItems": 3 },
+            "grammar_focus": { "type": "string" },
+            "chant_focus": { "type": "string" },
+            "checks_for_understanding": { "type": "array", "items": { "type": "string" } },
+            "success_criteria": { "type": "array", "items": { "type": "string" } },
+            "constraints": {
+              "type": "object",
+              "properties": {
+                "tone": { "type": "string", "enum": ["warm-positive-brief"] },
+                "no_translation_key": { "type": "boolean" }
+              },
+              "required": ["tone", "no_translation_key"]
+            }
+          },
+          "required": [
+            "metadata",
+            "lesson_steps",
+            "vocabulary_today",
+            "grammar_focus",
+            "chant_focus",
+            "checks_for_understanding",
+            "success_criteria",
+            "constraints"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": ["day_document"],
+      "additionalProperties": false
+    }
+  },
+  "self_checklist": [
+    "□ Contains 4–6 structured lesson steps with durations summing to 20–25 minutes.",
+    "□ Includes at least one spiral_content reference.",
+    "□ Embeds virtue_link and faith_phrase at least once.",
+    "□ Vocabulary_today drawn from week_spec.",
+    "□ Grammar_focus and chant_focus pulled from week_spec.",
+    "□ Checks and success_criteria consistent with role_context.",
+    "□ JSON passes DayDocument schema.",
+    "□ No extra commentary or markdown; fully machine-readable."
+  ],
+  "tags": [
+    "day_document",
+    "lesson_plan",
+    "sparky",
+    "seven-field",
+    "schema",
+    "pedagogy",
+    "latin_a"
+  ],
+  "example_invocation": {
+    "inputs": {
+      "week_number": 5,
+      "day_number": 2
+    },
+    "expected_output_excerpt": {
+      "day_document": {
+        "metadata": {
+          "week": 5,
+          "day": 2,
+          "class_name": "Latin A — Week 05 Day 2: 2nd Declension — Practice",
+          "grade": "Grade 3 (Grammar Stage, U.S.)",
+          "time_total_minutes": 22,
+          "license": "CC BY 4.0",
+          "validated_by": "Steel",
+          "originality_attestation": true,
+          "provenance": {
+            "provider": "openai",
+            "model": "gpt-4o",
+            "generated_at": "2025-10-14T12:00:00Z"
+          }
+        },
+        "lesson_steps": [
+          {
+            "step_number": 1,
+            "title": "Warm-Up Chant",
+            "duration_minutes": 4,
+            "instruction": "Chant the first and second declension endings slowly, then faster.",
+            "activity_type": "chant",
+            "materials": ["Chant chart"],
+            "spiral_content": ["1st declension endings"],
+            "virtue_link": "Diligence through repetition",
+            "faith_phrase": "Dominus vobiscum"
+          },
+          {
+            "step_number": 2,
+            "title": "Grammar Review",
+            "duration_minutes": 6,
+            "instruction": "Explain how -us nouns change in plural forms; ask students to name cases aloud.",
+            "activity_type": "discussion",
+            "materials": ["whiteboard"],
+            "spiral_content": ["case endings"],
+            "virtue_link": "",
+            "faith_phrase": ""
+          },
+          {
+            "step_number": 3,
+            "title": "Translation Practice",
+            "duration_minutes": 8,
+            "instruction": "Translate: 'Servī amant Deum.' and 'Amicī puellās vident.'",
+            "activity_type": "translation",
+            "materials": ["Sentence cards"],
+            "spiral_content": ["subject-verb agreement"],
+            "virtue_link": "",
+            "faith_phrase": ""
+          },
+          {
+            "step_number": 4,
+            "title": "Reflection and Closure",
+            "duration_minutes": 4,
+            "instruction": "Ask: 'What helped you remember endings today?' Close with the phrase *Dominus vobiscum.*",
+            "activity_type": "reflection",
+            "materials": [],
+            "spiral_content": [],
+            "virtue_link": "Faithful attention",
+            "faith_phrase": "Dominus vobiscum"
+          }
+        ],
+        "vocabulary_today": ["servus", "dominus", "magister", "campus", "deus"],
+        "grammar_focus": "Second Declension Nouns (Masculine Plural)",
+        "chant_focus": "us / ī / ō / um / ō",
+        "checks_for_understanding": [
+          "What is the nominative plural ending for -us nouns?",
+          "Translate: 'Servī sunt bonī.'",
+          "Identify the case of 'dominōrum.'"
+        ],
+        "success_criteria": [
+          "Chants 2nd declension plural endings without prompts.",
+          "Translates two simple sentences accurately.",
+          "Identifies case and number for given nouns."
+        ],
+        "constraints": { "tone": "warm-positive-brief", "no_translation_key": true }
+      }
+    }
+  }
+}

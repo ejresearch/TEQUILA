@@ -127,9 +127,67 @@ def task_assets(week_spec: dict) -> Tuple[str, str, Optional[Dict]]:
     return sys, usr, None
 
 
+def task_day_role_context(week_spec: dict, day: int) -> Tuple[str, str, Optional[Dict]]:
+    """
+    Generate prompts for day-specific role_context (the 4th Flint field).
+
+    This field defines Sparky's behavioral parameters for the specific day,
+    including teaching persona, hint availability, spiral emphasis, etc.
+
+    Args:
+        week_spec: The week specification data
+        day: Day number (1-4)
+
+    Returns:
+        (system_prompt, user_prompt, json_schema_hint)
+    """
+    sys = _load_system_prompt("day_role_context_system.txt")
+
+    usr = (
+        f"Generate day-specific role_context JSON for Week {week_spec.get('metadata', {}).get('week_number', '?')} Day {day}.\n\n"
+        "Week metadata and spiral links:\n"
+        + orjson.dumps(
+            {
+                "metadata": week_spec.get("metadata", {}),
+                "spiral_links": week_spec.get("spiral_links", {}),
+                "day": day,
+                "day_focus": _get_day_focus(day)
+            },
+            option=orjson.OPT_INDENT_2
+        ).decode()
+    )
+
+    schema = {
+        "type": "object",
+        "properties": {
+            "sparky_role": {"type": "string"},
+            "focus_mode": {"type": "string"},
+            "hints_enabled": {"type": "boolean"},
+            "spiral_emphasis": {"type": "array", "items": {"type": "string"}},
+            "encouragement_triggers": {"type": "array", "items": {"type": "string"}}
+        },
+        "required": ["sparky_role", "focus_mode", "hints_enabled"]
+    }
+
+    return sys, usr, schema
+
+
+def _get_day_focus(day: int) -> str:
+    """Get pedagogical focus label for day number."""
+    focuses = {
+        1: "introduction_and_exploration",
+        2: "practice_and_reinforcement",
+        3: "application_and_extension",
+        4: "review_and_spiral_25pct"
+    }
+    return focuses.get(day, "general")
+
+
 def task_day_fields(week_spec: dict, day: int) -> Tuple[str, str, Optional[Dict]]:
     """
-    Generate prompts for day Flint fields (the six text snippets).
+    Generate prompts for day Flint fields (class_name, summary, grade_level, guidelines, greeting).
+
+    Note: role_context (field 04) is generated separately via task_day_role_context.
 
     Args:
         week_spec: The week specification data
@@ -139,12 +197,12 @@ def task_day_fields(week_spec: dict, day: int) -> Tuple[str, str, Optional[Dict]
         (system_prompt, user_prompt, json_schema_hint)
     """
     sys = (
-        "Produce the six Flint field texts for a single day:\n"
+        "Produce the text Flint fields for a single day (excluding role_context):\n"
         "1. class_name - short lesson title\n"
         "2. summary - 2-3 sentence overview\n"
         "3. grade_level - target grade range\n"
-        "4. guidelines_for_sparky - teaching notes (markdown)\n"
-        "5. sparkys_greeting - 1-2 sentence student greeting\n\n"
+        "4. guidelines_for_sparky - teaching notes (markdown, now field 05)\n"
+        "5. sparkys_greeting - 1-2 sentence student greeting (now field 07)\n\n"
         "Return as JSON object with these keys.\n"
         "Keep greeting warm and encouraging (≤2 sentences)."
     )

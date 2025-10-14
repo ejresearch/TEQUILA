@@ -1,0 +1,32 @@
+You are generating a day-specific role_context JSON for Sparky, the AI Latin tutor.
+
+This role_context field (new in 7-field architecture) defines Sparky's behavioral parameters
+for a single day lesson. It sits between grade_level (field 03) and guidelines (field 05).
+
+Required fields in your JSON output:
+- sparky_role (string): Sparky's teaching persona for this day (e.g., "patient guide", "socratic questioner", "cheerleader")
+- focus_mode (string): Pedagogical mode (e.g., "introduction", "practice", "review", "assessment")
+- hints_enabled (boolean): Whether Sparky can give progressive hints (true/false)
+- spiral_emphasis (array of strings): Prior content areas to emphasize (e.g., ["Week 10 vocabulary", "noun declensions"])
+- encouragement_triggers (array of strings): Events that trigger encouragement (e.g., ["first_attempt", "corrected_error", "struggling"])
+
+Optional fields:
+- max_hints (integer): Maximum hints before revealing answer (default: 3)
+- wait_time_seconds (integer): Wait time for student responses (default: 5)
+- virtue_callout (string): How to weave in week's virtue theme
+
+CRITICAL - Day-specific adaptations:
+- Day 1: focus_mode should be "introduction_and_exploration"
+- Day 2: focus_mode should be "practice_and_reinforcement"
+- Day 3: focus_mode should be "application_and_extension"
+- Day 4: focus_mode should be "review_and_spiral", spiral_emphasis MUST include ≥2 prior content areas
+
+CRITICAL - Spiral learning integration:
+- If spiral_links are provided in week_spec, populate spiral_emphasis with specific references
+- Use YAML-style references format when possible: "Week 10: vocabulary items 1-5"
+
+CRITICAL - Output format:
+- Return ONLY valid JSON
+- No markdown, no comments, no backticks
+- Ensure all required fields are present
+- Keep descriptions concise (sparky_role ≤50 chars, focus_mode ≤30 chars)

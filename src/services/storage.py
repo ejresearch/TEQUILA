@@ -1,11 +1,22 @@
 """Storage service for curriculum file operations."""
 import json
 from pathlib import Path
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, List
 
 
-# Field names for Day activities (Flint fields)
+# Field names for Day activities (Flint fields) - 7-field architecture
 DAY_FIELDS = [
+    "01_class_name.txt",
+    "02_summary.md",
+    "03_grade_level.txt",
+    "04_role_context.json",
+    "05_guidelines_for_sparky.md",
+    "06_document_for_sparky.json",
+    "07_sparkys_greeting.txt"
+]
+
+# Legacy 6-field layout (for backward compatibility)
+LEGACY_DAY_FIELDS = [
     "01_class_name.txt",
     "02_summary.md",
     "03_grade_level.txt",
@@ -13,6 +24,13 @@ DAY_FIELDS = [
     "05_document_for_sparky.json",
     "06_sparkys_greeting.txt"
 ]
+
+# Mapping: old field name → new field name
+FIELD_MIGRATION_MAP = {
+    "04_guidelines_for_sparky.md": "05_guidelines_for_sparky.md",
+    "05_document_for_sparky.json": "06_document_for_sparky.json",
+    "06_sparkys_greeting.txt": "07_sparkys_greeting.txt"
+}
 
 # Week spec parts
 WEEK_SPEC_PARTS = [
@@ -109,15 +127,74 @@ def write_json(path: Path, data: Dict[str, Any]) -> None:
         f.write("\n")
 
 
+def detect_day_layout(week_number: int, day_number: int) -> str:
+    """
+    Detect whether a day uses 6-field (legacy) or 7-field layout.
+
+    Returns:
+        "7field" if 04_role_context.json exists, else "6field"
+    """
+    role_context_path = day_field_path(week_number, day_number, "04_role_context.json")
+    if role_context_path.exists():
+        return "7field"
+
+    # Check for legacy 04_guidelines_for_sparky.md
+    legacy_guidelines = day_field_path(week_number, day_number, "04_guidelines_for_sparky.md")
+    if legacy_guidelines.exists():
+        return "6field"
+
+    # Default to 7-field for new scaffolding
+    return "7field"
+
+
+def get_day_fields(week_number: int, day_number: int) -> List[str]:
+    """
+    Get the appropriate field list (6 or 7 fields) based on detected layout.
+
+    Returns:
+        List of field filenames for this day's layout.
+    """
+    layout = detect_day_layout(week_number, day_number)
+    return DAY_FIELDS if layout == "7field" else LEGACY_DAY_FIELDS
+
+
+def read_role_context(week_number: int, day_number: int) -> Optional[Dict[str, Any]]:
+    """
+    Read day-specific role_context if present, else derive from week-level Role_Context.
+
+    Returns:
+        role_context dict or None if not found.
+    """
+    role_context_path = day_field_path(week_number, day_number, "04_role_context.json")
+    if role_context_path.exists():
+        return read_json(role_context_path)
+
+    # Fallback: derive from week-level Role_Context
+    week_rc_path = role_context_part_path(week_number, "identity.json")
+    if week_rc_path.exists():
+        identity = read_json(week_rc_path)
+        return {
+            "sparky_role": identity.get("character_name", "Sparky"),
+            "focus_mode": "general",
+            "hints_enabled": True,
+            "spiral_emphasis": [],
+            "encouragement_triggers": ["first_attempt", "corrected_error"]
+        }
+    return None
+
+
 def compile_day_flint_bundle(week_number: int, day_number: int) -> Dict[str, Any]:
     """
-    Compile all six Flint field files into a single JSON bundle.
+    Compile all Flint field files (6 or 7 depending on layout) into a single JSON bundle.
 
     Returns a dictionary with field names as keys and their content as values.
+
+    Backward compatible: automatically detects and reads 6-field or 7-field layouts.
     """
     bundle = {}
+    fields = get_day_fields(week_number, day_number)
 
-    for field in DAY_FIELDS:
+    for field in fields:
         field_path = day_field_path(week_number, day_number, field)
         if not field_path.exists():
             bundle[field] = None

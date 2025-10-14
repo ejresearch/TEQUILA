@@ -39,7 +39,7 @@
     - Role context (Sparky's personality)
     - Assets (chant charts, glossaries, quizzes)
   - generator_day.py - Creates daily lessons:
-    - 6 fields per day (title, summary, grade level, guidelines, full lesson, greeting)
+    - 7 fields per day (title, summary, grade level, role context, guidelines, full lesson, greeting)
     - Enforces spiral learning (must recall prior content)
   - usage_tracker.py - Monitors spending:
     - Counts tokens used
@@ -139,6 +139,27 @@
   - Git-friendly (fewer merge conflicts)
   - Edit one part without regenerating everything
   - Track changes at granular level
+
+  ---
+  Migrating Existing Days to 7-Field Architecture
+
+  If you have existing 6-field days, use the migration script:
+
+  # Migrate a single week
+  python -m src.cli.migrate_to_7field --week 1
+
+  # Migrate all weeks
+  python -m src.cli.migrate_to_7field --all
+
+  # Preview changes without modifying files
+  python -m src.cli.migrate_to_7field --dry-run --all
+
+  The migration script:
+  1. Detects legacy 6-field days
+  2. Creates default role_context (04_role_context.json) from week-level Role_Context
+  3. Renames fields: 04→05, 05→06, 06→07
+  4. Validates migrated structure
+  5. Adds migration provenance metadata
 
   ---
   What You Can Do With This

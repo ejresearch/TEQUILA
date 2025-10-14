@@ -10,7 +10,8 @@ from .storage import (
     compile_day_flint_bundle,
     compile_week_spec,
     compile_role_context,
-    DAY_FIELDS,
+    get_day_fields,
+    detect_day_layout,
     WEEK_SPEC_PARTS,
     ROLE_CONTEXT_PARTS
 )
@@ -63,10 +64,11 @@ class ValidationResult:
 
 def validate_day_fields(week_number: int, day_number: int) -> ValidationResult:
     """
-    Validate that all required Flint field files exist for a day.
+    Validate that all required Flint field files exist for a day (6 or 7 fields).
 
     Checks:
-    - All six field files exist
+    - All field files exist (auto-detects 6-field vs 7-field layout)
+    - 7-field layout required for new days; 6-field is legacy
     - JSON files are valid JSON
     - Files are not empty (except where appropriate)
     """
@@ -80,7 +82,16 @@ def validate_day_fields(week_number: int, day_number: int) -> ValidationResult:
         )
         return result
 
-    for field in DAY_FIELDS:
+    layout = detect_day_layout(week_number, day_number)
+    fields = get_day_fields(week_number, day_number)
+
+    if layout == "6field":
+        result.add_warning(
+            f"Week{week_number:02d}/Day{day_number}",
+            "Day uses legacy 6-field layout. Consider migrating to 7-field with role_context."
+        )
+
+    for field in fields:
         field_path = day_path / field
         location = f"Week{week_number:02d}/Day{day_number}/{field}"
 
@@ -99,6 +110,25 @@ def validate_day_fields(week_number: int, day_number: int) -> ValidationResult:
         # Check for empty files (warning, not error)
         if field_path.stat().st_size == 0:
             result.add_warning(location, "Field file is empty")
+
+    # Validate role_context structure if present
+    if layout == "7field":
+        rc_path = day_path / "04_role_context.json"
+        if rc_path.exists():
+            try:
+                rc_data = json.loads(rc_path.read_text(encoding="utf-8"))
+                required_keys = ["sparky_role", "focus_mode", "hints_enabled"]
+                for key in required_keys:
+                    if key not in rc_data:
+                        result.add_warning(
+                            f"Week{week_number:02d}/Day{day_number}/04_role_context.json",
+                            f"role_context missing recommended key: {key}"
+                        )
+            except Exception as e:
+                result.add_error(
+                    f"Week{week_number:02d}/Day{day_number}/04_role_context.json",
+                    f"role_context validation failed: {e}"
+                )
 
     return result
 
@@ -121,7 +151,11 @@ def validate_day_4_spiral_content(week_number: int) -> ValidationResult:
         return result
 
     day4_path = day_dir(week_number, 4)
-    guidelines_path = day4_path / "04_guidelines_for_sparky.md"
+
+    # Handle both legacy and new field naming
+    layout = detect_day_layout(week_number, 4)
+    guidelines_file = "05_guidelines_for_sparky.md" if layout == "7field" else "04_guidelines_for_sparky.md"
+    guidelines_path = day4_path / guidelines_file
 
     if guidelines_path.exists():
         content = guidelines_path.read_text(encoding="utf-8").lower()

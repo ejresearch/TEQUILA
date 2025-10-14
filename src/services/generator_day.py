@@ -11,7 +11,7 @@ from .storage import (
     write_json
 )
 from .llm_client import LLMClient
-from .prompts.kit_tasks import task_day_fields, task_day_document
+from .prompts.kit_tasks import task_day_fields, task_day_document, task_day_role_context
 
 
 def get_field_template_path(field_name: str) -> Path:
@@ -23,13 +23,14 @@ def scaffold_day(week_number: int, day_number: int) -> Path:
     """
     Create the complete directory structure and files for a specific day.
 
-    Creates the six Flint field files:
+    Creates the seven Flint field files:
     - 01_class_name.txt
     - 02_summary.md
     - 03_grade_level.txt
-    - 04_guidelines_for_sparky.md
-    - 05_document_for_sparky.json
-    - 06_sparkys_greeting.txt
+    - 04_role_context.json (NEW in 7-field architecture)
+    - 05_guidelines_for_sparky.md (reindexed from 04)
+    - 06_document_for_sparky.json (reindexed from 05)
+    - 07_sparkys_greeting.txt (reindexed from 06)
 
     Args:
         week_number: The week number (1-36)
@@ -99,7 +100,7 @@ def scaffold_week_days(week_number: int) -> list[Path]:
 
 def generate_day_fields(week: int, day: int, client: LLMClient) -> List[Path]:
     """
-    Generate the six Flint field files for a day using LLM.
+    Generate the seven Flint field files for a day using LLM.
 
     Args:
         week: Week number (1-36)
@@ -141,13 +142,32 @@ def generate_day_fields(week: int, day: int, client: LLMClient) -> List[Path]:
                 "sparkys_greeting": "Welcome to Latin!"
             }
 
-    # Write field files (excluding document_for_sparky which is separate)
+    # Generate role_context separately
+    sys_rc, usr_rc, _ = task_day_role_context(week_spec, day)
+    response_rc = client.generate(prompt=usr_rc, system=sys_rc)
+
+    if response_rc.json:
+        role_context_data = response_rc.json
+    else:
+        try:
+            role_context_data = orjson.loads(response_rc.text)
+        except Exception:
+            # Fallback minimal role_context
+            role_context_data = {
+                "sparky_role": "encouraging guide",
+                "focus_mode": f"day_{day}_focus",
+                "hints_enabled": True,
+                "spiral_emphasis": [],
+                "encouragement_triggers": ["first_attempt"]
+            }
+
+    # Write field files (excluding document_for_sparky which is generated separately)
     field_mapping = {
         "01_class_name.txt": fields_data.get("class_name", ""),
         "02_summary.md": fields_data.get("summary", ""),
         "03_grade_level.txt": fields_data.get("grade_level", ""),
-        "04_guidelines_for_sparky.md": fields_data.get("guidelines_for_sparky", ""),
-        "06_sparkys_greeting.txt": fields_data.get("sparkys_greeting", "")
+        "05_guidelines_for_sparky.md": fields_data.get("guidelines_for_sparky", ""),
+        "07_sparkys_greeting.txt": fields_data.get("sparkys_greeting", "")
     }
 
     created_paths = []
@@ -155,6 +175,11 @@ def generate_day_fields(week: int, day: int, client: LLMClient) -> List[Path]:
         field_path = day_field_path(week, day, field_name)
         write_file(field_path, str(content))
         created_paths.append(field_path)
+
+    # Write role_context JSON
+    rc_path = day_field_path(week, day, "04_role_context.json")
+    write_json(rc_path, role_context_data)
+    created_paths.append(rc_path)
 
     return created_paths
 
@@ -199,8 +224,8 @@ def generate_day_document(week: int, day: int, client: LLMClient) -> Path:
             write_file(invalid_path, response.text)
             raise ValueError(f"LLM returned invalid JSON: {e}")
 
-    # Write document_for_sparky.json
-    doc_path = day_field_path(week, day, "05_document_for_sparky.json")
+    # Write document_for_sparky.json (now field 06)
+    doc_path = day_field_path(week, day, "06_document_for_sparky.json")
     write_json(doc_path, doc_data)
 
     return doc_path

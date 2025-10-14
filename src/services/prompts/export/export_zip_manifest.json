@@ -1,0 +1,174 @@
+{
+  "prompt_id": "prompt_for_export_zip_manifest",
+  "version": "1.0.0",
+  "description": "Builds a JSON manifest listing all files for a completed Latin A week — including all four days' 7-field files, compiled week specs, quiz packet, teacher key, and provenance data — ready for packaging into a distributable ZIP bundle.",
+  "family": "Assessment & Export",
+  "depends_on": [
+    "prompt_for_week_spec",
+    "prompt_for_day_document",
+    "prompt_for_quiz_packet",
+    "prompt_for_teacher_key",
+    "prompt_for_schema_validation"
+  ],
+  "persona": {
+    "ai_identity": "Steel",
+    "role": "Exporter and Archivist",
+    "voice": "Structured, exact, archival",
+    "mission": "Produce a machine-verifiable export manifest with all file paths, MIME types, checksums, and provenance tags required to build the final week ZIP bundle for teachers and schools."
+  },
+  "model_preferences": {
+    "provider": "openai",
+    "model": "gpt-4o",
+    "temperature": 0.0,
+    "max_tokens": 1800,
+    "reasoning": "Zero temp for deterministic manifest generation; 1800 tokens for complete file listings; gpt-4o for complex file enumeration and checksum handling"
+  },
+  "inputs": {
+    "project_root": "curriculum/LatinA",
+    "week_number": "{{WEEK_NUMBER}}",
+    "include_assets": true,
+    "file_structure_expectation": {
+      "week_spec": "Week_Spec/",
+      "activities": "activities/Day1..Day4/",
+      "assets": "assets/",
+      "quiz": "assets/QuizPacket.md",
+      "teacher_key": "assets/TeacherKey.md",
+      "compiled": "99_compiled_week_spec.json"
+    },
+    "metadata_rules": {
+      "checksum_algorithm": "sha256",
+      "provenance_required": true,
+      "filename_timestamp_format": "YYYY-MM-DDTHH:mm:ssZ"
+    }
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content_template": "You are Steel, archivist for TEQUILA. Your goal is to generate a complete export manifest for a single week's curriculum folder. Enumerate all files across Week_Spec, activities (Day1–Day4), assets, and compiled outputs. For each, record filename, relative path, size (if available), MIME type, and checksum placeholder. Include week-level provenance (model, provider, cost, timestamp). Do not generate or zip files — only describe them in structured JSON form."
+    },
+    {
+      "role": "user",
+      "content_template": [
+        "### Context",
+        "- project_root: {{project_root}}",
+        "- week_number: {{week_number}}",
+        "- include_assets: {{include_assets}}",
+        "",
+        "### Expected Folder Structure",
+        "```json",
+        "{{file_structure_expectation}}",
+        "```",
+        "",
+        "### Rules",
+        "Checksums should use {{metadata_rules.checksum_algorithm}}.",
+        "Include provenance block referencing generation model and cost data.",
+        "",
+        "### Task",
+        "Return a single JSON object named `export_manifest` with the following top-level structure:",
+        "",
+        "{",
+        "  \"week_info\": { ... },",
+        "  \"files\": [ ... ],",
+        "  \"provenance\": { ... },",
+        "  \"counts\": { ... }",
+        "}",
+        "",
+        "No prose. Strict JSON only."
+      ]
+    }
+  ],
+  "output_contract": {
+    "mime": "application/json",
+    "top_level_keys": ["week_info", "files", "provenance", "counts"],
+    "schema": {
+      "type": "object",
+      "properties": {
+        "week_info": {
+          "type": "object",
+          "properties": {
+            "week_number": { "type": "integer" },
+            "title": { "type": "string" },
+            "path": { "type": "string" },
+            "generated_on": { "type": "string" },
+            "fields_per_day": { "type": "integer" },
+            "days_included": { "type": "integer" }
+          },
+          "required": ["week_number", "title", "path", "generated_on"]
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": { "type": "string" },
+              "filename": { "type": "string" },
+              "category": { "type": "string", "enum": ["week_spec", "day_field", "asset", "compiled", "quiz", "teacher_key"] },
+              "mime_type": { "type": "string" },
+              "checksum": { "type": "string" },
+              "size_bytes": { "type": "integer" },
+              "provenance": {
+                "type": "object",
+                "properties": {
+                  "model": { "type": "string" },
+                  "provider": { "type": "string" },
+                  "timestamp": { "type": "string" },
+                  "cost_usd": { "type": "number" }
+                },
+                "required": ["model", "provider", "timestamp"]
+              }
+            },
+            "required": ["path", "filename", "category", "mime_type", "checksum"]
+          }
+        },
+        "provenance": {
+          "type": "object",
+          "properties": {
+            "generated_by": { "type": "string" },
+            "model": { "type": "string" },
+            "provider": { "type": "string" },
+            "timestamp": { "type": "string" },
+            "week_validation_passed": { "type": "boolean" },
+            "schema_version": { "type": "string" },
+            "cost_usd_total": { "type": "number" }
+          },
+          "required": ["generated_by", "model", "provider", "timestamp"]
+        },
+        "counts": {
+          "type": "object",
+          "properties": {
+            "total_files": { "type": "integer" },
+            "week_spec_files": { "type": "integer" },
+            "activity_files": { "type": "integer" },
+            "assets_files": { "type": "integer" },
+            "quiz_files": { "type": "integer" },
+            "teacher_key_files": { "type": "integer" }
+          },
+          "required": ["total_files"]
+        }
+      },
+      "required": ["week_info", "files", "provenance", "counts"]
+    }
+  },
+  "self_checklist": [
+    "□ All expected files (7 fields × 4 days) included.",
+    "□ Week_Spec and compiled JSON listed with paths.",
+    "□ Quiz and Teacher Key included under assets.",
+    "□ Checksums placeholder strings valid format.",
+    "□ Provenance block includes model/provider/timestamp/cost.",
+    "□ Counts accurate and consistent with file array length."
+  ],
+  "example_invocation": {
+    "inputs": {
+      "week_number": 9,
+      "project_root": "curriculum/LatinA"
+    }
+  },
+  "tags": [
+    "export",
+    "manifest",
+    "checksum",
+    "packaging",
+    "validation",
+    "provenance"
+  ]
+}

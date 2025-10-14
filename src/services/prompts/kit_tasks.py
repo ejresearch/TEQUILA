@@ -2449,3 +2449,210 @@ def task_cost_explanation(
     }
 
     return (system_content, user_content, config)
+
+
+# ============================================================================
+# QUIZ PACKET PROMPT - Generate weekly quiz for Day 4
+# ============================================================================
+
+def task_quiz_packet(
+    week_number: int,
+    week_spec: Dict[str, Any],
+    day4_document: Dict[str, Any],
+    guidelines: Optional[str] = None,
+    project_root: str = "curriculum/LatinA"
+) -> Tuple[str, str, Dict[str, Any]]:
+    """
+    Generate weekly quiz packet for Day 4 assessment.
+
+    This prompt creates a balanced quiz covering:
+    - Vocabulary (5 pts)
+    - Grammar & Chant (5 pts)
+    - Translation (5 pts)
+    - Virtue Reflection (5 pts)
+
+    Outputs both Markdown quiz and minimal JSON answer key.
+
+    Args:
+        week_number: Week number (1-35)
+        week_spec: Week specification data
+        day4_document: Day 4 document from prompt_for_day_document
+        guidelines: Optional Day 4 guidelines markdown
+        project_root: Root path for curriculum
+
+    Returns:
+        (system_prompt, user_prompt, config_dict)
+
+    Output:
+        JSON with quiz_markdown and answer_key_min array
+    """
+    prompt_spec = _load_prompt_json("assessment/quiz_packet.json")
+
+    user_content = "\n".join(prompt_spec["messages"][1]["content_template"])
+    user_content = user_content.replace("{{week_number}}", str(week_number))
+
+    # Extract virtue and faith from week_spec
+    virtue_focus = week_spec.get("virtue_focus", week_spec.get("virtue", "N/A"))
+    faith_phrase = week_spec.get("faith_phrase", "N/A")
+    user_content = user_content.replace("{{week_spec.virtue_focus}}", virtue_focus)
+    user_content = user_content.replace("{{week_spec.faith_phrase}}", faith_phrase)
+
+    # Replace total points
+    total_points = prompt_spec["inputs"]["format_requirements"]["total_points"]
+    user_content = user_content.replace("{{format_requirements.total_points}}", str(total_points))
+
+    # Serialize week spec (condensed)
+    week_spec_json = json.dumps(week_spec, indent=2)
+    if len(week_spec_json) > 1500:
+        week_spec_excerpt = week_spec_json[:1500] + "\n... (truncated)"
+    else:
+        week_spec_excerpt = week_spec_json
+    user_content = user_content.replace("{{week_spec}}", week_spec_excerpt)
+
+    # Serialize day4 document
+    day4_json = json.dumps(day4_document, indent=2)
+    if len(day4_json) > 1500:
+        day4_excerpt = day4_json[:1500] + "\n... (truncated)"
+    else:
+        day4_excerpt = day4_json
+    user_content = user_content.replace("{{day4_document}}", day4_excerpt)
+
+    # Include guidelines if provided
+    if guidelines:
+        if len(guidelines) > 1000:
+            guidelines_excerpt = guidelines[:1000] + "\n... (truncated)"
+        else:
+            guidelines_excerpt = guidelines
+        user_content = user_content.replace("{{guidelines}}", guidelines_excerpt)
+    else:
+        user_content = user_content.replace("{{guidelines}}", "[Load from Day 4 guidelines]")
+
+    system_content = prompt_spec["messages"][0]["content_template"]
+
+    config = {
+        "temperature": prompt_spec["model_preferences"]["temperature"],
+        "max_tokens": prompt_spec["model_preferences"]["max_tokens"],
+        "model": prompt_spec["model_preferences"]["model"]
+    }
+
+    return (system_content, user_content, config)
+
+
+# ============================================================================
+# TEACHER KEY PROMPT - Generate detailed answer key for quiz
+# ============================================================================
+
+def task_teacher_key(
+    week_number: int,
+    quiz_markdown: str,
+    answer_key_min: list,
+    week_spec: Dict[str, Any]
+) -> Tuple[str, str, Dict[str, Any]]:
+    """
+    Generate detailed teacher answer key for weekly quiz.
+
+    This prompt expands the minimal answer key with:
+    - Grammatical rationales (1-2 sentences per question)
+    - Chant references with pronunciation tips
+    - Literal and idiomatic translations
+    - Sample virtue reflection responses
+
+    Args:
+        week_number: Week number (1-35)
+        quiz_markdown: Quiz markdown from prompt_for_quiz_packet
+        answer_key_min: Minimal answer key JSON from prompt_for_quiz_packet
+        week_spec: Week specification data
+
+    Returns:
+        (system_prompt, user_prompt, config_dict)
+
+    Output:
+        Markdown with title, overview, question-by-question answers, chant references, virtue samples
+    """
+    prompt_spec = _load_prompt_json("assessment/teacher_key.json")
+
+    user_content = "\n".join(prompt_spec["messages"][1]["content_template"])
+    user_content = user_content.replace("{{week_number}}", str(week_number))
+
+    # Extract virtue and faith from week_spec
+    virtue_focus = week_spec.get("virtue_focus", week_spec.get("virtue", "N/A"))
+    faith_phrase = week_spec.get("faith_phrase", "N/A")
+    user_content = user_content.replace("{{week_spec.virtue_focus}}", virtue_focus)
+    user_content = user_content.replace("{{week_spec.faith_phrase}}", faith_phrase)
+
+    # Include quiz markdown
+    user_content = user_content.replace("{{quiz_markdown}}", quiz_markdown)
+
+    # Serialize answer key
+    answer_key_json = json.dumps(answer_key_min, indent=2)
+    user_content = user_content.replace("{{answer_key_min}}", answer_key_json)
+
+    system_content = prompt_spec["messages"][0]["content_template"]
+
+    config = {
+        "temperature": prompt_spec["model_preferences"]["temperature"],
+        "max_tokens": prompt_spec["model_preferences"]["max_tokens"],
+        "model": prompt_spec["model_preferences"]["model"]
+    }
+
+    return (system_content, user_content, config)
+
+
+# ============================================================================
+# EXPORT ZIP MANIFEST PROMPT - Generate file manifest for week export
+# ============================================================================
+
+def task_export_zip_manifest(
+    week_number: int,
+    include_assets: bool = True,
+    project_root: str = "curriculum/LatinA"
+) -> Tuple[str, str, Dict[str, Any]]:
+    """
+    Generate export manifest for week ZIP bundle.
+
+    This prompt produces a complete JSON manifest listing all files:
+    - All 7 fields × 4 days (28 files)
+    - Week_Spec files (12 files)
+    - Assets (quiz, teacher key, chant chart, etc.)
+    - Compiled outputs
+    - Provenance and checksums (SHA-256)
+
+    Args:
+        week_number: Week number (1-35)
+        include_assets: Whether to include asset files (default: True)
+        project_root: Root path for curriculum
+
+    Returns:
+        (system_prompt, user_prompt, config_dict)
+
+    Output:
+        JSON with week_info, files array, provenance, counts
+    """
+    prompt_spec = _load_prompt_json("export/export_zip_manifest.json")
+
+    user_content = "\n".join(prompt_spec["messages"][1]["content_template"])
+    user_content = user_content.replace("{{project_root}}", project_root)
+    user_content = user_content.replace("{{week_number}}", str(week_number))
+    user_content = user_content.replace("{{include_assets}}", str(include_assets).lower())
+
+    # Serialize file structure expectation
+    file_structure = prompt_spec["inputs"]["file_structure_expectation"]
+    file_structure_json = json.dumps(file_structure, indent=2)
+    user_content = user_content.replace("{{file_structure_expectation}}", file_structure_json)
+
+    # Replace metadata rules
+    metadata_rules = prompt_spec["inputs"]["metadata_rules"]
+    user_content = user_content.replace(
+        "{{metadata_rules.checksum_algorithm}}",
+        metadata_rules["checksum_algorithm"]
+    )
+
+    system_content = prompt_spec["messages"][0]["content_template"]
+
+    config = {
+        "temperature": prompt_spec["model_preferences"]["temperature"],
+        "max_tokens": prompt_spec["model_preferences"]["max_tokens"],
+        "model": prompt_spec["model_preferences"]["model"]
+    }
+
+    return (system_content, user_content, config)

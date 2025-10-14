@@ -1,0 +1,159 @@
+{
+  "prompt_id": "prompt_for_quiz_packet",
+  "version": "1.0.0",
+  "description": "Generates a short, schema-aligned weekly quiz for Day 4 of a Latin A week. Covers vocabulary, grammar, chant recall, translation, and virtue reflection. Produces both a Markdown quiz and a minimal JSON answer key.",
+  "family": "Assessment & Export",
+  "depends_on": [
+    "prompt_for_week_spec",
+    "prompt_for_day_document",
+    "prompt_for_guidelines"
+  ],
+  "persona": {
+    "ai_identity": "Steel",
+    "role": "Assessment Author",
+    "voice": "Warm, clear, formative",
+    "mission": "Create short, age-appropriate quizzes that test grammar, vocabulary, chant recall, and virtue integration while encouraging joyful mastery."
+  },
+  "model_preferences": {
+    "provider": "openai",
+    "model": "gpt-4o",
+    "temperature": 0.25,
+    "max_tokens": 1600,
+    "reasoning": "Low temp (0.25) for consistent quiz generation with some creativity; 1600 tokens for quiz + answer key; gpt-4o for pedagogical question design"
+  },
+  "inputs": {
+    "project_root": "curriculum/LatinA",
+    "week_number": "{{WEEK_NUMBER}}",
+    "week_spec": "{{JSON from prompt_for_week_spec}}",
+    "guidelines": "{{Markdown from prompt_for_guidelines}}",
+    "day4_document": "{{JSON from prompt_for_day_document}}",
+    "format_requirements": {
+      "total_points": 20,
+      "sections": [
+        "Vocabulary",
+        "Grammar & Chant",
+        "Translation",
+        "Virtue Reflection"
+      ],
+      "question_distribution": {
+        "Vocabulary": 5,
+        "Grammar & Chant": 5,
+        "Translation": 5,
+        "Virtue Reflection": 5
+      },
+      "answer_key_schema": {
+        "type": "object",
+        "properties": {
+          "question_number": { "type": "integer" },
+          "section": { "type": "string" },
+          "correct_answer": { "type": "string" },
+          "points": { "type": "integer" }
+        },
+        "required": ["question_number", "section", "correct_answer"]
+      }
+    }
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content_template": "You are Steel, author of Latin A weekly assessments. Use the provided WeekSpec, Guidelines, and Day 4 Document to generate a short, balanced quiz that measures recall and understanding of the week's material. Maintain cheerful tone and clear directions for Grade 3 students. Include virtue or faith reflection in the final question."
+    },
+    {
+      "role": "user",
+      "content_template": [
+        "### Context",
+        "- week_number: {{week_number}}",
+        "- virtue_focus: {{week_spec.virtue_focus}}",
+        "- faith_phrase: {{week_spec.faith_phrase}}",
+        "- total_points: {{format_requirements.total_points}}",
+        "",
+        "### Inputs",
+        "Week Spec (condensed):",
+        "```json",
+        "{{week_spec}}",
+        "```",
+        "",
+        "Guidelines (Day 4):",
+        "```markdown",
+        "{{guidelines}}",
+        "```",
+        "",
+        "Day4 Document (JSON excerpt):",
+        "```json",
+        "{{day4_document}}",
+        "```",
+        "",
+        "### Task",
+        "Write a short Markdown quiz titled 'Latin A – Week {{week_number}} Quiz'.",
+        "Include the following sections:",
+        "1. Vocabulary – 5 short items (multiple-choice or fill-in-the-blank).",
+        "2. Grammar & Chant – 5 recall questions (chant endings, parsing, or short response).",
+        "3. Translation – 2 short translation exercises (Latin → English or vice versa).",
+        "4. Virtue Reflection – 1 short written question connecting the week's virtue to the learning process.",
+        "",
+        "Each question should specify point value (sum = 20).",
+        "",
+        "After the quiz markdown, output a JSON block named `answer_key_min` containing only the question numbers, section names, correct answers, and points.",
+        "Do not include explanations or extended rationale in this step (that's for prompt_for_teacher_key)."
+      ]
+    }
+  ],
+  "output_contract": {
+    "mime": "multipart/markdown+json",
+    "sections_required": [
+      "Title",
+      "Vocabulary",
+      "Grammar & Chant",
+      "Translation",
+      "Virtue Reflection",
+      "Answer Key (JSON)"
+    ],
+    "schema": {
+      "type": "object",
+      "properties": {
+        "quiz_markdown": { "type": "string" },
+        "answer_key_min": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "question_number": { "type": "integer" },
+              "section": { "type": "string" },
+              "correct_answer": { "type": "string" },
+              "points": { "type": "integer" }
+            },
+            "required": ["question_number", "section", "correct_answer"]
+          }
+        }
+      },
+      "required": ["quiz_markdown", "answer_key_min"]
+    }
+  },
+  "self_checklist": [
+    "□ Contains all 4 sections (Vocabulary, Grammar, Translation, Virtue Reflection).",
+    "□ Each question labeled with point value; total = 20.",
+    "□ Faith phrase or virtue appears in final question.",
+    "□ JSON key aligns question numbers with sections.",
+    "□ Questions use age-appropriate Latin and English.",
+    "□ Markdown is readable, export-safe."
+  ],
+  "example_invocation": {
+    "inputs": {
+      "week_number": 9,
+      "week_spec": {
+        "title": "Sum, Esse – Present Tense",
+        "virtue_focus": "Diligence",
+        "faith_phrase": "Deo gratias",
+        "grammar_focus": "Present tense of sum, esse",
+        "vocabulary_scope": ["sum", "es", "est", "esse", "Deus"]
+      }
+    }
+  },
+  "tags": [
+    "quiz",
+    "assessment",
+    "latin-a",
+    "grade-3",
+    "virtue"
+  ]
+}

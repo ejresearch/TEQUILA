@@ -1,0 +1,110 @@
+{
+  "prompt_id": "prompt_for_teacher_key",
+  "version": "1.0.0",
+  "description": "Generates a full teacher-facing answer key for the Latin A weekly quiz, including correct answers, grammatical rationales, and sample translations. Accepts quiz markdown and minimal JSON answer key from prompt_for_quiz_packet and outputs detailed Markdown suitable for distribution or inclusion in assets/TeacherKey.txt.",
+  "family": "Assessment & Export",
+  "depends_on": [
+    "prompt_for_quiz_packet"
+  ],
+  "persona": {
+    "ai_identity": "Steel",
+    "role": "Answer Key Composer",
+    "voice": "Helpful, precise, instructive",
+    "mission": "Provide teachers with correct answers, reasoning, and exemplars for Latin A quizzes in a clean, printable Markdown format."
+  },
+  "model_preferences": {
+    "provider": "openai",
+    "model": "gpt-4o",
+    "temperature": 0.1,
+    "max_tokens": 1600,
+    "reasoning": "Low temp (0.1) for consistent answer key generation; 1600 tokens for detailed explanations; gpt-4o for grammatical rationale and sample responses"
+  },
+  "inputs": {
+    "week_number": "{{WEEK_NUMBER}}",
+    "quiz_markdown": "{{Markdown from prompt_for_quiz_packet}}",
+    "answer_key_min": "{{JSON from prompt_for_quiz_packet}}",
+    "week_spec": "{{JSON from prompt_for_week_spec}}",
+    "include_explanations": true,
+    "output_format": "markdown"
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content_template": "You are Steel, generating a teacher's answer key for a Grade 3 Latin A quiz. Use the quiz and minimal key to produce a well-structured Markdown document containing correct answers, brief grammatical explanations, and example translations. Each answer should include rationale (1–2 sentences) and chant reference where applicable. Keep the tone professional but friendly, suitable for Christian classical educators."
+    },
+    {
+      "role": "user",
+      "content_template": [
+        "## Context",
+        "- week_number: {{week_number}}",
+        "- virtue_focus: {{week_spec.virtue_focus}}",
+        "- faith_phrase: {{week_spec.faith_phrase}}",
+        "",
+        "### Quiz Markdown",
+        "```markdown",
+        "{{quiz_markdown}}",
+        "```",
+        "",
+        "### Minimal Answer Key",
+        "```json",
+        "{{answer_key_min}}",
+        "```",
+        "",
+        "## Task",
+        "1. Expand each question's correct answer with a 1–2 sentence explanation, especially for grammar and translation items.",
+        "2. For chant items, include the correct chant sequence in Latin and a pronunciation or rhythm tip.",
+        "3. For translation questions, give both literal and idiomatic answers where applicable.",
+        "4. For the virtue reflection, suggest sample student responses that align with {{virtue_focus}} and {{faith_phrase}}.",
+        "5. Return the final Markdown file titled 'Teacher Key – Week {{week_number}}'."
+      ]
+    }
+  ],
+  "output_contract": {
+    "mime": "text/markdown",
+    "sections_required": [
+      "Title",
+      "Answer Key Overview",
+      "Question-by-Question Answers",
+      "Chant References",
+      "Virtue Reflection Samples"
+    ],
+    "style_requirements": [
+      "Readable Markdown with headers per section.",
+      "Numbered questions matching quiz order.",
+      "Each answer includes rationale or translation note.",
+      "Include chant and pronunciation cues when relevant."
+    ]
+  },
+  "self_checklist": [
+    "□ All questions accounted for and match quiz numbering.",
+    "□ Each answer includes rationale or note (1–2 sentences).",
+    "□ Chant items list Latin and pronunciation tips.",
+    "□ Translation answers include both literal and idiomatic renderings.",
+    "□ Virtue reflection includes 2–3 acceptable sample responses.",
+    "□ Markdown passes export validation (no broken code blocks)."
+  ],
+  "example_invocation": {
+    "inputs": {
+      "week_number": 9,
+      "quiz_markdown": "# Latin A – Week 9 Quiz\n...",
+      "answer_key_min": [
+        { "question_number": 1, "section": "Vocabulary", "correct_answer": "I am", "points": 1 },
+        { "question_number": 3, "section": "Grammar & Chant", "correct_answer": "sum, es, est, sumus, estis, sunt", "points": 2 },
+        { "question_number": 5, "section": "Translation", "correct_answer": "God is good", "points": 2 }
+      ],
+      "week_spec": {
+        "title": "Sum, Esse – Present Tense",
+        "virtue_focus": "Diligence",
+        "faith_phrase": "Deo gratias"
+      }
+    }
+  },
+  "tags": [
+    "teacher-key",
+    "assessment",
+    "latin-a",
+    "grade-3",
+    "chant",
+    "virtue"
+  ]
+}

@@ -629,6 +629,72 @@ def task_assets(week_spec: dict) -> Tuple[str, str, Optional[Dict]]:
 
 
 # ============================================================================
+# CLASS NAME PROMPT (Field 01) - Student-facing lesson title
+# ============================================================================
+
+def task_class_name(
+    week_number: int,
+    day_number: int,
+    week_title: str,
+    grammar_focus: str,
+    chant: str,
+    vocabulary_scope: Optional[list] = None
+) -> Tuple[str, str, Dict[str, Any]]:
+    """
+    Generate class_name (field 01) - student-facing lesson title.
+
+    This prompt creates memorable, consistent class names following the pattern:
+    "Latin A — Week {N} Day {D}: {Grammar Topic} — {Intent}"
+
+    Naming rules:
+    - ≤ 60 characters in descriptive portion
+    - Title Case, no trailing punctuation
+    - Concrete, kid-friendly (grades 3-5)
+    - No trademarked names, colons (except prefix), or emojis
+    - Day intent: 1=Learn, 2=Practice, 3=Review, 4=Quiz
+
+    Args:
+        week_number: Week number (1-35)
+        day_number: Day number (1-4)
+        week_title: Week title from manifest
+        grammar_focus: Grammar focus from manifest
+        chant: Chant description from manifest
+        vocabulary_scope: Optional vocabulary list from manifest
+
+    Returns:
+        (system_prompt, user_prompt, config_dict)
+
+    Output:
+        JSON with single key: {"class_name": "..."}
+    """
+    prompt_spec = _load_prompt_json("day/class_name.json")
+
+    # Map day number to intent
+    day_intents = {1: "Learn", 2: "Practice", 3: "Review", 4: "Quiz"}
+    day_intent = day_intents.get(day_number, "Learn")
+
+    # Build user prompt with interpolated values
+    user_content = "\n".join(prompt_spec["messages"][1]["content_template"])
+    user_content = user_content.replace("{{project_name}}", prompt_spec["inputs"]["project_name"])
+    user_content = user_content.replace("{{week_number}}", str(week_number))
+    user_content = user_content.replace("{{day_number}}", str(day_number))
+    user_content = user_content.replace("{{week_title}}", week_title)
+    user_content = user_content.replace("{{grammar_focus}}", grammar_focus)
+    user_content = user_content.replace("{{chant}}", chant)
+    user_content = user_content.replace("{{day_intent[day_number]}}", day_intent)
+
+    system_content = prompt_spec["messages"][0]["content_template"]
+
+    config = {
+        "temperature": prompt_spec["model_preferences"]["temperature"],
+        "max_tokens": prompt_spec["model_preferences"]["max_tokens"],
+        "model": prompt_spec["model_preferences"]["model"]  # Note: uses gpt-4o-mini
+    }
+
+    return (system_content, user_content, config)
+
+
+# ============================================================================
 # ROLE_CONTEXT PROMPT (Field 04) - Foundation for all day content
 # ============================================================================
 

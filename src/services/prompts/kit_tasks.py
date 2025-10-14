@@ -19,6 +19,62 @@ def _load_system_prompt(filename: str) -> str:
     return path.read_text(encoding="utf-8")
 
 
+def _load_prompt_json(filename: str) -> Dict[str, Any]:
+    """Load a JSON prompt specification from the prompts directory."""
+    path = Path(__file__).parent / filename
+    with open(path, 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+
+# ============================================================================
+# SYSTEM OVERVIEW PROMPT - Establishes TEQUILA/Steel architecture
+# ============================================================================
+
+def task_system_overview() -> Tuple[str, str, Dict[str, Any]]:
+    """
+    Generate TEQUILA system overview manifesto.
+
+    This prompt bootstraps Steel's understanding of the Latin A curriculum
+    generation system. It establishes:
+    - Course scope (35 weeks × 4 days)
+    - 7-field day architecture
+    - Pedagogical pillars (spiral, virtue, faith, chant)
+    - Open-source policy and originality requirements
+    - Budget, provenance, and validation policies
+
+    Returns:
+        (system_prompt, user_prompt, config_dict)
+
+    Output:
+        Markdown document (~1000 words) saved to docs/SYSTEM_OVERVIEW.md
+    """
+    prompt_spec = _load_prompt_json("system/system_overview.json")
+
+    # Interpolate template variables
+    outline = "\n".join(prompt_spec["inputs"]["latin_a_outline"])
+
+    pillars = "\n".join(f"- {p}" for p in
+        prompt_spec["inputs"]["pedagogical_pillars"]
+    )
+
+    seven_fields = ", ".join(prompt_spec["inputs"]["seven_field_names"])
+
+    # Build user prompt from template
+    user_content = "\n".join(prompt_spec["messages"][1]["content_template"])
+    user_content = user_content.replace("{{latin_a_outline}}", outline)
+    user_content = user_content.replace("{{pedagogical_pillars}}", pillars)
+    user_content = user_content.replace("{{seven_field_names}}", seven_fields)
+
+    system_content = prompt_spec["messages"][0]["content_template"]
+
+    config = {
+        "temperature": prompt_spec["model_preferences"]["temperature"],
+        "max_tokens": prompt_spec["model_preferences"]["max_tokens"]
+    }
+
+    return (system_content, user_content, config)
+
+
 def task_week_spec(outline_snip: dict) -> Tuple[str, str, Optional[Dict]]:
     """
     Generate prompts for weekly spec generation.

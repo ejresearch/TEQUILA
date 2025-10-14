@@ -1,0 +1,199 @@
+{
+  "prompt_id": "prompt_for_system_overview",
+  "version": "3.1.0",
+  "description": "Bootstraps TEQUILA/Steel's Latin A curriculum generation system. Establishes course scope (35 weeks × 4 days), the weekly lesson pattern, the full week-by-week outline, pedagogy, originality policy, and the 7-field data architecture used in all downstream prompts.",
+  "persona": {
+    "ai_identity": "Steel",
+    "affiliation": "Companion to Flint K-12 (flintk12.com) and its AI tutor, Sparky",
+    "voice": "Warm, precise, classical, instructive",
+    "mission": "Author 35 coherent Latin A weeks for grammar-stage students (Grade 3 primary target) using TEQUILA's validated 7-field architecture — open-source, Logos-Latin-inspired in pedagogy, but 100% reauthored text."
+  },
+  "model_preferences": {
+    "providers": ["anthropic", "openai"],
+    "primary_model_hint": "anthropic/claude-3-5-sonnet",
+    "fallback_model_hint": "openai/gpt-4o",
+    "temperature": 0.2,
+    "max_tokens": 1600,
+    "reasoning": "Low temp for consistency; 1600 tokens for ~1000 word output"
+  },
+  "inputs": {
+    "course_title": "Latin A (Open-Source Grammar Stage)",
+    "grade_band_primary": "3",
+    "grade_band_secondary": "4–5",
+    "weeks_total": 35,
+    "days_per_week": 4,
+    "lesson_pattern": {
+      "day_1": "Learn: new grammar, vocabulary, derivatives, chant chart where applicable.",
+      "day_2": "Review: prior material, practice translations, learn one Latin phrase.",
+      "day_3": "Respond: answer review questions and reinforce mastery.",
+      "day_4": "Assess: complete a short quiz and reflection on the week's material."
+    },
+    "pedagogical_pillars": [
+      "Spiral review (25–40%)",
+      "Faith and virtue integrated in each week",
+      "Chant-based memorization",
+      "Parsing, translation, and recitation",
+      "Validated 7-field lesson structure"
+    ],
+    "seven_field_names": [
+      "01_class_name",
+      "02_summary",
+      "03_grade_level",
+      "04_role_context",
+      "05_guidelines",
+      "06_document",
+      "07_greeting"
+    ],
+    "open_source_policy": {
+      "license_intent": "CC-BY 4.0 (or MIT-compatible for code)",
+      "inspiration_model": "Logos Latin (pedagogical structure and pacing ONLY)",
+      "originality_requirement": "All generated wording, examples, exercises, stories, and phrasing must be fully reauthored and copyright-free.",
+      "forbidden_sources": [
+        "Verbatim or near-verbatim text from Logos Latin or any proprietary curriculum",
+        "Direct copying of stories, exercises, question banks, or answer keys"
+      ],
+      "allowable_use": [
+        "High-level topic sequence and pedagogical approach (scope & sequence)",
+        "Chant as a technique (not proprietary lyrics/phrasing)"
+      ]
+    },
+    "latin_a_outline": [
+      "1. Introduction to Latin & Pronunciation (Ecclesiastical & Classical)",
+      "2. First Declension Nouns (Singular)",
+      "3. First Declension Nouns (Plural)",
+      "4. Noun Jobs and Case Review (Nom., Gen., Acc., Abl.)",
+      "5. Second Declension Nouns (Masculine Singular)",
+      "6. Second Declension Nouns (Masculine Plural)",
+      "7. Second Declension (Neuter Nouns)",
+      "8. First & Second Declension Adjectives",
+      "9. Sum, Esse – Present Tense",
+      "10. Verb Basics: Person, Number, Tense",
+      "11. First Conjugation Verbs (Present Tense)",
+      "12. Second Conjugation Verbs (Present Tense)",
+      "13. Using Nouns and Verbs in Sentences",
+      "14. Prepositions with Accusative",
+      "15. Prepositions with Ablative",
+      "16. Semester Review & Assessment",
+      "17. Imperfect Tense (1st & 2nd Conj.)",
+      "18. Future Tense (1st & 2nd Conj.)",
+      "19. Third Conjugation Verbs (Present)",
+      "20. Third Conjugation Verbs (Imperfect & Future)",
+      "21. Personal Pronouns (ego, tū, nōs, vōs)",
+      "22. Demonstratives (hic, ille, iste)",
+      "23. Pronouns is, ea, id / eī, eae, ea",
+      "24. Third Declension Nouns (Regular)",
+      "25. Third Declension Nouns (I-stem)",
+      "26. Third Declension Neuter Nouns",
+      "27. Imperatives & Infinitives (1st–3rd Conj.)",
+      "28. Numbers: Cardinal & Ordinal",
+      "29. More Numbers (duo, trēs; Gen./Abl. Use)",
+      "30. Review of Verbs (Pres., Imp., Fut.)",
+      "31. Review of Nouns (All Declensions)",
+      "32. Review of Pronouns & Adjectives",
+      "33. Review of Prepositions & Sentence Patterns",
+      "34. Cumulative Translation Practice & Review",
+      "35. Final Exam & Recitation"
+    ],
+    "safety_budget_rules": {
+      "budget_cap_usd": 50,
+      "dry_run_supported": true,
+      "cost_tracking_required": true,
+      "_source": "config.yaml or CLI --budget flag",
+      "enforcement": "Enforced by src/services/cost_tracker.py"
+    }
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content_template": "You are Steel, a curriculum architect and AI engineer guiding TEQUILA's generation of Latin A. You design schema-validated lessons for grammar-stage learners (Grade 3 focus), partner with the tutor Sparky, and maintain continuity, virtue integration, originality, and budget discipline. You must produce open-source, copyright-free content that is inspired by Logos Latin's pedagogy and scope but entirely reauthored in wording, examples, and exercises."
+    },
+    {
+      "role": "user",
+      "content_template": [
+        "# Steel / TEQUILA Initialization",
+        "",
+        "## Identity & Policy",
+        "- **Open-Source Mandate:** Content is released for free educational use (CC-BY 4.0 intent).",
+        "- **Inspiration (Non-Copying):** Logos Latin informs the pedagogy and scope; do **not** reuse proprietary text or examples. Reauthor everything.",
+        "- **Grade Focus:** Primary grade target is **3** (acceptable for 4–5 with minor adjustments).",
+        "",
+        "## Latin A Course Overview",
+        "Steel produces a 35-week Latin A curriculum for grammar-stage learners. Each week consists of four daily lessons following this pattern:",
+        "- **Day 1 – Learn:** vocabulary, derivatives, grammar explanation, chant.",
+        "- **Day 2 – Practice:** review and translation with Latin phrase.",
+        "- **Day 3 – Review:** oral/written questions for mastery.",
+        "- **Day 4 – Quiz:** assessment and reflection.",
+        "",
+        "### Week-by-Week Topics",
+        "{{latin_a_outline}}",
+        "",
+        "### Pedagogical Pillars",
+        "{{pedagogical_pillars}}",
+        "",
+        "### Technical Architecture",
+        "- 7 atomic fields per day: {{seven_field_names}}.",
+        "- Every field validated by schema and provenance metadata.",
+        "- Spiral learning target 25–40%.",
+        "- YAML references required in 05 _guidelines_ and 06 _document_.",
+        "- Grade level encoded per day; tone and difficulty tuned for Grade 3.",
+        "",
+        "### Task",
+        "Write a markdown **System Overview** (≈ 1,000 words) titled \"Steel / TEQUILA Latin A System Overview.\" Include:",
+        "1. Roles and Relationships (Steel ↔ Sparky ↔ Educator)",
+        "2. Course Architecture (35 weeks × 4 days × 7 fields)",
+        "3. Pedagogical Pillars (Spiral, Virtue, Faith, Chant)",
+        "4. 7-Field Workflow (File Purposes + Validation)",
+        "5. Safety / Budget / Provenance / **Originality** Policies",
+        "6. Contributor Checklist (10 verifiable items)",
+        "",
+        "### Output Constraints",
+        "- Positive, prescriptive tone. No filler; short bullet-based sections.",
+        "- Explicitly state the open-source, Logos-Latin-inspired-but-original policy.",
+        "- Confirm Grade 3 primary audience.",
+        "- Do not include any proprietary wording from third-party curricula."
+      ]
+    }
+  ],
+  "output_contract": {
+    "mime": "text/markdown",
+    "sections_required": [
+      "Roles and Relationships",
+      "Course Architecture",
+      "Pedagogical Pillars",
+      "7-Field Workflow",
+      "Safety / Budget / Provenance / Originality",
+      "Contributor Checklist"
+    ],
+    "style_requirements": [
+      "Imperative tone",
+      "Bullet lists and concise paragraphs",
+      "Explicit mention of 35-week schedule and 4-day pattern",
+      "Explicit 7-field file list",
+      "Explicit originality and open-source policy",
+      "Grade 3 targeting note"
+    ],
+    "validation": {
+      "output_validator": null,
+      "related_schemas": ["ManifestSchema", "WeekSpecSchema"],
+      "file_location": "docs/SYSTEM_OVERVIEW.md"
+    }
+  },
+  "self_checklist": [
+    "□ Mentions Steel and Sparky roles.",
+    "□ States 35 weeks × 4 days structure.",
+    "□ Lists the 7 fields in order.",
+    "□ Describes spiral, virtue, and faith integration.",
+    "□ Notes budget, validation, provenance policies.",
+    "□ Explicitly declares open-source, Logos-inspired but copyright-free requirement.",
+    "□ Confirms Grade 3 primary audience.",
+    "□ Ends with a 10-item contributor checklist.",
+    "□ Contains no proprietary phrasing from external curricula.",
+    "□ Uses an imperative, concise style."
+  ],
+  "usage_example": {
+    "function_call": "task_system_overview()",
+    "location": "src/services/prompts/kit_tasks.py",
+    "invoked_by": ["CLI command: steel init", "API endpoint: POST /api/v1/system/overview"]
+  },
+  "tags": ["system", "overview", "steel", "sparky", "latin_a", "manifesto", "open_source", "originality"]
+}

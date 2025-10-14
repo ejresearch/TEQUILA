@@ -2059,3 +2059,240 @@ def task_day_greeting(
     )
 
     return sys, usr, None  # No JSON schema (plain text output)
+
+
+# ============================================================================
+# SCHEMA SELFCHECK PROMPT - Lightweight JSON self-validation
+# ============================================================================
+
+def task_schema_selfcheck(
+    week_number: int,
+    day_id: str,
+    field_name: str,
+    field_content: str,
+    expected_schema: Dict[str, Any],
+    project_root: str = "curriculum/LatinA"
+) -> Tuple[str, str, Dict[str, Any]]:
+    """
+    Generate schema self-validation report for a single field.
+
+    This prompt performs lightweight, deterministic JSON/YAML validation:
+    - Parses syntax
+    - Checks required keys
+    - Returns structured error/warning report
+
+    Args:
+        week_number: Week number (1-35)
+        day_id: Day identifier (Day1, Day2, Day3, Day4)
+        field_name: Field filename to validate
+        field_content: Raw file content
+        expected_schema: JSON Schema Draft-07 or YAML frontmatter spec
+        project_root: Root path for curriculum
+
+    Returns:
+        (system_prompt, user_prompt, config_dict)
+
+    Output:
+        JSON with subject, summary, errors, warnings, status
+    """
+    prompt_spec = _load_prompt_json("validation/schema_selfcheck.json")
+
+    user_content = "\n".join(prompt_spec["messages"][1]["content_template"])
+    user_content = user_content.replace("{{project_root}}", project_root)
+    user_content = user_content.replace("{{week_number}}", str(week_number))
+    user_content = user_content.replace("{{day_id}}", day_id)
+    user_content = user_content.replace("{{field_name}}", field_name)
+    user_content = user_content.replace("{{field_content}}", field_content)
+
+    schema_json = json.dumps(expected_schema, indent=2)
+    user_content = user_content.replace("{{expected_schema}}", schema_json)
+
+    system_content = prompt_spec["messages"][0]["content_template"]
+
+    config = {
+        "temperature": prompt_spec["model_preferences"]["temperature"],
+        "max_tokens": prompt_spec["model_preferences"]["max_tokens"],
+        "model": prompt_spec["model_preferences"]["model"]
+    }
+
+    return (system_content, user_content, config)
+
+
+# ============================================================================
+# PEDAGOGICAL SELFCHECK PROMPT - Pedagogy-focused QA for week bundle
+# ============================================================================
+
+def task_pedagogical_selfcheck(
+    week_number: int,
+    week_spec: Dict[str, Any],
+    day_bundles: Dict[str, Dict[str, Any]],
+    project_root: str = "curriculum/LatinA"
+) -> Tuple[str, str, Dict[str, Any]]:
+    """
+    Generate pedagogical QA report for week bundle.
+
+    This prompt checks:
+    - Spiral coverage (25-40%)
+    - CFU usage (≥2 per day)
+    - Pacing (20-25 min)
+    - Differentiation strategies
+    - Misconception handling
+    - Age-appropriateness
+
+    Args:
+        week_number: Week number (1-35)
+        week_spec: Week specification data
+        day_bundles: Dict of Day1-Day4 with role_context, guidelines, document
+        project_root: Root path for curriculum
+
+    Returns:
+        (system_prompt, user_prompt, config_dict)
+
+    Output:
+        Markdown report with rule results, day-by-day checklist
+    """
+    prompt_spec = _load_prompt_json("validation/pedagogical_selfcheck.json")
+
+    user_content = "\n".join(prompt_spec["messages"][1]["content_template"])
+    user_content = user_content.replace("{{week_number}}", str(week_number))
+    user_content = user_content.replace("{{project_root}}", project_root)
+
+    week_spec_json = json.dumps(week_spec, indent=2)
+    user_content = user_content.replace("{{week_spec}}", week_spec_json)
+
+    pedagogical_rules = prompt_spec["inputs"]["pedagogical_rules"]
+    rules_json = json.dumps(pedagogical_rules, indent=2)
+    user_content = user_content.replace("{{pedagogical_rules}}", rules_json)
+
+    system_content = prompt_spec["messages"][0]["content_template"]
+
+    config = {
+        "temperature": prompt_spec["model_preferences"]["temperature"],
+        "max_tokens": prompt_spec["model_preferences"]["max_tokens"],
+        "model": prompt_spec["model_preferences"]["model"]
+    }
+
+    return (system_content, user_content, config)
+
+
+# ============================================================================
+# SPIRAL ENFORCEMENT PROMPT - Ensure 25-40% spiral coverage
+# ============================================================================
+
+def task_spiral_enforcement(
+    week_number: int,
+    day_id: str,
+    day_document: Dict[str, Any],
+    prior_knowledge_digest: Dict[str, Any],
+    project_root: str = "curriculum/LatinA"
+) -> Tuple[str, str, Dict[str, Any]]:
+    """
+    Generate spiral enforcement report with patches.
+
+    This prompt analyzes spiral coverage in 06_document_for_sparky.json:
+    - Measures spiral % (spiral_items / total_items)
+    - If out of bounds (25-40%), proposes minimal patches
+    - Returns corrected document or RFC 6902 patch
+
+    Args:
+        week_number: Week number (1-35)
+        day_id: Day identifier (Day1, Day2, Day3, Day4)
+        day_document: DayDocument from prompt_for_day_document
+        prior_knowledge_digest: Available spiral content
+        project_root: Root path for curriculum
+
+    Returns:
+        (system_prompt, user_prompt, config_dict)
+
+    Output:
+        JSON with spiral_metrics, changes, patch_json, corrected_document
+    """
+    prompt_spec = _load_prompt_json("enforcement/spiral_enforcement.json")
+
+    user_content = "\n".join(prompt_spec["messages"][1]["content_template"])
+    user_content = user_content.replace("{{project_root}}", project_root)
+    user_content = user_content.replace("{{week_number}}", str(week_number))
+    user_content = user_content.replace("{{day_id}}", day_id)
+
+    day_doc_json = json.dumps(day_document, indent=2)
+    user_content = user_content.replace("{{day_document}}", day_doc_json)
+
+    digest_json = json.dumps(prior_knowledge_digest, indent=2)
+    user_content = user_content.replace("{{prior_knowledge_digest}}", digest_json)
+
+    spiral_policy = prompt_spec["inputs"]["spiral_policy"]
+    policy_json = json.dumps(spiral_policy, indent=2)
+    user_content = user_content.replace("{{spiral_policy}}", policy_json)
+
+    system_content = prompt_spec["messages"][0]["content_template"]
+
+    config = {
+        "temperature": prompt_spec["model_preferences"]["temperature"],
+        "max_tokens": prompt_spec["model_preferences"]["max_tokens"],
+        "model": prompt_spec["model_preferences"]["model"]
+    }
+
+    return (system_content, user_content, config)
+
+
+# ============================================================================
+# VIRTUE ALIGNMENT PROMPT - Audit virtue/faith integration
+# ============================================================================
+
+def task_virtue_alignment(
+    week_number: int,
+    day_id: str,
+    week_spec: Dict[str, Any],
+    day_bundle: Dict[str, Any],
+    project_root: str = "curriculum/LatinA"
+) -> Tuple[str, str, Dict[str, Any]]:
+    """
+    Generate virtue/faith alignment audit for a single day.
+
+    This prompt audits all 7 fields for:
+    - Virtue mentions (≥2, meaningful integration)
+    - Faith phrase usage (≥1, natural context)
+    - Proposes line-anchored patches for weak/missing integrations
+
+    Args:
+        week_number: Week number (1-35)
+        day_id: Day identifier (Day1, Day2, Day3, Day4)
+        week_spec: Week specification (for virtue_focus, faith_phrase)
+        day_bundle: Dict with all 7 field contents
+        project_root: Root path for curriculum
+
+    Returns:
+        (system_prompt, user_prompt, config_dict)
+
+    Output:
+        Markdown report + JSON metadata with alignment summary and patches
+    """
+    prompt_spec = _load_prompt_json("validation/virtue_alignment.json")
+
+    user_content = "\n".join(prompt_spec["messages"][1]["content_template"])
+    user_content = user_content.replace("{{project_root}}", project_root)
+    user_content = user_content.replace("{{week_number}}", str(week_number))
+    user_content = user_content.replace("{{day_id}}", day_id)
+
+    # Extract virtue and faith from week_spec
+    virtue = week_spec.get("virtue_focus", week_spec.get("virtue", "N/A"))
+    faith_phrase = week_spec.get("faith_phrase", "N/A")
+    user_content = user_content.replace("{{week_spec.virtue}}", virtue)
+    user_content = user_content.replace("{{week_spec.faith_phrase}}", faith_phrase)
+
+    day_bundle_json = json.dumps(day_bundle, indent=2)
+    user_content = user_content.replace("{{day_bundle}}", day_bundle_json)
+
+    alignment_rules = prompt_spec["inputs"]["alignment_rules"]
+    rules_json = json.dumps(alignment_rules, indent=2)
+    user_content = user_content.replace("{{alignment_rules}}", rules_json)
+
+    system_content = prompt_spec["messages"][0]["content_template"]
+
+    config = {
+        "temperature": prompt_spec["model_preferences"]["temperature"],
+        "max_tokens": prompt_spec["model_preferences"]["max_tokens"],
+        "model": prompt_spec["model_preferences"]["model"]
+    }
+
+    return (system_content, user_content, config)

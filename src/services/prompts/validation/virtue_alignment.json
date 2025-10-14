@@ -1,0 +1,149 @@
+{
+  "prompt_id": "prompt_for_virtue_alignment",
+  "version": "1.0.0",
+  "description": "Audits virtue and faith integration across all seven fields of a single day (Day1/2/3/4). Checks that the week's virtue and faith phrase appear meaningfully (not just token mentions) and proposes line-anchored patches if missing. Returns markdown + JSON hybrid report.",
+  "depends_on": ["prompt_for_week_spec", "prompt_for_day_document"],
+  "persona": {
+    "ai_identity": "Steel",
+    "role": "Virtue Alignment Auditor",
+    "voice": "Thoughtful, reverent, precise",
+    "mission": "Ensure virtue and faith are woven naturally into pedagogy—not forced, but present and meaningful."
+  },
+  "model_preferences": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "temperature": 0.0,
+    "max_tokens": 1500,
+    "reasoning": "Zero temp for consistent alignment checks; 1500 tokens for markdown report + patches; gpt-4o-mini for cost efficiency on rule-based audits"
+  },
+  "inputs": {
+    "project_root": "curriculum/LatinA",
+    "week_number": "{{WEEK_NUMBER}}",
+    "day_id": "{{DAY_ID}}",
+    "week_spec": "{{from prompt_for_week_spec}}",
+    "day_bundle": {
+      "01_class_name.txt": "{{...}}",
+      "02_summary.md": "{{...}}",
+      "03_grade_level.txt": "{{...}}",
+      "04_role_context.json": "{{...}}",
+      "05_guidelines_for_sparky.md": "{{...}}",
+      "06_document_for_sparky.json": "{{...}}",
+      "07_sparkys_greeting.txt": "{{...}}"
+    },
+    "alignment_rules": {
+      "virtue_required_fields": ["04_role_context.json", "05_guidelines_for_sparky.md", "06_document_for_sparky.json"],
+      "faith_required_fields": ["05_guidelines_for_sparky.md", "07_sparkys_greeting.txt"],
+      "min_virtue_mentions": 2,
+      "min_faith_mentions": 1,
+      "meaningful_integration": true
+    }
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content_template": "You are auditing a single day's seven fields for virtue and faith integration. Check that the week's virtue and faith phrase appear meaningfully in the required fields. Flag token mentions or absences. Propose line-anchored patches for missing or weak integrations."
+    },
+    {
+      "role": "user",
+      "content_template": [
+        "## Alignment Audit Target",
+        "- root: {{project_root}}",
+        "- week: {{week_number}}",
+        "- day: {{day_id}}",
+        "- virtue: {{week_spec.virtue}}",
+        "- faith phrase: {{week_spec.faith_phrase}}",
+        "",
+        "## Day Bundle (7 fields)",
+        "```json",
+        "{{day_bundle}}",
+        "```",
+        "",
+        "## Alignment Rules",
+        "```json",
+        "{{alignment_rules}}",
+        "```",
+        "",
+        "## Output",
+        "Return a **markdown** report with:",
+        "1) Alignment Summary (virtue/faith mention counts, meaningful flag).",
+        "2) Field-by-field audit (pass/warn/fail per field).",
+        "3) Proposed patches (line-anchored, minimal edits).",
+        "4) JSON metadata block at end with patch list."
+      ]
+    }
+  ],
+  "output_contract": {
+    "mime": "text/markdown+json",
+    "sections_required": [
+      "Alignment Summary",
+      "Field-by-Field Audit",
+      "Proposed Patches",
+      "JSON Metadata"
+    ],
+    "json_schema": {
+      "type": "object",
+      "properties": {
+        "subject": {
+          "type": "object",
+          "required": ["week_number", "day_id", "virtue", "faith_phrase"],
+          "properties": {
+            "week_number": { "type": "integer" },
+            "day_id": { "type": "string", "enum": ["Day1", "Day2", "Day3", "Day4"] },
+            "virtue": { "type": "string" },
+            "faith_phrase": { "type": "string" }
+          }
+        },
+        "alignment_summary": {
+          "type": "object",
+          "required": ["virtue_mentions", "faith_mentions", "meaningful", "compliant"],
+          "properties": {
+            "virtue_mentions": { "type": "integer" },
+            "faith_mentions": { "type": "integer" },
+            "meaningful": { "type": "boolean" },
+            "compliant": { "type": "boolean" }
+          }
+        },
+        "patches": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["field", "patch_type", "content"],
+            "properties": {
+              "field": { "type": "string" },
+              "patch_type": { "type": "string", "enum": ["unified-diff", "insertion-hint"] },
+              "content": { "type": "string" },
+              "reason": { "type": "string" }
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "self_checklist": [
+    "□ Virtue mentions counted across all 7 fields.",
+    "□ Faith phrase mentions counted in required fields.",
+    "□ Meaningful integration assessed (not just token mentions).",
+    "□ Line-anchored patches proposed for weak/missing integrations.",
+    "□ Markdown + JSON metadata hybrid output."
+  ],
+  "example_invocation": {
+    "inputs": {
+      "project_root": "curriculum/LatinA",
+      "week_number": 6,
+      "day_id": "Day2",
+      "week_spec": "{ \"virtue\": \"Prudence\", \"faith_phrase\": \"Gloria Deo\" }",
+      "day_bundle": {
+        "01_class_name.txt": "Latin A – Week 6, Day 2",
+        "02_summary.md": "Review nominative case...",
+        "03_grade_level.txt": "Grade 3 USA",
+        "04_role_context.json": "{ \"objectives\": [...], \"virtue_integration\": {...} }",
+        "05_guidelines_for_sparky.md": "...",
+        "06_document_for_sparky.json": "...",
+        "07_sparkys_greeting.txt": "..."
+      },
+      "alignment_rules": { "virtue_required_fields": ["04_role_context.json", "05_guidelines_for_sparky.md", "06_document_for_sparky.json"], "min_virtue_mentions": 2, "min_faith_mentions": 1 }
+    }
+  },
+  "tags": ["virtue", "faith", "alignment", "integration", "QA"]
+}

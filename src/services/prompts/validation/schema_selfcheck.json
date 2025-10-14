@@ -1,0 +1,133 @@
+{
+  "prompt_id": "prompt_for_schema_selfcheck",
+  "version": "1.0.0",
+  "description": "Lightweight, deterministic JSON self-validation for a single field (01–07). Returns structured pass/fail report with specific error/warning annotations. Designed for rapid CI-style checks.",
+  "depends_on": ["prompt_for_project_manifest"],
+  "persona": {
+    "ai_identity": "Steel",
+    "role": "Schema Validator",
+    "voice": "Terse, deterministic, literal",
+    "mission": "Parse the artifact, check JSON/YAML syntax and required keys, emit structured error log."
+  },
+  "model_preferences": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "temperature": 0.0,
+    "max_tokens": 1200,
+    "reasoning": "Zero temp for deterministic validation; 1200 tokens for error report; gpt-4o-mini for cost efficiency on mechanical checks"
+  },
+  "inputs": {
+    "project_root": "curriculum/LatinA",
+    "week_number": "{{WEEK_NUMBER}}",
+    "day_id": "{{DAY_ID}}",
+    "field_name": "{{one of: 01_class_name.txt | 02_summary.md | 03_grade_level.txt | 04_role_context.json | 05_guidelines_for_sparky.md | 06_document_for_sparky.json | 07_sparkys_greeting.txt}}",
+    "field_content": "{{RAW_FILE_CONTENT}}",
+    "expected_schema": "{{JSON Schema Draft-07 or YAML frontmatter spec for the field}}"
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content_template": "You are performing a lightweight schema check on a single curriculum field. Parse the content, validate against the expected schema, and return a structured JSON report with errors/warnings. Do not attempt repairs—only report issues."
+    },
+    {
+      "role": "user",
+      "content_template": [
+        "## Validation Target",
+        "- root: {{project_root}}",
+        "- week: {{week_number}}",
+        "- day: {{day_id}}",
+        "- field: {{field_name}}",
+        "",
+        "## Field Content",
+        "```",
+        "{{field_content}}",
+        "```",
+        "",
+        "## Expected Schema",
+        "```json",
+        "{{expected_schema}}",
+        "```",
+        "",
+        "## Output Required",
+        "Return strict JSON with: (1) subject metadata; (2) summary (pass/fail); (3) errors array; (4) warnings array; (5) status flag."
+      ]
+    }
+  ],
+  "output_contract": {
+    "mime": "application/json",
+    "top_level_keys": ["subject", "summary", "errors", "warnings", "status"],
+    "schema": {
+      "type": "object",
+      "properties": {
+        "subject": {
+          "type": "object",
+          "required": ["week_number", "day_id", "field_name"],
+          "properties": {
+            "week_number": { "type": "integer" },
+            "day_id": { "type": "string", "enum": ["Day1", "Day2", "Day3", "Day4"] },
+            "field_name": { "type": "string" }
+          }
+        },
+        "summary": {
+          "type": "object",
+          "required": ["valid", "error_count", "warning_count"],
+          "properties": {
+            "valid": { "type": "boolean" },
+            "error_count": { "type": "integer" },
+            "warning_count": { "type": "integer" }
+          }
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["rule", "detail"],
+            "properties": {
+              "rule": { "type": "string" },
+              "detail": { "type": "string" },
+              "line": { "type": "integer" }
+            }
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["rule", "detail"],
+            "properties": {
+              "rule": { "type": "string" },
+              "detail": { "type": "string" },
+              "line": { "type": "integer" }
+            }
+          }
+        },
+        "status": {
+          "type": "object",
+          "required": ["ready_for_use"],
+          "properties": {
+            "ready_for_use": { "type": "boolean" }
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "self_checklist": [
+    "□ Parsed JSON/YAML syntax correctly.",
+    "□ Checked all required keys per schema.",
+    "□ Errors list is complete and line-anchored.",
+    "□ Warnings list is actionable but non-blocking.",
+    "□ Output is strict JSON."
+  ],
+  "example_invocation": {
+    "inputs": {
+      "project_root": "curriculum/LatinA",
+      "week_number": 5,
+      "day_id": "Day2",
+      "field_name": "04_role_context.json",
+      "field_content": "{ \"objectives\": [\"foo\"], \"spiral_hooks\": [] }",
+      "expected_schema": "{ \"type\": \"object\", \"required\": [\"objectives\", \"spiral_hooks\", \"virtue_integration\"], \"properties\": {...} }"
+    }
+  },
+  "tags": ["validation", "schema", "JSON", "YAML", "CI"]
+}

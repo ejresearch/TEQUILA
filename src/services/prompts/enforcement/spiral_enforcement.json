@@ -1,0 +1,141 @@
+{
+  "prompt_id": "prompt_for_spiral_enforcement",
+  "version": "1.0.0",
+  "description": "Ensures 25–40% spiral coverage in 06_document_for_sparky.json by analyzing lesson_steps and vocabulary_today. If coverage is out of bounds, proposes minimal patches (add/remove spiral items) and returns a corrected DayDocument with change annotations.",
+  "depends_on": ["prompt_for_day_document", "prompt_for_prior_knowledge_digest"],
+  "persona": {
+    "ai_identity": "Steel",
+    "role": "Spiral Enforcement Agent",
+    "voice": "Analytical, quantitative, conservative",
+    "mission": "Measure spiral %, enforce 25–40% policy, propose minimal edits to bring document into compliance."
+  },
+  "model_preferences": {
+    "provider": "openai",
+    "model": "gpt-4o",
+    "temperature": 0.0,
+    "max_tokens": 1800,
+    "reasoning": "Zero temp for deterministic enforcement; 1800 tokens for spiral analysis and patch generation; gpt-4o for complex spiral planning"
+  },
+  "inputs": {
+    "project_root": "curriculum/LatinA",
+    "week_number": "{{WEEK_NUMBER}}",
+    "day_id": "{{DAY_ID}}",
+    "day_document": "{{from prompt_for_day_document or raw 06_document_for_sparky.json}}",
+    "prior_knowledge_digest": "{{from prompt_for_prior_knowledge_digest}}",
+    "spiral_policy": {
+      "min_coverage": 0.25,
+      "max_coverage": 0.40,
+      "measurement_basis": "lesson_steps + vocabulary_today"
+    }
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content_template": "You are enforcing the spiral coverage policy (25–40%). Analyze the day_document, count spiral items vs. new items in lesson_steps and vocabulary_today. If out of bounds, propose minimal changes (add/remove spiral items) and return a corrected DayDocument with annotations."
+    },
+    {
+      "role": "user",
+      "content_template": [
+        "## Spiral Enforcement Target",
+        "- root: {{project_root}}",
+        "- week: {{week_number}}",
+        "- day: {{day_id}}",
+        "",
+        "## Inputs",
+        "### Day Document",
+        "```json",
+        "{{day_document}}",
+        "```",
+        "",
+        "### Prior Knowledge Digest (available for spiral)",
+        "```json",
+        "{{prior_knowledge_digest}}",
+        "```",
+        "",
+        "### Policy",
+        "```json",
+        "{{spiral_policy}}",
+        "```",
+        "",
+        "## Output Required",
+        "Return strict JSON with: (1) spiral_metrics (current %, compliant flag); (2) changes array (add/remove operations); (3) patch_json (unified-diff or RFC 6902); (4) corrected_document (full JSON if regenerated)."
+      ]
+    }
+  ],
+  "output_contract": {
+    "mime": "application/json",
+    "top_level_keys": ["subject", "spiral_metrics", "changes", "patch_json", "corrected_document"],
+    "schema": {
+      "type": "object",
+      "properties": {
+        "subject": {
+          "type": "object",
+          "required": ["week_number", "day_id"],
+          "properties": {
+            "week_number": { "type": "integer" },
+            "day_id": { "type": "string", "enum": ["Day1", "Day2", "Day3", "Day4"] }
+          }
+        },
+        "spiral_metrics": {
+          "type": "object",
+          "required": ["spiral_count", "new_count", "total_count", "coverage_percent", "compliant"],
+          "properties": {
+            "spiral_count": { "type": "integer" },
+            "new_count": { "type": "integer" },
+            "total_count": { "type": "integer" },
+            "coverage_percent": { "type": "number" },
+            "compliant": { "type": "boolean" }
+          }
+        },
+        "changes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["action", "target", "item"],
+            "properties": {
+              "action": { "type": "string", "enum": ["add-spiral", "remove-spiral", "convert-new-to-spiral", "convert-spiral-to-new"] },
+              "target": { "type": "string", "enum": ["lesson_steps", "vocabulary_today"] },
+              "item": { "type": "string" },
+              "reason": { "type": "string" }
+            }
+          }
+        },
+        "patch_json": {
+          "type": "object",
+          "required": ["type", "content"],
+          "properties": {
+            "type": { "type": "string", "enum": ["unified-diff", "rfc6902"] },
+            "content": { "type": "string" }
+          }
+        },
+        "corrected_document": {
+          "type": "object",
+          "required": ["provided"],
+          "properties": {
+            "provided": { "type": "boolean" },
+            "content": { "type": "object" }
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "self_checklist": [
+    "□ Spiral % calculated correctly (spiral_count / total_count).",
+    "□ If out of bounds, minimal changes proposed.",
+    "□ Changes preserve pedagogy and tone.",
+    "□ Patch or corrected_document provided.",
+    "□ Output is strict JSON."
+  ],
+  "example_invocation": {
+    "inputs": {
+      "project_root": "curriculum/LatinA",
+      "week_number": 9,
+      "day_id": "Day3",
+      "day_document": "{ \"lesson_steps\": [{\"type\":\"warmup\",\"spiral_content\":[\"rosa\"]},{\"type\":\"instruction\",\"new_content\":[\"puella\",\"agricola\"]}], \"vocabulary_today\": {\"new\":[\"puella\",\"agricola\"],\"spiral\":[\"rosa\"]} }",
+      "prior_knowledge_digest": "{ \"vocabulary\": [\"rosa\", \"terra\", \"stella\"], \"grammar\": [\"nominative\"] }",
+      "spiral_policy": { "min_coverage": 0.25, "max_coverage": 0.40 }
+    }
+  },
+  "tags": ["spiral", "enforcement", "25-40%", "policy"]
+}

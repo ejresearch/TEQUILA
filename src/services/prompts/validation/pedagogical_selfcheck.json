@@ -1,0 +1,92 @@
+{
+  "prompt_id": "prompt_for_pedagogical_selfcheck",
+  "version": "1.0.0",
+  "description": "Pedagogy-focused QA for a week bundle (Day1–Day4). Checks spiral coverage (25–40%), age-appropriateness, CFU usage, pacing, differentiation, and misconception handling. Returns concise markdown report with rule-by-rule results and day-by-day checklist.",
+  "depends_on": ["prompt_for_week_spec", "prompt_for_day_document"],
+  "persona": {
+    "ai_identity": "Steel",
+    "role": "Pedagogical QA Specialist",
+    "voice": "Crisp, educational, evidence-based",
+    "mission": "Ensure week bundle meets classical pedagogy standards: spiral review, CFU, differentiation, pacing, and age-level alignment."
+  },
+  "model_preferences": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "temperature": 0.0,
+    "max_tokens": 1600,
+    "reasoning": "Zero temp for consistent QA; 1600 tokens for multi-day markdown report; gpt-4o-mini for cost efficiency on rule-based checks"
+  },
+  "inputs": {
+    "project_root": "curriculum/LatinA",
+    "week_number": "{{WEEK_NUMBER}}",
+    "week_spec": "{{from prompt_for_week_spec}}",
+    "day_bundles": {
+      "Day1": { "role_context": "{{...}}", "guidelines": "{{...}}", "document": "{{...}}" },
+      "Day2": { "role_context": "{{...}}", "guidelines": "{{...}}", "document": "{{...}}" },
+      "Day3": { "role_context": "{{...}}", "guidelines": "{{...}}", "document": "{{...}}" },
+      "Day4": { "role_context": "{{...}}", "guidelines": "{{...}}", "document": "{{...}}" }
+    },
+    "pedagogical_rules": {
+      "spiral_coverage": "25–40%",
+      "cfu_per_day": "≥2",
+      "total_lesson_time": "20–25 min",
+      "differentiation_required": true,
+      "misconceptions_documented": true,
+      "grade_level": "Grade 3 USA"
+    }
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content_template": "You are performing a pedagogical QA check on a week bundle (Day1–Day4). Evaluate spiral coverage, CFU usage, pacing, differentiation, misconception handling, and age-appropriateness. Flag rule violations with evidence. Return a concise markdown report."
+    },
+    {
+      "role": "user",
+      "content_template": [
+        "## Pedagogical Audit Targets",
+        "- Week: {{week_number}}",
+        "- Week Spec: ```json\n{{week_spec}}\n```",
+        "- Rules: ```json\n{{pedagogical_rules}}\n```",
+        "",
+        "## Output",
+        "Return a **markdown** report with:",
+        "1) Summary pass/warn/fail.",
+        "2) Rule-by-rule results (spiral coverage %, CFU count, pacing, differentiation, misconceptions).",
+        "3) Day-by-day checklist with specific findings.",
+        "4) Recommended actions for any failing rules."
+      ]
+    }
+  ],
+  "output_contract": {
+    "mime": "text/markdown",
+    "sections_required": [
+      "Pedagogical Summary",
+      "Rule Results",
+      "Day-by-Day Checklist",
+      "Recommended Actions"
+    ]
+  },
+  "self_checklist": [
+    "□ Spiral coverage % calculated across all days.",
+    "□ CFU count verified (≥2 per day).",
+    "□ Pacing checked (20–25 min total).",
+    "□ Differentiation strategies documented.",
+    "□ Misconceptions list present and actionable.",
+    "□ Grade 3 USA tone/level confirmed."
+  ],
+  "example_invocation": {
+    "inputs": {
+      "project_root": "curriculum/LatinA",
+      "week_number": 7,
+      "week_spec": "{ \"virtue\": \"Prudence\", \"faith_phrase\": \"Gloria Deo\", \"grammar_focus\": \"Noun Cases\" }",
+      "day_bundles": {
+        "Day1": { "role_context": "{...}", "guidelines": "...", "document": "{...}" },
+        "Day2": { "role_context": "{...}", "guidelines": "...", "document": "{...}" },
+        "Day3": { "role_context": "{...}", "guidelines": "...", "document": "{...}" },
+        "Day4": { "role_context": "{...}", "guidelines": "...", "document": "{...}" }
+      },
+      "pedagogical_rules": { "spiral_coverage": "25–40%", "cfu_per_day": "≥2", "total_lesson_time": "20–25 min" }
+    }
+  },
+  "tags": ["pedagogy", "QA", "spiral", "CFU", "differentiation"]
+}

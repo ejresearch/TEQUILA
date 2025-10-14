@@ -1,26 +1,96 @@
-You are generating a day-scoped document_for_sparky for Latin A curriculum.
+You are generating field 06_document_for_sparky.json for Latin A curriculum.
+This is the SIXTH field in the 7-field day architecture.
 
-Required fields in your JSON output:
-- metadata (week, day, title, duration_minutes)
-- prior_knowledge_digest (120-200 word summary of prerequisite concepts)
-- yesterday_recap (brief review of previous lesson)
-- spiral_links (connections to earlier weeks/days)
-- misconception_watchlist (common errors to watch for)
-- objectives (learning goals for this specific day)
-- materials (required resources)
-- lesson_flow (array of timed instructional steps)
-- behavior (Sparky's pedagogical personality: tone, loop behavior, hints_max, wait_seconds)
+CONTEXT (7-field architecture):
+01. class_name.txt
+02. summary.md
+03. grade_level.txt
+04. role_context.json (Sparky's behavioral parameters - YOU MUST REFERENCE THIS)
+05. guidelines_for_sparky.md (teaching notes with YAML references)
+06. document_for_sparky.json (THIS FIELD - complete lesson plan)
+07. sparkys_greeting.txt
 
-CRITICAL - Honor spiral learning principles:
-- Set recycled_vocab and recycled_grammar arrays
-- First 2 steps in lesson_flow MUST recall prior knowledge before introducing novelty
-- Each step must have: type (from allowed set), duration_minutes, description, student_action
-- Allowed step types: recall, introduction, guided_practice, independent_practice, assessment, transition
+YOUR TASK:
+Generate a complete, structured lesson plan JSON that:
+1. Incorporates role_context from field 04 (hints_max, wait_seconds, spiral_emphasis, focus_mode)
+2. Aligns with guidelines from field 05 (YAML references: prior_knowledge, vocabulary, grammar_focus)
+3. Enforces spiral learning (≥25% prior content for Day 4)
+4. Validates lesson_flow structure and timing
+5. Includes self-check validation
 
-CRITICAL - Lesson flow timing types:
-- Use "recall" for first 1-2 steps (review prior content)
-- Then "introduction" for new material
-- Follow with "guided_practice" and "independent_practice"
-- End with "assessment" or review
+REQUIRED JSON STRUCTURE:
+{
+  "metadata": {
+    "week": int,
+    "day": int,
+    "title": "Week X Day Y: Topic",
+    "duration_minutes": 45,
+    "virtue": "string or null",
+    "faith_phrase": "string or null"
+  },
+  "prior_knowledge_digest": "120-200 word summary of prerequisite concepts",
+  "yesterday_recap": "Brief review of previous lesson",
+  "spiral_links": {
+    "recycled_vocab": ["item1", "item2", ...],
+    "recycled_grammar": ["concept1", "concept2", ...],
+    "prior_day_concepts": ["concept1", ...],
+    "prior_weeks": [1, 2, ...]
+  },
+  "misconception_watchlist": ["error1", "error2", ...],
+  "objectives": {
+    "primary": ["objective1", "objective2", ...],
+    "spiral_review": ["review_obj1", ...] (only Day 4)
+  },
+  "materials": ["item1", "item2", ...],
+  "lesson_flow": [
+    {
+      "type": "recall|introduction|guided_practice|independent_practice|assessment|transition|greeting|review|chant|derivatives|agreement_drill|dictation|translation|copywork|faith_reflection|closure",
+      "duration_minutes": int,
+      "description": "What happens in this step",
+      "student_action": "Expected student behavior",
+      "teacher_notes": "Optional notes"
+    }
+  ],
+  "behavior": {
+    "tone": "string",
+    "loop_behavior": "string",
+    "hints_max": int (from role_context or default 3),
+    "wait_seconds": int (from role_context or default 5),
+    "encouragement_frequency": "string"
+  }
+}
 
-Return ONLY valid JSON. No markdown, no comments, no backticks.
+CRITICAL REQUIREMENTS:
+
+1. SPIRAL LEARNING:
+   - First 1-2 steps in lesson_flow MUST be type "recall" or "review"
+   - spiral_links.recycled_vocab must have ≥3 items (Week 1 can be empty)
+   - spiral_links.recycled_grammar must have ≥2 items (Week 1 can be empty)
+   - Day 4: ≥25% of lesson_flow total time must be recall/review/assessment types
+
+2. LESSON FLOW:
+   - Minimum 5 steps, maximum 12 steps
+   - Total duration should sum to ~45 minutes (±5 minutes acceptable)
+   - Each step requires: type, duration_minutes, description, student_action
+   - Allowed types: recall, introduction, guided_practice, independent_practice, assessment, transition, greeting, review, chant, derivatives, agreement_drill, dictation, translation, copywork, faith_reflection, closure
+
+3. BEHAVIOR INTEGRATION:
+   - behavior.hints_max should match role_context.max_hints (if provided)
+   - behavior.wait_seconds should match role_context.wait_time_seconds (if provided)
+   - behavior.tone should align with role_context.sparky_role
+
+4. OUTPUT FORMAT:
+   - Return ONLY valid JSON (no markdown fences, no explanatory text)
+   - All required fields must be present
+   - String values must not be empty (min length > 0)
+
+SELF-CHECK RUBRIC (validate before returning):
+✓ Is JSON valid and parseable?
+✓ Does prior_knowledge_digest have 120-200 words?
+✓ Do first 1-2 lesson_flow steps have type "recall" or "review"?
+✓ Does lesson_flow have ≥5 steps?
+✓ Does lesson_flow total duration ≈ 45 minutes?
+✓ For Day 4: Is ≥25% of time spent on recall/review/assessment?
+✓ Are spiral_links arrays populated with prior content (if Week ≥ 2)?
+✓ Does behavior object include hints_max and wait_seconds?
+✓ Are all required top-level fields present?

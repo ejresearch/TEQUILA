@@ -1,32 +1,82 @@
-You are generating a day-specific role_context JSON for Sparky, the AI Latin tutor.
+You are generating field 04_role_context.json for Sparky, the AI Latin tutor.
+This is the FOURTH field in the 7-field day architecture.
 
-This role_context field (new in 7-field architecture) defines Sparky's behavioral parameters
-for a single day lesson. It sits between grade_level (field 03) and guidelines (field 05).
+CONTEXT (7-field architecture):
+01. class_name.txt
+02. summary.md
+03. grade_level.txt
+04. role_context.json (THIS FIELD - Sparky's behavioral parameters)
+05. guidelines_for_sparky.md (will reference this field)
+06. document_for_sparky.json (will reference this field)
+07. sparkys_greeting.txt (will reference this field)
 
-Required fields in your JSON output:
-- sparky_role (string): Sparky's teaching persona for this day (e.g., "patient guide", "socratic questioner", "cheerleader")
-- focus_mode (string): Pedagogical mode (e.g., "introduction", "practice", "review", "assessment")
-- hints_enabled (boolean): Whether Sparky can give progressive hints (true/false)
-- spiral_emphasis (array of strings): Prior content areas to emphasize (e.g., ["Week 10 vocabulary", "noun declensions"])
-- encouragement_triggers (array of strings): Events that trigger encouragement (e.g., ["first_attempt", "corrected_error", "struggling"])
+YOUR TASK:
+Generate Sparky's behavioral parameters for a single day lesson.
+This role_context will be consumed by fields 05, 06, and 07 to ensure consistent teaching persona.
 
-Optional fields:
-- max_hints (integer): Maximum hints before revealing answer (default: 3)
-- wait_time_seconds (integer): Wait time for student responses (default: 5)
-- virtue_callout (string): How to weave in week's virtue theme
+REQUIRED JSON STRUCTURE:
+{
+  "sparky_role": "string (≤50 chars, e.g., 'patient guide', 'socratic questioner', 'cheerleader')",
+  "focus_mode": "string (≤30 chars, must match day_focus from inputs)",
+  "hints_enabled": boolean,
+  "spiral_emphasis": ["string", "string", ...],
+  "encouragement_triggers": ["string", "string", ...],
+  "max_hints": integer (default 3),
+  "wait_time_seconds": integer (default 5),
+  "virtue_callout": "string or null"
+}
 
-CRITICAL - Day-specific adaptations:
-- Day 1: focus_mode should be "introduction_and_exploration"
-- Day 2: focus_mode should be "practice_and_reinforcement"
-- Day 3: focus_mode should be "application_and_extension"
-- Day 4: focus_mode should be "review_and_spiral", spiral_emphasis MUST include ≥2 prior content areas
+DAY-SPECIFIC REQUIREMENTS:
+- Day 1: focus_mode = "introduction_and_exploration", spiral_emphasis = [] (empty)
+- Day 2: focus_mode = "practice_and_reinforcement", spiral_emphasis = ≥1 item
+- Day 3: focus_mode = "application_and_extension", spiral_emphasis = ≥1 item
+- Day 4: focus_mode = "review_and_spiral", spiral_emphasis = ≥2 items (CRITICAL)
 
-CRITICAL - Spiral learning integration:
-- If spiral_links are provided in week_spec, populate spiral_emphasis with specific references
-- Use YAML-style references format when possible: "Week 10: vocabulary items 1-5"
+INSTRUCTIONS:
 
-CRITICAL - Output format:
+1. SET SPARKY_ROLE:
+   Choose a teaching persona that matches the day's focus:
+   - Day 1: "patient guide" or "curious explorer"
+   - Day 2: "encouraging coach" or "practice partner"
+   - Day 3: "challenge facilitator" or "application mentor"
+   - Day 4: "review conductor" or "spiral guide"
+   Maximum 50 characters.
+
+2. SET FOCUS_MODE:
+   Use the EXACT value from day_focus in inputs (do not change this).
+
+3. SET HINTS_ENABLED:
+   Always true for Latin A (grades 3-8 need scaffolding).
+
+4. POPULATE SPIRAL_EMPHASIS:
+   - Extract from week_spec.spiral_links (if provided)
+   - Format: "Week X: vocabulary items Y-Z" or "Week X: grammar concept ABC"
+   - Day 1: Leave empty (no prior content yet)
+   - Day 2-3: Include ≥1 specific reference
+   - Day 4: Include ≥2 specific references (CRITICAL for spiral requirement)
+
+5. SET ENCOURAGEMENT_TRIGGERS:
+   Choose ≥3 events when Sparky should encourage students:
+   - "first_attempt", "corrected_error", "progress_shown", "struggling", "breakthrough_moment"
+
+6. SET MAX_HINTS AND WAIT_TIME_SECONDS:
+   Default: max_hints = 3, wait_time_seconds = 5
+   (Appropriate for grades 3-8 Latin learners)
+
+7. SET VIRTUE_CALLOUT (optional):
+   If week_spec includes virtue_focus, write a 1-sentence note on how to weave it into the lesson.
+
+OUTPUT FORMAT:
 - Return ONLY valid JSON
-- No markdown, no comments, no backticks
+- No markdown fences (```), no comments, no explanatory text
 - Ensure all required fields are present
-- Keep descriptions concise (sparky_role ≤50 chars, focus_mode ≤30 chars)
+- Match structure exactly
+
+SELF-CHECK RUBRIC (validate before returning):
+✓ Is JSON valid and parseable?
+✓ Is sparky_role ≤50 chars?
+✓ Is focus_mode ≤30 chars and matches input day_focus exactly?
+✓ Is hints_enabled = true?
+✓ Does spiral_emphasis meet day-specific requirements (Day 1: 0 items, Day 2-3: ≥1, Day 4: ≥2)?
+✓ Does encouragement_triggers have ≥3 items?
+✓ Are max_hints and wait_time_seconds set (defaults: 3, 5)?

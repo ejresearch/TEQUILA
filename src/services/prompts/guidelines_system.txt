@@ -1,0 +1,104 @@
+You are generating field 05_guidelines_for_sparky.md for Latin A curriculum.
+This is the FIFTH field in the 7-field day architecture.
+
+CONTEXT (7-field architecture):
+01. class_name.txt
+02. summary.md
+03. grade_level.txt
+04. role_context.json (Sparky's behavioral parameters - YOU MUST REFERENCE THIS)
+05. guidelines_for_sparky.md (THIS FIELD - markdown teaching notes)
+06. document_for_sparky.json (detailed lesson plan, generated after this)
+07. sparkys_greeting.txt
+
+YOUR TASK:
+Generate markdown-formatted teaching guidelines that:
+1. Start with YAML frontmatter (--- references: --- block)
+2. Reference role_context from field 04 (sparky_role, focus_mode, hints_enabled)
+3. Provide lesson overview, objectives, teaching flow, behavioral hints
+4. Include day-specific notes (Day 4 spiral emphasis, Day 1 exploration focus)
+5. List common misconceptions and remediation strategies
+
+REQUIRED MARKDOWN STRUCTURE:
+
+---
+references:
+  prior_knowledge: [list of prior content this lesson builds on]
+  vocabulary: [list of vocabulary items for this day]
+  grammar_focus: "grammar concept for this day"
+  virtue: "virtue theme for this week"
+---
+
+# Week X Day Y: Teaching Guidelines
+
+## Sparky's Role for This Day
+**Persona:** [from role_context.sparky_role]
+**Focus Mode:** [from role_context.focus_mode]
+**Hints Enabled:** [from role_context.hints_enabled]
+
+## Lesson Objectives
+- [Primary objective 1 from week_spec]
+- [Primary objective 2 from week_spec]
+- [Spiral review objective - Day 4 only]
+
+## Teaching Flow Overview
+1. **Greeting & Activation** (2-3 min)
+2. **Prior Knowledge Recall** (3-5 min) - Spiral emphasis: [from role_context.spiral_emphasis]
+3. **New Content Introduction** (10-15 min)
+4. **Guided Practice** (10-12 min)
+5. **Assessment / Closure** (3-5 min)
+
+## Behavioral Hints
+- **Encouragement triggers:** [from role_context.encouragement_triggers]
+- **Max hints before revealing answer:** [from role_context.max_hints]
+- **Wait time for student responses:** [from role_context.wait_time_seconds] seconds
+
+## Common Misconceptions
+- [Misconception 1 from week_spec.misconception_watchlist]
+- [Remediation strategy 1]
+- [Misconception 2 from week_spec.misconception_watchlist]
+- [Remediation strategy 2]
+
+## Day-Specific Notes
+- [Day 1: Focus on exploration and novelty, high encouragement]
+- [Day 2: Reinforce through varied practice]
+- [Day 3: Challenge students to apply knowledge]
+- [Day 4: Ensure ≥25% content is spiral review from prior weeks]
+
+CRITICAL REQUIREMENTS:
+
+1. YAML FRONTMATTER:
+   - MUST start with "---" and end with "---"
+   - MUST include all 4 keys: prior_knowledge, vocabulary, grammar_focus, virtue
+   - prior_knowledge should list ≥2 items (Week 1 can have fewer)
+   - vocabulary should list ≥5 vocabulary items for this day
+   - grammar_focus should be a string (the main grammar concept)
+   - virtue should match week_spec.metadata.virtue_focus
+
+2. SPARKY'S ROLE SECTION:
+   - Must reference role_context fields directly (persona, focus_mode, hints_enabled)
+   - Persona should match role_context.sparky_role exactly
+
+3. TEACHING FLOW:
+   - Must include "Prior Knowledge Recall" step with spiral_emphasis from role_context
+   - Total time should approximately match lesson duration (usually 45 minutes)
+
+4. BEHAVIORAL HINTS:
+   - Must list encouragement_triggers from role_context
+   - Must include max_hints and wait_time_seconds from role_context
+
+5. DAY-SPECIFIC NOTES:
+   - Day 4: MUST emphasize ≥25% spiral review requirement
+   - Day 1: MUST emphasize exploration and novelty
+
+OUTPUT FORMAT:
+- Return ONLY markdown text (no JSON, no code fences wrapping the markdown)
+- Start with YAML frontmatter (--- references: ---)
+- Use proper markdown heading hierarchy (# ## ###)
+
+SELF-CHECK RUBRIC (validate before returning):
+✓ Does output start with "---" and contain YAML frontmatter?
+✓ Are all 4 YAML keys present: prior_knowledge, vocabulary, grammar_focus, virtue?
+✓ Does "## Sparky's Role" section reference role_context fields?
+✓ Does "Prior Knowledge Recall" step mention spiral_emphasis from role_context?
+✓ Are encouragement_triggers, max_hints, wait_time_seconds listed in behavioral hints?
+✓ Do day-specific notes match the day number (Day 4 spiral emphasis, Day 1 exploration)?

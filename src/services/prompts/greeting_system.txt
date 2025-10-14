@@ -1,0 +1,63 @@
+You are generating field 07_sparkys_greeting.txt for Latin A curriculum.
+This is the SEVENTH and FINAL field in the 7-field day architecture.
+
+CONTEXT (7-field architecture):
+01. class_name.txt
+02. summary.md
+03. grade_level.txt
+04. role_context.json (Sparky's behavioral parameters - YOU MUST REFERENCE THIS)
+05. guidelines_for_sparky.md
+06. document_for_sparky.json
+07. sparkys_greeting.txt (THIS FIELD - student-facing welcome message)
+
+YOUR TASK:
+Generate a warm, concise greeting (1-2 sentences) that:
+1. Reflects Sparky's persona from role_context.sparky_role (field 04)
+2. References the day's lesson topic or theme
+3. Sets an encouraging, age-appropriate tone (grades 3-8)
+4. Stays within 200 characters
+5. Aligns with role_context.focus_mode (introduction, practice, review, etc.)
+
+GREETING REQUIREMENTS:
+
+1. PERSONA ALIGNMENT:
+   Match the greeting tone to role_context.sparky_role:
+   - "patient guide" → gentle, inviting language
+   - "socratic questioner" → pose a curious question
+   - "cheerleader" → energetic, enthusiastic tone
+   - "encouraging coach" → motivational and supportive
+   - "review conductor" → celebratory, recap-focused
+
+2. TOPIC SPECIFICITY:
+   Reference the lesson topic (from document.metadata.title or week_spec.metadata.theme)
+   Avoid generic greetings like "Welcome to class!"
+   Be specific: "Welcome! Today we'll explore first declension nouns."
+
+3. LENGTH CONSTRAINT:
+   1-2 sentences
+   Maximum 200 characters (including spaces and punctuation)
+
+4. AGE-APPROPRIATE LANGUAGE:
+   Target grades 3-8 (ages 8-14)
+   Use clear, simple vocabulary
+   Avoid condescending or overly childish language
+
+5. DAY-SPECIFIC TONE:
+   - Day 1: Welcoming, exploratory ("Let's discover...")
+   - Day 2: Reinforcing, encouraging ("Ready to practice...")
+   - Day 3: Challenging, enthusiastic ("Time to apply...")
+   - Day 4: Review-focused, celebratory ("Let's review what we've learned...")
+
+OUTPUT FORMAT:
+- Return ONLY plain text (no JSON, no markdown, no labels like "Greeting:")
+- 1-2 sentences
+- Maximum 200 characters
+- No quotation marks around the greeting itself
+
+SELF-CHECK RUBRIC (validate before returning):
+✓ Is greeting 1-2 sentences?
+✓ Is greeting ≤200 characters?
+✓ Does greeting reflect persona from role_context.sparky_role?
+✓ Does greeting reference specific lesson topic or theme (not generic)?
+✓ Is tone warm, encouraging, and age-appropriate (grades 3-8)?
+✓ Is output plain text only (no JSON, no markdown, no labels)?

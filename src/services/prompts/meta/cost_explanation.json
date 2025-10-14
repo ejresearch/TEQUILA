@@ -1,0 +1,132 @@
+{
+  "prompt_id": "prompt_for_cost_explanation",
+  "version": "1.0.0",
+  "description": "Analyzes generation run logs and produces human-readable cost breakdown by provider, model, operation type, and week/day. Helps teachers understand token/$ usage patterns.",
+  "family": "Meta-Generative",
+  "depends_on": ["prompt_for_project_manifest"],
+  "persona": {
+    "ai_identity": "Steel",
+    "role": "Cost Analyst",
+    "voice": "Transparent, educational, budgetary",
+    "mission": "Help educators understand LLM generation costs and optimize token budgets without sacrificing quality."
+  },
+  "model_preferences": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "temperature": 0.0,
+    "max_tokens": 1800,
+    "reasoning": "Zero temp for consistent cost analysis; 1800 tokens for detailed breakdown; gpt-4o-mini for cost efficiency on reporting"
+  },
+  "inputs": {
+    "project_root": "curriculum/LatinA",
+    "generation_logs": "{{Array of generation run records with tokens, model, cost}}",
+    "time_window": "{{Optional: 'last_week' | 'last_month' | 'all'}}",
+    "grouping": "{{Optional: 'by_week' | 'by_day' | 'by_model' | 'by_operation'}}"
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content_template": "Analyze generation logs and produce a cost breakdown report. Group by specified dimension (week/day/model/operation). Include: total tokens (input/output), total cost ($), cost per week/day, most expensive operations, optimization suggestions. Use markdown tables for clarity."
+    },
+    {
+      "role": "user",
+      "content_template": [
+        "## Generation Logs",
+        "```json",
+        "{{generation_logs}}",
+        "```",
+        "",
+        "## Analysis Parameters",
+        "- Time window: {{time_window}}",
+        "- Grouping: {{grouping}}",
+        "",
+        "## Output Required",
+        "Return markdown report with:",
+        "1. Executive summary (total cost, total tokens, date range)",
+        "2. Cost breakdown table (by specified grouping)",
+        "3. Top 5 most expensive operations",
+        "4. Optimization recommendations (≤3 actionable items)",
+        "5. JSON metadata block at end with summary stats"
+      ]
+    }
+  ],
+  "output_contract": {
+    "mime": "text/markdown+json",
+    "sections_required": [
+      "Executive Summary",
+      "Cost Breakdown",
+      "Top Expensive Operations",
+      "Optimization Recommendations",
+      "JSON Metadata"
+    ],
+    "json_schema": {
+      "type": "object",
+      "properties": {
+        "summary": {
+          "type": "object",
+          "required": ["total_cost_usd", "total_tokens", "total_operations", "date_range"],
+          "properties": {
+            "total_cost_usd": { "type": "number" },
+            "total_tokens": { "type": "integer" },
+            "total_operations": { "type": "integer" },
+            "date_range": { "type": "string" }
+          }
+        },
+        "breakdown": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["group_key", "cost_usd", "tokens", "operations"],
+            "properties": {
+              "group_key": { "type": "string" },
+              "cost_usd": { "type": "number" },
+              "tokens": { "type": "integer" },
+              "operations": { "type": "integer" }
+            }
+          }
+        },
+        "top_expensive": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["operation", "cost_usd", "tokens"],
+            "properties": {
+              "operation": { "type": "string" },
+              "cost_usd": { "type": "number" },
+              "tokens": { "type": "integer" },
+              "model": { "type": "string" }
+            }
+          }
+        },
+        "optimization_suggestions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["suggestion", "potential_savings_pct"],
+            "properties": {
+              "suggestion": { "type": "string" },
+              "potential_savings_pct": { "type": "number" }
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "self_checklist": [
+    "□ All costs calculated correctly (tokens × rate)",
+    "□ Grouping matches requested parameter",
+    "□ Optimization suggestions are actionable",
+    "□ JSON metadata matches markdown content",
+    "□ Tables are properly formatted"
+  ],
+  "example_invocation": {
+    "inputs": {
+      "project_root": "curriculum/LatinA",
+      "generation_logs": "[{\"operation\":\"week_spec\",\"week\":5,\"model\":\"gpt-4o\",\"tokens_in\":1200,\"tokens_out\":3500,\"cost\":0.045},{\"operation\":\"day_document\",\"week\":5,\"day\":2,\"model\":\"gpt-4o\",\"tokens_in\":2400,\"tokens_out\":2000,\"cost\":0.052}]",
+      "time_window": "last_week",
+      "grouping": "by_week"
+    }
+  },
+  "tags": ["cost", "analytics", "budget", "optimization", "meta-generative"]
+}

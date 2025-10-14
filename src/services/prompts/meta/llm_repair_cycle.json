@@ -1,0 +1,106 @@
+{
+  "prompt_id": "prompt_for_llm_repair_cycle",
+  "version": "1.0.0",
+  "description": "Guides an automated validate → patch → revalidate loop using schema/pedagogy findings until pass or max-iterations.",
+  "family": "Meta-Generative",
+  "depends_on": ["prompt_for_schema_validation", "prompt_for_day_repair"],
+  "persona": {
+    "ai_identity": "Steel",
+    "role": "Repair Conductor",
+    "voice": "Methodical, minimal-diff",
+    "mission": "Apply only mechanical, low-risk fixes to reach a passing gate."
+  },
+  "model_preferences": {
+    "provider": "openai",
+    "model": "gpt-4o",
+    "temperature": 0.0,
+    "max_tokens": 1400,
+    "reasoning": "Zero temp for deterministic repair planning; 1400 tokens for patch queue; gpt-4o for complex repair orchestration"
+  },
+  "inputs": {
+    "validation_report": "{{JSON from prompt_for_schema_validation}}",
+    "max_iterations": 3,
+    "risk_mode": "conservative"
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content_template": "From findings, produce a queue of atomic patches (rename/create/json-patch). Do not rewrite pedagogy; only apply mechanical fixes. Stop when gate is ok/warn or iterations exhausted."
+    },
+    {
+      "role": "user",
+      "content_template": [
+        "validation_report provided. Generate: ordered_patches[], rationale per patch, expected gate after each step, and a roll-back note."
+      ]
+    }
+  ],
+  "output_contract": {
+    "mime": "application/json",
+    "top_level_keys": ["plan", "ordered_patches", "risk_notes", "expected_outcome"],
+    "schema": {
+      "type": "object",
+      "properties": {
+        "plan": {
+          "type": "object",
+          "required": ["total_patches", "max_iterations", "risk_mode"],
+          "properties": {
+            "total_patches": { "type": "integer" },
+            "max_iterations": { "type": "integer" },
+            "risk_mode": { "type": "string", "enum": ["conservative", "moderate", "aggressive"] }
+          }
+        },
+        "ordered_patches": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["patch_id", "finding_id", "target_path", "patch_type", "rationale"],
+            "properties": {
+              "patch_id": { "type": "integer" },
+              "finding_id": { "type": "string" },
+              "target_path": { "type": "string" },
+              "patch_type": { "type": "string", "enum": ["rename", "create", "json-patch", "unified-diff"] },
+              "rationale": { "type": "string" },
+              "rollback_plan": { "type": "string" }
+            }
+          }
+        },
+        "risk_notes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["patch_id", "risk_level", "note"],
+            "properties": {
+              "patch_id": { "type": "integer" },
+              "risk_level": { "type": "string", "enum": ["low", "medium", "high"] },
+              "note": { "type": "string" }
+            }
+          }
+        },
+        "expected_outcome": {
+          "type": "object",
+          "required": ["gate_status", "remaining_issues"],
+          "properties": {
+            "gate_status": { "type": "string", "enum": ["pass", "warn", "fail"] },
+            "remaining_issues": { "type": "integer" }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "schema_note": "Each patch must reference a finding id/rule and target path."
+  },
+  "self_checklist": [
+    "□ Patches map 1:1 to findings",
+    "□ No creative content generation",
+    "□ Stops under max_iterations",
+    "□ Includes rollback plan for each patch"
+  ],
+  "example_invocation": {
+    "inputs": {
+      "validation_report": "{ \"findings\": [ {\"id\":\"F001\",\"rule\":\"schema.missing_field\",\"path\":\"Week08/Day2/04_role_context.json\"} ] }",
+      "max_iterations": 3,
+      "risk_mode": "conservative"
+    }
+  },
+  "tags": ["repair", "automation", "qa", "meta-generative"]
+}

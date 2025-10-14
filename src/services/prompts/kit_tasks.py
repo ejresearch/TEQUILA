@@ -2296,3 +2296,156 @@ def task_virtue_alignment(
     }
 
     return (system_content, user_content, config)
+
+
+# ============================================================================
+# CHAIN CONTEXT BUILDER PROMPT - Assemble compact context bundles
+# ============================================================================
+
+def task_chain_context_builder(
+    week_number: int,
+    day_number: int,
+    token_budget: int = 6000,
+    include_assets: bool = False,
+    project_root: str = "curriculum/LatinA"
+) -> Tuple[str, str, Dict[str, Any]]:
+    """
+    Generate compact context bundle for generation runs.
+
+    This prompt assembles a lossless, token-budgeted context object that includes:
+    - Project info (root, week, day)
+    - Week spec (condensed)
+    - Prior knowledge digest (week-1)
+    - Manifest slice for the week
+    - Virtue/faith for the week
+    - Any existing day-level files
+
+    Intelligently prunes content to fit token budget while preserving semantic nuclei.
+
+    Args:
+        week_number: Week number (1-35)
+        day_number: Day number (1-4)
+        token_budget: Maximum tokens for context bundle (default: 6000)
+        include_assets: Whether to include asset files (default: False)
+        project_root: Root path for curriculum
+
+    Returns:
+        (system_prompt, user_prompt, config_dict)
+
+    Output:
+        JSON with project_info, week_spec, prior_knowledge, manifest, day_files, provenance, size
+    """
+    prompt_spec = _load_prompt_json("meta/chain_context_builder.json")
+
+    user_content = "\n".join(prompt_spec["messages"][1]["content_template"])
+    user_content = user_content.replace("{{project_root}}", project_root)
+    user_content = user_content.replace("{{week_number}}", str(week_number))
+    user_content = user_content.replace("{{day_number}}", str(day_number))
+    user_content = user_content.replace("{{token_budget}}", str(token_budget))
+    user_content = user_content.replace("{{include_assets}}", str(include_assets).lower())
+
+    system_content = prompt_spec["messages"][0]["content_template"]
+
+    config = {
+        "temperature": prompt_spec["model_preferences"]["temperature"],
+        "max_tokens": prompt_spec["model_preferences"]["max_tokens"],
+        "model": prompt_spec["model_preferences"]["model"]
+    }
+
+    return (system_content, user_content, config)
+
+
+# ============================================================================
+# LLM REPAIR CYCLE PROMPT - Automated validate→patch→revalidate loop
+# ============================================================================
+
+def task_llm_repair_cycle(
+    validation_report: Dict[str, Any],
+    max_iterations: int = 3,
+    risk_mode: str = "conservative"
+) -> Tuple[str, str, Dict[str, Any]]:
+    """
+    Generate automated repair cycle plan from validation findings.
+
+    This prompt produces a queue of atomic patches (rename/create/json-patch)
+    that address validation failures mechanically, without creative rewrites.
+    Continues until gate is ok/warn or max_iterations exhausted.
+
+    Args:
+        validation_report: Validation findings from prompt_for_schema_validation
+        max_iterations: Maximum repair iterations (default: 3)
+        risk_mode: Risk tolerance - 'conservative', 'moderate', or 'aggressive'
+
+    Returns:
+        (system_prompt, user_prompt, config_dict)
+
+    Output:
+        JSON with plan, ordered_patches, risk_notes, expected_outcome
+    """
+    prompt_spec = _load_prompt_json("meta/llm_repair_cycle.json")
+
+    user_content = "\n".join(prompt_spec["messages"][1]["content_template"])
+
+    # Validation report is embedded in the prompt
+    validation_json = json.dumps(validation_report, indent=2)
+    user_content = f"## Validation Report\n```json\n{validation_json}\n```\n\n" + user_content
+
+    system_content = prompt_spec["messages"][0]["content_template"]
+
+    config = {
+        "temperature": prompt_spec["model_preferences"]["temperature"],
+        "max_tokens": prompt_spec["model_preferences"]["max_tokens"],
+        "model": prompt_spec["model_preferences"]["model"]
+    }
+
+    return (system_content, user_content, config)
+
+
+# ============================================================================
+# COST EXPLANATION PROMPT - Analyze and report LLM generation costs
+# ============================================================================
+
+def task_cost_explanation(
+    generation_logs: list,
+    time_window: str = "all",
+    grouping: str = "by_week",
+    project_root: str = "curriculum/LatinA"
+) -> Tuple[str, str, Dict[str, Any]]:
+    """
+    Generate cost analysis report from generation logs.
+
+    This prompt analyzes LLM generation costs and produces a human-readable
+    breakdown by provider, model, operation type, and week/day. Includes
+    optimization suggestions to help educators manage token budgets.
+
+    Args:
+        generation_logs: Array of generation run records with tokens, model, cost
+        time_window: Time filter - 'last_week', 'last_month', or 'all' (default: 'all')
+        grouping: Grouping dimension - 'by_week', 'by_day', 'by_model', or 'by_operation'
+        project_root: Root path for curriculum
+
+    Returns:
+        (system_prompt, user_prompt, config_dict)
+
+    Output:
+        Markdown report with executive summary, cost breakdown, top operations, optimizations, JSON metadata
+    """
+    prompt_spec = _load_prompt_json("meta/cost_explanation.json")
+
+    user_content = "\n".join(prompt_spec["messages"][1]["content_template"])
+
+    # Serialize generation logs
+    logs_json = json.dumps(generation_logs, indent=2)
+    user_content = user_content.replace("{{generation_logs}}", logs_json)
+    user_content = user_content.replace("{{time_window}}", time_window)
+    user_content = user_content.replace("{{grouping}}", grouping)
+
+    system_content = prompt_spec["messages"][0]["content_template"]
+
+    config = {
+        "temperature": prompt_spec["model_preferences"]["temperature"],
+        "max_tokens": prompt_spec["model_preferences"]["max_tokens"],
+        "model": prompt_spec["model_preferences"]["model"]
+    }
+
+    return (system_content, user_content, config)

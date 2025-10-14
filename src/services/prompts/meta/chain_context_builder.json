@@ -1,0 +1,112 @@
+{
+  "prompt_id": "prompt_for_chain_context_builder",
+  "version": "1.0.0",
+  "description": "Builds a compact, lossless context bundle for any generation run (week/day). Resolves paths, pulls prior digests, and trims to model token budget.",
+  "family": "Meta-Generative",
+  "depends_on": [
+    "prompt_for_project_manifest",
+    "prompt_for_week_spec",
+    "prompt_for_prior_knowledge_digest"
+  ],
+  "persona": {
+    "ai_identity": "Steel",
+    "role": "Context Orchestrator",
+    "voice": "Crisp, operational",
+    "mission": "Assemble just-enough structured context for a downstream prompt while respecting token limits and provenance."
+  },
+  "model_preferences": {
+    "provider": "openai",
+    "model": "gpt-4o",
+    "temperature": 0.0,
+    "max_tokens": 1200,
+    "reasoning": "Zero temp for deterministic context assembly; 1200 tokens for context bundle; gpt-4o for intelligent pruning and semantic preservation"
+  },
+  "inputs": {
+    "project_root": "curriculum/LatinA",
+    "week_number": "{{WEEK_NUMBER}}",
+    "day_number": "{{DAY_NUMBER}}",
+    "token_budget": 6000,
+    "include_assets": false
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content_template": "Assemble a JSON context object with: project_info, week_spec (condensed), prior_knowledge_digest (week-1), manifest slice for the week, virtue/faith for the week, and any day-level files already present (class_name, day_summary, grade_level, role_context, guidelines, existing document, greeting). Prune safely to fit token_budget; keep keys but shorten long strings with '…' preserving semantic nuclei."
+    },
+    {
+      "role": "user",
+      "content_template": [
+        "project_root={{project_root}}; week={{week_number}}; day={{day_number}}; token_budget={{token_budget}}; include_assets={{include_assets}}",
+        "Return strict JSON named `chain_context`."
+      ]
+    }
+  ],
+  "output_contract": {
+    "mime": "application/json",
+    "top_level_keys": ["project_info", "week_spec", "prior_knowledge", "manifest", "day_files", "provenance", "size"],
+    "schema": {
+      "type": "object",
+      "properties": {
+        "project_info": {
+          "type": "object",
+          "required": ["project_root", "week_number", "day_number"],
+          "properties": {
+            "project_root": { "type": "string" },
+            "week_number": { "type": "integer" },
+            "day_number": { "type": "integer" }
+          }
+        },
+        "week_spec": {
+          "type": "object",
+          "description": "Condensed week specification"
+        },
+        "prior_knowledge": {
+          "type": "object",
+          "description": "Prior knowledge digest from week-1"
+        },
+        "manifest": {
+          "type": "object",
+          "description": "Manifest slice for the week"
+        },
+        "day_files": {
+          "type": "object",
+          "description": "Any day-level files already present"
+        },
+        "provenance": {
+          "type": "object",
+          "required": ["generated_at", "generated_by"],
+          "properties": {
+            "generated_at": { "type": "string" },
+            "generated_by": { "type": "string" }
+          }
+        },
+        "size": {
+          "type": "object",
+          "required": ["bytes", "estimated_tokens"],
+          "properties": {
+            "bytes": { "type": "integer" },
+            "estimated_tokens": { "type": "integer" }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "schema_note": "All values must be JSON-serializable; include byte and token size estimates under size."
+  },
+  "self_checklist": [
+    "□ Includes all available day files",
+    "□ Trims safely under token budget",
+    "□ Preserves virtue/faith and grammar targets",
+    "□ Adds provenance with timestamps/models"
+  ],
+  "example_invocation": {
+    "inputs": {
+      "project_root": "curriculum/LatinA",
+      "week_number": 8,
+      "day_number": 2,
+      "token_budget": 6000,
+      "include_assets": false
+    }
+  },
+  "tags": ["context", "orchestration", "budget", "meta-generative"]
+}

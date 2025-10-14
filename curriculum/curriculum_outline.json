@@ -1,1 +1,137 @@
-{}
+{
+  "course": "Latin A",
+  "target_grade": "3-5",
+  "total_weeks": 36,
+  "description": "Classical Latin instruction with virtue formation and spiral learning principles",
+
+  "week_01": {
+    "week": 1,
+    "title": "Latin Foundations: Alphabet and Pronunciation",
+    "virtue_focus": "Discipline",
+    "faith_phrase": "In principio - In the beginning",
+    "new_vocab": ["salve", "vale", "Latin", "lingua", "discipulus"],
+    "grammar_topics": ["Latin alphabet", "Classical pronunciation", "Vowel sounds"],
+    "learning_goals": ["Master Latin alphabet", "Pronounce Latin vowels correctly", "Greet others in Latin"]
+  },
+
+  "week_02": {
+    "week": 2,
+    "title": "First Words: Greetings and Simple Phrases",
+    "virtue_focus": "Respect",
+    "faith_phrase": "Pax vobiscum - Peace be with you",
+    "new_vocab": ["pax", "sum", "es", "est", "et", "non"],
+    "grammar_topics": ["Present tense of 'sum'", "Simple statements", "Negation with 'non'"],
+    "learning_goals": ["Use 'sum' correctly", "Form basic Latin sentences", "Respond to greetings"],
+    "spiral_from": [1]
+  },
+
+  "week_03": {
+    "week": 3,
+    "title": "First Declension Nouns: Introduction",
+    "virtue_focus": "Patience",
+    "faith_phrase": "Gloria Patri - Glory to the Father",
+    "new_vocab": ["puella", "femina", "aqua", "terra", "via"],
+    "grammar_topics": ["First declension endings", "Nominative case", "Gender (feminine)"],
+    "learning_goals": ["Identify first declension nouns", "Use nominative case", "Understand gender"],
+    "spiral_from": [1, 2]
+  },
+
+  "week_04": {
+    "week": 4,
+    "title": "First Declension: Accusative Case",
+    "virtue_focus": "Diligence",
+    "faith_phrase": "Deo gratias - Thanks be to God",
+    "new_vocab": ["porta", "silva", "stella", "luna", "rosa"],
+    "grammar_topics": ["Accusative case endings", "Direct objects", "Subject vs. object"],
+    "learning_goals": ["Form accusative case", "Identify direct objects", "Translate simple sentences"],
+    "spiral_from": [2, 3]
+  },
+
+  "week_05": {
+    "week": 5,
+    "title": "First and Second Conjugation Verbs",
+    "virtue_focus": "Courage",
+    "faith_phrase": "Veni, Sancte Spiritus - Come, Holy Spirit",
+    "new_vocab": ["amo", "laudo", "porto", "video", "habeo"],
+    "grammar_topics": ["Present tense verb endings", "First conjugation -are", "Second conjugation -ere"],
+    "learning_goals": ["Conjugate present tense verbs", "Match subjects with verbs", "Form complete sentences"],
+    "spiral_from": [2, 3, 4]
+  },
+
+  "week_06": {
+    "week": 6,
+    "title": "Second Declension Nouns: Masculine",
+    "virtue_focus": "Wisdom",
+    "faith_phrase": "Verbum Domini - The Word of the Lord",
+    "new_vocab": ["dominus", "servus", "filius", "amicus", "puer"],
+    "grammar_topics": ["Second declension -us endings", "Masculine gender", "Nominative and accusative"],
+    "learning_goals": ["Decline second declension nouns", "Distinguish masculine from feminine", "Use both genders in sentences"],
+    "spiral_from": [3, 4, 5]
+  },
+
+  "week_07": {
+    "week": 7,
+    "title": "Second Declension: Neuter Nouns",
+    "virtue_focus": "Humility",
+    "faith_phrase": "Fiat voluntas tua - Thy will be done",
+    "new_vocab": ["templum", "donum", "verbum", "bellum", "regnum"],
+    "grammar_topics": ["Second declension -um endings", "Neuter gender rules", "Three genders"],
+    "learning_goals": ["Identify neuter nouns", "Apply neuter endings", "Use all three genders"],
+    "spiral_from": [4, 5, 6]
+  },
+
+  "week_08": {
+    "week": 8,
+    "title": "Adjectives: First-Second Declension",
+    "virtue_focus": "Justice",
+    "faith_phrase": "Justitia et pax - Justice and peace",
+    "new_vocab": ["bonus", "magnus", "malus", "parvus", "multus"],
+    "grammar_topics": ["Adjective endings", "Agreement with nouns", "Gender-number-case agreement"],
+    "learning_goals": ["Form adjective endings", "Match adjectives to nouns", "Translate descriptive phrases"],
+    "spiral_from": [3, 6, 7]
+  },
+
+  "week_09": {
+    "week": 9,
+    "title": "Third Conjugation Verbs",
+    "virtue_focus": "Fortitude",
+    "faith_phrase": "Deus fortitudo mea - God is my strength",
+    "new_vocab": ["dico", "duco", "mitto", "scribo", "lego"],
+    "grammar_topics": ["Third conjugation -ere", "Stem vowel changes", "Present tense forms"],
+    "learning_goals": ["Conjugate third conjugation", "Distinguish conjugation types", "Use multiple verb types"],
+    "spiral_from": [5, 6, 8]
+  },
+
+  "week_10": {
+    "week": 10,
+    "title": "Genitive and Dative Cases",
+    "virtue_focus": "Charity",
+    "faith_phrase": "Deus caritas est - God is love",
+    "new_vocab": ["filia", "mater", "pater", "liber", "soror"],
+    "grammar_topics": ["Genitive case (possession)", "Dative case (indirect object)", "Five cases"],
+    "learning_goals": ["Form genitive endings", "Form dative endings", "Show possession and giving"],
+    "spiral_from": [3, 4, 6, 7]
+  },
+
+  "week_11": {
+    "week": 11,
+    "title": "Ablative Case: Introduction",
+    "virtue_focus": "Temperance",
+    "faith_phrase": "In medio stat virtus - Virtue stands in the middle",
+    "new_vocab": ["cum", "in", "ex", "de", "ab"],
+    "grammar_topics": ["Ablative case uses", "Prepositions with ablative", "Means and accompaniment"],
+    "learning_goals": ["Form ablative endings", "Use ablative with prepositions", "Express means and manner"],
+    "spiral_from": [6, 7, 8, 10]
+  },
+
+  "week_12": {
+    "week": 12,
+    "title": "Review and Synthesis: First Quarter",
+    "virtue_focus": "Prudence",
+    "faith_phrase": "Sapientia aedificavit - Wisdom has built",
+    "new_vocab": ["omnis", "totus", "unus", "duo", "tres"],
+    "grammar_topics": ["All five cases", "Three conjugations", "Full declension review"],
+    "learning_goals": ["Demonstrate mastery of cases", "Translate complex sentences", "Apply all grammar learned"],
+    "spiral_from": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+  }
+}

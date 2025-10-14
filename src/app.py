@@ -1,8 +1,9 @@
 """FastAPI application for Latin A curriculum management."""
-from fastapi import FastAPI, HTTPException, Path as PathParam
+from fastapi import FastAPI, HTTPException, Path as PathParam, Header, Depends
 from fastapi.responses import JSONResponse, FileResponse
-from typing import Dict, Any
+from typing import Dict, Any, Optional
 from pathlib import Path
+import os
 
 from .config import settings, get_llm_client
 from .services.generator_week import (
@@ -34,6 +35,7 @@ from .services.storage import (
 )
 from .services.validator import validate_week
 from .services.exporter import export_week_to_zip
+from .services.usage_tracker import get_tracker
 
 # Create FastAPI app
 app = FastAPI(
@@ -41,6 +43,37 @@ app = FastAPI(
     description="API for managing 36-week Latin A curriculum with per-field file structure",
     version="1.0.0"
 )
+
+
+# ============================================================================
+# AUTHENTICATION
+# ============================================================================
+
+def require_api_key(x_api_key: Optional[str] = Header(None)):
+    """
+    Require API key for protected endpoints.
+
+    Set API_AUTH_KEY in .env to enable authentication.
+    If not set, all requests are allowed (development mode).
+    """
+    auth_key = os.getenv("API_AUTH_KEY")
+
+    # If no auth key configured, allow all requests (dev mode)
+    if not auth_key:
+        return
+
+    # If auth key is configured, require it
+    if not x_api_key:
+        raise HTTPException(
+            status_code=401,
+            detail="Missing API key. Include X-API-Key header."
+        )
+
+    if x_api_key != auth_key:
+        raise HTTPException(
+            status_code=403,
+            detail="Invalid API key"
+        )
 
 
 @app.get("/")
@@ -51,6 +84,19 @@ def root():
         "version": "1.0.0",
         "docs": "/docs"
     }
+
+
+@app.get("/api/v1/usage")
+def get_usage():
+    """Get LLM usage statistics and cost estimates."""
+    return get_tracker().get_summary()
+
+
+@app.post("/api/v1/usage/reset")
+def reset_usage(_auth: None = Depends(require_api_key)):
+    """Reset usage statistics. Requires API key."""
+    get_tracker().reset()
+    return {"message": "Usage statistics reset successfully"}
 
 
 # ============================================================================
@@ -295,9 +341,10 @@ def download_week_export(
 
 @app.post("/api/v1/gen/weeks/{week}/spec")
 def generate_week_spec_endpoint(
-    week: int = PathParam(..., ge=1, le=36)
+    week: int = PathParam(..., ge=1, le=36),
+    _auth: None = Depends(require_api_key)
 ):
-    """Generate week specification using LLM."""
+    """Generate week specification using LLM. Requires API key."""
     try:
         client = get_llm_client()
         spec_path = generate_week_spec_from_outline(week, client)
@@ -311,9 +358,10 @@ def generate_week_spec_endpoint(
 
 @app.post("/api/v1/gen/weeks/{week}/role-context")
 def generate_role_context_endpoint(
-    week: int = PathParam(..., ge=1, le=36)
+    week: int = PathParam(..., ge=1, le=36),
+    _auth: None = Depends(require_api_key)
 ):
-    """Generate Sparky role context using LLM."""
+    """Generate Sparky role context using LLM. Requires API key."""
     try:
         client = get_llm_client()
         context_path = generate_role_context(week, client)
@@ -327,9 +375,10 @@ def generate_role_context_endpoint(
 
 @app.post("/api/v1/gen/weeks/{week}/assets")
 def generate_assets_endpoint(
-    week: int = PathParam(..., ge=1, le=36)
+    week: int = PathParam(..., ge=1, le=36),
+    _auth: None = Depends(require_api_key)
 ):
-    """Generate week assets using LLM."""
+    """Generate week assets using LLM. Requires API key."""
     try:
         client = get_llm_client()
         asset_paths = generate_assets(week, client)
@@ -344,9 +393,10 @@ def generate_assets_endpoint(
 @app.post("/api/v1/gen/weeks/{week}/days/{day}/fields")
 def generate_day_fields_endpoint(
     week: int = PathParam(..., ge=1, le=36),
-    day: int = PathParam(..., ge=1, le=4)
+    day: int = PathParam(..., ge=1, le=4),
+    _auth: None = Depends(require_api_key)
 ):
-    """Generate day Flint fields using LLM."""
+    """Generate day Flint fields using LLM. Requires API key."""
     try:
         client = get_llm_client()
         field_paths = generate_day_fields(week, day, client)
@@ -361,9 +411,10 @@ def generate_day_fields_endpoint(
 @app.post("/api/v1/gen/weeks/{week}/days/{day}/document")
 def generate_day_document_endpoint(
     week: int = PathParam(..., ge=1, le=36),
-    day: int = PathParam(..., ge=1, le=4)
+    day: int = PathParam(..., ge=1, le=4),
+    _auth: None = Depends(require_api_key)
 ):
-    """Generate day document_for_sparky using LLM."""
+    """Generate day document_for_sparky using LLM. Requires API key."""
     try:
         client = get_llm_client()
         doc_path = generate_day_document(week, day, client)
@@ -377,10 +428,11 @@ def generate_day_document_endpoint(
 
 @app.post("/api/v1/gen/weeks/{week}/hydrate")
 def hydrate_week_endpoint(
-    week: int = PathParam(..., ge=1, le=36)
+    week: int = PathParam(..., ge=1, le=36),
+    _auth: None = Depends(require_api_key)
 ):
     """
-    Hydrate complete week using LLM (spec, role context, assets, all days).
+    Hydrate complete week using LLM (spec, role context, assets, all days). Requires API key.
 
     This generates everything in order:
     1. Week spec

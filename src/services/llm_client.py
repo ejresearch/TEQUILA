@@ -11,6 +11,10 @@ class LLMResponse:
     text: str
     json: Optional[Dict[str, Any]] = None
     raw: Any = None
+    tokens_prompt: Optional[int] = None
+    tokens_completion: Optional[int] = None
+    model: Optional[str] = None
+    provider: Optional[str] = None
 
 
 class LLMClient:
@@ -105,6 +109,11 @@ class OpenAIClient(LLMClient):
 
         out = resp.choices[0].message.content or ""
 
+        # Extract token usage
+        usage = resp.usage if hasattr(resp, 'usage') else None
+        tokens_prompt = usage.prompt_tokens if usage else None
+        tokens_completion = usage.completion_tokens if usage else None
+
         # Attempt to parse JSON
         js = None
         if out and out.strip().startswith("{"):
@@ -113,7 +122,15 @@ class OpenAIClient(LLMClient):
             except Exception:
                 pass
 
-        return LLMResponse(text=out, json=js, raw=resp)
+        return LLMResponse(
+            text=out,
+            json=js,
+            raw=resp,
+            tokens_prompt=tokens_prompt,
+            tokens_completion=tokens_completion,
+            model=self.model,
+            provider="openai"
+        )
 
 
 class AnthropicClient(LLMClient):
@@ -172,6 +189,11 @@ class AnthropicClient(LLMClient):
             if getattr(block, "type", "") == "text"
         ])
 
+        # Extract token usage
+        usage = resp.usage if hasattr(resp, 'usage') else None
+        tokens_prompt = usage.input_tokens if usage else None
+        tokens_completion = usage.output_tokens if usage else None
+
         # Attempt to parse JSON
         js = None
         if out and out.strip().startswith("{"):
@@ -180,4 +202,12 @@ class AnthropicClient(LLMClient):
             except Exception:
                 pass
 
-        return LLMResponse(text=out, json=js, raw=resp)
+        return LLMResponse(
+            text=out,
+            json=js,
+            raw=resp,
+            tokens_prompt=tokens_prompt,
+            tokens_completion=tokens_completion,
+            model=self.model,
+            provider="anthropic"
+        )

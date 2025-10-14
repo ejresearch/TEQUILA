@@ -1,6 +1,8 @@
 """Week structure generation service."""
 from pathlib import Path
 from typing import List, Dict, Any
+from datetime import datetime
+import subprocess
 import orjson
 from .storage import (
     week_dir,
@@ -15,11 +17,38 @@ from .storage import (
 )
 from .llm_client import LLMClient
 from .prompts.kit_tasks import task_week_spec, task_role_context, task_assets
+from .usage_tracker import get_tracker
 
 
 def get_template_path(template_type: str) -> Path:
     """Get the base path for template files."""
     return Path(__file__).parent.parent / "templates" / "week_kit" / template_type
+
+
+def _get_git_commit() -> str:
+    """Get current git commit hash."""
+    try:
+        result = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            capture_output=True,
+            text=True,
+            timeout=2
+        )
+        return result.stdout.strip()[:8] if result.returncode == 0 else "unknown"
+    except Exception:
+        return "unknown"
+
+
+def _create_provenance(response) -> Dict[str, Any]:
+    """Create generation provenance metadata from LLM response."""
+    return {
+        "provider": response.provider,
+        "model": response.model,
+        "created_at": datetime.utcnow().isoformat() + "Z",
+        "git_commit": _get_git_commit(),
+        "tokens_prompt": response.tokens_prompt,
+        "tokens_completion": response.tokens_completion
+    }
 
 
 def scaffold_week(week_number: int) -> Path:
@@ -157,7 +186,17 @@ def generate_week_spec_from_outline(week: int, client: LLMClient) -> Path:
     # Generate via LLM
     response = client.generate(prompt=usr, system=sys, json_schema=schema)
 
-    # Parse response
+    # Track usage
+    if response.provider and response.tokens_prompt:
+        get_tracker().track(
+            provider=response.provider,
+            model=response.model or "unknown",
+            tokens_prompt=response.tokens_prompt or 0,
+            tokens_completion=response.tokens_completion or 0,
+            operation=f"week_{week}_spec"
+        )
+
+    # Parse response - STRICT: must be valid JSON
     if response.json:
         spec_data = response.json
     else:
@@ -167,7 +206,21 @@ def generate_week_spec_from_outline(week: int, client: LLMClient) -> Path:
             # Save invalid response for inspection
             invalid_path = week_spec_dir(week) / "99_compiled_week_spec_INVALID.json"
             write_file(invalid_path, response.text)
-            raise ValueError(f"LLM returned invalid JSON: {e}")
+            raise ValueError(f"LLM returned invalid JSON - cannot proceed. Error: {e}")
+
+    # Add generation provenance
+    spec_data["__generation"] = _create_provenance(response)
+
+    # Validate against Pydantic schema
+    from ..models import WeekSpec
+    try:
+        validated_spec = WeekSpec(**spec_data)
+        spec_data = validated_spec.model_dump(by_alias=True)
+    except Exception as e:
+        # Save invalid spec for inspection
+        invalid_path = week_spec_dir(week) / "99_compiled_week_spec_VALIDATION_FAILED.json"
+        write_json(invalid_path, spec_data)
+        raise ValueError(f"Generated week spec failed Pydantic validation: {e}")
 
     # Write to individual part files
     _write_week_spec_parts(week, spec_data)

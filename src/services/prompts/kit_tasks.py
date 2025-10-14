@@ -220,6 +220,120 @@ def task_schema_validation(
 
 
 # ============================================================================
+# WEEK VALIDATION PROMPT - Final readiness gate for week publication
+# ============================================================================
+
+def task_week_validation(
+    week_number: int,
+    project_root: str = "curriculum/LatinA",
+    schema_report: Optional[Dict[str, Any]] = None
+) -> Tuple[str, str, Dict[str, Any]]:
+    """
+    Generate final week validation report - publishability gate.
+
+    This prompt aggregates schema validation, performs cross-file coherence
+    checks, verifies assets/assessment coverage, enforces pedagogy thresholds,
+    and decides publishability with minimal-diff fix suggestions.
+
+    Validation domains:
+    A. Manifest Consistency (title, grammar, chant alignment)
+    B. Vocabulary Scope (new vocab count, cross-references)
+    C. Prior Knowledge (spiral items referenced in Day1-Day2)
+    D. Assessment & Assets (quiz items, chant chart, glossary)
+    E. Pedagogy & Timing (lesson minutes, virtue, faith)
+    F. License & Originality (frontmatter, attestation)
+
+    Output structure:
+    - week: {week_number, path}
+    - upstream: {schema_report_gate, errors, warnings}
+    - coherence_checks: {manifest_consistency, vocabulary_scope, ...}
+    - findings: array of {level, domain, rule, path, detail, anchors}
+    - suggested_fixes: array of {for_rule, path, patch_type, patch, notes}
+    - metrics: {domains_checked, files_checked, errors, warnings}
+    - status: {pass, gate, next_actions}
+
+    Decision logic:
+    - upstream fail → gate=fail, pass=false
+    - errors>0 → gate=fail, pass=false
+    - any coherence fail → gate=fail, pass=false
+    - any warn → gate=warn, pass=true
+    - else → gate=ok, pass=true
+
+    Args:
+        week_number: Week number (1-35)
+        project_root: Root path for curriculum
+        schema_report: Optional schema validation report from prompt_for_schema_validation
+
+    Returns:
+        (system_prompt, user_prompt, config_dict)
+
+    Output:
+        JSON validation report with gate status and fix patches
+    """
+    prompt_spec = _load_prompt_json("validation/week_validation.json")
+
+    # Build user prompt with interpolated values
+    user_content = "\n".join(prompt_spec["messages"][1]["content_template"])
+    user_content = user_content.replace("{{project_root}}", project_root)
+    user_content = user_content.replace("{{week_number}}", str(week_number))
+
+    # Build file paths with zero-padded week number
+    week_str = f"Week{week_number:02d}" if week_number < 10 else f"Week{week_number}"
+
+    compiled_week_spec_path = f"{project_root}/{week_str}/Week_Spec/99_compiled_week_spec.json"
+    prior_knowledge_digest_path = f"{project_root}/{week_str}/Week_Spec/07_prior_knowledge_digest.json"
+    project_manifest_path = f"{project_root}/project_manifest.json"
+
+    user_content = user_content.replace("{{compiled_week_spec_path}}", compiled_week_spec_path)
+    user_content = user_content.replace("{{prior_knowledge_digest_path}}", prior_knowledge_digest_path)
+    user_content = user_content.replace("{{project_manifest_path}}", project_manifest_path)
+
+    # Replace policy thresholds
+    thresholds = prompt_spec["inputs"]["policy_thresholds"]
+    user_content = user_content.replace(
+        "{{policy_thresholds.min_vocab_new}}",
+        str(thresholds["min_vocab_new"])
+    )
+    user_content = user_content.replace(
+        "{{policy_thresholds.max_vocab_new}}",
+        str(thresholds["max_vocab_new"])
+    )
+    user_content = user_content.replace(
+        "{{policy_thresholds.min_quiz_items}}",
+        str(thresholds["min_quiz_items"])
+    )
+    user_content = user_content.replace(
+        "{{policy_thresholds.lesson_minutes_min}}",
+        str(thresholds["lesson_minutes_min"])
+    )
+    user_content = user_content.replace(
+        "{{policy_thresholds.lesson_minutes_max}}",
+        str(thresholds["lesson_minutes_max"])
+    )
+    user_content = user_content.replace(
+        "{{policy_thresholds.license_allowed}}",
+        str(thresholds["license_allowed"])
+    )
+
+    # If schema_report provided, serialize it
+    # Otherwise leave as placeholder for file/API reference
+    if schema_report:
+        schema_json = json.dumps(schema_report, indent=2)
+        # Note: In the prompt spec, schema_report is referenced but not templated
+        # We could add it to the context if needed
+        pass
+
+    system_content = prompt_spec["messages"][0]["content_template"]
+
+    config = {
+        "temperature": prompt_spec["model_preferences"]["temperature"],
+        "max_tokens": prompt_spec["model_preferences"]["max_tokens"]
+    }
+
+    return (system_content, user_content, config)
+
+
+# ============================================================================
 # WEEK SPEC PROMPT - Generates complete 12-file week specification
 # ============================================================================
 

@@ -1,0 +1,282 @@
+{
+  "prompt_id": "prompt_for_week_validation",
+  "version": "1.0.0",
+  "description": "Final readiness gate for a single Week in TEQUILA's Latin A project. Aggregates the schema-level report, performs cross-file/coherence checks (manifest ↔ week_spec ↔ day kits), verifies assets and assessment coverage, enforces pedagogy thresholds, and decides publishability with minimal-diff fix suggestions.",
+  "depends_on": [
+    "prompt_for_system_overview",
+    "prompt_for_project_manifest",
+    "prompt_for_week_spec",
+    "prompt_for_prior_knowledge_digest",
+    "prompt_for_schema_validation"
+  ],
+  "persona": {
+    "ai_identity": "Steel",
+    "role": "Quality Lead & Release Gatekeeper",
+    "voice": "Calm, decisive, audit-ready",
+    "mission": "Integrate all validation signals for a week, compute pass/warn/fail, and emit precise patches to reach publishable quality quickly."
+  },
+  "model_preferences": {
+    "provider": "openai",
+    "model": "gpt-4o",
+    "temperature": 0.0,
+    "max_tokens": 2200,
+    "reasoning": "Zero temp for deterministic validation logic; 2200 tokens for comprehensive findings and patches"
+  },
+  "inputs": {
+    "project_root": "curriculum/LatinA",
+    "week_number": "{{WEEK_NUMBER}}",
+    "compiled_week_spec_path": "curriculum/LatinA/Week{{WEEK_NUMBER}}/99_compiled_week_spec.json",
+    "prior_knowledge_digest_path": "curriculum/LatinA/Week{{WEEK_NUMBER}}/07_prior_knowledge_digest.json",
+    "project_manifest_path": "curriculum/LatinA/project_manifest.json",
+    "schema_report": "{{OUTPUT_FROM:prompt_for_schema_validation}}",
+    "days_per_week": 4,
+    "seven_field_names": [
+      "01_class_name.txt",
+      "02_summary.md",
+      "03_grade_level.txt",
+      "04_role_context.json",
+      "05_guidelines_for_sparky.md",
+      "06_document_for_sparky.json",
+      "07_sparkys_greeting.txt"
+    ],
+    "policy_thresholds": {
+      "spiral_min_percent": 25,
+      "lesson_minutes_min": 20,
+      "lesson_minutes_max": 25,
+      "min_quiz_items": 6,
+      "min_vocab_new": 5,
+      "max_vocab_new": 10,
+      "virtue_required": true,
+      "faith_phrase_required": true,
+      "license_allowed": ["CC BY 4.0", "CC0"]
+    }
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content_template": "You are Steel, the final QA gate. You receive paths to Week {{week_number}} artifacts, the project manifest, prior knowledge digest, and the full schema-level report. Produce a single STRICT JSON object (no extra prose) that:\n\n1) Summarizes upstream schema report status.\n2) Runs cross-file coherence checks (manifest ↔ week_spec ↔ day kits).\n3) Verifies assets presence (chants, glossary, quiz packet) and assessment coverage.\n4) Computes readiness (ok/warn/fail) with deterministic rules.\n5) Provides minimal, mechanical patches (create/rename/json-patch/unified-diff) to reach \"ok\" when feasible.\n\nBe explicit, line- or pointer-anchored where possible. Never invent content; only suggest safe structural fixes."
+    },
+    {
+      "role": "user",
+      "content_template": [
+        "## Context",
+        "- project_root: {{project_root}}",
+        "- week_number: {{week_number}}",
+        "- compiled_week_spec_path: {{compiled_week_spec_path}}",
+        "- prior_knowledge_digest_path: {{prior_knowledge_digest_path}}",
+        "- project_manifest_path: {{project_manifest_path}}",
+        "- schema_report: (object from prompt_for_schema_validation)",
+        "",
+        "## Additional Validation Domains",
+        "A. Manifest Consistency",
+        "  1. week_spec.title matches project_manifest.week_manifest[week_number].title.",
+        "  2. week_spec.grammar_focus and chant align with manifest entries.",
+        "",
+        "B. Vocabulary Scope",
+        "  1. Count of new vocabulary in week_spec within [{{policy_thresholds.min_vocab_new}}, {{policy_thresholds.max_vocab_new}}].",
+        "  2. All vocab referenced by Day1–Day4 06_document_for_sparky.json appear in week_spec.vocabulary_index.",
+        "",
+        "C. Prior Knowledge",
+        "  1. prior_knowledge_digest.vocabulary_recycled[*] and grammar_recycled[*] appear in Day1–Day2 spiral steps.",
+        "",
+        "D. Assessment & Assets",
+        "  1. assets/quiz.md (or .json) exists with ≥ {{policy_thresholds.min_quiz_items}} graded items.",
+        "  2. assets/chant_chart.md (or .png) exists and is referenced at least once in Day1/Day2.",
+        "  3. assets/glossary.json optional → warn if missing.",
+        "",
+        "E. Pedagogy & Timing",
+        "  1. Each day's total minutes in 06_document_for_sparky.json is within [{{policy_thresholds.lesson_minutes_min}}, {{policy_thresholds.lesson_minutes_max}}].",
+        "  2. Virtue and faith phrase present and match manifest.",
+        "",
+        "F. License & Originality",
+        "  1. 00_week_summary.md YAML frontmatter includes license ∈ {{policy_thresholds.license_allowed}} and originality_attestation: true.",
+        "",
+        "## Output",
+        "Return a SINGLE JSON object conforming to the Output Contract below. Include patches only when the fix is mechanical and safe (e.g., add frontmatter, add missing reference key, rename file). Use relative paths from {{project_root}}."
+      ]
+    }
+  ],
+  "output_contract": {
+    "mime": "application/json",
+    "top_level_keys": [
+      "week",
+      "upstream",
+      "coherence_checks",
+      "findings",
+      "suggested_fixes",
+      "metrics",
+      "status"
+    ],
+    "schema": {
+      "type": "object",
+      "properties": {
+        "week": {
+          "type": "object",
+          "properties": {
+            "week_number": { "type": "integer" },
+            "path": { "type": "string" }
+          },
+          "required": ["week_number", "path"]
+        },
+        "upstream": {
+          "type": "object",
+          "properties": {
+            "schema_report_gate": { "type": "string", "enum": ["ok", "warn", "fail"] },
+            "schema_report_errors": { "type": "integer" },
+            "schema_report_warnings": { "type": "integer" }
+          },
+          "required": ["schema_report_gate", "schema_report_errors", "schema_report_warnings"]
+        },
+        "coherence_checks": {
+          "type": "object",
+          "properties": {
+            "manifest_consistency": { "type": "string", "enum": ["ok", "warn", "fail"] },
+            "vocabulary_scope": { "type": "string", "enum": ["ok", "warn", "fail"] },
+            "prior_knowledge_alignment": { "type": "string", "enum": ["ok", "warn", "fail"] },
+            "assessment_and_assets": { "type": "string", "enum": ["ok", "warn", "fail"] },
+            "pedagogy_and_timing": { "type": "string", "enum": ["ok", "warn", "fail"] },
+            "license_and_originality": { "type": "string", "enum": ["ok", "warn", "fail"] }
+          },
+          "required": [
+            "manifest_consistency",
+            "vocabulary_scope",
+            "prior_knowledge_alignment",
+            "assessment_and_assets",
+            "pedagogy_and_timing",
+            "license_and_originality"
+          ]
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "level": { "type": "string", "enum": ["error", "warning", "info"] },
+              "domain": { "type": "string" },
+              "rule": { "type": "string" },
+              "path": { "type": "string" },
+              "detail": { "type": "string" },
+              "anchors": {
+                "type": "object",
+                "properties": {
+                  "line": { "type": "integer" },
+                  "json_pointer": { "type": "string" }
+                },
+                "additionalProperties": false
+              }
+            },
+            "required": ["level", "domain", "rule", "path", "detail"]
+          }
+        },
+        "suggested_fixes": {
+          "type": "array",
+          "description": "Minimal, mechanical patches only.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "for_rule": { "type": "string" },
+              "path": { "type": "string" },
+              "patch_type": { "type": "string", "enum": ["unified-diff", "create-file", "rename-file", "json-patch"] },
+              "patch": { "type": "string" },
+              "notes": { "type": "string" }
+            },
+            "required": ["for_rule", "path", "patch_type", "patch"]
+          }
+        },
+        "metrics": {
+          "type": "object",
+          "properties": {
+            "domains_checked": { "type": "integer" },
+            "files_checked": { "type": "integer" },
+            "errors": { "type": "integer" },
+            "warnings": { "type": "integer" }
+          },
+          "required": ["domains_checked", "files_checked", "errors", "warnings"]
+        },
+        "status": {
+          "type": "object",
+          "properties": {
+            "pass": { "type": "boolean" },
+            "gate": { "type": "string", "enum": ["ok", "warn", "fail"] },
+            "next_actions": { "type": "array", "items": { "type": "string" } }
+          },
+          "required": ["pass", "gate"]
+        }
+      },
+      "required": ["week", "upstream", "coherence_checks", "findings", "suggested_fixes", "metrics", "status"],
+      "additionalProperties": false
+    }
+  },
+  "decision_logic": {
+    "gate_rules": [
+      "If upstream.schema_report_gate == 'fail' → gate='fail', pass=false.",
+      "Else count errors across findings: errors>0 → gate='fail', pass=false.",
+      "Else if any coherence_checks == 'fail' → gate='fail', pass=false.",
+      "Else if any coherence_checks == 'warn' OR upstream.schema_report_gate == 'warn' → gate='warn', pass=true.",
+      "Else gate='ok', pass=true."
+    ]
+  },
+  "self_checklist": [
+    "□ Reads upstream schema report and mirrors gate state.",
+    "□ Confirms manifest ↔ week_spec title/grammar/chant consistency.",
+    "□ Verifies vocab counts and references across Day1–Day4.",
+    "□ Confirms spiral items from prior_knowledge_digest appear in Day1/Day2.",
+    "□ Checks quiz item count and chant/glossary asset presence.",
+    "□ Enforces timing, virtue, and faith requirements.",
+    "□ Verifies license and originality frontmatter in 00_week_summary.md.",
+    "□ Emits only mechanical, minimal patches and strict JSON."
+  ],
+  "example_invocation": {
+    "inputs": {
+      "project_root": "curriculum/LatinA",
+      "week_number": 5,
+      "schema_report": {
+        "summary": { "errors": 0, "warnings": 2 },
+        "status": { "gate": "warn" }
+      }
+    },
+    "expected_output_excerpt": {
+      "week": { "week_number": 5, "path": "curriculum/LatinA/Week5" },
+      "upstream": { "schema_report_gate": "warn", "schema_report_errors": 0, "schema_report_warnings": 2 },
+      "coherence_checks": {
+        "manifest_consistency": "ok",
+        "vocabulary_scope": "ok",
+        "prior_knowledge_alignment": "warn",
+        "assessment_and_assets": "ok",
+        "pedagogy_and_timing": "ok",
+        "license_and_originality": "ok"
+      },
+      "findings": [
+        {
+          "level": "warning",
+          "domain": "prior_knowledge",
+          "rule": "spiral.items_referenced",
+          "path": "curriculum/LatinA/Week5/activities/Day1/06_document_for_sparky.json",
+          "detail": "Recycled vocab 'amicus' listed in digest but not referenced in Day1 spiral step.",
+          "anchors": { "json_pointer": "/lesson_steps/0" }
+        }
+      ],
+      "suggested_fixes": [
+        {
+          "for_rule": "spiral.items_referenced",
+          "path": "curriculum/LatinA/Week5/activities/Day1/06_document_for_sparky.json",
+          "patch_type": "json-patch",
+          "patch": "[{\"op\":\"add\",\"path\":\"/lesson_steps/0/spiral_content\",\"value\":\"Recall prior vocab: amicus, puella; chant 1st declension.\"}]",
+          "notes": "Adds missing spiral reference; teacher-facing text unchanged."
+        }
+      ],
+      "metrics": { "domains_checked": 6, "files_checked": 33, "errors": 0, "warnings": 1 },
+      "status": { "pass": true, "gate": "warn", "next_actions": ["Apply suggested json-patch", "Re-run week validation"] }
+    }
+  },
+  "tags": [
+    "validation",
+    "week_gate",
+    "publish_ready",
+    "coherence",
+    "assets",
+    "assessment",
+    "pedagogy",
+    "open_source"
+  ]
+}

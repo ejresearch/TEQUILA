@@ -1,7 +1,10 @@
-"""Day activity generation service."""
+"""Day activity generation service with retry logic (v1.0 Pilot)."""
 from pathlib import Path
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 import orjson
+import time
+import logging
+from datetime import datetime
 from .storage import (
     day_dir,
     day_field_path,
@@ -12,6 +15,13 @@ from .storage import (
 )
 from .llm_client import LLMClient
 from .prompts.kit_tasks import task_day_fields, task_day_document, task_day_role_context
+from ..config import settings
+
+# Configure logging
+logger = logging.getLogger(__name__)
+
+# Retry configuration
+MAX_RETRIES = settings.max_retries  # Default: 10 retries
 
 
 def get_field_template_path(field_name: str) -> Path:
@@ -95,7 +105,59 @@ def scaffold_week_days(week_number: int) -> list[Path]:
 
 
 # ============================================================================
-# LLM-BASED GENERATION FUNCTIONS
+# RETRY AND LOGGING UTILITIES
+# ============================================================================
+
+def _log_retry_attempt(week: int, day: int, attempt: int, error: str, log_dir: Optional[Path] = None):
+    """Log a retry attempt to the logs directory."""
+    if log_dir is None:
+        log_dir = settings.logs_path
+
+    log_dir.mkdir(parents=True, exist_ok=True)
+    log_file = log_dir / f"Week{week:02d}_Day{day}_retries.log"
+
+    timestamp = datetime.now().isoformat()
+    log_entry = f"[{timestamp}] Attempt {attempt}/{MAX_RETRIES}: {error}\n"
+
+    with open(log_file, 'a', encoding='utf-8') as f:
+        f.write(log_entry)
+
+    logger.warning(f"Week {week} Day {day} - Attempt {attempt}/{MAX_RETRIES}: {error}")
+
+
+def _save_invalid_response(week: int, day: int, field: str, attempt: int, content: str):
+    """Save invalid LLM response for debugging."""
+    invalid_dir = settings.logs_path / "invalid_responses"
+    invalid_dir.mkdir(parents=True, exist_ok=True)
+
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = f"Week{week:02d}_Day{day}_{field}_v{attempt}_{timestamp}_INVALID.json"
+    invalid_path = invalid_dir / filename
+
+    write_file(invalid_path, content)
+    logger.error(f"Saved invalid response to {invalid_path}")
+    return invalid_path
+
+
+def _prompt_user_to_continue(week: int, day: int, field: str) -> bool:
+    """
+    Prompt user for confirmation after MAX_RETRIES failures.
+
+    Returns True to continue, False to abort.
+    """
+    print(f"\n{'='*80}")
+    print(f"⚠️  GENERATION FAILED: Week {week} Day {day} - {field}")
+    print(f"{'='*80}")
+    print(f"After {MAX_RETRIES} attempts, the LLM failed to generate valid content.")
+    print(f"Logs saved to: {settings.logs_path / f'Week{week:02d}_Day{day}_retries.log'}")
+    print()
+
+    response = input("Continue with next generation? (y/n): ").strip().lower()
+    return response == 'y'
+
+
+# ============================================================================
+# LLM-BASED GENERATION FUNCTIONS WITH RETRY LOGIC
 # ============================================================================
 
 def generate_day_fields(week: int, day: int, client: LLMClient) -> List[Path]:
@@ -186,15 +248,21 @@ def generate_day_fields(week: int, day: int, client: LLMClient) -> List[Path]:
 
 def generate_day_document(week: int, day: int, client: LLMClient) -> Path:
     """
-    Generate the document_for_sparky JSON for a day using LLM.
+    Generate the document_for_sparky JSON for a day using LLM with retry logic.
+
+    Retries up to MAX_RETRIES (10) times on validation failure.
+    If all retries fail, prompts user for confirmation to continue.
 
     Args:
-        week: Week number (1-36)
+        week: Week number (1-35)
         day: Day number (1-4)
         client: LLM client instance
 
     Returns:
         Path to generated document_for_sparky.json
+
+    Raises:
+        ValueError: If generation fails after MAX_RETRIES and user aborts
     """
     # Ensure day directory exists
     scaffold_day(week, day)
@@ -209,25 +277,77 @@ def generate_day_document(week: int, day: int, client: LLMClient) -> Path:
     # Get prompts
     sys, usr, schema = task_day_document(week_spec, day)
 
-    # Generate via LLM
-    response = client.generate(prompt=usr, system=sys, json_schema=schema)
-
-    # Parse response
-    if response.json:
-        doc_data = response.json
-    else:
+    # Retry loop
+    for attempt in range(1, MAX_RETRIES + 1):
         try:
-            doc_data = orjson.loads(response.text)
+            # Generate via LLM
+            response = client.generate(prompt=usr, system=sys, json_schema=schema)
+
+            # Parse response
+            if response.json:
+                doc_data = response.json
+            else:
+                doc_data = orjson.loads(response.text)
+
+            # Basic validation - check required fields
+            required_fields = ["metadata", "prior_knowledge_digest", "objectives", "lesson_flow"]
+            missing_fields = [f for f in required_fields if f not in doc_data]
+
+            if missing_fields:
+                error_msg = f"Missing required fields: {missing_fields}"
+                _log_retry_attempt(week, day, attempt, error_msg)
+                _save_invalid_response(week, day, "document", attempt, response.text)
+
+                if attempt < MAX_RETRIES:
+                    time.sleep(2)  # Brief pause before retry
+                    continue
+                else:
+                    if not _prompt_user_to_continue(week, day, "document_for_sparky"):
+                        raise ValueError(f"Generation aborted by user after {MAX_RETRIES} attempts")
+                    break
+
+            # Write document_for_sparky.json (field 06 in 7-field architecture)
+            doc_path = day_field_path(week, day, "06_document_for_sparky.json")
+            write_json(doc_path, doc_data)
+
+            if attempt > 1:
+                logger.info(f"Week {week} Day {day} document generated successfully on attempt {attempt}")
+
+            return doc_path
+
+        except orjson.JSONDecodeError as e:
+            error_msg = f"Invalid JSON response: {e}"
+            _log_retry_attempt(week, day, attempt, error_msg)
+            _save_invalid_response(week, day, "document", attempt, response.text)
+
+            if attempt < MAX_RETRIES:
+                time.sleep(2)
+                continue
+            else:
+                if not _prompt_user_to_continue(week, day, "document_for_sparky"):
+                    raise ValueError(f"Generation aborted by user after {MAX_RETRIES} attempts")
+                # User chose to continue - save what we have
+                doc_path = day_field_path(week, day, "06_document_for_sparky.json")
+                write_file(doc_path, "{}")
+                return doc_path
+
         except Exception as e:
-            # Save invalid response for inspection
-            invalid_path = day_field_path(week, day, "05_document_for_sparky_INVALID.json")
-            write_file(invalid_path, response.text)
-            raise ValueError(f"LLM returned invalid JSON: {e}")
+            error_msg = f"Unexpected error: {e}"
+            _log_retry_attempt(week, day, attempt, error_msg)
 
-    # Write document_for_sparky.json (now field 06)
+            if attempt < MAX_RETRIES:
+                time.sleep(2)
+                continue
+            else:
+                if not _prompt_user_to_continue(week, day, "document_for_sparky"):
+                    raise ValueError(f"Generation aborted by user after {MAX_RETRIES} attempts")
+                # User chose to continue - save placeholder
+                doc_path = day_field_path(week, day, "06_document_for_sparky.json")
+                write_file(doc_path, "{}")
+                return doc_path
+
+    # Fallback if loop completes without return
     doc_path = day_field_path(week, day, "06_document_for_sparky.json")
-    write_json(doc_path, doc_data)
-
     return doc_path
 
 

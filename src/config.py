@@ -16,10 +16,12 @@ class Settings(BaseSettings):
     # Curriculum paths
     curriculum_base_path: Path = Path(__file__).parent.parent / "curriculum"
     exports_path: Path = Path(__file__).parent.parent / "curriculum" / "exports"
+    logs_path: Path = Path(__file__).parent.parent / "logs"
 
-    # Curriculum parameters
-    total_weeks: int = 36
+    # Curriculum parameters (Latin A v1.0 Pilot)
+    total_weeks: int = 35
     days_per_week: int = 4
+    max_retries: int = 10
 
     # LLM Configuration (OpenAI GPT-4o only)
     PROVIDER: str = "openai"  # Fixed to OpenAI
@@ -29,13 +31,16 @@ class Settings(BaseSettings):
     GEN_MAX_TOKENS: int = 3000
     TIMEOUT_S: int = 30
 
-    # Cost Control & Safety
+    # Cost Control & Safety (tracking only, enforcement disabled)
     DRY_RUN: bool = False
-    BUDGET_USD: Optional[float] = None
+    BUDGET_USD: Optional[float] = None  # Disabled by default
     COST_WARN_PCT: float = 0.8
-    MAX_WEEK: Optional[int] = None
+    MAX_WEEK: Optional[int] = 35  # Latin A v1.0 Pilot limit
     PROMPT_VERSION: str = "v1"
     PROMPT_COMPAT_MODE: bool = False
+
+    # Generation parameters
+    prior_content_min_percentage: float = 25.0  # Minimum % of quiz questions from prior weeks
 
 
 # Global settings instance

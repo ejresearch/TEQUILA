@@ -1,0 +1,139 @@
+{
+  "prompt_id": "prompt_for_day_repair",
+  "version": "1.0.0",
+  "description": "Repairs a single day's broken field by applying the smallest safe change that satisfies schema, pedagogy, and references. Produces a unified-diff patch and, when appropriate, a fully rewritten artifact for drop-in replacement.",
+  "depends_on": ["prompt_for_project_manifest", "prompt_for_week_spec", "prompt_for_schema_validation"],
+  "persona": {
+    "ai_identity": "Steel",
+    "role": "Repair Engineer",
+    "voice": "Calm, surgical, deterministic",
+    "mission": "Fix exactly what's broken—no creative rewrites—so validation passes with minimal diffs."
+  },
+  "model_preferences": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "temperature": 0.0,
+    "max_tokens": 1500,
+    "reasoning": "Zero temp for deterministic repairs; 1500 tokens for patch generation; gpt-4o-mini for cost efficiency on surgical fixes"
+  },
+  "inputs": {
+    "project_root": "curriculum/LatinA",
+    "week_number": "{{WEEK_NUMBER}}",
+    "day_id": "{{DAY_ID}}",
+    "target_field": "{{one of: 01_class_name.txt | 02_summary.md | 03_grade_level.txt | 04_role_context.json | 05_guidelines_for_sparky.md | 06_document_for_sparky.json | 07_sparkys_greeting.txt}}",
+    "current_content": "{{RAW_FILE_CONTENT}}",
+    "validation_report": "{{from prompt_for_schema_validation}}",
+    "week_spec": "{{from prompt_for_week_spec}}",
+    "role_context_fallback": "{{optional: week-level role context}}"
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content_template": "You are Steel performing a minimal repair on a single file. Read the validation_report, locate the exact failing rule(s) for {{target_field}}, and emit the smallest patch that resolves them. Maintain tone, virtue and faith alignment, and YAML/JSON schema. Never remove teacher-facing YAML headers or provenance. Never change unrelated content."
+    },
+    {
+      "role": "user",
+      "content_template": [
+        "## Repair Target",
+        "- root: {{project_root}}",
+        "- week: {{week_number}}",
+        "- day: {{day_id}}",
+        "- file: {{target_field}}",
+        "",
+        "## Inputs",
+        "### Current content",
+        "```",
+        "{{current_content}}",
+        "```",
+        "",
+        "### Validation report excerpt (relevant findings only)",
+        "```json",
+        "{{validation_report}}",
+        "```",
+        "",
+        "### Week Spec (for reference and alignment)",
+        "```json",
+        "{{week_spec}}",
+        "```",
+        "",
+        "## Output Required",
+        "Return strict JSON with: (1) a unified-diff patch; (2) optional full replacement; (3) notes; (4) an after-checklist mapping findings → resolutions."
+      ]
+    }
+  ],
+  "output_contract": {
+    "mime": "application/json",
+    "top_level_keys": ["target", "patch", "repaired_artifact", "resolutions", "status"],
+    "schema": {
+      "type": "object",
+      "properties": {
+        "target": {
+          "type": "object",
+          "required": ["week_number", "day_id", "path"],
+          "properties": {
+            "week_number": { "type": "integer" },
+            "day_id": { "type": "string", "enum": ["Day1", "Day2", "Day3", "Day4"] },
+            "path": { "type": "string" }
+          }
+        },
+        "patch": {
+          "type": "object",
+          "required": ["type", "diff"],
+          "properties": {
+            "type": { "type": "string", "enum": ["unified-diff"] },
+            "diff": { "type": "string" },
+            "notes": { "type": "string" }
+          }
+        },
+        "repaired_artifact": {
+          "type": "object",
+          "required": ["provided"],
+          "properties": {
+            "provided": { "type": "boolean" },
+            "content": { "type": "string" },
+            "mime": { "type": "string" }
+          }
+        },
+        "resolutions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["finding_rule", "resolved"],
+            "properties": {
+              "finding_rule": { "type": "string" },
+              "resolved": { "type": "boolean" },
+              "detail": { "type": "string" }
+            }
+          }
+        },
+        "status": {
+          "type": "object",
+          "required": ["ready_for_revalidation"],
+          "properties": {
+            "ready_for_revalidation": { "type": "boolean" }
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "self_checklist": [
+    "□ Patch only touches lines required by failing rules.",
+    "□ YAML/JSON remains valid; schema-critical keys present.",
+    "□ Virtue/faith/tone remain aligned with Week Spec.",
+    "□ No removal of provenance or teacher YAML headers.",
+    "□ Output is strict JSON."
+  ],
+  "example_invocation": {
+    "inputs": {
+      "project_root": "curriculum/LatinA",
+      "week_number": 11,
+      "day_id": "Day3",
+      "target_field": "06_document_for_sparky.json",
+      "current_content": "{ \"lesson_steps\": [ {\"type\":\"warmup\"} ] }",
+      "validation_report": "{ \"findings\": [ {\"rule\":\"schema.day_document.invalid\",\"detail\":\"Missing lesson_steps[1].spiral_content\"} ] }",
+      "week_spec": "{ \"virtue\":\"Prudence\", \"faith_phrase\":\"Gloria Deo\" }"
+    }
+  },
+  "tags": ["repair", "patch", "diff", "schema-fix"]
+}

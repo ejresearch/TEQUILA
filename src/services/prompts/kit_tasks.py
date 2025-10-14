@@ -1329,6 +1329,236 @@ def task_greeting(
 
 
 # ============================================================================
+# DAY REPAIR PROMPT - Minimal surgical fixes for broken fields
+# ============================================================================
+
+def task_day_repair(
+    week_number: int,
+    day_id: str,
+    target_field: str,
+    current_content: str,
+    validation_report: Dict[str, Any],
+    week_spec: Optional[Dict[str, Any]] = None,
+    project_root: str = "curriculum/LatinA"
+) -> Tuple[str, str, Dict[str, Any]]:
+    """
+    Generate repair patch for a single day's broken field.
+
+    This prompt produces minimal surgical fixes that satisfy schema, pedagogy,
+    and references without creative rewrites. Returns unified-diff patch and
+    optional full replacement artifact.
+
+    Args:
+        week_number: Week number (1-35)
+        day_id: Day identifier (Day1, Day2, Day3, Day4)
+        target_field: Field filename to repair
+        current_content: Current file content
+        validation_report: Validation findings
+        week_spec: Optional week spec for alignment
+        project_root: Root path for curriculum
+
+    Returns:
+        (system_prompt, user_prompt, config_dict)
+
+    Output:
+        JSON with patch, repaired_artifact, resolutions, status
+    """
+    prompt_spec = _load_prompt_json("repair/day_repair.json")
+
+    user_content = "\n".join(prompt_spec["messages"][1]["content_template"])
+    user_content = user_content.replace("{{project_root}}", project_root)
+    user_content = user_content.replace("{{week_number}}", str(week_number))
+    user_content = user_content.replace("{{day_id}}", day_id)
+    user_content = user_content.replace("{{target_field}}", target_field)
+    user_content = user_content.replace("{{current_content}}", current_content)
+
+    validation_json = json.dumps(validation_report, indent=2)
+    user_content = user_content.replace("{{validation_report}}", validation_json)
+
+    if week_spec:
+        week_spec_json = json.dumps(week_spec, indent=2)
+        user_content = user_content.replace("{{week_spec}}", week_spec_json)
+    else:
+        user_content = user_content.replace("{{week_spec}}", "[Load from week spec]")
+
+    system_content = prompt_spec["messages"][0]["content_template"]
+    system_content = system_content.replace("{{target_field}}", target_field)
+
+    config = {
+        "temperature": prompt_spec["model_preferences"]["temperature"],
+        "max_tokens": prompt_spec["model_preferences"]["max_tokens"],
+        "model": prompt_spec["model_preferences"]["model"]
+    }
+
+    return (system_content, user_content, config)
+
+
+# ============================================================================
+# WEEK REFRESH PROMPT - Minimal regeneration after spec changes
+# ============================================================================
+
+def task_week_refresh(
+    week_number: int,
+    old_week_spec: Dict[str, Any],
+    new_week_spec: Dict[str, Any],
+    project_root: str = "curriculum/LatinA"
+) -> Tuple[str, str, Dict[str, Any]]:
+    """
+    Generate refresh plan for week after spec changes.
+
+    This prompt computes deltas between old and new week specs and produces
+    a minimal regeneration plan (keep/patch/regenerate) for each field in
+    each of the 4 days.
+
+    Args:
+        week_number: Week number (1-35)
+        old_week_spec: Compiled spec before change
+        new_week_spec: Compiled spec after change
+        project_root: Root path for curriculum
+
+    Returns:
+        (system_prompt, user_prompt, config_dict)
+
+    Output:
+        JSON with week, plan, artifacts, revalidation, cost_notes
+    """
+    prompt_spec = _load_prompt_json("refresh/week_refresh.json")
+
+    user_content = "\n".join(prompt_spec["messages"][1]["content_template"])
+
+    old_spec_json = json.dumps(old_week_spec, indent=2)
+    new_spec_json = json.dumps(new_week_spec, indent=2)
+
+    user_content = user_content.replace("{{old_week_spec}}", old_spec_json)
+    user_content = user_content.replace("{{new_week_spec}}", new_spec_json)
+    user_content = user_content.replace(
+        "{{seven_fields}}",
+        json.dumps(prompt_spec["inputs"]["seven_fields"])
+    )
+
+    system_content = prompt_spec["messages"][0]["content_template"]
+
+    config = {
+        "temperature": prompt_spec["model_preferences"]["temperature"],
+        "max_tokens": prompt_spec["model_preferences"]["max_tokens"],
+        "model": prompt_spec["model_preferences"]["model"]
+    }
+
+    return (system_content, user_content, config)
+
+
+# ============================================================================
+# LEGACY MIGRATION PROMPT - 6-field to 7-field upgrade
+# ============================================================================
+
+def task_legacy_migration(
+    week_number: int,
+    detected_layouts: Dict[str, Any],
+    week_level_role_context: Optional[Dict[str, Any]] = None,
+    project_root: str = "curriculum/LatinA"
+) -> Tuple[str, str, Dict[str, Any]]:
+    """
+    Generate migration plan for legacy 6-field to 7-field layout.
+
+    This prompt produces mechanical upgrades: creates missing 04_role_context.json,
+    adds YAML frontmatter to guidelines, preserves content and provenance.
+
+    Args:
+        week_number: Week number (1-35)
+        detected_layouts: FS scan summary of present/missing files per day
+        week_level_role_context: Optional week-level role context for synthesis
+        project_root: Root path for curriculum
+
+    Returns:
+        (system_prompt, user_prompt, config_dict)
+
+    Output:
+        JSON with week, operations, artifacts, post_checks
+    """
+    prompt_spec = _load_prompt_json("migration/legacy_migration.json")
+
+    user_content = "\n".join(prompt_spec["messages"][1]["content_template"])
+    user_content = user_content.replace("{{week_number}}", str(week_number))
+
+    layouts_json = json.dumps(detected_layouts, indent=2)
+    user_content = user_content.replace("{{detected_layouts}}", layouts_json)
+
+    if week_level_role_context:
+        role_json = json.dumps(week_level_role_context, indent=2)
+        user_content = user_content.replace("{{week_level_role_context}}", role_json)
+    else:
+        user_content = user_content.replace("{{week_level_role_context}}", "{}")
+
+    system_content = prompt_spec["messages"][0]["content_template"]
+
+    config = {
+        "temperature": prompt_spec["model_preferences"]["temperature"],
+        "max_tokens": prompt_spec["model_preferences"]["max_tokens"],
+        "model": prompt_spec["model_preferences"]["model"]
+    }
+
+    return (system_content, user_content, config)
+
+
+# ============================================================================
+# ALIGNMENT CHECK PROMPT - Editorial QA for week bundle
+# ============================================================================
+
+def task_alignment_check(
+    week_number: int,
+    week_spec: Dict[str, Any],
+    day_bundles: Dict[str, Dict[str, Any]],
+    project_root: str = "curriculum/LatinA"
+) -> Tuple[str, str, Dict[str, Any]]:
+    """
+    Generate alignment QA report for week bundle.
+
+    This prompt audits tone, age-level, virtue, and faith-phrase alignment
+    across all 7 fields in Day1-Day4. Produces concise markdown report with
+    actionable quick fixes.
+
+    Args:
+        week_number: Week number (1-35)
+        week_spec: Week specification data
+        day_bundles: Dict of Day1-Day4 with their 7 fields
+        project_root: Root path for curriculum
+
+    Returns:
+        (system_prompt, user_prompt, config_dict)
+
+    Output:
+        Markdown report with summary, checklist, findings, next actions
+    """
+    prompt_spec = _load_prompt_json("qa/alignment_check.json")
+
+    user_content = "\n".join(prompt_spec["messages"][1]["content_template"])
+    user_content = user_content.replace("{{week_number}}", str(week_number))
+
+    # Extract virtue and faith from week_spec
+    virtue = week_spec.get("virtue_focus", week_spec.get("virtue", "N/A"))
+    faith_phrase = week_spec.get("faith_phrase", "N/A")
+
+    user_content = user_content.replace("{{week_spec.virtue}}", virtue)
+    user_content = user_content.replace("{{week_spec.faith_phrase}}", faith_phrase)
+
+    style_constraints = prompt_spec["inputs"]["style_constraints"]
+    user_content = user_content.replace(
+        "{{style_constraints.grade_level}}",
+        style_constraints["grade_level"]
+    )
+
+    system_content = prompt_spec["messages"][0]["content_template"]
+
+    config = {
+        "temperature": prompt_spec["model_preferences"]["temperature"],
+        "max_tokens": prompt_spec["model_preferences"]["max_tokens"],
+        "model": prompt_spec["model_preferences"]["model"]
+    }
+
+    return (system_content, user_content, config)
+
+
+# ============================================================================
 # LEGACY ROLE_CONTEXT PROMPT (Field 04) - Week-level variant
 # ============================================================================
 

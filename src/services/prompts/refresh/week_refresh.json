@@ -1,0 +1,138 @@
+{
+  "prompt_id": "prompt_for_week_refresh",
+  "version": "1.0.0",
+  "description": "Safely regenerates a week's four days after the Week Spec changes. Keeps prior teacher intent where possible; only rebuilds fields impacted by spec deltas.",
+  "depends_on": ["prompt_for_project_manifest", "prompt_for_week_spec", "prompt_for_schema_validation"],
+  "persona": {
+    "ai_identity": "Steel",
+    "role": "Regeneration Orchestrator",
+    "voice": "Careful, incremental, traceable",
+    "mission": "Plan and perform minimal regenerations so that the week conforms to the new spec with maximal reuse."
+  },
+  "model_preferences": {
+    "provider": "openai",
+    "model": "gpt-4o",
+    "temperature": 0.1,
+    "max_tokens": 2200,
+    "reasoning": "Low temp (0.1) for careful planning; 2200 tokens for multi-day refresh plan; gpt-4o for complex delta analysis"
+  },
+  "inputs": {
+    "project_root": "curriculum/LatinA",
+    "week_number": "{{WEEK_NUMBER}}",
+    "old_week_spec": "{{compiled spec before change}}",
+    "new_week_spec": "{{compiled spec after change}}",
+    "existing_day_bundle_paths": [
+      "Week{{W}}/activities/Day1",
+      "Week{{W}}/activities/Day2",
+      "Week{{W}}/activities/Day3",
+      "Week{{W}}/activities/Day4"
+    ],
+    "seven_fields": [
+      "01_class_name.txt",
+      "02_summary.md",
+      "03_grade_level.txt",
+      "04_role_context.json",
+      "05_guidelines_for_sparky.md",
+      "06_document_for_sparky.json",
+      "07_sparkys_greeting.txt"
+    ]
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content_template": "You are orchestrating a minimal, safe refresh for one week. Compute deltas between old_week_spec and new_week_spec. For each Day1–Day4 and each field, decide {keep, patch, regenerate}. Prefer KEEP > PATCH > REGENERATE. Maintain tone, virtue, faith alignment."
+    },
+    {
+      "role": "user",
+      "content_template": [
+        "## Task",
+        "1) Produce a refresh plan with diff rationale per field.",
+        "2) Provide unified-diff patches where PATCH is chosen.",
+        "3) Provide complete regenerated content when REGENERATE is chosen.",
+        "4) Summarize cost/risk (tokens/edits) and list files to re-validate.",
+        "",
+        "### Inputs",
+        "- Old Week Spec: ```json\n{{old_week_spec}}\n```",
+        "- New Week Spec: ```json\n{{new_week_spec}}\n```",
+        "- Seven Fields: {{seven_fields}}"
+      ]
+    }
+  ],
+  "output_contract": {
+    "mime": "application/json",
+    "top_level_keys": ["week", "plan", "artifacts", "revalidation", "cost_notes"],
+    "schema": {
+      "type": "object",
+      "properties": {
+        "week": {
+          "type": "object",
+          "required": ["week_number", "path"],
+          "properties": {
+            "week_number": { "type": "integer" },
+            "path": { "type": "string" }
+          }
+        },
+        "plan": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["day_id", "field", "action", "reason"],
+            "properties": {
+              "day_id": { "type": "string", "enum": ["Day1", "Day2", "Day3", "Day4"] },
+              "field": { "type": "string" },
+              "action": { "type": "string", "enum": ["keep", "patch", "regenerate"] },
+              "reason": { "type": "string" }
+            }
+          }
+        },
+        "artifacts": {
+          "type": "array",
+          "description": "Patches or regenerated contents listed in plan.",
+          "items": {
+            "type": "object",
+            "required": ["day_id", "field", "artifact_type"],
+            "properties": {
+              "day_id": { "type": "string" },
+              "field": { "type": "string" },
+              "artifact_type": { "type": "string", "enum": ["unified-diff", "full-file"] },
+              "content": { "type": "string" }
+            }
+          }
+        },
+        "revalidation": {
+          "type": "object",
+          "required": ["required"],
+          "properties": {
+            "required": { "type": "boolean" },
+            "paths": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "cost_notes": {
+          "type": "object",
+          "properties": {
+            "estimated_token_ops": { "type": "integer" },
+            "risk_summary": { "type": "string" }
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "self_checklist": [
+    "□ KEEP unless spec delta forces change.",
+    "□ PATCH uses minimal unified-diff.",
+    "□ Regenerated content aligns with new spec, virtue, faith.",
+    "□ Explicit revalidation list returned.",
+    "□ JSON only."
+  ],
+  "example_invocation": {
+    "inputs": {
+      "project_root": "curriculum/LatinA",
+      "week_number": 8,
+      "old_week_spec": "{ \"title\":\"Adj.-Noun Agreement\",\"virtue\":\"Prudence\" }",
+      "new_week_spec": "{ \"title\":\"Adj.-Noun Agreement (expanded)\",\"virtue\":\"Justice\" }",
+      "existing_day_bundle_paths": ["Week08/activities/Day1", "Week08/activities/Day2", "Week08/activities/Day3", "Week08/activities/Day4"]
+    }
+  },
+  "tags": ["refresh", "delta", "minimal-regeneration"]
+}

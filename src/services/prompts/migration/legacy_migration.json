@@ -1,0 +1,113 @@
+{
+  "prompt_id": "prompt_for_legacy_migration",
+  "version": "1.0.0",
+  "description": "Migrates legacy 6-field day folders to the 7-field layout by creating 04_role_context.json, renaming files if needed, and inserting required YAML headers/references.",
+  "depends_on": ["prompt_for_system_overview"],
+  "persona": {
+    "ai_identity": "Steel",
+    "role": "Migration Specialist",
+    "voice": "Exact, conservative, reversible",
+    "mission": "Perform mechanical upgrades only; preserve content and provenance while achieving 7-field compliance."
+  },
+  "model_preferences": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "temperature": 0.0,
+    "max_tokens": 1400,
+    "reasoning": "Zero temp for deterministic migration; 1400 tokens for migration plan; gpt-4o-mini for cost efficiency on mechanical operations"
+  },
+  "inputs": {
+    "project_root": "curriculum/LatinA",
+    "week_number": "{{WEEK_NUMBER}}",
+    "days_to_check": ["Day1", "Day2", "Day3", "Day4"],
+    "week_level_role_context": "{{optional JSON used to synthesize day role_context}}",
+    "detected_layouts": "{{FS scan summary of each day: present/missing files}}"
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content_template": "You are migrating each legacy day to the 7-field schema. For any missing 04_role_context.json, create a minimal valid file from week_level_role_context plus day specifics. If 05_guidelines_for_sparky.md lacks YAML frontmatter or references, add them. Do not alter pedagogy or tone."
+    },
+    {
+      "role": "user",
+      "content_template": [
+        "## Inputs",
+        "- week: {{week_number}}",
+        "- layouts: ```json\n{{detected_layouts}}\n```",
+        "- role_context (week-level): ```json\n{{week_level_role_context}}\n```",
+        "",
+        "## Output",
+        "Return JSON migration plan with operations (rename/create/patch) and artifacts (new files, diffs)."
+      ]
+    }
+  ],
+  "output_contract": {
+    "mime": "application/json",
+    "top_level_keys": ["week", "operations", "artifacts", "post_checks"],
+    "schema": {
+      "type": "object",
+      "properties": {
+        "week": {
+          "type": "object",
+          "required": ["week_number", "path"],
+          "properties": {
+            "week_number": { "type": "integer" },
+            "path": { "type": "string" }
+          }
+        },
+        "operations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["day_id", "action", "target"],
+            "properties": {
+              "day_id": { "type": "string" },
+              "action": { "type": "string", "enum": ["create-file", "rename-file", "unified-diff"] },
+              "target": { "type": "string" },
+              "reason": { "type": "string" }
+            }
+          }
+        },
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["day_id", "target", "artifact_type", "content"],
+            "properties": {
+              "day_id": { "type": "string" },
+              "target": { "type": "string" },
+              "artifact_type": { "type": "string", "enum": ["json", "markdown", "unified-diff"] },
+              "content": { "type": "string" }
+            }
+          }
+        },
+        "post_checks": {
+          "type": "object",
+          "required": ["revalidate"],
+          "properties": {
+            "revalidate": { "type": "boolean" },
+            "paths": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "self_checklist": [
+    "□ Create minimal valid 04_role_context.json per day.",
+    "□ Insert YAML frontmatter to 05_guidelines if missing.",
+    "□ No semantic rewrites; provenance preserved.",
+    "□ All operations reversible; list revalidation paths.",
+    "□ Strict JSON output."
+  ],
+  "example_invocation": {
+    "inputs": {
+      "project_root": "curriculum/LatinA",
+      "week_number": 11,
+      "days_to_check": ["Day2"],
+      "detected_layouts": "{ \"Day2\": {\"present\": [\"01_class_name.txt\",\"02_summary.md\",\"03_grade_level.txt\",\"05_guidelines_for_sparky.md\",\"06_document_for_sparky.json\",\"07_sparkys_greeting.txt\"], \"missing\": [\"04_role_context.json\"] } }",
+      "week_level_role_context": "{ \"identity\":\"Sparky\",\"student_profile\":\"Grade 3 USA\" }"
+    }
+  },
+  "tags": ["migration", "seven-field", "legacy"]
+}

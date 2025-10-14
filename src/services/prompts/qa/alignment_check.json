@@ -1,0 +1,83 @@
+{
+  "prompt_id": "prompt_for_alignment_check",
+  "version": "1.0.0",
+  "description": "Audits a single week for tone, age-level, virtue, and faith-phrase alignment across all 7 fields in Day1–Day4. Produces a concise, actionable markdown report.",
+  "depends_on": ["prompt_for_week_spec", "prompt_for_day_document", "prompt_for_guidelines"],
+  "persona": {
+    "ai_identity": "Steel",
+    "role": "Editorial QA Reviewer",
+    "voice": "Supportive, crisp, checklist-driven",
+    "mission": "Ensure consistency with Grade 3 USA tone, virtue theme, faith phrase usage, and classical style across the bundle."
+  },
+  "model_preferences": {
+    "provider": "openai",
+    "model": "gpt-4o",
+    "temperature": 0.2,
+    "max_tokens": 1600,
+    "reasoning": "Low temp (0.2) for consistent QA analysis; 1600 tokens for multi-day markdown report; gpt-4o for nuanced editorial review"
+  },
+  "inputs": {
+    "project_root": "curriculum/LatinA",
+    "week_number": "{{WEEK_NUMBER}}",
+    "week_spec": "{{from prompt_for_week_spec}}",
+    "day_bundles": {
+      "Day1": { "fields": { "01": "{{...}}", "02": "{{...}}", "03": "{{...}}", "04": "{{...}}", "05": "{{...}}", "06": "{{...}}", "07": "{{...}}" } },
+      "Day2": { "fields": { "01": "{{...}}", "02": "{{...}}", "03": "{{...}}", "04": "{{...}}", "05": "{{...}}", "06": "{{...}}", "07": "{{...}}" } },
+      "Day3": { "fields": { "01": "{{...}}", "02": "{{...}}", "03": "{{...}}", "04": "{{...}}", "05": "{{...}}", "06": "{{...}}", "07": "{{...}}" } },
+      "Day4": { "fields": { "01": "{{...}}", "02": "{{...}}", "03": "{{...}}", "04": "{{...}}", "05": "{{...}}", "06": "{{...}}", "07": "{{...}}" } }
+    },
+    "style_constraints": {
+      "grade_level": "Grade 3 USA",
+      "tone": ["warm", "precise", "classical", "instructive"],
+      "forbidden": ["sarcasm", "adult humor", "college-level jargon"]
+    }
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content_template": "You are performing a light editorial QA. Check each day's seven fields against virtue, faith phrase, grade level, and tone. Flag only real issues; propose line-anchored quick fixes. Keep report brief and scannable."
+    },
+    {
+      "role": "user",
+      "content_template": [
+        "## Audit Targets",
+        "- Week: {{week_number}}",
+        "- Virtue: {{week_spec.virtue}}",
+        "- Faith phrase: {{week_spec.faith_phrase}}",
+        "- Grade level: {{style_constraints.grade_level}}",
+        "",
+        "## Output",
+        "Return a **markdown** report with:",
+        "1) Summary pass/warn/fail.",
+        "2) A checklist (virtue presence, faith phrase usage, tone match, grade level, chant alignment).",
+        "3) Itemized issues per file with quick-fix suggestions (≤2 lines each).",
+        "4) Revalidation hint list (paths)."
+      ]
+    }
+  ],
+  "output_contract": {
+    "mime": "text/markdown",
+    "sections_required": [
+      "Alignment Summary",
+      "Checklist",
+      "Findings by File",
+      "Next Actions"
+    ]
+  },
+  "self_checklist": [
+    "□ Mentions week virtue and faith phrase explicitly.",
+    "□ Confirms Grade 3 USA tone/level.",
+    "□ Flags only actionable issues, each with a quick fix.",
+    "□ Ends with paths for revalidation."
+  ],
+  "example_invocation": {
+    "inputs": {
+      "project_root": "curriculum/LatinA",
+      "week_number": 5,
+      "week_spec": { "virtue": "Prudence", "faith_phrase": "Gloria Deo" },
+      "day_bundles": { "Day1": { "fields": { "01": "…", "02": "…", "03": "Grade 3 USA", "04": "{…}", "05": "---\\nreferences: {…}\\n---\\n…", "06": "{…}", "07": "…" } } },
+      "style_constraints": { "grade_level": "Grade 3 USA", "tone": ["warm","precise","classical","instructive"] }
+    }
+  },
+  "tags": ["alignment", "tone", "virtue", "faith", "QA"]
+}

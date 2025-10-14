@@ -123,6 +123,102 @@ def task_project_manifest() -> Tuple[str, str, Dict[str, Any]]:
     return (system_content, user_content, config)
 
 
+# ============================================================================
+# SCHEMA VALIDATION PROMPT - Validates entire week structure
+# ============================================================================
+
+def task_schema_validation(
+    week_number: int,
+    project_root: str = "curriculum/LatinA",
+    week_files: Optional[Dict[str, Any]] = None
+) -> Tuple[str, str, Dict[str, Any]]:
+    """
+    Generate validation report for a complete week.
+
+    This prompt validates all aspects of a week's content:
+    - 7-field structure for all 4 days
+    - Pydantic schema conformance (WeekSpec, DayDocument, DayRoleContext, FlintBundle)
+    - YAML references integrity
+    - Spiral learning rules (≥25% for week ≥2)
+    - Virtue and faith integration
+    - Provenance metadata
+    - Originality and licensing (CC BY 4.0)
+    - Grade-level calibration (Grade 3 primary)
+    - Backward compatibility (6-field legacy support)
+
+    Args:
+        week_number: Week number (1-35)
+        project_root: Root path for curriculum
+        week_files: Optional dict of file contents (if not provided, assumes FS binding)
+
+    Returns:
+        (system_prompt, user_prompt, config_dict)
+
+    Output:
+        JSON validation report saved to validation_reports/Week{week_number}_validation.json
+    """
+    prompt_spec = _load_prompt_json("validation/schema_validation.json")
+
+    # Build user prompt with interpolated values
+    user_content = "\n".join(prompt_spec["messages"][1]["content_template"])
+    user_content = user_content.replace("{{project_root}}", project_root)
+    user_content = user_content.replace("{{week_number}}", str(week_number))
+
+    # Interpolate pedagogical rules
+    contracts = prompt_spec["inputs"]["contracts"]
+    ped_rules = contracts["pedagogical_rules"]
+    orig_rules = contracts["originality_rules"]
+    grade_rules = contracts["grade_level_rules"]
+
+    user_content = user_content.replace(
+        "{{contracts.pedagogical_rules.lesson_total_minutes_min}}",
+        str(ped_rules["lesson_total_minutes_min"])
+    )
+    user_content = user_content.replace(
+        "{{contracts.pedagogical_rules.lesson_total_minutes_max}}",
+        str(ped_rules["lesson_total_minutes_max"])
+    )
+    user_content = user_content.replace(
+        "{{contracts.originality_rules.n_gram_window}}",
+        str(orig_rules["n_gram_window"])
+    )
+    user_content = user_content.replace(
+        "{{contracts.originality_rules.n_gram_similarity_max}}",
+        str(orig_rules["n_gram_similarity_max"])
+    )
+    user_content = user_content.replace(
+        "{{contracts.originality_rules.example_overlap_max_pct}}",
+        str(orig_rules["example_overlap_max_pct"])
+    )
+    user_content = user_content.replace(
+        "{{contracts.grade_level_rules.english_exposition_target_flesch_kincaid_max}}",
+        str(grade_rules["english_exposition_target_flesch_kincaid_max"])
+    )
+    user_content = user_content.replace(
+        "{{contracts.grade_level_rules.english_sentence_length_max}}",
+        str(grade_rules["english_sentence_length_max"])
+    )
+    user_content = user_content.replace(
+        "{{contracts.grade_level_rules.latin_sentence_length_max_words}}",
+        str(grade_rules["latin_sentence_length_max_words"])
+    )
+
+    # If week_files provided, append them to the prompt
+    if week_files:
+        user_content += "\n\n## Provided File Contents\n"
+        for path, content in week_files.items():
+            user_content += f"\n### {path}\n```\n{content}\n```\n"
+
+    system_content = prompt_spec["messages"][0]["content_template"]
+
+    config = {
+        "temperature": prompt_spec["model_preferences"]["temperature"],
+        "max_tokens": prompt_spec["model_preferences"]["max_tokens"]
+    }
+
+    return (system_content, user_content, config)
+
+
 def task_week_spec(outline_snip: dict) -> Tuple[str, str, Optional[Dict]]:
     """
     Generate prompts for weekly spec generation.

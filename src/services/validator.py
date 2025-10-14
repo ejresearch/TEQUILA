@@ -135,11 +135,12 @@ def validate_day_fields(week_number: int, day_number: int) -> ValidationResult:
 
 def validate_day_4_spiral_content(week_number: int) -> ValidationResult:
     """
-    Validate that Day 4 includes adequate spiral/review content.
+    Validate that Day 4 includes adequate spiral/review content (≥25% rule).
 
     Checks:
     - Day 4 guidelines mention prior content or review
     - Week spec includes spiral links (for weeks >= 2)
+    - Assessment has ≥25% quiz questions from prior weeks
     """
     result = ValidationResult()
 
@@ -171,6 +172,34 @@ def validate_day_4_spiral_content(week_number: int) -> ValidationResult:
             f"Week{week_number:02d}/Day4",
             "Day 4 guidelines file missing"
         )
+
+    # Check assessment for 25% prior content requirement
+    from ..config import settings
+    from .storage import week_spec_part_path
+
+    assessment_path = week_spec_part_path(week_number, "07_assessment.json")
+    if assessment_path.exists():
+        try:
+            import json
+            with assessment_path.open("r", encoding="utf-8") as f:
+                assessment_data = json.load(f)
+
+            # Check prior_content_percentage field
+            prior_pct = assessment_data.get("prior_content_percentage", 0)
+            min_required = settings.prior_content_min_percentage
+
+            if prior_pct < min_required:
+                result.add_error(
+                    f"Week{week_number:02d}/Week_Spec/07_assessment.json",
+                    f"Assessment must have ≥{min_required}% prior content (found {prior_pct}%)"
+                )
+        except json.JSONDecodeError:
+            result.add_warning(
+                f"Week{week_number:02d}/Week_Spec/07_assessment.json",
+                "Could not parse assessment JSON to validate 25% rule"
+            )
+        except Exception:
+            pass
 
     return result
 

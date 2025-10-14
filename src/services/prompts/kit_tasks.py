@@ -695,6 +695,110 @@ def task_class_name(
 
 
 # ============================================================================
+# DAY SUMMARY PROMPT (Field 02) - Daily lesson overview markdown
+# ============================================================================
+
+def task_day_summary(
+    week_number: int,
+    day_number: int,
+    class_name: str,
+    week_spec: Optional[Dict[str, Any]] = None,
+    prior_knowledge_digest: Optional[Dict[str, Any]] = None
+) -> Tuple[str, str, Dict[str, Any]]:
+    """
+    Generate 02_summary.md - daily lesson summary markdown.
+
+    This prompt creates a 150-250 word structured markdown summary explaining:
+    - What the student should learn today (objective)
+    - Prior knowledge connections (2-3 items from digest)
+    - Focus for today (grammar, chant, vocabulary)
+    - Virtue & faith connection
+    - Teacher notes (pacing, pronunciation)
+
+    Output structure (JSON with markdown content):
+    - day_summary: markdown string with YAML frontmatter
+
+    Markdown sections:
+    1. YAML header (week, day, license, provenance)
+    2. Objective (1-2 sentences)
+    3. Prior Knowledge (2-3 items)
+    4. Focus for Today (grammar, chant, vocab list)
+    5. Virtue & Faith Connection (1-2 sentences)
+    6. Teacher Notes (pacing/pronunciation)
+
+    Args:
+        week_number: Week number (1-35)
+        day_number: Day number (1-4)
+        class_name: Class name from prompt_for_class_name
+        week_spec: Optional compiled week spec
+        prior_knowledge_digest: Optional prior knowledge digest
+
+    Returns:
+        (system_prompt, user_prompt, config_dict)
+
+    Output:
+        JSON with single key: {"day_summary": "...markdown..."}
+    """
+    prompt_spec = _load_prompt_json("day/day_summary.json")
+
+    # Map day number to intent
+    day_intents = {
+        1: "Learn: introduce new grammar, vocabulary, and chant.",
+        2: "Practice: review, translate, and recite.",
+        3: "Review: answer questions and reinforce mastery.",
+        4: "Quiz: assess learning and reflect on progress."
+    }
+    day_intent = day_intents.get(day_number, "Learn")
+
+    # Build user prompt with interpolated values
+    user_content = "\n".join(prompt_spec["messages"][1]["content_template"])
+    user_content = user_content.replace("{{week_number}}", str(week_number))
+    user_content = user_content.replace("{{day_number}}", str(day_number))
+    user_content = user_content.replace("{{class_name}}", class_name)
+    user_content = user_content.replace("{{day_intent[day_number]}}", day_intent)
+
+    # If week_spec provided, interpolate its fields
+    if week_spec:
+        user_content = user_content.replace(
+            "{{week_spec.title}}",
+            week_spec.get("title", "")
+        )
+        user_content = user_content.replace(
+            "{{week_spec.grammar_focus}}",
+            week_spec.get("grammar_focus", "")
+        )
+        user_content = user_content.replace(
+            "{{week_spec.chant}}",
+            week_spec.get("chant", "")
+        )
+        user_content = user_content.replace(
+            "{{week_spec.virtue_focus}}",
+            week_spec.get("virtue_focus", "")
+        )
+        user_content = user_content.replace(
+            "{{week_spec.faith_phrase}}",
+            week_spec.get("faith_phrase", "")
+        )
+    else:
+        # Leave placeholders for file/API reference
+        user_content = user_content.replace("{{week_spec.title}}", "[Load from week spec]")
+        user_content = user_content.replace("{{week_spec.grammar_focus}}", "[Load from week spec]")
+        user_content = user_content.replace("{{week_spec.chant}}", "[Load from week spec]")
+        user_content = user_content.replace("{{week_spec.virtue_focus}}", "[Load from week spec]")
+        user_content = user_content.replace("{{week_spec.faith_phrase}}", "[Load from week spec]")
+
+    system_content = prompt_spec["messages"][0]["content_template"]
+
+    config = {
+        "temperature": prompt_spec["model_preferences"]["temperature"],
+        "max_tokens": prompt_spec["model_preferences"]["max_tokens"],
+        "model": prompt_spec["model_preferences"]["model"]  # gpt-4o-mini
+    }
+
+    return (system_content, user_content, config)
+
+
+# ============================================================================
 # ROLE_CONTEXT PROMPT (Field 04) - Foundation for all day content
 # ============================================================================
 

@@ -1,0 +1,152 @@
+{
+  "prompt_id": "prompt_for_day_summary",
+  "version": "1.0.0",
+  "description": "Generates the student- and teacher-facing daily summary file (02_summary.md) for a single Day in Steel's Latin A curriculum. Draws from the Week Spec, prior knowledge digest, and class name to produce a concise, structured markdown summary describing what is taught, practiced, and reviewed that day.",
+  "depends_on": [
+    "prompt_for_system_overview",
+    "prompt_for_project_manifest",
+    "prompt_for_week_spec",
+    "prompt_for_prior_knowledge_digest",
+    "prompt_for_class_name"
+  ],
+  "persona": {
+    "ai_identity": "Steel",
+    "role": "Daily Lesson Summarizer",
+    "voice": "Warm, direct, classical-instructor tone",
+    "mission": "Write a 150–250 word markdown summary for the day that clearly outlines its learning focus, prior knowledge connection, and intended outcomes for students and teachers."
+  },
+  "model_preferences": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "temperature": 0.3,
+    "max_tokens": 600,
+    "reasoning": "Moderate temp (0.3) for warm narrative; 600 tokens for ~250 word summary; gpt-4o-mini for cost efficiency"
+  },
+  "inputs": {
+    "project_name": "Latin A (Grammar Stage)",
+    "week_number": "{{WEEK_NUMBER}}",
+    "day_number": "{{DAY_NUMBER}}",
+    "class_name": "{{OUTPUT_FROM:prompt_for_class_name.class_name}}",
+    "week_spec": "99_compiled_week_spec.json",
+    "prior_knowledge_digest": "07_prior_knowledge_digest.json",
+    "day_intent": {
+      "1": "Learn: introduce new grammar, vocabulary, and chant.",
+      "2": "Practice: review, translate, and recite.",
+      "3": "Review: answer questions and reinforce mastery.",
+      "4": "Quiz: assess learning and reflect on progress."
+    },
+    "output_filename": "02_summary.md"
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content_template": "You are Steel, summarizer of TEQUILA's daily lessons. Write concise, rhythmic markdown summaries that explain what this day covers, why it matters, and how it connects to prior knowledge. Tone: calm, encouraging, and rooted in classical pedagogy."
+    },
+    {
+      "role": "user",
+      "content_template": [
+        "## Context",
+        "- Week {{week_number}}: {{week_spec.title}}",
+        "- Day {{day_number}} (Intent: {{day_intent[day_number]}})",
+        "- Class Name: {{class_name}}",
+        "- Grammar Focus: {{week_spec.grammar_focus}}",
+        "- Chant: {{week_spec.chant}}",
+        "- Virtue: {{week_spec.virtue_focus}}",
+        "- Faith Phrase: {{week_spec.faith_phrase}}",
+        "",
+        "### Prior Knowledge Highlights",
+        "Use 1–2 vocabulary or grammar elements from prior_knowledge_digest that support this day's content.",
+        "",
+        "## Task",
+        "Generate a markdown file titled `{{class_name}}` with the following structure:",
+        "",
+        "```markdown",
+        "---",
+        "week: {{week_number}}",
+        "day: {{day_number}}",
+        "license: 'CC BY 4.0'",
+        "validated_by: Steel",
+        "originality_attestation: true",
+        "---",
+        "",
+        "# {{class_name}}",
+        "",
+        "## Objective",
+        "State in 1–2 sentences what the student should learn today.",
+        "",
+        "## Prior Knowledge",
+        "List or describe 2–3 previously learned ideas that connect to today's lesson.",
+        "",
+        "## Focus for Today",
+        "- Grammar: {{week_spec.grammar_focus}}",
+        "- Chant: {{week_spec.chant}}",
+        "- Vocabulary: List 5–8 key words from week_spec.vocabulary_scope relevant today.",
+        "",
+        "## Virtue & Faith Connection",
+        "Briefly tie the virtue and faith phrase into this day's study (1–2 sentences).",
+        "",
+        "## Teacher Notes",
+        "Include pacing suggestions or pronunciation reminders.",
+        "```",
+        "",
+        "### Rules",
+        "- Use simple markdown headings and lists.",
+        "- Write in plain, clear prose for Grades 3–5 teachers.",
+        "- Keep tone instructional yet warm; avoid excess theological commentary.",
+        "- Keep summary length between 150 and 250 words.",
+        "",
+        "Return ONLY valid JSON containing one key: `day_summary` (the full markdown as string)."
+      ]
+    }
+  ],
+  "output_contract": {
+    "mime": "application/json",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "day_summary": {
+          "type": "string",
+          "minLength": 100,
+          "maxLength": 2000,
+          "description": "A full markdown file including YAML header and lesson summary."
+        }
+      },
+      "required": ["day_summary"],
+      "additionalProperties": false
+    }
+  },
+  "self_checklist": [
+    "□ Includes YAML header with license and provenance.",
+    "□ Clearly lists objective, prior knowledge, focus, and virtue/faith sections.",
+    "□ References week grammar and chant.",
+    "□ Ties prior knowledge digest content to today's lesson.",
+    "□ Uses markdown headings and lists properly.",
+    "□ ≤ 250 words, readable for grades 3–5 teachers.",
+    "□ Output JSON has only the `day_summary` key."
+  ],
+  "tags": ["daily_summary", "seven-field", "markdown", "teacher-facing", "latin_a"],
+  "example_invocation": {
+    "inputs": {
+      "week_number": 5,
+      "day_number": 2,
+      "class_name": "Latin A — Week 05 Day 2: 2nd Declension — Practice",
+      "week_spec": {
+        "title": "Second Declension Nouns (Masculine Singular)",
+        "grammar_focus": "Second Declension endings and usage",
+        "chant": "us / ī / ō / um / ō",
+        "vocabulary_scope": ["servus", "dominus", "magister", "campus", "deus"],
+        "virtue_focus": "Perseverance",
+        "faith_phrase": "Dominus vobiscum"
+      },
+      "prior_knowledge_digest": {
+        "vocabulary_recycled": [
+          {"item": "puella", "source_week": 2},
+          {"item": "amicus", "source_week": 3}
+        ]
+      }
+    },
+    "expected_output_excerpt": {
+      "day_summary": "---\\nweek: 5\\nday: 2\\nlicense: 'CC BY 4.0'\\nvalidated_by: Steel\\noriginality_attestation: true\\n---\\n\\n# Latin A — Week 05 Day 2: 2nd Declension — Practice\\n\\n## Objective\\nStudents will practice identifying and translating 2nd declension masculine nouns in short Latin sentences.\\n\\n## Prior Knowledge\\n- Recall 1st declension patterns from *puella* and *amicus* used in earlier lessons.\\n\\n## Focus for Today\\n- Grammar: Second Declension endings (singular and plural)\\n- Chant: *us / ī / ō / um / ō*\\n- Vocabulary: *servus*, *dominus*, *magister*, *campus*, *deus*\\n\\n## Virtue & Faith Connection\\nPerseverance is shown in careful repetition; we strive for accuracy and steady growth. *Dominus vobiscum* reminds us to work with the Lord's presence.\\n\\n## Teacher Notes\\nEncourage students to chant slowly and clearly, emphasizing vowel length and case endings."
+    }
+  }
+}

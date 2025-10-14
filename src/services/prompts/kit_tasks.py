@@ -357,6 +357,89 @@ def task_prior_knowledge_digest(
     return (system_content, user_content, config)
 
 
+# ============================================================================
+# WEEK SUMMARY PROMPT - Generates human-readable week overview
+# ============================================================================
+
+def task_week_summary(
+    week_number: int,
+    week_spec: Optional[Dict[str, Any]] = None,
+    prior_knowledge_digest: Optional[Dict[str, Any]] = None,
+    project_root: str = "curriculum/LatinA"
+) -> Tuple[str, str, Dict[str, Any]]:
+    """
+    Generate 00_week_summary.md - human-readable week overview.
+
+    This prompt synthesizes week data into a coherent markdown summary that
+    combines grammar, vocabulary, virtue, faith, chants, and prior knowledge
+    for educators, validators, and Sparky.
+
+    Output structure (JSON with markdown content):
+    - week_number: integer
+    - file_name: "00_week_summary.md"
+    - content: markdown string with YAML frontmatter
+
+    Markdown sections:
+    1. Week Overview (title, grammar, chant, virtue, faith)
+    2. Learning Objectives (3-5 bullets)
+    3. Prior Knowledge Connection (recycled content)
+    4. New Concepts Introduced (grammar + vocab)
+    5. Virtue and Faith Integration
+    6. Pedagogical Flow (Days 1-4)
+    7. Teacher Notes
+    8. YAML frontmatter (license, provenance)
+
+    Args:
+        week_number: Week number (1-35)
+        week_spec: Optional compiled week spec (99_compiled_week_spec.json)
+        prior_knowledge_digest: Optional digest (07_prior_knowledge_digest.json)
+        project_root: Root path for curriculum
+
+    Returns:
+        (system_prompt, user_prompt, config_dict)
+
+    Output:
+        JSON with week_number, file_name, and markdown content string
+    """
+    prompt_spec = _load_prompt_json("week/week_summary.json")
+
+    # Build user prompt with interpolated values
+    user_content = "\n".join(prompt_spec["messages"][1]["content_template"])
+    user_content = user_content.replace("{{week_number}}", str(week_number))
+    user_content = user_content.replace("{{project_root}}", project_root)
+
+    # If week_spec provided, serialize it for context
+    if week_spec:
+        week_spec_json = json.dumps(week_spec, indent=2)
+        user_content = user_content.replace("{{week_spec}}", week_spec_json)
+    else:
+        # Placeholder for file reference
+        user_content = user_content.replace(
+            "{{week_spec}}",
+            f"Load from {project_root}/Week{week_number:02d}/Week_Spec/99_compiled_week_spec.json"
+        )
+
+    # If prior_knowledge_digest provided, serialize it
+    if prior_knowledge_digest:
+        digest_json = json.dumps(prior_knowledge_digest, indent=2)
+        user_content = user_content.replace("{{prior_knowledge_digest}}", digest_json)
+    else:
+        # Placeholder for file reference
+        user_content = user_content.replace(
+            "{{prior_knowledge_digest}}",
+            f"Load from {project_root}/Week{week_number:02d}/Week_Spec/07_prior_knowledge_digest.json"
+        )
+
+    system_content = prompt_spec["messages"][0]["content_template"]
+
+    config = {
+        "temperature": prompt_spec["model_preferences"]["temperature"],
+        "max_tokens": prompt_spec["model_preferences"]["max_tokens"]
+    }
+
+    return (system_content, user_content, config)
+
+
 def task_role_context(week_spec: dict) -> Tuple[str, str, Optional[Dict]]:
     """
     Generate prompts for Sparky role context (week-level).

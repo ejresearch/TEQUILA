@@ -1,0 +1,164 @@
+{
+  "prompt_id": "prompt_for_week_summary",
+  "version": "1.0.0",
+  "description": "Generates the human-readable and machine-linked weekly summary file for Steel's Latin A curriculum. Combines metadata, learning objectives, virtue/faith integration, vocabulary highlights, grammar focus, and pedagogical flow into a unified markdown summary used by educators, validators, and Sparky.",
+  "depends_on": [
+    "prompt_for_system_overview",
+    "prompt_for_project_manifest",
+    "prompt_for_week_spec",
+    "prompt_for_prior_knowledge_digest"
+  ],
+  "persona": {
+    "ai_identity": "Steel",
+    "role": "Curriculum Narrator and Summarizer",
+    "voice": "Warm, confident, rhythmic, classical",
+    "mission": "Synthesize a week's worth of schema-validated Latin A content into a clear, motivating markdown summary that connects prior learning, new material, and faith-infused pedagogy."
+  },
+  "model_preferences": {
+    "provider": "openai",
+    "model": "gpt-4o",
+    "temperature": 0.3,
+    "max_tokens": 1800,
+    "reasoning": "Moderate temp (0.3) for warm narrative flow; 1800 tokens for complete markdown summary"
+  },
+  "inputs": {
+    "project_root": "curriculum/LatinA",
+    "week_number": "{{WEEK_NUMBER}}",
+    "week_spec": "99_compiled_week_spec.json",
+    "prior_knowledge_digest": "07_prior_knowledge_digest.json",
+    "days_per_week": 4,
+    "seven_field_names": [
+      "01_class_name",
+      "02_summary",
+      "03_grade_level",
+      "04_role_context",
+      "05_guidelines",
+      "06_document",
+      "07_greeting"
+    ],
+    "output_filename": "00_week_summary.md"
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content_template": "You are Steel, TEQUILA's classical curriculum summarizer. Your purpose is to weave together one week's data — grammar, vocabulary, virtue, faith, chants, and prior knowledge — into a coherent markdown overview. This document must balance precision (for validators) and warmth (for teachers and students). Write as if it were the front page of the week's folder."
+    },
+    {
+      "role": "user",
+      "content_template": [
+        "## Context",
+        "- week_number: {{week_number}}",
+        "- project_root: {{project_root}}",
+        "- week_spec: {{week_spec}}",
+        "- prior_knowledge_digest: {{prior_knowledge_digest}}",
+        "",
+        "## Task",
+        "Generate a markdown file titled `Week {{week_number}} Summary` that concisely describes:",
+        "",
+        "### 1. Week Overview",
+        "- Title, grammar focus, chant, virtue, and faith phrase",
+        "- Brief purpose of the week (2–3 sentences)",
+        "",
+        "### 2. Learning Objectives",
+        "- Pull from 02_objectives.json (3–5 concise bullets)",
+        "",
+        "### 3. Prior Knowledge Connection",
+        "- Summarize what students are expected to recall from prior weeks",
+        "- Name 2–3 vocabulary or grammar items being revisited (from prior_knowledge_digest)",
+        "",
+        "### 4. New Concepts Introduced",
+        "- List new grammar concept(s) and 5–8 key vocabulary items",
+        "- Include chant title and describe its function",
+        "",
+        "### 5. Virtue and Faith Integration",
+        "- Explain how the virtue focus shapes learning this week",
+        "- Reflect on the faith phrase with 1–2 sentences of theological or moral insight",
+        "",
+        "### 6. Pedagogical Flow (Days 1–4)",
+        "- Day 1: Learning focus (grammar/vocab/chant)",
+        "- Day 2: Practice focus (translation/Latin phrase)",
+        "- Day 3: Review focus (questions/recitation)",
+        "- Day 4: Quiz or assessment focus",
+        "",
+        "### 7. Teacher Notes",
+        "- Optional paragraph summarizing pacing, tips, or potential difficulties",
+        "",
+        "### 8. Provenance and License",
+        "- Include YAML-style frontmatter at the top of the markdown with:",
+        "  ```yaml",
+        "  week_number: {{week_number}}",
+        "  license: 'CC BY 4.0'",
+        "  originality_attestation: true",
+        "  validated_by: Steel",
+        "  source_files: ['99_compiled_week_spec.json', '07_prior_knowledge_digest.json']",
+        "  ```",
+        "",
+        "### Output Format",
+        "Return **only valid markdown** as a JSON string field named `week_summary`. Example:",
+        "",
+        "{",
+        "  \"week_number\": {{week_number}},",
+        "  \"file_name\": \"00_week_summary.md\",",
+        "  \"content\": \"---\\nweek_number: {{week_number}}\\nlicense: 'CC BY 4.0'\\noriginality_attestation: true\\nvalidated_by: Steel\\nsource_files: ['99_compiled_week_spec.json','07_prior_knowledge_digest.json']\\n---\\n\\n# Week {{week_number}} – {{week_spec.title}}\\n\\n## Grammar Focus\\n{{week_spec.grammar_focus}}\\n\\n## Chant\\n{{week_spec.chant}}\\n\\n## Virtue: {{week_spec.virtue_focus}} | Faith Phrase: {{week_spec.faith_phrase}}\\n\\n### Overview\\nThis week introduces ...\\n\\n### Learning Objectives\\n- Students will ...\\n\\n### Prior Knowledge\\n- Recall ...\\n\\n### New Concepts\\n- Grammar: ...\\n- Vocabulary: ...\\n\\n### Pedagogical Flow\\n- Day 1: ...\\n- Day 2: ...\\n- Day 3: ...\\n- Day 4: ...\\n\\n### Teacher Notes\\nOffer pacing and pronunciation tips ...\"",
+        "}"
+      ]
+    }
+  ],
+  "output_contract": {
+    "mime": "application/json",
+    "top_level_keys": [
+      "week_number",
+      "file_name",
+      "content"
+    ],
+    "validation_requirements": {
+      "file_name": "string must equal '00_week_summary.md'",
+      "content": "string, valid markdown, includes YAML header",
+      "week_number": "integer 1–35"
+    }
+  },
+  "self_checklist": [
+    "□ Markdown includes YAML frontmatter with license and provenance.",
+    "□ Lists grammar, chant, virtue, and faith phrase.",
+    "□ Contains 3–5 learning objectives.",
+    "□ Summarizes prior knowledge recycled this week.",
+    "□ Identifies new grammar and vocabulary content.",
+    "□ Describes pedagogical flow (Days 1–4).",
+    "□ Maintains warm, clear tone suitable for Grade 3–5 teachers.",
+    "□ File name is 00_week_summary.md.",
+    "□ Output passes schema validation."
+  ],
+  "tags": [
+    "week_summary",
+    "markdown",
+    "teacher-facing",
+    "curriculum",
+    "pedagogy",
+    "spiral_learning",
+    "validation",
+    "open_source"
+  ],
+  "example_invocation": {
+    "inputs": {
+      "week_number": 5,
+      "week_spec": {
+        "title": "Second Declension Nouns (Masculine Singular)",
+        "grammar_focus": "Second Declension endings and their usage in Latin sentences.",
+        "chant": "us / ī / ō / um / ō",
+        "virtue_focus": "Perseverance",
+        "faith_phrase": "Dominus vobiscum"
+      },
+      "prior_knowledge_digest": {
+        "vocabulary_recycled": [
+          {"item": "puella", "source_week": 2},
+          {"item": "amicus", "source_week": 3}
+        ]
+      }
+    },
+    "expected_output_excerpt": {
+      "week_number": 5,
+      "file_name": "00_week_summary.md",
+      "content": "---\\nweek_number: 5\\nlicense: 'CC BY 4.0'\\noriginality_attestation: true\\nvalidated_by: Steel\\nsource_files: ['99_compiled_week_spec.json','07_prior_knowledge_digest.json']\\n---\\n\\n# Week 5 – Second Declension Nouns (Masculine Singular)\\n\\n## Grammar Focus\\nSecond Declension endings and their use in Latin sentences.\\n\\n## Chant\\n```\nus / ī / ō / um / ō\nī / ōrum / īs / ōs / īs\n```\\n\\n## Virtue: Perseverance | Faith Phrase: Dominus vobiscum\\n\\n### Overview\\nStudents begin exploring masculine nouns and practice distinguishing forms using chant and color-coded parsing.\\n\\n### Learning Objectives\\n- Identify and chant 2nd declension endings.\\n- Translate simple nominative/accusative sentences.\\n- Review prior 1st declension forms.\\n\\n### Prior Knowledge\\nRevisit *puella* and *amicus* from Weeks 2–3.\\n\\n### New Concepts\\nIntroduce *servus, dominus, magister*, and rules for agreement.\\n\\n### Pedagogical Flow\\nDay 1: Learn endings and chant.\\nDay 2: Review and translate.\\nDay 3: Oral recall.\\nDay 4: Quiz.\\n\\n### Teacher Notes\\nEncourage students to recite chants rhythmically and emphasize vowel length during pronunciation practice."
+    }
+  }
+}

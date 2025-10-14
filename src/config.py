@@ -30,6 +30,14 @@ class Settings(BaseSettings):
     GEN_MAX_TOKENS: int = 3000
     TIMEOUT_S: int = 30
 
+    # Cost Control & Safety
+    DRY_RUN: bool = False
+    BUDGET_USD: Optional[float] = None
+    COST_WARN_PCT: float = 0.8
+    MAX_WEEK: Optional[int] = None
+    PROMPT_VERSION: str = "v1"
+    PROMPT_COMPAT_MODE: bool = False
+
 
 # Global settings instance
 settings = Settings()

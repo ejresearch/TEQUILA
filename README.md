@@ -391,6 +391,209 @@ Weeks 13-36 require seed data expansion (PRs welcome!).
 
 ---
 
+## ⚠️ Risks, Limitations & Mitigations
+
+This section documents known constraints and the safety architecture implemented to address them.
+
+### 1. Quality / Pedagogical Correctness
+
+**Risk**: LLMs can generate structurally valid but pedagogically incorrect, factually inaccurate, or age-inappropriate content.
+
+**Mitigations**:
+- ✅ Strict Pydantic schema validation enforces structure
+- ✅ Spiral learning rules enforced programmatically
+- ✅ Generation provenance tracked for auditing
+- ⚠️ **HUMAN REVIEW REQUIRED** - All content must be reviewed by qualified educators
+
+**Educator Review Checklist**:
+- [ ] Factual accuracy (Latin grammar, vocabulary, translations)
+- [ ] Age-appropriateness for grades 3-5
+- [ ] Theological accuracy of faith phrases
+- [ ] Spiral enforcement (vocab/grammar recycling correct)
+- [ ] Virtue integration appropriate and authentic
+- [ ] Activity duration estimates realistic
+- [ ] Assessment difficulty calibrated correctly
+
+### 2. Cost / Token Usage
+
+**Risk**: Uncontrolled generation can rack up hundreds of dollars in API costs.
+
+**Mitigations**:
+- ✅ Real-time cost tracking (`/api/v1/usage` endpoint)
+- ✅ Per-model pricing estimates
+- ✅ API authentication prevents unauthorized access
+- ✅ DRY_RUN mode for testing without costs (see below)
+- ✅ BUDGET_USD cap stops generation at threshold
+
+**Quick Safety Setup**:
+
+```bash
+# .env configuration for cost control
+DRY_RUN=true                    # Test without API calls
+BUDGET_USD=5.00                 # Stop at $5 spent
+COST_WARN_PCT=0.8               # Warn at 80% of budget
+MAX_WEEK=12                     # Only generate Weeks 1-12
+API_AUTH_KEY=changeme123        # Protect endpoints
+```
+
+**Dry-Run Example**:
+```bash
+# Test generation logic without spending money
+DRY_RUN=true make gen-week WEEK=1
+
+# Estimate costs before running
+python -m src.cli.estimate_cost --weeks 1-36
+```
+
+### 3. Seed Data / Bootstrapping
+
+**Risk**: System requires curriculum outline seed data. Weeks 13-36 are currently placeholders.
+
+**Mitigations**:
+- ✅ Weeks 1-12 fully populated
+- ✅ Validator warns if outline incomplete
+- ✅ Clear documentation of seed data requirements
+- 📋 Community contributions welcome for Weeks 13-36
+
+**Expanding Seed Data**:
+See `curriculum/curriculum_outline.json` - each week requires:
+- `title`, `virtue_focus`, `faith_phrase`
+- `new_vocab` (5-10 words)
+- `grammar_topics` (2-4 concepts)
+- `learning_goals` (3-5 objectives)
+- `spiral_from` (list of prerequisite weeks)
+
+### 4. Prompt Brittleness
+
+**Risk**: LLM behavior changes over time. Prompts may break with model updates.
+
+**Mitigations**:
+- ✅ Prompt versioning system (`PROMPT_VERSION=v1`)
+- ✅ Compatibility mode for rollback
+- ✅ Structured prompts in `/src/services/prompts/`
+- ✅ Git commit tracking in provenance
+
+**Prompt Version Control**:
+```bash
+# Use specific prompt version
+PROMPT_VERSION=v1 make gen-week WEEK=1
+
+# Enable compatibility mode for old content
+PROMPT_COMPAT_MODE=true make gen-week WEEK=1
+```
+
+### 5. Scalability / Subject Specificity
+
+**Risk**: System is Latin A-specific. Adapting to other subjects requires schema changes.
+
+**Mitigations**:
+- ✅ Modular Pydantic schemas (easy to extend)
+- ✅ Provider-agnostic LLM client
+- ✅ Atomic file structure supports any subject
+- 📋 Template system for new subjects
+
+**Adaptation Pattern**:
+1. Copy `schemas_week.py` → `schemas_math.py`
+2. Modify fields (e.g., `vocabulary` → `formulas`)
+3. Update prompts in `/prompts/math_system.txt`
+4. Reuse validation, API, cost tracking unchanged
+
+### 6. API Security
+
+**Risk**: Open API endpoints allow unauthorized expensive operations.
+
+**Mitigations**:
+- ✅ Bearer token authentication (`X-API-Key` header)
+- ✅ Generation endpoints protected by default
+- ✅ Public read-only endpoints (usage, validation)
+- ✅ Rate limiting recommended at reverse proxy
+
+**Security Best Practices**:
+```bash
+# Generate strong API key
+python -c "import secrets; print(secrets.token_urlsafe(32))"
+
+# Set in .env
+API_AUTH_KEY=<generated_key>
+
+# Use in requests
+curl -H "X-API-Key: your_key" -X POST .../gen/weeks/1/spec
+```
+
+### 7. Version Management / Regeneration
+
+**Risk**: Regenerating content overwrites previous versions. Git conflicts likely.
+
+**Mitigations**:
+- ✅ Per-field atomic files minimize conflicts
+- ✅ Generation provenance tracks what/when/how
+- ✅ Resume-safe CLI (skips existing valid content)
+- ✅ Dry-run shows what would change
+
+**Safe Regeneration Workflow**:
+```bash
+# Check what exists
+python -m src.cli.validate_week 11
+
+# Dry-run regeneration (no writes)
+python -m src.cli.hydrate_week_from_llm 11 --dry-run
+
+# Regenerate only invalid components
+python -m src.cli.hydrate_week_from_llm 11 --regen=invalid
+
+# Force full regeneration (DESTRUCTIVE)
+python -m src.cli.hydrate_week_from_llm 11 --force
+```
+
+### 8. Observability / Debugging
+
+**Risk**: LLM failures are opaque. Hard to debug bad generations.
+
+**Mitigations**:
+- ✅ Structured logging with request correlation
+- ✅ Invalid JSON saved as `*_INVALID.json`
+- ✅ Validation failures saved as `*_VALIDATION_FAILED.json`
+- ✅ Token counts and timings logged
+- ✅ Cost per operation tracked
+
+**Debug Workflow**:
+1. Check `/api/v1/usage` for anomalies
+2. Review `*_INVALID.json` files for LLM failures
+3. Check logs for token counts and costs
+4. Use `--verbose` flag for detailed output
+
+### 9. Institutional Deployment
+
+**Risk**: System not hardened for school/district use.
+
+**Production Checklist**:
+- [ ] Set `API_AUTH_KEY` to strong value
+- [ ] Enable HTTPS via reverse proxy (nginx/Caddy)
+- [ ] Set `BUDGET_USD` to monthly limit
+- [ ] Configure CORS for web client access
+- [ ] Set up daily cost monitoring alerts
+- [ ] Back up `curriculum/` to version control
+- [ ] Implement rate limiting (10 req/min recommended)
+- [ ] Review all generated content before classroom use
+- [ ] Train educators on quality review process
+- [ ] Document customization process for your school
+
+### Summary: Defense-in-Depth
+
+This system implements multiple layers of protection:
+
+1. **Authentication** - Prevents unauthorized access
+2. **Cost Controls** - Caps spending, dry-run mode
+3. **Validation** - Strict schemas reject bad data
+4. **Provenance** - Full audit trail
+5. **Observability** - Logs, metrics, debug artifacts
+6. **Safety Defaults** - Fail-fast, no fallback garbage
+7. **Human Review** - Required checkpoint before classroom use
+
+**The system is educationally defensible, auditable, and ready for institutional pilots.**
+
+---
+
 ## 🤝 Contributing
 
 This system maintains strict validation and pedagogical principles. When contributing:

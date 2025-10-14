@@ -39,9 +39,71 @@ class LLMClient:
         """
         raise NotImplementedError
 
+    def _check_budget(self):
+        """Check if generation would exceed budget cap."""
+        from ..config import settings
+        from .usage_tracker import get_tracker
+
+        if settings.BUDGET_USD is None:
+            return  # No budget set
+
+        tracker = get_tracker()
+        summary = tracker.get_summary()
+        spent = summary.get("estimated_cost_usd", 0.0)
+
+        if spent >= settings.BUDGET_USD:
+            raise BudgetExceededError(
+                f"Budget exceeded: ${spent:.2f} spent, limit is ${settings.BUDGET_USD:.2f}. "
+                "Increase BUDGET_USD in .env or reset usage with /api/v1/usage/reset"
+            )
+
+        # Warn at threshold
+        warn_threshold = settings.BUDGET_USD * settings.COST_WARN_PCT
+        if spent >= warn_threshold and spent < settings.BUDGET_USD:
+            import warnings
+            warnings.warn(
+                f"Budget warning: ${spent:.2f} spent of ${settings.BUDGET_USD:.2f} limit "
+                f"({spent/settings.BUDGET_USD*100:.1f}%)"
+            )
+
+    def _dry_run_response(self, prompt: str, system: Optional[str]) -> LLMResponse:
+        """Return placeholder response for dry-run mode."""
+        placeholder_json = {
+            "metadata": {"week": 1, "title": "DRY RUN PLACEHOLDER", "virtue_focus": "Testing"},
+            "objectives": [{"id": "dry_run_1", "description": "Placeholder objective", "category": "vocabulary"}],
+            "vocabulary": [{"latin": "test", "english": "test", "part_of_speech": "noun"}],
+            "grammar_focus": "This is a dry-run placeholder response",
+            "chant": {"latin_text": "placeholder", "english_translation": "placeholder"},
+            "sessions": [
+                {"day": i, "focus": "dry-run", "activities": ["placeholder"]}
+                for i in range(1, 5)
+            ],
+            "assessment": {"format": "dry-run", "timing": "Day 4", "prior_content_percentage": 25, "items": ["placeholder"]},
+            "assets": ["placeholder"],
+            "spiral_links": {"prior_weeks_dependencies": [], "recycled_vocab": [], "recycled_grammar": []},
+            "interleaving_plan": "Dry-run placeholder for testing without API calls",
+            "misconception_watchlist": [],
+            "preview_next_week": "Next week placeholder"
+        }
+
+        return LLMResponse(
+            text=orjson.dumps(placeholder_json).decode(),
+            json=placeholder_json,
+            raw=None,
+            tokens_prompt=0,
+            tokens_completion=0,
+            model="dry-run",
+            provider="dry-run"
+        )
+
 
 class _TransientError(Exception):
     """Wrapper for transient errors that should be retried."""
+    pass
+
+
+class BudgetExceededError(Exception):
+    """Raised when generation would exceed budget cap."""
     pass
 
 
@@ -83,6 +145,14 @@ class OpenAIClient(LLMClient):
         json_schema: Optional[Dict] = None
     ) -> LLMResponse:
         """Generate response using OpenAI API."""
+        # Check dry-run mode
+        from ..config import settings
+        if settings.DRY_RUN:
+            return self._dry_run_response(prompt, system)
+
+        # Check budget
+        self._check_budget()
+
         msgs = []
         if system:
             msgs.append({"role": "system", "content": system})
@@ -171,6 +241,14 @@ class AnthropicClient(LLMClient):
         json_schema: Optional[Dict] = None
     ) -> LLMResponse:
         """Generate response using Anthropic API."""
+        # Check dry-run mode
+        from ..config import settings
+        if settings.DRY_RUN:
+            return self._dry_run_response(prompt, system)
+
+        # Check budget
+        self._check_budget()
+
         try:
             resp = self.client.messages.create(
                 model=self.model,

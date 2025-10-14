@@ -101,3 +101,17 @@ class DayDocument(BaseModel):
         if word_count < 30:
             raise ValueError(f"Prior knowledge digest too short: {word_count} words (need 30+)")
         return v
+
+    @field_validator("lesson_flow")
+    @classmethod
+    def validate_day4_assessment(cls, v, info):
+        """Day 4 must include assessment step."""
+        metadata = info.data.get("metadata")
+        if metadata and hasattr(metadata, "day") and metadata.day == 4:
+            has_assessment = any(step.type == "assessment" for step in v)
+            if not has_assessment:
+                raise ValueError(
+                    "Day 4 must include an 'assessment' step type. "
+                    "This enforces spiral learning review."
+                )
+        return v

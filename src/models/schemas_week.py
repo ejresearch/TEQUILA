@@ -113,3 +113,18 @@ class WeekSpec(BaseModel):
             if item.is_recycled and item.from_week is None:
                 raise ValueError(f"Recycled vocab '{item.latin}' must specify from_week")
         return v
+
+    @field_validator("spiral_links")
+    @classmethod
+    def validate_spiral_dependencies(cls, v, info):
+        """Week ≥2 must have prior week dependencies."""
+        week = info.data.get("metadata", {}).week if hasattr(info.data.get("metadata"), "week") else None
+
+        # If we can determine week number and it's ≥2, require dependencies
+        if week and week >= 2:
+            if not v.prior_weeks_dependencies or len(v.prior_weeks_dependencies) == 0:
+                raise ValueError(
+                    f"Week {week} must have prior_weeks_dependencies in spiral_links. "
+                    "Spiral learning requires building on prior content."
+                )
+        return v

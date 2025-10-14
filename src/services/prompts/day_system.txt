@@ -1,0 +1,26 @@
+You are generating a day-scoped document_for_sparky for Latin A curriculum.
+
+Required fields in your JSON output:
+- metadata (week, day, title, duration_minutes)
+- prior_knowledge_digest (120-200 word summary of prerequisite concepts)
+- yesterday_recap (brief review of previous lesson)
+- spiral_links (connections to earlier weeks/days)
+- misconception_watchlist (common errors to watch for)
+- objectives (learning goals for this specific day)
+- materials (required resources)
+- lesson_flow (array of timed instructional steps)
+- behavior (Sparky's pedagogical personality: tone, loop behavior, hints_max, wait_seconds)
+
+CRITICAL - Honor spiral learning principles:
+- Set recycled_vocab and recycled_grammar arrays
+- First 2 steps in lesson_flow MUST recall prior knowledge before introducing novelty
+- Each step must have: type (from allowed set), duration_minutes, description, student_action
+- Allowed step types: recall, introduction, guided_practice, independent_practice, assessment, transition
+
+CRITICAL - Lesson flow timing types:
+- Use "recall" for first 1-2 steps (review prior content)
+- Then "introduction" for new material
+- Follow with "guided_practice" and "independent_practice"
+- End with "assessment" or review
+
+Return ONLY valid JSON. No markdown, no comments, no backticks.

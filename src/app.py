@@ -4,9 +4,19 @@ from fastapi.responses import JSONResponse, FileResponse
 from typing import Dict, Any
 from pathlib import Path
 
-from .config import settings
-from .services.generator_week import scaffold_week
-from .services.generator_day import scaffold_day
+from .config import settings, get_llm_client
+from .services.generator_week import (
+    scaffold_week,
+    generate_week_spec_from_outline,
+    generate_role_context,
+    generate_assets
+)
+from .services.generator_day import (
+    scaffold_day,
+    generate_day_fields,
+    generate_day_document,
+    hydrate_day_from_llm
+)
 from .services.storage import (
     day_field_path,
     week_spec_part_path,
@@ -277,6 +287,140 @@ def download_week_export(
         media_type="application/zip",
         filename=zip_path.name
     )
+
+
+# ============================================================================
+# LLM GENERATION ENDPOINTS
+# ============================================================================
+
+@app.post("/api/v1/gen/weeks/{week}/spec")
+def generate_week_spec_endpoint(
+    week: int = PathParam(..., ge=1, le=36)
+):
+    """Generate week specification using LLM."""
+    try:
+        client = get_llm_client()
+        spec_path = generate_week_spec_from_outline(week, client)
+        return {
+            "message": f"Week {week} spec generated successfully",
+            "spec_path": str(spec_path)
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/v1/gen/weeks/{week}/role-context")
+def generate_role_context_endpoint(
+    week: int = PathParam(..., ge=1, le=36)
+):
+    """Generate Sparky role context using LLM."""
+    try:
+        client = get_llm_client()
+        context_path = generate_role_context(week, client)
+        return {
+            "message": f"Week {week} role context generated successfully",
+            "context_path": str(context_path)
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/v1/gen/weeks/{week}/assets")
+def generate_assets_endpoint(
+    week: int = PathParam(..., ge=1, le=36)
+):
+    """Generate week assets using LLM."""
+    try:
+        client = get_llm_client()
+        asset_paths = generate_assets(week, client)
+        return {
+            "message": f"Week {week} assets generated successfully",
+            "asset_paths": [str(p) for p in asset_paths]
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/v1/gen/weeks/{week}/days/{day}/fields")
+def generate_day_fields_endpoint(
+    week: int = PathParam(..., ge=1, le=36),
+    day: int = PathParam(..., ge=1, le=4)
+):
+    """Generate day Flint fields using LLM."""
+    try:
+        client = get_llm_client()
+        field_paths = generate_day_fields(week, day, client)
+        return {
+            "message": f"Week {week} Day {day} fields generated successfully",
+            "field_paths": [str(p) for p in field_paths]
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/v1/gen/weeks/{week}/days/{day}/document")
+def generate_day_document_endpoint(
+    week: int = PathParam(..., ge=1, le=36),
+    day: int = PathParam(..., ge=1, le=4)
+):
+    """Generate day document_for_sparky using LLM."""
+    try:
+        client = get_llm_client()
+        doc_path = generate_day_document(week, day, client)
+        return {
+            "message": f"Week {week} Day {day} document generated successfully",
+            "document_path": str(doc_path)
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/v1/gen/weeks/{week}/hydrate")
+def hydrate_week_endpoint(
+    week: int = PathParam(..., ge=1, le=36)
+):
+    """
+    Hydrate complete week using LLM (spec, role context, assets, all days).
+
+    This generates everything in order:
+    1. Week spec
+    2. Role context
+    3. Assets
+    4. All 4 days (fields + documents)
+    """
+    try:
+        client = get_llm_client()
+        results = {"week": week, "components": {}}
+
+        # Generate week components
+        spec_path = generate_week_spec_from_outline(week, client)
+        results["components"]["spec"] = str(spec_path)
+
+        role_path = generate_role_context(week, client)
+        results["components"]["role_context"] = str(role_path)
+
+        asset_paths = generate_assets(week, client)
+        results["components"]["assets"] = [str(p) for p in asset_paths]
+
+        # Generate all days
+        results["components"]["days"] = []
+        for day in range(1, 5):
+            day_result = hydrate_day_from_llm(week, day, client)
+            results["components"]["days"].append(day_result)
+
+        # Run validation
+        from .services.validator import validate_week
+        validation = validate_week(week)
+        results["validation"] = {
+            "is_valid": validation.is_valid(),
+            "summary": validation.summary(),
+            "error_count": len(validation.errors),
+            "warning_count": len(validation.warnings)
+        }
+
+        return results
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 if __name__ == "__main__":

@@ -1,0 +1,24 @@
+You are generating the canonical Weekly Lesson Spec for Latin A curriculum.
+
+Your output must strictly follow the schema keys:
+- metadata (course, week, title, virtue_focus)
+- objectives (learning goals for the week)
+- vocabulary (new Latin words with translations)
+- grammar_focus (grammatical concepts covered)
+- chant (weekly chant details)
+- sessions (breakdown by day)
+- assessment (quiz/evaluation plan)
+- assets (list of supplementary materials)
+- spiral_links (connections to prior weeks)
+- interleaving_plan (how prior content is mixed in)
+- misconception_watchlist (common student errors to address)
+- preview_next_week (teaser of upcoming content)
+
+CRITICAL - Honor spiral learning principles:
+- Recycle vocabulary and grammar from prior weeks
+- Set prior_weeks_dependencies clearly
+- Include preview_next_week to prepare students
+- Ensure ≥25% of assessment items test prior content
+- Mark recycled items explicitly in spiral_links
+
+Return ONLY valid JSON. No markdown, no comments, no backticks.

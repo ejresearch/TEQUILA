@@ -1,6 +1,17 @@
 """Day activity generation service."""
 from pathlib import Path
-from .storage import day_dir, day_field_path, DAY_FIELDS, write_file, write_json
+from typing import Dict, Any, List
+import orjson
+from .storage import (
+    day_dir,
+    day_field_path,
+    week_spec_part_path,
+    DAY_FIELDS,
+    write_file,
+    write_json
+)
+from .llm_client import LLMClient
+from .prompts.kit_tasks import task_day_fields, task_day_document
 
 
 def get_field_template_path(field_name: str) -> Path:
@@ -80,3 +91,140 @@ def scaffold_week_days(week_number: int) -> list[Path]:
         day_paths.append(day_path)
 
     return day_paths
+
+
+# ============================================================================
+# LLM-BASED GENERATION FUNCTIONS
+# ============================================================================
+
+def generate_day_fields(week: int, day: int, client: LLMClient) -> List[Path]:
+    """
+    Generate the six Flint field files for a day using LLM.
+
+    Args:
+        week: Week number (1-36)
+        day: Day number (1-4)
+        client: LLM client instance
+
+    Returns:
+        List of paths to generated field files
+    """
+    # Ensure day directory exists
+    scaffold_day(week, day)
+
+    # Load week spec to inform day fields
+    spec_path = week_spec_part_path(week, "99_compiled_week_spec.json")
+    if spec_path.exists():
+        week_spec = orjson.loads(spec_path.read_bytes())
+    else:
+        week_spec = {"metadata": {"week": week, "title": f"Week {week}"}}
+
+    # Get prompts
+    sys, usr, _ = task_day_fields(week_spec, day)
+
+    # Generate via LLM
+    response = client.generate(prompt=usr, system=sys)
+
+    # Parse response
+    if response.json:
+        fields_data = response.json
+    else:
+        try:
+            fields_data = orjson.loads(response.text)
+        except Exception:
+            # Fallback to minimal data
+            fields_data = {
+                "class_name": f"Week {week} Day {day}",
+                "summary": "Latin lesson",
+                "grade_level": "3-5",
+                "guidelines_for_sparky": "Teach Latin vocabulary",
+                "sparkys_greeting": "Welcome to Latin!"
+            }
+
+    # Write field files (excluding document_for_sparky which is separate)
+    field_mapping = {
+        "01_class_name.txt": fields_data.get("class_name", ""),
+        "02_summary.md": fields_data.get("summary", ""),
+        "03_grade_level.txt": fields_data.get("grade_level", ""),
+        "04_guidelines_for_sparky.md": fields_data.get("guidelines_for_sparky", ""),
+        "06_sparkys_greeting.txt": fields_data.get("sparkys_greeting", "")
+    }
+
+    created_paths = []
+    for field_name, content in field_mapping.items():
+        field_path = day_field_path(week, day, field_name)
+        write_file(field_path, str(content))
+        created_paths.append(field_path)
+
+    return created_paths
+
+
+def generate_day_document(week: int, day: int, client: LLMClient) -> Path:
+    """
+    Generate the document_for_sparky JSON for a day using LLM.
+
+    Args:
+        week: Week number (1-36)
+        day: Day number (1-4)
+        client: LLM client instance
+
+    Returns:
+        Path to generated document_for_sparky.json
+    """
+    # Ensure day directory exists
+    scaffold_day(week, day)
+
+    # Load week spec to inform day document
+    spec_path = week_spec_part_path(week, "99_compiled_week_spec.json")
+    if spec_path.exists():
+        week_spec = orjson.loads(spec_path.read_bytes())
+    else:
+        week_spec = {"metadata": {"week": week, "title": f"Week {week}"}}
+
+    # Get prompts
+    sys, usr, schema = task_day_document(week_spec, day)
+
+    # Generate via LLM
+    response = client.generate(prompt=usr, system=sys, json_schema=schema)
+
+    # Parse response
+    if response.json:
+        doc_data = response.json
+    else:
+        try:
+            doc_data = orjson.loads(response.text)
+        except Exception as e:
+            # Save invalid response for inspection
+            invalid_path = day_field_path(week, day, "05_document_for_sparky_INVALID.json")
+            write_file(invalid_path, response.text)
+            raise ValueError(f"LLM returned invalid JSON: {e}")
+
+    # Write document_for_sparky.json
+    doc_path = day_field_path(week, day, "05_document_for_sparky.json")
+    write_json(doc_path, doc_data)
+
+    return doc_path
+
+
+def hydrate_day_from_llm(week: int, day: int, client: LLMClient) -> Dict[str, Any]:
+    """
+    Generate all day content (fields + document) using LLM.
+
+    Args:
+        week: Week number (1-36)
+        day: Day number (1-4)
+        client: LLM client instance
+
+    Returns:
+        Dictionary with paths and status
+    """
+    field_paths = generate_day_fields(week, day, client)
+    doc_path = generate_day_document(week, day, client)
+
+    return {
+        "week": week,
+        "day": day,
+        "field_paths": [str(p) for p in field_paths],
+        "document_path": str(doc_path),
+        "status": "success"
+    }

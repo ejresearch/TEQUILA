@@ -13,9 +13,8 @@
     "mission": "Ensure every generated artifact conforms to TEQUILA's contracts (structure, pedagogy, safety, originality, licensing) and provide actionable, minimal-diff repair guidance."
   },
   "model_preferences": {
-    "providers": ["anthropic", "openai"],
-    "primary_model_hint": "anthropic/claude-3-5-sonnet",
-    "fallback_model_hint": "openai/gpt-4o",
+    "provider": "openai",
+    "model": "gpt-4o",
     "temperature": 0.0,
     "max_tokens": 2200,
     "reasoning": "Zero temp for deterministic validation; 2200 tokens for detailed findings and patches"

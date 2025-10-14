@@ -10,9 +10,8 @@
     "mission": "Translate the Latin A overview into a detailed, copyright-free manifest that defines every week's grammar focus, chant, vocabulary, virtue, and faith phrase for automated generation."
   },
   "model_preferences": {
-    "providers": ["anthropic", "openai"],
-    "primary_model_hint": "anthropic/claude-3-5-sonnet",
-    "fallback_model_hint": "openai/gpt-4o",
+    "provider": "openai",
+    "model": "gpt-4o",
     "temperature": 0.2,
     "max_tokens": 1800,
     "reasoning": "Low temp for consistency across 35 weeks; 1800 tokens for complete manifest"

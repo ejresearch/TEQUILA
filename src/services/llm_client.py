@@ -1,4 +1,4 @@
-"""LLM client abstraction supporting OpenAI and Anthropic."""
+"""LLM client abstraction for OpenAI GPT-4o."""
 from dataclasses import dataclass
 from typing import Optional, Dict, Any
 import orjson
@@ -18,7 +18,7 @@ class LLMResponse:
 
 
 class LLMClient:
-    """Abstract base class for LLM clients."""
+    """OpenAI GPT-4o client for TEQUILA/Steel curriculum generation."""
 
     def generate(
         self,
@@ -108,17 +108,25 @@ class BudgetExceededError(Exception):
 
 
 class OpenAIClient(LLMClient):
-    """OpenAI API client with retry logic."""
+    """OpenAI API client with retry logic for GPT-4o."""
 
     def __init__(
         self,
         api_key: str,
-        model: str,
-        temp: float,
-        max_tokens: int,
-        timeout: int
+        model: str = "gpt-4o",
+        temp: float = 0.2,
+        max_tokens: int = 2000,
+        timeout: int = 60
     ):
-        """Initialize OpenAI client."""
+        """Initialize OpenAI client.
+
+        Args:
+            api_key: OpenAI API key
+            model: Model name (default: gpt-4o)
+            temp: Temperature (default: 0.2)
+            max_tokens: Maximum tokens (default: 2000)
+            timeout: Request timeout in seconds (default: 60)
+        """
         if not api_key:
             raise ValueError("OPENAI_API_KEY missing")
 
@@ -144,7 +152,16 @@ class OpenAIClient(LLMClient):
         system: Optional[str] = None,
         json_schema: Optional[Dict] = None
     ) -> LLMResponse:
-        """Generate response using OpenAI API."""
+        """Generate response using OpenAI GPT-4o API.
+
+        Args:
+            prompt: User prompt text
+            system: Optional system prompt
+            json_schema: Optional JSON schema for structured output
+
+        Returns:
+            LLMResponse with text, JSON, and usage metadata
+        """
         # Check dry-run mode
         from ..config import settings
         if settings.DRY_RUN:
@@ -203,89 +220,34 @@ class OpenAIClient(LLMClient):
         )
 
 
-class AnthropicClient(LLMClient):
-    """Anthropic API client with retry logic."""
+def get_client(
+    provider: str = "openai",
+    model: Optional[str] = None,
+    **kwargs
+) -> LLMClient:
+    """
+    Factory function to get LLM client.
 
-    def __init__(
-        self,
-        api_key: str,
-        model: str,
-        temp: float,
-        max_tokens: int,
-        timeout: int
-    ):
-        """Initialize Anthropic client."""
-        if not api_key:
-            raise ValueError("ANTHROPIC_API_KEY missing")
+    Args:
+        provider: Provider name (only "openai" supported)
+        model: Model name (default: gpt-4o)
+        **kwargs: Additional arguments passed to client constructor
 
-        try:
-            import anthropic
-        except ImportError:
-            raise ImportError("anthropic package required. Install with: pip install anthropic")
+    Returns:
+        Configured LLMClient instance
 
-        self.client = anthropic.Anthropic(api_key=api_key, timeout=timeout)
-        self.model = model
-        self.temp = temp
-        self.max_tokens = max_tokens
-        self.timeout = timeout
+    Raises:
+        ValueError: If provider is not "openai"
+    """
+    from ..config import settings
 
-    @retry(
-        stop=stop_after_attempt(3),
-        wait=wait_exponential(min=1, max=6),
-        retry=retry_if_exception_type(_TransientError)
+    if provider != "openai":
+        raise ValueError(f"Only 'openai' provider is supported. Got: {provider}")
+
+    return OpenAIClient(
+        api_key=settings.OPENAI_API_KEY,
+        model=model or "gpt-4o",
+        temp=kwargs.get("temp", 0.2),
+        max_tokens=kwargs.get("max_tokens", 2000),
+        timeout=kwargs.get("timeout", 60)
     )
-    def generate(
-        self,
-        prompt: str,
-        system: Optional[str] = None,
-        json_schema: Optional[Dict] = None
-    ) -> LLMResponse:
-        """Generate response using Anthropic API."""
-        # Check dry-run mode
-        from ..config import settings
-        if settings.DRY_RUN:
-            return self._dry_run_response(prompt, system)
-
-        # Check budget
-        self._check_budget()
-
-        try:
-            resp = self.client.messages.create(
-                model=self.model,
-                temperature=self.temp,
-                max_tokens=self.max_tokens,
-                system=system or "",
-                messages=[{"role": "user", "content": prompt}]
-            )
-        except Exception as e:
-            # Wrap in transient error for retry
-            raise _TransientError(str(e))
-
-        # Extract text from content blocks
-        out = "".join([
-            block.text for block in resp.content
-            if getattr(block, "type", "") == "text"
-        ])
-
-        # Extract token usage
-        usage = resp.usage if hasattr(resp, 'usage') else None
-        tokens_prompt = usage.input_tokens if usage else None
-        tokens_completion = usage.output_tokens if usage else None
-
-        # Attempt to parse JSON
-        js = None
-        if out and out.strip().startswith("{"):
-            try:
-                js = orjson.loads(out)
-            except Exception:
-                pass
-
-        return LLMResponse(
-            text=out,
-            json=js,
-            raw=resp,
-            tokens_prompt=tokens_prompt,
-            tokens_completion=tokens_completion,
-            model=self.model,
-            provider="anthropic"
-        )

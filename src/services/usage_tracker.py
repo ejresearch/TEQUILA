@@ -6,19 +6,12 @@ import orjson
 from threading import Lock
 
 
-# Rough cost estimates per 1M tokens (as of 2025)
+# Rough cost estimates per 1M tokens (as of 2025) - OpenAI only
 COST_PER_1M_TOKENS = {
-    # OpenAI
     "gpt-4o": {"input": 2.50, "output": 10.00},
     "gpt-4o-mini": {"input": 0.15, "output": 0.60},
     "gpt-4-turbo": {"input": 10.00, "output": 30.00},
     "gpt-3.5-turbo": {"input": 0.50, "output": 1.50},
-    # Anthropic
-    "claude-3-5-sonnet-latest": {"input": 3.00, "output": 15.00},
-    "claude-3-5-sonnet-20241022": {"input": 3.00, "output": 15.00},
-    "claude-3-opus-latest": {"input": 15.00, "output": 75.00},
-    "claude-3-sonnet-20240229": {"input": 3.00, "output": 15.00},
-    "claude-3-haiku-20240307": {"input": 0.25, "output": 1.25},
 }
 
 
@@ -83,8 +76,8 @@ class UsageTracker:
         Record a single LLM API call.
 
         Args:
-            provider: "openai" or "anthropic"
-            model: Model name (e.g., "gpt-4o", "claude-3-5-sonnet-latest")
+            provider: Provider name (should be "openai")
+            model: Model name (e.g., "gpt-4o", "gpt-4o-mini")
             tokens_prompt: Input tokens used
             tokens_completion: Output tokens generated
             operation: Type of operation (e.g., "generation", "week_spec", "day_document")

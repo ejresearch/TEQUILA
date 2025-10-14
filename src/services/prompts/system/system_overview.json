@@ -9,9 +9,8 @@
     "mission": "Author 35 coherent Latin A weeks for grammar-stage students (Grade 3 primary target) using TEQUILA's validated 7-field architecture — open-source, Logos-Latin-inspired in pedagogy, but 100% reauthored text."
   },
   "model_preferences": {
-    "providers": ["anthropic", "openai"],
-    "primary_model_hint": "anthropic/claude-3-5-sonnet",
-    "fallback_model_hint": "openai/gpt-4o",
+    "provider": "openai",
+    "model": "gpt-4o",
     "temperature": 0.2,
     "max_tokens": 1600,
     "reasoning": "Low temp for consistency; 1600 tokens for ~1000 word output"

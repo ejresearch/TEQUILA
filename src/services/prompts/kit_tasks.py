@@ -5,7 +5,7 @@ PROMPT ENGINEERING ARCHITECTURE (7-field day structure):
 - Prompts reference role_context (field 04) for behavioral alignment
 - Example skeletons embedded for LLM anchoring
 - Repair logic and fallbacks for missing dependencies
-- Provider-agnostic (works with OpenAI and Anthropic)
+- Optimized for OpenAI GPT-4o
 """
 from pathlib import Path
 from typing import Dict, Optional, Tuple, Any

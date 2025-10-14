@@ -1219,6 +1219,116 @@ def task_document_day(
 
 
 # ============================================================================
+# GREETING PROMPT (Field 07) - Sparky's closing message
+# ============================================================================
+
+def task_greeting(
+    week_number: int,
+    day_number: int,
+    class_name: str,
+    week_spec: Optional[Dict[str, Any]] = None,
+    role_context: Optional[Dict[str, Any]] = None,
+    day_document: Optional[Dict[str, Any]] = None
+) -> Tuple[str, str, Dict[str, Any]]:
+    """
+    Generate 07_sparkys_greeting.txt - Cheerful closing message from Sparky.
+
+    This prompt produces a short, warm, faith-grounded farewell message that
+    reflects the week's virtue and faith phrase while reinforcing joy in
+    learning Latin. The greeting is student-facing and ends each lesson on
+    a positive, encouraging note.
+
+    Output structure (JSON with text string):
+    - greeting_text: string (40-300 chars)
+      * Begins with cheerful tone ("Well done!", "Great work today!")
+      * References virtue and/or faith phrase naturally
+      * Optionally echoes chant rhythm or Latin vocabulary
+      * Encourages curiosity for tomorrow's lesson
+      * Ends with warm sign-off ("Valē!", "See you next time!")
+
+    Tone features:
+    - Warm, rhythmic, faithful, encouraging
+    - Grade 3 appropriate language
+    - Reflects Sparky's identity from role_context
+    - Integrates virtue and faith without being preachy
+    - Natural, conversational, uplifting
+
+    Args:
+        week_number: Week number (1-35)
+        day_number: Day number (1-4)
+        class_name: Class name from prompt_for_class_name
+        week_spec: Optional week spec data (for virtue_focus, faith_phrase)
+        role_context: Optional role context (for Sparky's identity)
+        day_document: Optional day document (for lesson_steps summary)
+
+    Returns:
+        (system_prompt, user_prompt, config_dict)
+
+    Output:
+        JSON with single key: {"greeting_text": "...cheerful message..."}
+    """
+    prompt_spec = _load_prompt_json("day/greeting.json")
+
+    # Build user prompt with interpolated values
+    user_content = "\n".join(prompt_spec["messages"][1]["content_template"])
+    user_content = user_content.replace("{{week_number}}", str(week_number))
+    user_content = user_content.replace("{{day_number}}", str(day_number))
+    user_content = user_content.replace("{{class_name}}", class_name)
+    user_content = user_content.replace("{{grade_level}}", prompt_spec["inputs"]["grade_level"])
+
+    # Extract virtue and faith phrase from week_spec
+    if week_spec:
+        virtue_focus = week_spec.get("virtue_focus", "diligence")
+        faith_phrase = week_spec.get("faith_phrase", "Gloria Deo")
+        user_content = user_content.replace("{{week_spec.virtue_focus}}", virtue_focus)
+        user_content = user_content.replace("{{week_spec.faith_phrase}}", faith_phrase)
+    else:
+        user_content = user_content.replace("{{week_spec.virtue_focus}}", "[Load from week spec]")
+        user_content = user_content.replace("{{week_spec.faith_phrase}}", "[Load from week spec]")
+
+    # If role_context provided, serialize excerpt
+    if role_context:
+        # Extract just identity and constraints for brevity
+        role_excerpt = {
+            "identity": role_context.get("identity", "Sparky the Encourager"),
+            "audience": role_context.get("audience", "Grade 3 (Grammar Stage, U.S.)"),
+            "constraints": role_context.get("constraints", {})
+        }
+        role_context_json = json.dumps(role_excerpt, indent=2)
+        user_content = user_content.replace("{{role_context}}", role_context_json)
+    else:
+        user_content = user_content.replace(
+            "{{role_context}}",
+            f"[Load from curriculum/LatinA/Week{week_number:02d}/Day{day_number:02d}/04_role_context.json]"
+        )
+
+    # If day_document provided, extract lesson_steps titles only for brevity
+    if day_document:
+        lesson_steps = day_document.get("lesson_steps", [])
+        if lesson_steps:
+            step_titles = [step.get("title", "") for step in lesson_steps]
+            lesson_summary = "Lesson steps: " + ", ".join(step_titles)
+        else:
+            lesson_summary = "No lesson steps found"
+        user_content = user_content.replace("{{day_document.lesson_steps}}", lesson_summary)
+    else:
+        user_content = user_content.replace(
+            "{{day_document.lesson_steps}}",
+            f"[Load from curriculum/LatinA/Week{week_number:02d}/Day{day_number:02d}/06_document_for_sparky.json]"
+        )
+
+    system_content = prompt_spec["messages"][0]["content_template"]
+
+    config = {
+        "temperature": prompt_spec["model_preferences"]["temperature"],
+        "max_tokens": prompt_spec["model_preferences"]["max_tokens"],
+        "model": prompt_spec["model_preferences"]["model"]  # gpt-4o
+    }
+
+    return (system_content, user_content, config)
+
+
+# ============================================================================
 # LEGACY ROLE_CONTEXT PROMPT (Field 04) - Week-level variant
 # ============================================================================
 

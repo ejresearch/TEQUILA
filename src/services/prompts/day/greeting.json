@@ -1,0 +1,115 @@
+{
+  "prompt_id": "prompt_for_greeting",
+  "version": "1.0.0",
+  "description": "Generates the closing field (07_sparkys_greeting.txt) — a short, cheerful, faith-grounded closing message from Sparky to the student. The greeting should reflect the week's virtue and faith phrase while reinforcing joy in learning Latin.",
+  "depends_on": [
+    "prompt_for_system_overview",
+    "prompt_for_project_manifest",
+    "prompt_for_week_spec",
+    "prompt_for_prior_knowledge_digest",
+    "prompt_for_week_summary",
+    "prompt_for_class_name",
+    "prompt_for_day_summary",
+    "prompt_for_grade_level",
+    "prompt_for_role_context",
+    "prompt_for_guidelines",
+    "prompt_for_day_document"
+  ],
+  "persona": {
+    "ai_identity": "Steel",
+    "role": "Tone and Student Voice Director",
+    "voice": "Warm, rhythmic, faithful, encouraging",
+    "mission": "Write Sparky's final message for the day — uplifting, memorable, and aligned with virtue, chant cadence, and Grade 3 tone."
+  },
+  "model_preferences": {
+    "provider": "openai",
+    "model": "gpt-4o",
+    "temperature": 0.4,
+    "max_tokens": 300,
+    "reasoning": "Medium-high temp (0.4) for warm, varied tone; 300 tokens sufficient for brief greeting; gpt-4o for natural, age-appropriate language"
+  },
+  "inputs": {
+    "project_name": "Latin A (Grammar Stage)",
+    "week_number": "{{WEEK_NUMBER}}",
+    "day_number": "{{DAY_NUMBER}}",
+    "grade_level": "Grade 3 (Grammar Stage, U.S.)",
+    "class_name": "{{from prompt_for_class_name.class_name}}",
+    "week_spec": "{{from prompt_for_week_spec.week_spec}}",
+    "role_context": "{{from prompt_for_role_context.role_context}}",
+    "day_document": "{{from prompt_for_day_document.day_document}}",
+    "output_filename": "07_sparkys_greeting.txt"
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content_template": "You are Steel, scripting Sparky's closing message for a Grade 3 Latin class. The greeting must be warm, rhythmic, and faith-tied — something a cheerful AI tutor might say at the end of a session. Use the virtue and faith phrase from the week, include a brief chant callback if natural, and close with a blessing or encouragement."
+    },
+    {
+      "role": "user",
+      "content_template": [
+        "## Context",
+        "- Week {{week_number}} – Day {{day_number}}",
+        "- Class: {{class_name}}",
+        "- Virtue: {{week_spec.virtue_focus}}",
+        "- Faith Phrase: {{week_spec.faith_phrase}}",
+        "- Grade: {{grade_level}}",
+        "",
+        "### Role Context (excerpt)",
+        "{{role_context}}",
+        "",
+        "### Lesson Summary (from day_document)",
+        "{{day_document.lesson_steps}}",
+        "",
+        "## Task",
+        "Write a single text string (max 120 words) for 07_sparkys_greeting.txt. It should:",
+        "- Begin with a cheerful greeting tone (\"Well done!\" / \"Great work today!\" / etc.)",
+        "- Reference the virtue and/or faith phrase once naturally.",
+        "- Optionally echo a chant rhythm or a Latin word learned that day.",
+        "- Encourage curiosity for tomorrow's lesson.",
+        "- End with a warm sign-off like 'Valē!' or 'See you next time!'",
+        "",
+        "Return valid JSON with one key: `greeting_text` (the full message as a string)."
+      ]
+    }
+  ],
+  "output_contract": {
+    "mime": "application/json",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "greeting_text": {
+          "type": "string",
+          "minLength": 40,
+          "maxLength": 300,
+          "description": "A cheerful, 1-paragraph farewell message from Sparky closing the day's Latin lesson."
+        }
+      },
+      "required": ["greeting_text"],
+      "additionalProperties": false
+    }
+  },
+  "self_checklist": [
+    "□ Includes at least one reference to virtue or faith phrase.",
+    "□ Tone is warm, rhythmic, and child-appropriate.",
+    "□ May echo chant rhythm or Latin vocabulary.",
+    "□ Ends with positive farewell ('Valē!', 'See you next time!').",
+    "□ 40–120 words; no markdown, JSON only."
+  ],
+  "tags": [
+    "greeting",
+    "sparky",
+    "tone",
+    "virtue-faith",
+    "seven-field",
+    "latin_a"
+  ],
+  "example_invocation": {
+    "inputs": {
+      "week_number": 5,
+      "day_number": 2
+    },
+    "expected_output_excerpt": {
+      "greeting_text": "Well done today, little scholar! You practiced your 2nd-declension endings with diligence — a true act of steady heart. Remember our faith phrase, *Gloria Deo* — give glory to God for every word you learn. Tomorrow we'll keep building strong sentences together. Keep your chant ready and your smile bright. Valē for now!"
+    }
+  }
+}

@@ -5,7 +5,8 @@ from src.services.prompts.prompt_validator import (
     validate_role_context,
     validate_guidelines_markdown,
     validate_document_json,
-    validate_greeting_text
+    validate_greeting_text,
+    validate_project_manifest
 )
 
 
@@ -170,6 +171,104 @@ class TestGreetingValidation:
         is_valid, errors = validate_greeting_text(text)
         assert not is_valid
         assert any("too long" in err for err in errors)
+
+
+class TestProjectManifestValidation:
+    """Test project manifest JSON validation."""
+
+    def test_valid_manifest(self):
+        """Valid project manifest should pass."""
+        data = {
+            "project_info": {
+                "title": "Latin A",
+                "grade_focus": "3",
+                "total_weeks": 35,
+                "days_per_week": 4
+            },
+            "pedagogical_constants": [
+                "Spiral review 25-40%",
+                "Virtue integration",
+                "Chant-based memorization"
+            ],
+            "week_manifest": [
+                {
+                    "week_number": i,
+                    "title": f"Week {i} Title",
+                    "grammar_focus": f"Grammar concept {i}",
+                    "chant": f"Chant {i}",
+                    "vocabulary_scope": ["word1", "word2", "word3"],
+                    "virtue_focus": "Patience",
+                    "faith_phrase": "Deus caritas est",
+                    "day_structure": {
+                        "day_1": "Learn",
+                        "day_2": "Practice",
+                        "day_3": "Review",
+                        "day_4": "Quiz"
+                    }
+                }
+                for i in range(1, 36)
+            ]
+        }
+        is_valid, errors = validate_project_manifest(data)
+        assert is_valid
+        assert len(errors) == 0
+
+    def test_missing_top_level_field(self):
+        """Missing top-level field should fail."""
+        data = {
+            "project_info": {},
+            "pedagogical_constants": []
+            # Missing week_manifest
+        }
+        is_valid, errors = validate_project_manifest(data)
+        assert not is_valid
+        assert any("week_manifest" in err for err in errors)
+
+    def test_incorrect_week_count(self):
+        """Manifest with != 35 weeks should fail."""
+        data = {
+            "project_info": {
+                "title": "Latin A",
+                "grade_focus": "3",
+                "total_weeks": 35,
+                "days_per_week": 4
+            },
+            "pedagogical_constants": ["Spiral review"],
+            "week_manifest": [
+                {
+                    "week_number": 1,
+                    "title": "Week 1",
+                    "grammar_focus": "Grammar",
+                    "chant": "Chant",
+                    "vocabulary_scope": ["word1"],
+                    "virtue_focus": "Patience",
+                    "faith_phrase": "Phrase",
+                    "day_structure": {"day_1": "x", "day_2": "x", "day_3": "x", "day_4": "x"}
+                }
+                # Only 1 week instead of 35
+            ]
+        }
+        is_valid, errors = validate_project_manifest(data)
+        assert not is_valid
+        assert any("35 weeks" in err for err in errors)
+
+    def test_missing_week_field(self):
+        """Week missing required field should fail."""
+        data = {
+            "project_info": {"title": "Latin A", "grade_focus": "3", "total_weeks": 35, "days_per_week": 4},
+            "pedagogical_constants": ["Spiral"],
+            "week_manifest": [
+                {
+                    "week_number": i,
+                    "title": f"Week {i}",
+                    # Missing grammar_focus, chant, etc.
+                }
+                for i in range(1, 36)
+            ]
+        }
+        is_valid, errors = validate_project_manifest(data)
+        assert not is_valid
+        assert any("grammar_focus" in err for err in errors)
 
 
 if __name__ == "__main__":

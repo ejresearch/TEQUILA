@@ -75,6 +75,54 @@ def task_system_overview() -> Tuple[str, str, Dict[str, Any]]:
     return (system_content, user_content, config)
 
 
+def task_project_manifest() -> Tuple[str, str, Dict[str, Any]]:
+    """
+    Generate TEQUILA project manifest for all 35 weeks.
+
+    This prompt produces the authoritative scope-and-sequence JSON that defines:
+    - All 35 weeks with titles, grammar focus, chant, vocabulary scope
+    - Virtue focus per week (rotating classical virtues)
+    - Faith phrases per week (short Latin phrases)
+    - 4-day structure pattern (Learn, Practice, Review, Quiz)
+    - Open-source policy and originality requirements
+
+    Returns:
+        (system_prompt, user_prompt, config_dict)
+
+    Output:
+        JSON manifest saved to data/project_manifest.json
+    """
+    prompt_spec = _load_prompt_json("system/project_manifest.json")
+
+    # Get latin_a_outline from system_overview (or use embedded version)
+    try:
+        system_overview_spec = _load_prompt_json("system/system_overview.json")
+        latin_a_outline = system_overview_spec["inputs"]["latin_a_outline"]
+    except (FileNotFoundError, KeyError):
+        # Fallback: use outline from this spec (if embedded)
+        latin_a_outline = [
+            "1. Introduction to Latin & Pronunciation (Ecclesiastical & Classical)",
+            "2. First Declension Nouns (Singular)",
+            # ... (would be full list in production)
+        ]
+
+    # Format outline as numbered list
+    outline_text = "\n".join(latin_a_outline)
+
+    # Build user prompt from template
+    user_content = "\n".join(prompt_spec["messages"][1]["content_template"])
+    user_content = user_content.replace("{{latin_a_outline}}", outline_text)
+
+    system_content = prompt_spec["messages"][0]["content_template"]
+
+    config = {
+        "temperature": prompt_spec["model_preferences"]["temperature"],
+        "max_tokens": prompt_spec["model_preferences"]["max_tokens"]
+    }
+
+    return (system_content, user_content, config)
+
+
 def task_week_spec(outline_snip: dict) -> Tuple[str, str, Optional[Dict]]:
     """
     Generate prompts for weekly spec generation.

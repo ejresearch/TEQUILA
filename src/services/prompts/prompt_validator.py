@@ -190,3 +190,86 @@ def validate_greeting_text(text: str) -> Tuple[bool, List[str]]:
         errors.append("Greeting should be 1-2 sentences (found >2)")
 
     return (len(errors) == 0, errors)
+
+
+def validate_project_manifest(data: Dict[str, Any]) -> Tuple[bool, List[str]]:
+    """
+    Validate project manifest JSON against schema requirements.
+
+    Args:
+        data: Parsed project manifest JSON
+
+    Returns:
+        (is_valid, error_messages)
+    """
+    errors = []
+
+    # Required top-level fields
+    required_top_level = ["project_info", "pedagogical_constants", "week_manifest"]
+    for field in required_top_level:
+        if field not in data:
+            errors.append(f"Missing required top-level field: {field}")
+            return (False, errors)  # Can't proceed without these
+
+    # Validate project_info
+    project_info = data["project_info"]
+    required_info = ["title", "grade_focus", "total_weeks", "days_per_week"]
+    for field in required_info:
+        if field not in project_info:
+            errors.append(f"Missing project_info field: {field}")
+
+    # Validate pedagogical_constants is a list
+    if not isinstance(data["pedagogical_constants"], list):
+        errors.append("pedagogical_constants must be a list")
+    elif len(data["pedagogical_constants"]) < 3:
+        errors.append(f"pedagogical_constants should have ≥3 items (got {len(data['pedagogical_constants'])})")
+
+    # Validate week_manifest
+    week_manifest = data["week_manifest"]
+    if not isinstance(week_manifest, list):
+        errors.append("week_manifest must be a list")
+        return (False, errors)
+
+    # Check total week count
+    if len(week_manifest) != 35:
+        errors.append(f"week_manifest must contain exactly 35 weeks (got {len(week_manifest)})")
+
+    # Validate each week
+    required_week_fields = [
+        "week_number", "title", "grammar_focus", "chant",
+        "vocabulary_scope", "virtue_focus", "faith_phrase", "day_structure"
+    ]
+
+    for idx, week in enumerate(week_manifest, 1):
+        # Check required fields
+        for field in required_week_fields:
+            if field not in week:
+                errors.append(f"Week {idx}: missing required field '{field}'")
+
+        # Validate week_number
+        if "week_number" in week:
+            if week["week_number"] != idx:
+                errors.append(f"Week {idx}: week_number mismatch (expected {idx}, got {week['week_number']})")
+
+        # Validate vocabulary_scope
+        if "vocabulary_scope" in week:
+            vocab = week["vocabulary_scope"]
+            if not isinstance(vocab, list):
+                errors.append(f"Week {idx}: vocabulary_scope must be a list")
+            elif len(vocab) > 10:
+                errors.append(f"Week {idx}: vocabulary_scope has too many items (max 10, got {len(vocab)})")
+            elif len(vocab) == 0:
+                errors.append(f"Week {idx}: vocabulary_scope is empty (should have 5-10 items)")
+
+        # Validate day_structure
+        if "day_structure" in week:
+            day_struct = week["day_structure"]
+            if not isinstance(day_struct, dict):
+                errors.append(f"Week {idx}: day_structure must be an object")
+            else:
+                required_days = ["day_1", "day_2", "day_3", "day_4"]
+                for day in required_days:
+                    if day not in day_struct:
+                        errors.append(f"Week {idx}: day_structure missing '{day}'")
+
+    return (len(errors) == 0, errors)

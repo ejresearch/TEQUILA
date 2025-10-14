@@ -1,0 +1,29 @@
+{
+  "session_structure": {
+    "greeting": {
+      "duration_minutes": 2,
+      "purpose": "Establish connection and set tone"
+    },
+    "warm_up": {
+      "duration_minutes": 3,
+      "purpose": "Review and activate prior knowledge"
+    },
+    "main_lesson": {
+      "duration_minutes": 12,
+      "purpose": "Introduce and practice new content"
+    },
+    "practice": {
+      "duration_minutes": 5,
+      "purpose": "Apply learning through activities"
+    },
+    "closing": {
+      "duration_minutes": 3,
+      "purpose": "Summarize, celebrate, preview"
+    }
+  },
+  "transition_strategies": [
+    "Use consistent Latin phrases",
+    "Incorporate movement between activities",
+    "Provide clear time markers"
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "01_metadata.json": {
+    "week_number": 0,
+    "title": "Week Title",
+    "theme": "Weekly Theme",
+    "virtue_focus": "",
+    "faith_phrase": "",
+    "created_date": "",
+    "last_modified": "",
+    "author": "Latin A Curriculum System",
+    "version": "1.0"
+  },
+  "02_objectives.json": {
+    "learning_objectives": [
+      "Students will be able to...",
+      "Students will demonstrate...",
+      "Students will understand..."
+    ],
+    "linguistic_goals": [],
+    "cultural_goals": [],
+    "virtue_integration": ""
+  },
+  "03_vocabulary.json": {
+    "new_vocabulary": [],
+    "review_vocabulary": [],
+    "vocabulary_notes": ""
+  },
+  "04_grammar_focus.md": "# Grammar Focus - Week 11\n\n## Primary Grammar Concept\n[Main grammar concept for the week]\n\n## Teaching Sequence\n1. Introduction\n2. Guided practice\n3. Independent application\n\n## Examples\n- Example 1\n- Example 2\n- Example 3\n\n## Common Errors to Address\n- Error pattern 1\n- Error pattern 2\n",
+  "05_chant.json": {
+    "chant_text": "",
+    "translation": "",
+    "pronunciation_guide": "",
+    "teaching_notes": "",
+    "gestures_movements": []
+  },
+  "06_sessions_week_view.json": {
+    "day_1": {
+      "focus": "Introduction and exploration",
+      "activities": [],
+      "duration_minutes": 20
+    },
+    "day_2": {
+      "focus": "Practice and reinforcement",
+      "activities": [],
+      "duration_minutes": 20
+    },
+    "day_3": {
+      "focus": "Application and extension",
+      "activities": [],
+      "duration_minutes": 20
+    },
+    "day_4": {
+      "focus": "Review and spiral (25% prior content)",
+      "activities": [],
+      "duration_minutes": 20,
+      "spiral_content_percentage": 25
+    }
+  },
+  "07_assessment.json": {
+    "formative_assessments": [],
+    "summative_assessment": "",
+    "success_criteria": [],
+    "rubric": {
+      "exceeds": "",
+      "meets": "",
+      "approaching": "",
+      "beginning": ""
+    }
+  },
+  "08_assets_index.json": {
+    "chant_chart": "assets/ChantChart.txt",
+    "glossary": "assets/Glossary.txt",
+    "copywork": "assets/Copywork.txt",
+    "quiz_packet": "assets/QuizPacket.txt",
+    "teacher_key": "assets/TeacherKey.txt",
+    "virtue_entry": "assets/VirtueEntry.txt",
+    "additional_resources": []
+  },
+  "09_spiral_links.json": {
+    "links_to_previous_weeks": [],
+    "concepts_to_review": [],
+    "vocabulary_to_recycle": [],
+    "grammar_connections": []
+  },
+  "10_interleaving_plan.md": "# Interleaving Plan - Week 11\n\n## Previous Content Integration\n- Week [X]: [Concept to interleave]\n- Week [Y]: [Concept to interleave]\n\n## Interleaving Strategy\n[Description of how prior content is woven into new lessons]\n\n## Day-by-Day Breakdown\n### Day 1\n- [Interleaved element]\n\n### Day 2\n- [Interleaved element]\n\n### Day 3\n- [Interleaved element]\n\n### Day 4 (25% Spiral Content)\n- [Major review component 1]\n- [Major review component 2]\n- [Integration with new content]\n",
+  "11_misconception_watchlist.json": {
+    "common_misconceptions": [
+      {
+        "misconception": "",
+        "why_it_occurs": "",
+        "correction_strategy": ""
+      }
+    ],
+    "pronunciation_pitfalls": [],
+    "grammar_confusion_points": []
+  },
+  "12_preview_next_week.md": "# Preview: Week 12\n\n## Coming Up Next\n[Brief description of next week's focus]\n\n## Preparation Needed\n- [Teacher preparation item 1]\n- [Teacher preparation item 2]\n\n## Connection to Current Week\n[How next week builds on this week]\n"
+}

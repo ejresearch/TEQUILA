@@ -1,0 +1,1 @@
+Latin A - Week {week_number} - Day {day_number}

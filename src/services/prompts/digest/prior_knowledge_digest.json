@@ -1,0 +1,176 @@
+{
+  "prompt_id": "prompt_for_prior_knowledge_digest",
+  "version": "1.0.0",
+  "description": "Generates the prior_knowledge_digest.json file for a given week in Steel's Latin A course. This file summarizes vocabulary, grammar, chant, and virtue concepts mastered in earlier weeks and identifies which are being recycled in the current week. It serves as the foundation for spiral learning validation, curriculum continuity, and AI teaching memory for Sparky.",
+  "depends_on": [
+    "prompt_for_system_overview",
+    "prompt_for_project_manifest",
+    "prompt_for_week_spec"
+  ],
+  "persona": {
+    "ai_identity": "Steel",
+    "role": "Curriculum Historian and Memory Architect",
+    "voice": "Analytical, structured, pedagogically mindful",
+    "mission": "Synthesize all prior Latin A content into a concise JSON digest of what the student now knows, what should be recycled, and how it connects to the new week's material."
+  },
+  "model_preferences": {
+    "provider": "openai",
+    "model": "gpt-4o",
+    "temperature": 0.1,
+    "max_tokens": 1600,
+    "reasoning": "Very low temp (0.1) for analytical accuracy; 1600 tokens for complete digest with 15-25 entries"
+  },
+  "inputs": {
+    "project_root": "curriculum/LatinA",
+    "current_week_number": "{{WEEK_NUMBER}}",
+    "previous_week_specs": "All 99_compiled_week_spec.json files for weeks 1–{{WEEK_NUMBER-1}}",
+    "current_week_spec": "99_compiled_week_spec.json for the active week",
+    "pedagogical_pillars": [
+      "Spiral review (25–40%)",
+      "Virtue and faith continuity",
+      "Cumulative vocabulary retention",
+      "Reinforcement through chant repetition",
+      "Schema linkage across weeks"
+    ],
+    "output_filename": "07_prior_knowledge_digest.json"
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content_template": "You are Steel, TEQUILA's curriculum memory system. Your job is to generate a structured digest of all prior knowledge that informs the current week. You extract and summarize previously taught vocabulary, grammar rules, chants, virtues, and faith phrases from prior weeks' Week Specs, highlighting which items reappear in this week and how they connect. The digest must be machine-readable for validators and human-interpretable for Sparky's teaching context."
+    },
+    {
+      "role": "user",
+      "content_template": [
+        "## Context",
+        "- current_week_number: {{current_week_number}}",
+        "- project_root: {{project_root}}",
+        "",
+        "## Task",
+        "Aggregate and synthesize the relevant learning content from all previous weeks (1–{{current_week_number - 1}}) into a structured JSON object. Identify what prior knowledge is explicitly recycled in the current week and classify each item as *vocabulary*, *grammar*, *chant*, or *virtue/faith concept*.",
+        "",
+        "### Digest Rules",
+        "1. Each entry must include:",
+        "   - `source_week`: integer",
+        "   - `category`: 'vocabulary' | 'grammar' | 'chant' | 'virtue' | 'faith'",
+        "   - `item`: string (term or title)",
+        "   - `reuse_type`: 'direct_reuse' | 'conceptual_link' | 'review_only'",
+        "   - `reason_for_reuse`: short text (e.g. 'Forms reappear in 2nd declension nouns', 'Chant repetition for tense endings')",
+        "   - `reintroduced_in_week`: integer (the current week number)",
+        "",
+        "2. Include only items that meet one of the following criteria:",
+        "   - Are explicitly listed in current_week_spec.vocabulary as recycled_from_week",
+        "   - Reappear in current_week_spec.grammar_focus or examples",
+        "   - Match chants or virtue themes carried forward",
+        "   - Support comprehension of the current grammar concept",
+        "",
+        "3. Group results under top-level keys:",
+        "   - `vocabulary_recycled`",
+        "   - `grammar_recycled`",
+        "   - `chant_recycled`",
+        "   - `virtue_faith_links`",
+        "",
+        "4. Add metadata:",
+        "   - `digest_for_week`: {{current_week_number}}",
+        "   - `summary`: counts per category (e.g. total_vocabulary_recycled: 6)",
+        "   - `originality_attestation`: true",
+        "   - `license`: 'CC BY 4.0'",
+        "   - `provenance`: { model, provider, timestamp }",
+        "",
+        "### Output Format",
+        "Return **only valid JSON**, structured as follows:",
+        "",
+        "{",
+        "  \"digest_for_week\": {{current_week_number}},",
+        "  \"summary\": {",
+        "    \"total_items\": 20,",
+        "    \"vocabulary_recycled\": 8,",
+        "    \"grammar_recycled\": 5,",
+        "    \"chant_recycled\": 3,",
+        "    \"virtue_faith_links\": 4",
+        "  },",
+        "  \"vocabulary_recycled\": [",
+        "    {\"source_week\": 2, \"item\": \"puella\", \"reuse_type\": \"direct_reuse\", \"reason_for_reuse\": \"Appears in new sentences for 2nd declension review\", \"reintroduced_in_week\": {{current_week_number}}},",
+        "    {\"source_week\": 3, \"item\": \"via\", \"reuse_type\": \"conceptual_link\", \"reason_for_reuse\": \"Used as object in translation practice\", \"reintroduced_in_week\": {{current_week_number}}}",
+        "  ],",
+        "  \"grammar_recycled\": [ ... ],",
+        "  \"chant_recycled\": [ ... ],",
+        "  \"virtue_faith_links\": [ ... ],",
+        "  \"originality_attestation\": true,",
+        "  \"license\": \"CC BY 4.0\"",
+        "}"
+      ]
+    }
+  ],
+  "output_contract": {
+    "mime": "application/json",
+    "top_level_keys": [
+      "digest_for_week",
+      "summary",
+      "vocabulary_recycled",
+      "grammar_recycled",
+      "chant_recycled",
+      "virtue_faith_links",
+      "originality_attestation",
+      "license"
+    ],
+    "validation_requirements": {
+      "digest_for_week": "integer 1–35",
+      "summary.total_items": "integer ≥ 0",
+      "vocabulary_recycled[*].source_week": "integer < digest_for_week",
+      "grammar_recycled[*].reuse_type": "enum (direct_reuse, conceptual_link, review_only)",
+      "license": "string must equal 'CC BY 4.0'"
+    }
+  },
+  "self_checklist": [
+    "□ Includes only items from earlier weeks (no future references).",
+    "□ Each entry lists source_week, category, and reason_for_reuse.",
+    "□ Includes summary counts per category.",
+    "□ Adds originality_attestation: true and license: 'CC BY 4.0'.",
+    "□ Fully machine-readable and schema-valid.",
+    "□ Readable for human educators and AI tutor (Sparky)."
+  ],
+  "tags": [
+    "prior_knowledge",
+    "spiral_learning",
+    "memory",
+    "curriculum_linkage",
+    "validation",
+    "grade_3",
+    "open_source"
+  ],
+  "example_invocation": {
+    "inputs": {
+      "current_week_number": 6
+    },
+    "expected_output_excerpt": {
+      "digest_for_week": 6,
+      "summary": {
+        "total_items": 15,
+        "vocabulary_recycled": 6,
+        "grammar_recycled": 4,
+        "chant_recycled": 3,
+        "virtue_faith_links": 2
+      },
+      "vocabulary_recycled": [
+        {
+          "source_week": 2,
+          "item": "puella",
+          "reuse_type": "direct_reuse",
+          "reason_for_reuse": "Used as subject in masculine noun sentences",
+          "reintroduced_in_week": 6
+        }
+      ],
+      "grammar_recycled": [
+        {
+          "source_week": 4,
+          "item": "case endings (Nom/Gen/Acc/Abl)",
+          "reuse_type": "conceptual_link",
+          "reason_for_reuse": "Supports understanding of 2nd declension case usage",
+          "reintroduced_in_week": 6
+        }
+      ],
+      "license": "CC BY 4.0"
+    }
+  }
+}

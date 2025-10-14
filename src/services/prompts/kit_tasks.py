@@ -299,6 +299,64 @@ def task_week_spec(
     return (system_content, user_content, config)
 
 
+# ============================================================================
+# PRIOR KNOWLEDGE DIGEST PROMPT - Generates spiral learning memory
+# ============================================================================
+
+def task_prior_knowledge_digest(
+    current_week_number: int,
+    project_root: str = "curriculum/LatinA"
+) -> Tuple[str, str, Dict[str, Any]]:
+    """
+    Generate prior_knowledge_digest.json for spiral learning validation.
+
+    This prompt synthesizes all prior weeks' content into a structured digest
+    identifying which vocabulary, grammar, chants, and virtue/faith concepts
+    are being recycled in the current week.
+
+    Output structure:
+    - digest_for_week: integer
+    - summary: counts per category
+    - vocabulary_recycled: array of recycled vocab items
+    - grammar_recycled: array of recycled grammar concepts
+    - chant_recycled: array of recycled chants
+    - virtue_faith_links: array of virtue/faith connections
+    - originality_attestation: true
+    - license: "CC BY 4.0"
+
+    Args:
+        current_week_number: Week number (1-35)
+        project_root: Root path for curriculum
+
+    Returns:
+        (system_prompt, user_prompt, config_dict)
+
+    Output:
+        JSON digest saved to Week_Spec/07_prior_knowledge_digest.json
+    """
+    prompt_spec = _load_prompt_json("digest/prior_knowledge_digest.json")
+
+    # Build user prompt with interpolated values
+    user_content = "\n".join(prompt_spec["messages"][1]["content_template"])
+    user_content = user_content.replace("{{current_week_number}}", str(current_week_number))
+    user_content = user_content.replace("{{project_root}}", project_root)
+
+    # Replace dynamic expressions like {{current_week_number - 1}}
+    user_content = user_content.replace(
+        "{{current_week_number - 1}}",
+        str(current_week_number - 1)
+    )
+
+    system_content = prompt_spec["messages"][0]["content_template"]
+
+    config = {
+        "temperature": prompt_spec["model_preferences"]["temperature"],
+        "max_tokens": prompt_spec["model_preferences"]["max_tokens"]
+    }
+
+    return (system_content, user_content, config)
+
+
 def task_role_context(week_spec: dict) -> Tuple[str, str, Optional[Dict]]:
     """
     Generate prompts for Sparky role context (week-level).

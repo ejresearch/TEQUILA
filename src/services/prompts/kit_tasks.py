@@ -847,7 +847,247 @@ def task_grade_level(
 
 
 # ============================================================================
-# ROLE_CONTEXT PROMPT (Field 04) - Foundation for all day content
+# ROLE_CONTEXT PROMPT (Field 04) - Day-level Sparky coaching brief
+# ============================================================================
+
+def task_role_context_day(
+    week_number: int,
+    day_number: int,
+    class_name: str,
+    week_spec: Optional[Dict[str, Any]] = None,
+    prior_knowledge_digest: Optional[Dict[str, Any]] = None,
+    day_summary: Optional[Dict[str, Any]] = None
+) -> Tuple[str, str, Dict[str, Any]]:
+    """
+    Generate 04_role_context.json - Day-level coaching brief for Sparky.
+
+    This prompt produces a comprehensive DayRoleContext schema that defines:
+    - Identity and audience (Sparky persona, Grade 3 target)
+    - Lesson slot (week, day, title)
+    - Objectives (2-4 measurable student outcomes)
+    - Focus areas (3-5 teaching priorities)
+    - Spiral hooks (vocabulary + grammar from prior weeks)
+    - Virtue integration (from WeekSpec)
+    - Faith integration (from WeekSpec)
+    - Coaching cues (4-6 short lines Sparky can say)
+    - Common misconceptions (pattern + correction)
+    - Checks for understanding (3-5 CFU questions)
+    - Success criteria (3-4 observable outcomes)
+    - Differentiation (support scaffolds + extensions)
+    - Classroom management (2-3 reminders)
+    - Constraints (time, tone, no direct translation)
+
+    Output structure (JSON schema):
+    - identity: string (e.g., "Sparky the Encourager")
+    - audience: "Grade 3 (Grammar Stage, U.S.)" (fixed)
+    - lesson_slot: {week, day, title}
+    - objectives: array of strings (2-4)
+    - focus_areas: array of strings (3-5)
+    - spiral_hooks: {vocabulary_spiral, grammar_spiral}
+    - virtue_integration: {virtue, prompt ≤40 words}
+    - faith_integration: {phrase, usage_note ≤40 words}
+    - coaching_cues: array of strings (4-6)
+    - common_misconceptions: array of {pattern, correction_cue}
+    - checks_for_understanding: array of strings (3-5)
+    - success_criteria: array of strings (3-4)
+    - differentiation: {support, extension}
+    - classroom_management: array of strings (2-3)
+    - constraints: {time_window_minutes, tone, no_translation_key}
+    - __provenance: {provider, model, generated_at}
+
+    Args:
+        week_number: Week number (1-35)
+        day_number: Day number (1-4)
+        class_name: Class name from prompt_for_class_name
+        week_spec: Optional week spec data
+        prior_knowledge_digest: Optional prior knowledge digest
+        day_summary: Optional day summary
+
+    Returns:
+        (system_prompt, user_prompt, config_dict)
+
+    Output:
+        JSON with complete DayRoleContext schema
+    """
+    prompt_spec = _load_prompt_json("day/role_context.json")
+
+    # Build user prompt with interpolated values
+    user_content = "\n".join(prompt_spec["messages"][1]["content_template"])
+    user_content = user_content.replace("{{project_name}}", prompt_spec["inputs"]["project_name"])
+    user_content = user_content.replace("{{week_number}}", str(week_number))
+    user_content = user_content.replace("{{day_number}}", str(day_number))
+    user_content = user_content.replace("{{class_name}}", class_name)
+    user_content = user_content.replace("{{grade_level_fixed}}", prompt_spec["inputs"]["grade_level_fixed"])
+
+    # If week_spec provided, serialize it
+    if week_spec:
+        week_spec_json = json.dumps(week_spec, indent=2)
+        user_content = user_content.replace("{{week_spec}}", week_spec_json)
+    else:
+        user_content = user_content.replace(
+            "{{week_spec}}",
+            f"[Load from curriculum/LatinA/Week{week_number:02d}/Week_Spec/99_compiled_week_spec.json]"
+        )
+
+    # If prior_knowledge_digest provided, serialize it
+    if prior_knowledge_digest:
+        digest_json = json.dumps(prior_knowledge_digest, indent=2)
+        user_content = user_content.replace("{{prior_knowledge_digest}}", digest_json)
+    else:
+        user_content = user_content.replace(
+            "{{prior_knowledge_digest}}",
+            f"[Load from curriculum/LatinA/Week{week_number:02d}/Week_Spec/07_prior_knowledge_digest.json]"
+        )
+
+    # If day_summary provided, serialize it
+    if day_summary:
+        if isinstance(day_summary, dict) and "day_summary" in day_summary:
+            summary_content = day_summary["day_summary"]
+        elif isinstance(day_summary, str):
+            summary_content = day_summary
+        else:
+            summary_content = json.dumps(day_summary)
+        user_content = user_content.replace("{{day_summary}}", summary_content)
+    else:
+        user_content = user_content.replace(
+            "{{day_summary}}",
+            f"[Load from curriculum/LatinA/Week{week_number:02d}/Day{day_number:02d}/02_summary.md]"
+        )
+
+    system_content = prompt_spec["messages"][0]["content_template"]
+
+    config = {
+        "temperature": prompt_spec["model_preferences"]["temperature"],
+        "max_tokens": prompt_spec["model_preferences"]["max_tokens"],
+        "model": prompt_spec["model_preferences"]["model"]  # gpt-4o
+    }
+
+    return (system_content, user_content, config)
+
+
+# ============================================================================
+# GUIDELINES PROMPT (Field 05) - Minute-by-minute teaching script
+# ============================================================================
+
+def task_guidelines(
+    week_number: int,
+    day_number: int,
+    class_name: str,
+    week_spec: Optional[Dict[str, Any]] = None,
+    prior_knowledge_digest: Optional[Dict[str, Any]] = None,
+    day_summary: Optional[Dict[str, Any]] = None,
+    role_context: Optional[Dict[str, Any]] = None
+) -> Tuple[str, str, Dict[str, Any]]:
+    """
+    Generate 05_guidelines_for_sparky.md - Minute-by-minute teaching script.
+
+    This prompt produces a detailed markdown teaching script that implements
+    the role_context (Field 04) with concrete lesson flow, dialogue, and activities.
+
+    Output structure (Markdown with YAML frontmatter):
+    - YAML header (week, day, title, time_window_minutes, tone, audience, license, provenance)
+    - Objectives & Success Criteria (from role_context)
+    - Materials & Setup
+    - Minute-by-Minute Flow (5 phases):
+      1. Greeting & Spiral Review (5 min)
+      2. Chant Introduction/Practice (5-7 min)
+      3. Grammar Instruction (8-10 min)
+      4. Guided Practice (5-7 min)
+      5. Closure & Virtue Tie-In (2-3 min)
+    - Coaching Notes (misconceptions, differentiation, classroom management)
+    - Assessment Checkpoints
+
+    Pedagogical features:
+    - Embeds spiral_hooks from role_context in Phase 1
+    - Uses coaching_cues from role_context as dialogue
+    - Includes common_misconceptions with correction cues
+    - Implements checks_for_understanding throughout
+    - Integrates virtue and faith in Phase 5
+    - Respects constraints (time_window, tone, no_translation_key)
+
+    Args:
+        week_number: Week number (1-35)
+        day_number: Day number (1-4)
+        class_name: Class name from prompt_for_class_name
+        week_spec: Optional week spec data
+        prior_knowledge_digest: Optional prior knowledge digest
+        day_summary: Optional day summary
+        role_context: Optional role context from prompt_for_role_context
+
+    Returns:
+        (system_prompt, user_prompt, config_dict)
+
+    Output:
+        JSON with single key: {"guidelines_markdown": "...markdown..."}
+    """
+    prompt_spec = _load_prompt_json("day/guidelines.json")
+
+    # Build user prompt with interpolated values
+    user_content = "\n".join(prompt_spec["messages"][1]["content_template"])
+    user_content = user_content.replace("{{project_name}}", prompt_spec["inputs"]["project_name"])
+    user_content = user_content.replace("{{week_number}}", str(week_number))
+    user_content = user_content.replace("{{day_number}}", str(day_number))
+    user_content = user_content.replace("{{class_name}}", class_name)
+    user_content = user_content.replace("{{grade_level_fixed}}", prompt_spec["inputs"]["grade_level_fixed"])
+
+    # If week_spec provided, serialize it
+    if week_spec:
+        week_spec_json = json.dumps(week_spec, indent=2)
+        user_content = user_content.replace("{{week_spec}}", week_spec_json)
+    else:
+        user_content = user_content.replace(
+            "{{week_spec}}",
+            f"[Load from curriculum/LatinA/Week{week_number:02d}/Week_Spec/99_compiled_week_spec.json]"
+        )
+
+    # If prior_knowledge_digest provided, serialize it
+    if prior_knowledge_digest:
+        digest_json = json.dumps(prior_knowledge_digest, indent=2)
+        user_content = user_content.replace("{{prior_knowledge_digest}}", digest_json)
+    else:
+        user_content = user_content.replace(
+            "{{prior_knowledge_digest}}",
+            f"[Load from curriculum/LatinA/Week{week_number:02d}/Week_Spec/07_prior_knowledge_digest.json]"
+        )
+
+    # If day_summary provided, serialize it
+    if day_summary:
+        if isinstance(day_summary, dict) and "day_summary" in day_summary:
+            summary_content = day_summary["day_summary"]
+        elif isinstance(day_summary, str):
+            summary_content = day_summary
+        else:
+            summary_content = json.dumps(day_summary)
+        user_content = user_content.replace("{{day_summary}}", summary_content)
+    else:
+        user_content = user_content.replace(
+            "{{day_summary}}",
+            f"[Load from curriculum/LatinA/Week{week_number:02d}/Day{day_number:02d}/02_summary.md]"
+        )
+
+    # If role_context provided, serialize it
+    if role_context:
+        role_context_json = json.dumps(role_context, indent=2)
+        user_content = user_content.replace("{{role_context}}", role_context_json)
+    else:
+        user_content = user_content.replace(
+            "{{role_context}}",
+            f"[Load from curriculum/LatinA/Week{week_number:02d}/Day{day_number:02d}/04_role_context.json]"
+        )
+
+    system_content = prompt_spec["messages"][0]["content_template"]
+
+    config = {
+        "temperature": prompt_spec["model_preferences"]["temperature"],
+        "max_tokens": prompt_spec["model_preferences"]["max_tokens"],
+        "model": prompt_spec["model_preferences"]["model"]  # gpt-4o
+    }
+
+    return (system_content, user_content, config)
+
+
+# ============================================================================
+# LEGACY ROLE_CONTEXT PROMPT (Field 04) - Week-level variant
 # ============================================================================
 
 def task_day_role_context(week_spec: dict, day: int) -> Tuple[str, str, Optional[Dict]]:

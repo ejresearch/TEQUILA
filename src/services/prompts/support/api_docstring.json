@@ -1,0 +1,114 @@
+{
+  "prompt_id": "prompt_for_api_docstring",
+  "version": "1.0.0",
+  "family": "System Support",
+  "description": "Generates clean, example-rich docstrings for TEQUILA Python endpoints and CLIs, standardized to Google-style or NumPy-style with type hints and usage examples.",
+  "depends_on": [],
+  "persona": {
+    "ai_identity": "Steel",
+    "role": "API Documentarian",
+    "voice": "Clear, didactic, example-first",
+    "mission": "Make every public function and CLI discoverable and safe to use without reading source."
+  },
+  "model_preferences": {
+    "provider": "openai",
+    "model": "gpt-4o",
+    "temperature": 0.2,
+    "max_tokens": 1000,
+    "reasoning": "Low temp (0.2) for consistent docstring style; 1000 tokens for complete documentation; gpt-4o for technical writing and example generation"
+  },
+  "inputs": {
+    "doc_style": "google | numpy",
+    "module_path": "src/cli/export.py",
+    "symbol_name": "build_week_zip",
+    "signature": "def build_week_zip(project_root: str, week_number: int, manifest_path: str, out_dir: str) -> Path:",
+    "summary": "Create a ZIP archive for a completed week using an export manifest.",
+    "params": [
+      { "name": "project_root", "type": "str", "desc": "Root folder for the Latin A project." },
+      { "name": "week_number", "type": "int", "desc": "Week to export (1–35)." },
+      { "name": "manifest_path", "type": "str", "desc": "Path to export_manifest JSON." },
+      { "name": "out_dir", "type": "str", "desc": "Directory to write the final ZIP." }
+    ],
+    "returns": { "type": "Path", "desc": "Path to the created ZIP file." },
+    "raises": [
+      { "type": "FileNotFoundError", "desc": "If manifest or required files are missing." },
+      { "type": "ValueError", "desc": "If manifest fails schema checks." }
+    ],
+    "examples": [
+      "build_week_zip('curriculum/LatinA', 9, 'Week09/export_manifest.json', 'dist/')"
+    ],
+    "notes": [
+      "Requires a passing schema validation and complete checksums.",
+      "Deterministic ZIP naming: LatinA_Week09_YYYYMMDD.zip"
+    ]
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content_template": "You write precise Python docstrings. Respect the requested style (Google or NumPy). Include: short summary, detailed Args/Parameters, Returns, Raises, Examples, and Notes. Keep line width reasonable and avoid redundancy."
+    },
+    {
+      "role": "user",
+      "content_template": [
+        "### Style",
+        "{{doc_style}}",
+        "",
+        "### Target",
+        "- Module: {{module_path}}",
+        "- Symbol: {{symbol_name}}",
+        "- Signature: {{signature}}",
+        "",
+        "### Details",
+        "- Summary: {{summary}}",
+        "- Params: {{params}}",
+        "- Returns: {{returns}}",
+        "- Raises: {{raises}}",
+        "- Examples: {{examples}}",
+        "- Notes: {{notes}}",
+        "",
+        "### Task",
+        "Return a single string field `docstring` containing only the final docstring block (no code fences)."
+      ]
+    }
+  ],
+  "output_contract": {
+    "mime": "application/json",
+    "top_level_keys": ["docstring"],
+    "schema": {
+      "type": "object",
+      "properties": {
+        "docstring": { "type": "string" }
+      },
+      "required": ["docstring"]
+    }
+  },
+  "self_checklist": [
+    "□ Matches requested style exactly (Google or NumPy).",
+    "□ Includes examples runnable as-is.",
+    "□ Raises list mirrors inputs.",
+    "□ No extraneous commentary; one clean docstring."
+  ],
+  "example_invocation": {
+    "inputs": {
+      "doc_style": "google",
+      "module_path": "src/cli/export.py",
+      "symbol_name": "build_week_zip",
+      "signature": "def build_week_zip(project_root: str, week_number: int, manifest_path: str, out_dir: str) -> Path:",
+      "summary": "Create a ZIP archive for a completed week using an export manifest.",
+      "params": [
+        { "name": "project_root", "type": "str", "desc": "Root folder for the Latin A project." },
+        { "name": "week_number", "type": "int", "desc": "Week to export (1–35)." },
+        { "name": "manifest_path", "type": "str", "desc": "Path to export_manifest JSON." },
+        { "name": "out_dir", "type": "str", "desc": "Directory to write the final ZIP." }
+      ],
+      "returns": { "type": "Path", "desc": "Path to the created ZIP file." },
+      "raises": [
+        { "type": "FileNotFoundError", "desc": "If manifest or required files are missing." },
+        { "type": "ValueError", "desc": "If manifest fails schema checks." }
+      ],
+      "examples": ["build_week_zip('curriculum/LatinA', 9, 'Week09/export_manifest.json', 'dist/')"],
+      "notes": ["Requires a passing schema validation and complete checksums."]
+    }
+  },
+  "tags": ["docs", "api", "docstrings", "developer-experience", "system-support"]
+}

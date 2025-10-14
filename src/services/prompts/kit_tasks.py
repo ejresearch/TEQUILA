@@ -2656,3 +2656,154 @@ def task_export_zip_manifest(
     }
 
     return (system_content, user_content, config)
+
+
+# ============================================================================
+# ERROR EXPLANATION PROMPT - Convert errors into actionable fixes
+# ============================================================================
+
+def task_error_explanation(
+    error_context: Dict[str, Any],
+    raw_error_text: str,
+    recent_findings: Optional[list] = None
+) -> Tuple[str, str, Dict[str, Any]]:
+    """
+    Generate actionable error explanation with minimal-diff fixes.
+
+    This prompt translates tracebacks and validation failures into:
+    - Terse diagnosis (one sentence)
+    - Likely causes (array of strings)
+    - Minimal fix (unified-diff or JSON Patch)
+    - Verification steps (concrete commands)
+    - Preventive guardrails (schema hints, tests, CI)
+
+    Args:
+        error_context: Dict with component, week_number, day_number, file_path
+        raw_error_text: Raw traceback or error message
+        recent_findings: Optional list of validation findings
+
+    Returns:
+        (system_prompt, user_prompt, config_dict)
+
+    Output:
+        JSON with diagnosis, causes, minimal_fix, verify, guardrails
+    """
+    prompt_spec = _load_prompt_json("support/error_explanation.json")
+
+    user_content = "\n".join(prompt_spec["messages"][1]["content_template"])
+
+    # Serialize error context
+    error_context_json = json.dumps(error_context, indent=2)
+    user_content = user_content.replace("{{error_context}}", error_context_json)
+
+    # Include raw error text
+    user_content = user_content.replace("{{raw_error_text}}", raw_error_text)
+
+    # Serialize recent findings
+    if recent_findings:
+        findings_json = json.dumps(recent_findings, indent=2)
+        user_content = user_content.replace("{{recent_findings}}", findings_json)
+    else:
+        user_content = user_content.replace("{{recent_findings}}", "[]")
+
+    system_content = prompt_spec["messages"][0]["content_template"]
+
+    config = {
+        "temperature": prompt_spec["model_preferences"]["temperature"],
+        "max_tokens": prompt_spec["model_preferences"]["max_tokens"],
+        "model": prompt_spec["model_preferences"]["model"]
+    }
+
+    return (system_content, user_content, config)
+
+
+# ============================================================================
+# API DOCSTRING PROMPT - Generate Python docstrings
+# ============================================================================
+
+def task_api_docstring(
+    doc_style: str,
+    module_path: str,
+    symbol_name: str,
+    signature: str,
+    summary: str,
+    params: list,
+    returns: Dict[str, str],
+    raises: Optional[list] = None,
+    examples: Optional[list] = None,
+    notes: Optional[list] = None
+) -> Tuple[str, str, Dict[str, Any]]:
+    """
+    Generate Python docstring in Google or NumPy style.
+
+    This prompt creates clean, example-rich docstrings for TEQUILA functions:
+    - Short summary line
+    - Detailed Args/Parameters section
+    - Returns section
+    - Raises section (if applicable)
+    - Examples section (runnable code)
+    - Notes section (if applicable)
+
+    Args:
+        doc_style: 'google' or 'numpy'
+        module_path: Path to module (e.g., 'src/cli/export.py')
+        symbol_name: Function/class name
+        signature: Full function signature
+        summary: One-line summary
+        params: List of dicts with name, type, desc
+        returns: Dict with type and desc
+        raises: Optional list of dicts with type and desc
+        examples: Optional list of example code strings
+        notes: Optional list of note strings
+
+    Returns:
+        (system_prompt, user_prompt, config_dict)
+
+    Output:
+        JSON with single key 'docstring' containing formatted docstring
+    """
+    prompt_spec = _load_prompt_json("support/api_docstring.json")
+
+    user_content = "\n".join(prompt_spec["messages"][1]["content_template"])
+
+    # Replace scalar values
+    user_content = user_content.replace("{{doc_style}}", doc_style)
+    user_content = user_content.replace("{{module_path}}", module_path)
+    user_content = user_content.replace("{{symbol_name}}", symbol_name)
+    user_content = user_content.replace("{{signature}}", signature)
+    user_content = user_content.replace("{{summary}}", summary)
+
+    # Serialize lists/dicts
+    params_json = json.dumps(params, indent=2)
+    user_content = user_content.replace("{{params}}", params_json)
+
+    returns_json = json.dumps(returns, indent=2)
+    user_content = user_content.replace("{{returns}}", returns_json)
+
+    if raises:
+        raises_json = json.dumps(raises, indent=2)
+        user_content = user_content.replace("{{raises}}", raises_json)
+    else:
+        user_content = user_content.replace("{{raises}}", "[]")
+
+    if examples:
+        examples_json = json.dumps(examples, indent=2)
+        user_content = user_content.replace("{{examples}}", examples_json)
+    else:
+        user_content = user_content.replace("{{examples}}", "[]")
+
+    if notes:
+        notes_json = json.dumps(notes, indent=2)
+        user_content = user_content.replace("{{notes}}", notes_json)
+    else:
+        user_content = user_content.replace("{{notes}}", "[]")
+
+    system_content = prompt_spec["messages"][0]["content_template"]
+
+    config = {
+        "temperature": prompt_spec["model_preferences"]["temperature"],
+        "max_tokens": prompt_spec["model_preferences"]["max_tokens"],
+        "model": prompt_spec["model_preferences"]["model"]
+    }
+
+    return (system_content, user_content, config)

@@ -1,0 +1,90 @@
+{
+  "prompt_id": "prompt_for_grade_level",
+  "version": "1.1.0",
+  "description": "Writes the grade level metadata file (03_grade_level.txt) for a single Day in Steel's Latin A course. Since all lessons in Latin A are designed for Grammar Stage Grade 3 (U.S.), this prompt outputs a fixed standardized value for consistency and schema compliance.",
+  "depends_on": [
+    "prompt_for_system_overview",
+    "prompt_for_project_manifest"
+  ],
+  "persona": {
+    "ai_identity": "Steel",
+    "role": "Metadata Registrar",
+    "voice": "Neutral, procedural, factual",
+    "mission": "Ensure every Latin A lesson includes the correct fixed grade level metadata to support consistency and validation."
+  },
+  "model_preferences": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "temperature": 0.0,
+    "max_tokens": 50,
+    "reasoning": "Zero temp for deterministic output; 50 tokens sufficient for fixed value; gpt-4o-mini for cost efficiency"
+  },
+  "inputs": {
+    "project_name": "Latin A (Grammar Stage)",
+    "week_number": "{{WEEK_NUMBER}}",
+    "day_number": "{{DAY_NUMBER}}",
+    "grade_fixed": "Grade 3 (Grammar Stage, U.S.)",
+    "output_filename": "03_grade_level.txt"
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content_template": "You are Steel, TEQUILA's metadata registrar. For every Latin A lesson, output the fixed grade level line for Grammar Stage Grade 3 (U.S.). No reasoning or variation is required."
+    },
+    {
+      "role": "user",
+      "content_template": [
+        "## Context",
+        "- Week: {{week_number}}",
+        "- Day: {{day_number}}",
+        "- Course: Latin A (Grammar Stage)",
+        "",
+        "## Task",
+        "Return a single JSON object with one key `grade_level`, whose value must exactly equal:",
+        "`Grade 3 (Grammar Stage, U.S.)`",
+        "",
+        "This file is used for schema validation and educator-facing metadata.",
+        "Return ONLY valid JSON."
+      ]
+    }
+  ],
+  "output_contract": {
+    "mime": "application/json",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "grade_level": {
+          "type": "string",
+          "enum": ["Grade 3 (Grammar Stage, U.S.)"]
+        }
+      },
+      "required": ["grade_level"],
+      "additionalProperties": false
+    },
+    "examples": [
+      { "grade_level": "Grade 3 (Grammar Stage, U.S.)" }
+    ]
+  },
+  "self_checklist": [
+    "□ Outputs one field only: grade_level.",
+    "□ Always equals 'Grade 3 (Grammar Stage, U.S.)'.",
+    "□ Valid JSON, no variation.",
+    "□ File name: 03_grade_level.txt."
+  ],
+  "tags": [
+    "metadata",
+    "grade_level",
+    "fixed_value",
+    "seven-field",
+    "latin_a"
+  ],
+  "example_invocation": {
+    "inputs": {
+      "week_number": 5,
+      "day_number": 3
+    },
+    "expected_output": {
+      "grade_level": "Grade 3 (Grammar Stage, U.S.)"
+    }
+  }
+}

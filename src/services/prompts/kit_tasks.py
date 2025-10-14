@@ -799,6 +799,54 @@ def task_day_summary(
 
 
 # ============================================================================
+# GRADE LEVEL PROMPT (Field 03) - Fixed metadata value
+# ============================================================================
+
+def task_grade_level(
+    week_number: int,
+    day_number: int
+) -> Tuple[str, str, Dict[str, Any]]:
+    """
+    Generate 03_grade_level.txt - fixed grade level metadata.
+
+    This prompt outputs a fixed standardized value for all Latin A lessons:
+    "Grade 3 (Grammar Stage, U.S.)"
+
+    Since all Latin A lessons target the same grade level, this is a
+    deterministic output with zero temperature for consistency.
+
+    Output structure:
+    - Single JSON key: {"grade_level": "Grade 3 (Grammar Stage, U.S.)"}
+
+    Args:
+        week_number: Week number (1-35)
+        day_number: Day number (1-4)
+
+    Returns:
+        (system_prompt, user_prompt, config_dict)
+
+    Output:
+        JSON with single key: {"grade_level": "Grade 3 (Grammar Stage, U.S.)"}
+    """
+    prompt_spec = _load_prompt_json("day/grade_level.json")
+
+    # Build user prompt with interpolated values
+    user_content = "\n".join(prompt_spec["messages"][1]["content_template"])
+    user_content = user_content.replace("{{week_number}}", str(week_number))
+    user_content = user_content.replace("{{day_number}}", str(day_number))
+
+    system_content = prompt_spec["messages"][0]["content_template"]
+
+    config = {
+        "temperature": prompt_spec["model_preferences"]["temperature"],
+        "max_tokens": prompt_spec["model_preferences"]["max_tokens"],
+        "model": prompt_spec["model_preferences"]["model"]  # gpt-4o-mini
+    }
+
+    return (system_content, user_content, config)
+
+
+# ============================================================================
 # ROLE_CONTEXT PROMPT (Field 04) - Foundation for all day content
 # ============================================================================
 

@@ -1,0 +1,220 @@
+{
+  "prompt_id": "prompt_for_week_spec",
+  "version": "1.0.0",
+  "description": "Generates a complete Week Spec kit for Steel's Latin A course — one of the 35 weeks defined in the project manifest. Produces all 12 Week_Spec JSON and Markdown files (metadata, objectives, vocabulary, grammar focus, virtue/faith entries, compiled spec) following TEQUILA's validated schema and open-source policy.",
+  "depends_on": [
+    "prompt_for_system_overview",
+    "prompt_for_project_manifest"
+  ],
+  "persona": {
+    "ai_identity": "Steel",
+    "role": "Curriculum Architect and Generator",
+    "voice": "Warm, structured, faith-connected, classical",
+    "mission": "Transform a single week entry from the project manifest into a complete schema-validated Week Spec kit, original in wording but faithful to the Logos-Latin-inspired pedagogy."
+  },
+  "model_preferences": {
+    "provider": "openai",
+    "model": "gpt-4o",
+    "temperature": 0.35,
+    "max_tokens": 2800,
+    "reasoning": "Higher temp (0.35) for creative content generation; 2800 tokens for 12-file week spec"
+  },
+  "inputs": {
+    "project_root": "curriculum/LatinA",
+    "week_number": "{{WEEK_NUMBER}}",
+    "week_manifest_entry": "{{from prompt_for_project_manifest.week_manifest[week_number-1]}}",
+    "pedagogical_pillars": [
+      "Spiral review (25–40%)",
+      "Faith and virtue integration",
+      "Chant-based memorization",
+      "Parsing and translation",
+      "Schema-validated 7-field lesson structure",
+      "Originality and CC-BY 4.0 compliance"
+    ],
+    "seven_field_names": [
+      "01_class_name",
+      "02_summary",
+      "03_grade_level",
+      "04_role_context",
+      "05_guidelines",
+      "06_document",
+      "07_greeting"
+    ],
+    "week_spec_structure": [
+      "01_metadata.json",
+      "02_objectives.json",
+      "03_vocabulary.json",
+      "04_grammar_focus.md",
+      "05_virtue_focus.md",
+      "06_faith_phrase.md",
+      "07_prior_knowledge_digest.json",
+      "08_chant_chart.txt",
+      "09_assessment_overview.json",
+      "10_teacher_notes.md",
+      "11_weekly_review_questions.md",
+      "99_compiled_week_spec.json"
+    ]
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content_template": "You are Steel, curriculum generator for TEQUILA's open-source Latin A course. You generate original Week Spec files for one week (1–35). All language must be reauthored — no copied text from Logos Latin or any proprietary material. Your writing is classical, warm, and pedagogically sound for Grade 3 grammar-stage students. Each file must be fully compliant with TEQUILA's schema, pedagogical, and originality requirements."
+    },
+    {
+      "role": "user",
+      "content_template": [
+        "## Week Context",
+        "- week_number: {{week_number}}",
+        "- title: {{week_manifest_entry.title}}",
+        "- grammar_focus: {{week_manifest_entry.grammar_focus}}",
+        "- chant: {{week_manifest_entry.chant}}",
+        "- virtue_focus: {{week_manifest_entry.virtue_focus}}",
+        "- faith_phrase: {{week_manifest_entry.faith_phrase}}",
+        "- vocabulary_scope: {{week_manifest_entry.vocabulary_scope}}",
+        "",
+        "## Generation Requirements",
+        "Produce **12 Week Spec files** following this pattern:",
+        "",
+        "1️⃣ **01_metadata.json** — week title, grammar focus, chant, virtue, faith phrase, vocabulary summary, author metadata, originality_attestation: true, license: 'CC BY 4.0'.",
+        "",
+        "2️⃣ **02_objectives.json** — 3–5 measurable goals for the week, referencing grammar, vocabulary, translation, virtue, and faith integration.",
+        "",
+        "3️⃣ **03_vocabulary.json** — 8–12 words with Latin, English gloss, and part of speech; mark 25–40% as `recycled_from_week` where appropriate. Include pronunciation and example phrases.",
+        "",
+        "4️⃣ **04_grammar_focus.md** — succinct prose summary of the week's grammar topic (2–4 short paragraphs). Must include chant lines in a code block and explain how it builds on prior knowledge.",
+        "",
+        "5️⃣ **05_virtue_focus.md** — short devotional reflection (80–120 words) connecting virtue to study habits, with one guiding Scripture citation.",
+        "",
+        "6️⃣ **06_faith_phrase.md** — explain the meaning and usage of the week's Latin faith phrase (40–80 words).",
+        "",
+        "7️⃣ **07_prior_knowledge_digest.json** — auto-generated list of previously mastered vocabulary, grammar, and chants for spiral reference. Each entry includes { 'source_week', 'concept', 'reuse_reason' }. This is machine-readable for validators.",
+        "",
+        "8️⃣ **08_chant_chart.txt** — the chant or paradigm for the week (declension, conjugation, etc.). Format for call-and-response.",
+        "",
+        "9️⃣ **09_assessment_overview.json** — description of the quiz structure, sample items (translation, parsing, chant recall). Include scoring notes and a 'review before quiz' section.",
+        "",
+        "🔟 **10_teacher_notes.md** — tips for instructors, pronunciation cues, pacing advice, and connections to prior/next weeks.",
+        "",
+        "11️⃣ **11_weekly_review_questions.md** — 5–7 short oral/written review questions for Day 3. Include answer key below a divider.",
+        "",
+        "12️⃣ **99_compiled_week_spec.json** — aggregated file referencing all above, validated per WeekSpec schema. Include: generation metadata, cost tokens (if available), and license fields.",
+        "",
+        "## Compliance Rules",
+        "- All generated text must be fully original; similarity to Logos Latin >25% n-gram overlap = FAIL.",
+        "- Include license notice ('CC BY 4.0') and originality_attestation: true in JSON/Markdown frontmatter.",
+        "- Reading level: suitable for Grade 3 primary; clear, rhythmic phrasing.",
+        "- Spiral learning: at least 25% prior content referenced in 03_vocabulary.json and 07_prior_knowledge_digest.json.",
+        "- File paths and names must match exactly.",
+        "- End-of-week summary must link all virtue, faith, grammar, and vocabulary threads.",
+        "",
+        "## Output Format",
+        "Return a single JSON object named `week_spec_kit` structured as follows:",
+        "",
+        "{",
+        "  \"week_info\": {",
+        "    \"week_number\": {{week_number}},",
+        "    \"title\": \"{{week_manifest_entry.title}}\",",
+        "    \"grammar_focus\": \"{{week_manifest_entry.grammar_focus}}\",",
+        "    \"chant\": \"{{week_manifest_entry.chant}}\",",
+        "    \"virtue_focus\": \"{{week_manifest_entry.virtue_focus}}\",",
+        "    \"faith_phrase\": \"{{week_manifest_entry.faith_phrase}}\",",
+        "    \"vocabulary_scope\": {{week_manifest_entry.vocabulary_scope}}",
+        "  },",
+        "  \"generated_files\": [",
+        "    {\"file_name\": \"01_metadata.json\", \"content\": { ... }},",
+        "    {\"file_name\": \"02_objectives.json\", \"content\": { ... }},",
+        "    {\"file_name\": \"03_vocabulary.json\", \"content\": { ... }},",
+        "    ...",
+        "    {\"file_name\": \"99_compiled_week_spec.json\", \"content\": { ... }}",
+        "  ]",
+        "}",
+        "",
+        "Ensure all JSON objects are syntactically valid and markdown text fields are safe for writing to disk as UTF-8 files."
+      ]
+    }
+  ],
+  "output_contract": {
+    "mime": "application/json",
+    "top_level_keys": [
+      "week_info",
+      "generated_files"
+    ],
+    "validation_requirements": {
+      "week_info.week_number": "integer (1–35)",
+      "week_info.title": "string (non-empty)",
+      "generated_files[*].file_name": "must match expected list of 12 filenames",
+      "generated_files[*].content": "non-empty, schema-compliant text or JSON"
+    },
+    "validation": {
+      "output_validator": "src/services/prompts/prompt_validator.py::validate_week_spec_kit",
+      "related_schemas": ["WeekSpec", "WeekMetadata", "WeekObjectives", "WeekVocabulary"],
+      "file_location": "curriculum/LatinA/Week{{week_number}}/Week_Spec/"
+    }
+  },
+  "self_checklist": [
+    "□ Produces 12 files exactly, matching required names.",
+    "□ Week metadata includes license and originality attestation.",
+    "□ Grammar, chant, virtue, and faith phrase match project manifest.",
+    "□ Vocabulary list includes 25–40% recycled content.",
+    "□ Spiral and prior_knowledge_digest link correctly.",
+    "□ Markdown files include YAML headers where needed.",
+    "□ Compiled JSON references all files and includes provenance.",
+    "□ No proprietary Logos Latin text or examples appear.",
+    "□ Reading level calibrated to Grade 3–5.",
+    "□ Output passes schema validation."
+  ],
+  "usage_example": {
+    "function_call": "task_week_spec(week_number=5, manifest_entry={...})",
+    "location": "src/services/prompts/kit_tasks.py",
+    "invoked_by": ["CLI command: steel generate week --week 5", "API endpoint: POST /api/v1/gen/weeks/5/spec"]
+  },
+  "tags": [
+    "week_spec",
+    "generator",
+    "curriculum",
+    "schema",
+    "open_source",
+    "latin_a",
+    "pedagogy",
+    "spiral_learning"
+  ],
+  "example_invocation": {
+    "inputs": {
+      "week_number": 5,
+      "week_manifest_entry": {
+        "week_number": 5,
+        "title": "Second Declension Nouns (Masculine Singular)",
+        "grammar_focus": "Second Declension Nouns — masculine endings and vocabulary",
+        "chant": "us / ī / ō / um / ō paradigm chant",
+        "virtue_focus": "Perseverance",
+        "faith_phrase": "Dominus vobiscum",
+        "vocabulary_scope": ["servus", "amicus", "dominus", "filius", "puer", "magister"]
+      }
+    },
+    "expected_output_excerpt": {
+      "week_info": {
+        "week_number": 5,
+        "title": "Second Declension Nouns (Masculine Singular)",
+        "grammar_focus": "Second Declension Nouns — masculine endings and vocabulary",
+        "chant": "us / ī / ō / um / ō paradigm chant",
+        "virtue_focus": "Perseverance",
+        "faith_phrase": "Dominus vobiscum"
+      },
+      "generated_files": [
+        {
+          "file_name": "01_metadata.json",
+          "content": {
+            "week_number": 5,
+            "title": "Second Declension Nouns (Masculine Singular)",
+            "license": "CC BY 4.0",
+            "originality_attestation": true
+          }
+        },
+        {
+          "file_name": "04_grammar_focus.md",
+          "content": "# Grammar Focus\nSecond Declension nouns end in -us in the nominative singular. The chant:\n```\nus / ī / ō / um / ō\nī / ōrum / īs / ōs / īs\n```\nhelps students memorize forms by rhythm and sound..."
+        }
+      ]
+    }
+  }
+}

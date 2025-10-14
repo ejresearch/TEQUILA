@@ -219,47 +219,84 @@ def task_schema_validation(
     return (system_content, user_content, config)
 
 
-def task_week_spec(outline_snip: dict) -> Tuple[str, str, Optional[Dict]]:
+# ============================================================================
+# WEEK SPEC PROMPT - Generates complete 12-file week specification
+# ============================================================================
+
+def task_week_spec(
+    week_number: int,
+    manifest_entry: Dict[str, Any]
+) -> Tuple[str, str, Dict[str, Any]]:
     """
-    Generate prompts for weekly spec generation.
+    Generate complete Week Spec kit (12 files) for a single week.
+
+    This prompt produces all Week_Spec files:
+    - 01_metadata.json
+    - 02_objectives.json
+    - 03_vocabulary.json
+    - 04_grammar_focus.md
+    - 05_virtue_focus.md
+    - 06_faith_phrase.md
+    - 07_prior_knowledge_digest.json
+    - 08_chant_chart.txt
+    - 09_assessment_overview.json
+    - 10_teacher_notes.md
+    - 11_weekly_review_questions.md
+    - 99_compiled_week_spec.json
 
     Args:
-        outline_snip: Snippet from curriculum outline for this week
+        week_number: Week number (1-35)
+        manifest_entry: Week entry from project_manifest.week_manifest
 
     Returns:
-        (system_prompt, user_prompt, json_schema_hint)
+        (system_prompt, user_prompt, config_dict)
+
+    Output:
+        JSON with week_info and generated_files array
     """
-    sys = _load_system_prompt("week_system.txt")
-    usr = (
-        "Using this curriculum outline seed, generate a complete Weekly Lesson Spec as JSON:\n\n"
-        + orjson.dumps(outline_snip, option=orjson.OPT_INDENT_2).decode()
+    prompt_spec = _load_prompt_json("week/week_spec.json")
+
+    # Build user prompt with interpolated manifest entry
+    user_content = "\n".join(prompt_spec["messages"][1]["content_template"])
+
+    # Replace week_number
+    user_content = user_content.replace("{{week_number}}", str(week_number))
+
+    # Replace manifest entry fields
+    user_content = user_content.replace(
+        "{{week_manifest_entry.title}}",
+        manifest_entry.get("title", "")
+    )
+    user_content = user_content.replace(
+        "{{week_manifest_entry.grammar_focus}}",
+        manifest_entry.get("grammar_focus", "")
+    )
+    user_content = user_content.replace(
+        "{{week_manifest_entry.chant}}",
+        manifest_entry.get("chant", "")
+    )
+    user_content = user_content.replace(
+        "{{week_manifest_entry.virtue_focus}}",
+        manifest_entry.get("virtue_focus", "")
+    )
+    user_content = user_content.replace(
+        "{{week_manifest_entry.faith_phrase}}",
+        manifest_entry.get("faith_phrase", "")
     )
 
-    # Schema hint for structured output
-    schema = {
-        "type": "object",
-        "properties": {
-            "metadata": {"type": "object"},
-            "objectives": {"type": "array"},
-            "vocabulary": {"type": "array"},
-            "grammar_focus": {"type": "string"},
-            "chant": {"type": "object"},
-            "sessions": {"type": "array"},
-            "assessment": {"type": "object"},
-            "assets": {"type": "array"},
-            "spiral_links": {"type": "object"},
-            "interleaving_plan": {"type": "string"},
-            "misconception_watchlist": {"type": "array"},
-            "preview_next_week": {"type": "string"}
-        },
-        "required": [
-            "metadata", "objectives", "vocabulary", "grammar_focus",
-            "chant", "assessment", "assets", "spiral_links",
-            "interleaving_plan", "misconception_watchlist", "preview_next_week"
-        ]
+    # Replace vocabulary_scope (array)
+    vocab_scope = manifest_entry.get("vocabulary_scope", [])
+    vocab_json = json.dumps(vocab_scope)
+    user_content = user_content.replace("{{week_manifest_entry.vocabulary_scope}}", vocab_json)
+
+    system_content = prompt_spec["messages"][0]["content_template"]
+
+    config = {
+        "temperature": prompt_spec["model_preferences"]["temperature"],
+        "max_tokens": prompt_spec["model_preferences"]["max_tokens"]
     }
 
-    return sys, usr, schema
+    return (system_content, user_content, config)
 
 
 def task_role_context(week_spec: dict) -> Tuple[str, str, Optional[Dict]]:

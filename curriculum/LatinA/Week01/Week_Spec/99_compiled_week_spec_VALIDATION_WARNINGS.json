@@ -1,11 +1,11 @@
 {
   "metadata": {
     "week_title": "Latin Foundations: Alphabet and Pronunciation",
-    "grammar_focus": "",
-    "chant": "",
+    "grammar_focus": "Introduction to Latin Alphabet and Pronunciation",
+    "chant": "Alphabet Chant",
     "virtue_focus": "Discipline",
     "faith_phrase": "In principio - In the beginning",
-    "vocabulary_summary": "Introduction to basic Latin vocabulary.",
+    "vocabulary_summary": "Introduction to basic Latin vocabulary related to classroom objects and greetings.",
     "author_metadata": {
       "author_name": "Steel",
       "author_contact": "steel@tequila.org"
@@ -14,101 +14,109 @@
     "license": "CC BY 4.0"
   },
   "objectives": [
-    "Students will recognize and pronounce each letter of the Latin alphabet.",
-    "Students will understand the importance of discipline in language learning.",
-    "Students will memorize and recite the faith phrase 'In principio'.",
-    "Students will learn basic Latin vocabulary related to the alphabet.",
-    "Students will connect the virtue of discipline to their study habits."
+    "Students will recite the Latin alphabet with correct pronunciation.",
+    "Students will identify and pronounce basic Latin vocabulary related to classroom objects.",
+    "Students will understand the virtue of discipline in the context of language learning.",
+    "Students will translate the faith phrase 'In principio' and discuss its significance.",
+    "Students will demonstrate the ability to connect Latin sounds to written letters."
   ],
   "vocabulary": [
     {
-      "latin": "a",
-      "english": "a",
-      "part_of_speech": "letter",
-      "pronunciation": "ah",
-      "example_phrase": "Aqua est vita."
+      "latin": "liber",
+      "english": "book",
+      "part_of_speech": "noun",
+      "pronunciation": "LEE-ber",
+      "example_phrase": "Liber in mensa est."
     },
     {
-      "latin": "b",
-      "english": "b",
-      "part_of_speech": "letter",
-      "pronunciation": "beh",
-      "example_phrase": "Bellum est malum."
+      "latin": "mensa",
+      "english": "table",
+      "part_of_speech": "noun",
+      "pronunciation": "MEN-sa",
+      "example_phrase": "Mensa magna est."
     },
     {
-      "latin": "c",
-      "english": "c",
-      "part_of_speech": "letter",
-      "pronunciation": "keh",
-      "example_phrase": "Cibus est bonus."
+      "latin": "magister",
+      "english": "teacher",
+      "part_of_speech": "noun",
+      "pronunciation": "ma-GIS-ter",
+      "example_phrase": "Magister docet."
     },
     {
-      "latin": "d",
-      "english": "d",
-      "part_of_speech": "letter",
-      "pronunciation": "deh",
-      "example_phrase": "Domus est magna."
+      "latin": "schola",
+      "english": "school",
+      "part_of_speech": "noun",
+      "pronunciation": "SKO-la",
+      "example_phrase": "Schola nova est."
     },
     {
-      "latin": "e",
-      "english": "e",
-      "part_of_speech": "letter",
-      "pronunciation": "eh",
-      "example_phrase": "Equus est fortis."
+      "latin": "salve",
+      "english": "hello",
+      "part_of_speech": "interjection",
+      "pronunciation": "SAL-we",
+      "example_phrase": "Salve, amice!"
     },
     {
-      "latin": "f",
-      "english": "f",
-      "part_of_speech": "letter",
-      "pronunciation": "ef",
-      "example_phrase": "Flos est pulcher."
+      "latin": "discipulus",
+      "english": "student",
+      "part_of_speech": "noun",
+      "pronunciation": "dis-KIP-u-lus",
+      "example_phrase": "Discipulus studet."
     },
     {
-      "latin": "g",
-      "english": "g",
-      "part_of_speech": "letter",
-      "pronunciation": "geh",
-      "example_phrase": "Gladius est acutus."
+      "latin": "tabula",
+      "english": "board",
+      "part_of_speech": "noun",
+      "pronunciation": "TA-bu-la",
+      "example_phrase": "Tabula alba est."
     },
     {
-      "latin": "h",
-      "english": "h",
-      "part_of_speech": "letter",
-      "pronunciation": "hah",
-      "example_phrase": "Hortus est viridis."
+      "latin": "sella",
+      "english": "chair",
+      "part_of_speech": "noun",
+      "pronunciation": "SEL-la",
+      "example_phrase": "Sella vacua est."
     }
   ],
-  "grammar_focus": "### Grammar Focus: The Latin Alphabet\n\nThe Latin alphabet is the foundation of our journey into the language. It consists of 23 letters, each with its own distinct pronunciation. Unlike English, Latin pronunciation is consistent, which means once you learn the sound of each letter, you can read any Latin word with confidence.\n\nTo aid in memorization, we will use the following chant:\n\n```\nA, B, C, D, E, F, G,\nH, I, K, L, M, N, O, P,\nQ, R, S, T, U, X, Y, Z.\n```\n\nThis chant helps students internalize the sequence and sound of each letter, building a strong foundation for future vocabulary and grammar studies.",
+  "grammar_focus": "### Introduction to Latin Alphabet and Pronunciation\n\nLatin, like English, uses an alphabet to represent sounds. The Latin alphabet consists of 23 letters, similar to the English alphabet but without J, U, and W. Each letter has a distinct pronunciation, which is crucial for reading and speaking Latin accurately.\n\nTo help remember the alphabet, we use the following chant:\n\n```\nA, B, C, D, E, F, G,\nH, I, K, L, M, N, O,\nP, Q, R, S, T, V, X, Y, Z.\n```\n\nThis week, we focus on mastering these sounds, which will form the foundation for all future Latin learning. Understanding the pronunciation will aid in recognizing patterns and building vocabulary.",
   "spiral_links": {
     "prior_knowledge": []
   },
   "chant": {
-    "text": "Call: A, B, C, D, E, F, G,\nResponse: H, I, K, L, M, N, O, P,\nCall: Q, R, S, T, U, X, Y, Z."
+    "text": "Call: A, B, C, D, E, F, G,\nResponse: H, I, K, L, M, N, O,\nCall: P, Q, R, S, T, V, X, Y, Z."
   },
   "assessment": {
     "quiz_structure": {
       "sections": [
         {
           "type": "pronunciation",
-          "items": 5,
-          "description": "Identify and pronounce Latin letters."
+          "description": "Students will pronounce selected letters of the Latin alphabet.",
+          "sample_items": [
+            "Pronounce the letter 'C'.",
+            "Pronounce the letter 'V'."
+          ]
         },
         {
-          "type": "translation",
-          "items": 3,
-          "description": "Translate simple phrases using learned vocabulary."
+          "type": "vocabulary_translation",
+          "description": "Translate basic Latin vocabulary into English.",
+          "sample_items": [
+            "Translate 'liber'.",
+            "Translate 'mensa'."
+          ]
         },
         {
-          "type": "chant recall",
-          "items": 1,
-          "description": "Recite the alphabet chant."
+          "type": "faith_phrase_explanation",
+          "description": "Explain the meaning of the faith phrase 'In principio'.",
+          "sample_items": [
+            "What does 'In principio' mean?"
+          ]
         }
       ],
-      "scoring_notes": "Each section is equally weighted. Pronunciation accuracy is key.",
-      "review_before_quiz": "Review the alphabet chant and practice pronunciation of each letter."
+      "scoring_notes": "Each section is worth equal points. Pronunciation is evaluated on accuracy and clarity.",
+      "review_before_quiz": "Review the alphabet chant and practice vocabulary pronunciation."
     }
   },
-  "interleaving_plan": "### Teacher Notes\n\n- **Pronunciation Cues**: Emphasize the consistent sounds of Latin letters. Use the chant to reinforce learning.\n- **Pacing Advice**: Spend ample time on each letter, ensuring students are comfortable before moving on.\n- **Connections**: This week sets the stage for vocabulary building. Next week, we'll introduce simple nouns and verbs.\n- **Engagement Tip**: Use visual aids, like flashcards, to help students associate letters with sounds.",
+  "interleaving_plan": "### Teacher Notes\n\n- **Pronunciation Tips**: Emphasize the clear enunciation of each letter. Latin pronunciation is consistent, which aids in reading and speaking.\n- **Pacing Advice**: Spend time each day on the alphabet chant to build confidence. Use repetition to reinforce learning.\n- **Connections**: This week's focus on the alphabet sets the stage for future vocabulary and grammar lessons. Next week, we will begin simple sentence structures.\n- **Encouragement**: Remind students that discipline in practice leads to mastery. Celebrate small victories to build motivation.",
   "sessions": [],
   "assets": [],
   "misconception_watchlist": [],
@@ -116,9 +124,9 @@
   "__generation": {
     "provider": "openai",
     "model": "gpt-4o",
-    "created_at": "2025-10-15T16:18:19.952182Z",
-    "git_commit": "e4bab4bc",
+    "created_at": "2025-10-15T16:30:44.463822Z",
+    "git_commit": "2f2a5f9e",
     "tokens_prompt": 930,
-    "tokens_completion": 1724
+    "tokens_completion": 2050
   }
 }

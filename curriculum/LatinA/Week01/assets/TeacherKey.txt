@@ -1,1 +1,72 @@
-{'answer_key': ['1. a', '2. War is bad.', '3. D', '4. Example: Domus est magna.', '5. The horse is strong.']}
+```markdown
+# Teacher Key – Week 1
+
+Hello, educators! Below you'll find the answer key for the Grade 3 Latin A Week 1 Quiz. Each answer includes explanations to help you guide your students in understanding the material. Let's help our students grow in their Latin knowledge!
+
+## Vocabulary (5 points)
+
+1. **Fill in the blank:** The Latin word for "book" is **liber**. (1 point)  
+   **Explanation:** "Liber" is the Latin word for "book," which is a common noun used in educational contexts.  
+   **Chant Reference:** N/A
+
+2. **Multiple Choice:** What does "mensa" mean in English? **b) Table** (1 point)  
+   **Explanation:** "Mensa" translates to "table" in English. It's important for students to connect Latin vocabulary with everyday objects.  
+   **Chant Reference:** N/A
+
+3. **Fill in the blank:** "Salve" is a Latin word used to say **Hello**. (1 point)  
+   **Explanation:** "Salve" is a common greeting in Latin, equivalent to "hello" in English, used to greet someone warmly.  
+   **Chant Reference:** N/A
+
+4. **Multiple Choice:** How do you pronounce "magister"? **a) MAH-gis-ter** (1 point)  
+   **Explanation:** The pronunciation "MAH-gis-ter" follows classical Latin pronunciation rules, where "g" is hard as in "go."  
+   **Chant Reference:** N/A
+
+5. **Fill in the blank:** The Latin word for "teacher" is **magister**. (1 point)  
+   **Explanation:** "Magister" is the Latin term for "teacher," often used in educational settings.  
+   **Chant Reference:** N/A
+
+## Grammar & Chant (5 points)
+
+6. **Short Response:** Recite the Latin alphabet from A to E. **A, B, C, D, E** (1 point)  
+   **Explanation:** The Latin alphabet begins with these letters, similar to the English alphabet.  
+   **Chant Reference:** "A, B, C, D, E" - Remember to pronounce "C" as "K."
+
+7. **Multiple Choice:** Which of the following is a noun? **b) liber** (1 point)  
+   **Explanation:** "Liber" is a noun, meaning "book," while "salve" is a greeting and "et" is a conjunction.  
+   **Chant Reference:** N/A
+
+8. **Fill in the blank:** The phrase "Liber in mensa est" means "The book is on the **table**." (1 point)  
+   **Explanation:** "Mensa" translates to "table," and the phrase describes the book's location.  
+   **Chant Reference:** N/A
+
+9. **Short Response:** What is the correct pronunciation of the letter "C" in Latin? **K** (1 point)  
+   **Explanation:** In classical Latin, "C" is always pronounced as "K," regardless of the following vowel.  
+   **Chant Reference:** "C" is pronounced as "K" in chants.
+
+10. **Chant Recall:** What comes after "G" in the Latin alphabet chant? **H** (1 point)  
+    **Explanation:** The sequence of the Latin alphabet follows the same order as the English alphabet.  
+    **Chant Reference:** "A, B, C, D, E, F, G, H" - Keep the rhythm steady.
+
+## Translation (4 points)
+
+11. **Translate to English:** "Magister in mensa est." **The teacher is on the table.** (2 points)  
+    **Explanation:** "Magister" means "teacher," "in" means "on," and "mensa" means "table." The sentence structure is similar to English.  
+    **Literal Translation:** "Teacher on table is."  
+    **Idiomatic Translation:** "The teacher is on the table."
+
+12. **Translate to Latin:** "Hello, teacher." **Salve, magister.** (2 points)  
+    **Explanation:** "Salve" is the greeting "hello," and "magister" is the noun for "teacher."  
+    **Literal Translation:** "Hello, teacher."  
+    **Idiomatic Translation:** "Salve, magister."
+
+## Virtue Reflection (1 point)
+
+13. **Short Written Response:** How can practicing discipline help you learn Latin better? Write one or two sentences. (1 point)  
+    **Sample Response:** Practicing discipline helps me focus and remember what I've learned. It encourages me to study regularly and improve my Latin skills.  
+    **Virtue Focus:** N/A  
+    **Faith Phrase:** N/A
+
+---
+
+Thank you for guiding your students through their Latin journey. Your dedication to their learning is invaluable!
+```

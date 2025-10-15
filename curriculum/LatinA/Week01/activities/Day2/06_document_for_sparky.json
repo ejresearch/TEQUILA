@@ -2,81 +2,94 @@
   "metadata": {
     "week": 1,
     "day": 2,
-    "title": "Week 1 Day 2: Latin Alphabet and Pronunciation",
+    "title": "Week 1 Day 2: Latin Alphabet and Classroom Vocabulary",
     "duration_minutes": 45,
     "virtue": "Discipline",
     "faith_phrase": "In principio - In the beginning"
   },
-  "prior_knowledge_digest": "Students should have a basic understanding of the Latin alphabet's structure and its pronunciation. Familiarity with the concept of discipline in learning will help them appreciate the importance of consistent practice. They should also be aware of the faith phrase 'In principio' as a foundational element of the course.",
-  "yesterday_recap": "Yesterday, we introduced the Latin alphabet and began practicing the pronunciation of the first few letters. We also discussed the virtue of discipline and its role in language learning.",
+  "prior_knowledge_digest": "Students should have a basic understanding of the Latin alphabet and its pronunciation. They should be familiar with the concept of connecting sounds to written letters, as well as the importance of discipline in learning a new language. Additionally, they should have been introduced to some basic Latin vocabulary related to classroom objects and greetings.",
+  "yesterday_recap": "Yesterday, we introduced the Latin alphabet and practiced its pronunciation. We also began learning basic vocabulary related to classroom objects.",
   "spiral_links": {
-    "recycled_vocab": [],
-    "recycled_grammar": [],
+    "recycled_vocab": [
+      "liber",
+      "mensa",
+      "magister"
+    ],
+    "recycled_grammar": [
+      "noun identification",
+      "basic pronunciation"
+    ],
     "prior_day_concepts": [
-      "Latin alphabet introduction",
-      "Pronunciation basics"
+      "Latin alphabet",
+      "basic vocabulary"
     ],
     "prior_weeks": []
   },
   "misconception_watchlist": [
-    "Confusing Latin letter sounds with English",
-    "Mispronouncing 'c' and 'g'"
+    "Confusing Latin pronunciation with English",
+    "Misidentifying parts of speech"
   ],
   "objectives": {
     "primary": [
-      "Students will recognize and pronounce each letter of the Latin alphabet.",
-      "Students will understand the importance of discipline in language learning.",
-      "Students will memorize and recite the faith phrase 'In principio'.",
-      "Students will learn basic Latin vocabulary related to the alphabet.",
-      "Students will connect the virtue of discipline to their study habits."
-    ],
-    "spiral_review": []
+      "Students will recite the Latin alphabet with correct pronunciation.",
+      "Students will identify and pronounce basic Latin vocabulary related to classroom objects.",
+      "Students will understand the virtue of discipline in the context of language learning.",
+      "Students will translate the faith phrase 'In principio' and discuss its significance.",
+      "Students will demonstrate the ability to connect Latin sounds to written letters."
+    ]
   },
   "materials": [
-    "Latin alphabet chart",
-    "Pronunciation audio clips",
-    "Faith phrase poster"
+    "Alphabet chart",
+    "Flashcards with vocabulary words",
+    "Whiteboard and markers"
   ],
   "lesson_flow": [
     {
       "type": "recall",
       "duration_minutes": 5,
-      "description": "Review the pronunciation of the Latin letters introduced yesterday.",
-      "student_action": "Students will repeat the pronunciation of each letter after the teacher.",
-      "teacher_notes": "Focus on correct pronunciation and address any confusion from yesterday."
+      "description": "Review the Latin alphabet with the class using the alphabet chart.",
+      "student_action": "Students recite the alphabet along with the teacher.",
+      "teacher_notes": "Focus on correct pronunciation and rhythm."
+    },
+    {
+      "type": "recall",
+      "duration_minutes": 5,
+      "description": "Quick review of vocabulary from Day 1 using flashcards.",
+      "student_action": "Students pronounce each word as it is shown.",
+      "teacher_notes": "Correct any pronunciation errors immediately."
     },
     {
       "type": "introduction",
       "duration_minutes": 10,
-      "description": "Introduce the next set of letters in the Latin alphabet.",
-      "student_action": "Students will listen and repeat each new letter's pronunciation.",
-      "teacher_notes": "Use the pronunciation audio clips to ensure accuracy."
+      "description": "Introduce new vocabulary related to classroom objects.",
+      "student_action": "Students listen and repeat each new word.",
+      "teacher_notes": "Use visuals to help students connect words with objects."
     },
     {
       "type": "guided_practice",
       "duration_minutes": 10,
-      "description": "Practice pronouncing the new letters with example phrases.",
-      "student_action": "Students will practice saying example phrases containing the new letters.",
-      "teacher_notes": "Encourage students to focus on the sound of each letter in context."
+      "description": "Practice pronunciation and usage of new vocabulary in simple sentences.",
+      "student_action": "Students form sentences using the new vocabulary.",
+      "teacher_notes": "Encourage students to use vocabulary in context."
     },
     {
       "type": "faith_reflection",
       "duration_minutes": 5,
       "description": "Discuss the faith phrase 'In principio' and its significance.",
-      "student_action": "Students will recite the faith phrase and reflect on its meaning.",
-      "teacher_notes": "Connect the phrase to the theme of beginnings in learning."
+      "student_action": "Students reflect on the phrase and share thoughts.",
+      "teacher_notes": "Connect the phrase to the virtue of discipline."
     },
     {
       "type": "closure",
       "duration_minutes": 5,
-      "description": "Summarize the day's learning and reinforce the virtue of discipline.",
-      "student_action": "Students will share how they can apply discipline in their study habits.",
-      "teacher_notes": "Encourage students to set personal goals for practicing the alphabet."
+      "description": "Recap the day's learning and preview the next lesson.",
+      "student_action": "Students share one thing they learned today.",
+      "teacher_notes": "Encourage students to practice at home."
     }
   ],
   "behavior": {
     "tone": "Encouraging and supportive",
-    "loop_behavior": "Revisit pronunciation as needed",
+    "loop_behavior": "Reinforce correct pronunciation through repetition",
     "hints_max": 3,
     "wait_seconds": 5,
     "encouragement_frequency": "Frequent"

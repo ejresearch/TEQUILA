@@ -1,1 +1,1 @@
-{'practice_sentences': ['Aqua est vita.', 'Bellum est malum.', 'Cibus est bonus.', 'Domus est magna.', 'Equus est fortis.']}
+['Liber in mensa est.', 'Mensa magna est.', 'Magister docet.', 'Schola nova est.', 'Salve, amice!']

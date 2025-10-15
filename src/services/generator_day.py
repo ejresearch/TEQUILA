@@ -442,16 +442,50 @@ def generate_day4_assessment(week: int, client: LLMClient) -> Dict[str, Path]:
 
     response_quiz = client.generate(prompt=usr_quiz, system=sys_quiz)
 
-    # Parse quiz response
+    # Parse quiz response (expects Markdown quiz + JSON answer key at end)
     if response_quiz.json:
         quiz_data = response_quiz.json
     else:
-        try:
-            cleaned_text = _strip_markdown_fences(response_quiz.text)
-            quiz_data = orjson.loads(cleaned_text)
-        except Exception as e:
-            logger.error(f"Failed to parse quiz packet response: {e}")
-            raise ValueError(f"Quiz packet generation failed: invalid JSON response")
+        # Response is likely Markdown + JSON block
+        # Split by JSON code fence or find JSON block at end
+        text = response_quiz.text
+
+        # Try to find JSON block (either in code fence or raw at end)
+        import re
+        json_match = re.search(r'```json\s*(\{.*?\})\s*```', text, re.DOTALL)
+        if not json_match:
+            # Try without code fence
+            json_match = re.search(r'(\{[^{]*"answer_key_min"[^}]*\})', text, re.DOTALL)
+
+        if json_match:
+            json_part = json_match.group(1)
+            markdown_part = text[:json_match.start()].strip()
+
+            try:
+                answer_key_data = orjson.loads(json_part)
+                quiz_data = {
+                    "quiz_markdown": markdown_part,
+                    "answer_key_min": answer_key_data.get("answer_key_min", [])
+                }
+                logger.info(f"Successfully parsed quiz: {len(markdown_part)} chars markdown, {len(quiz_data['answer_key_min'])} answer keys")
+            except Exception as e:
+                logger.error(f"Failed to parse JSON portion of quiz: {e}")
+                raise ValueError(f"Quiz packet generation failed: invalid JSON in response")
+        else:
+            # No JSON found, try parsing entire response as JSON
+            try:
+                cleaned_text = _strip_markdown_fences(text)
+                quiz_data = orjson.loads(cleaned_text)
+            except Exception as e:
+                logger.error(f"Failed to parse quiz packet response: {e}")
+                logger.error(f"Raw response text: {text[:500]}")
+                # Save the invalid response for inspection
+                invalid_dir = settings.logs_path / "invalid_responses"
+                invalid_dir.mkdir(parents=True, exist_ok=True)
+                invalid_path = invalid_dir / f"Week{week:02d}_quiz_packet_INVALID.txt"
+                write_file(invalid_path, text)
+                logger.error(f"Saved invalid quiz response to {invalid_path}")
+                raise ValueError(f"Quiz packet generation failed: invalid JSON response")
 
     quiz_markdown = quiz_data.get("quiz_markdown", "")
     answer_key_min = quiz_data.get("answer_key_min", [])

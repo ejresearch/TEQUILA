@@ -1,92 +1,90 @@
 {
   "metadata": {
-    "week": 2,
+    "week": 1,
     "day": 4,
-    "title": "Week 2 Day 4: Introduction to Latin Verbs",
+    "title": "Week 1 Day 4: Introduction to Basic Latin Grammar",
     "duration_minutes": 45,
-    "virtue": "Perseverance",
-    "faith_phrase": "Laborare est orare (To work is to pray)"
+    "virtue": "Patience",
+    "faith_phrase": "Pax vobiscum"
   },
-  "prior_knowledge_digest": "Students should be familiar with basic Latin nouns and their declensions, as well as the concept of subject-verb agreement in English. They have been introduced to the first declension and some basic vocabulary, including common nouns and adjectives. Understanding of Latin sentence structure, particularly the Subject-Object-Verb order, is essential. Students should also recall the vocabulary related to family and school, as well as the concept of noun-adjective agreement.",
-  "yesterday_recap": "Yesterday, we explored more complex noun-adjective agreements and practiced translating simple sentences from Latin to English, focusing on the first declension.",
+  "prior_knowledge_digest": "Students should be familiar with the Latin alphabet and basic pronunciation rules. They have been introduced to simple Latin greetings and common phrases. Understanding of basic sentence structure in English will aid in grasping Latin syntax. Familiarity with the concept of nouns and verbs in English is essential as we begin to explore these in Latin.",
+  "yesterday_recap": "Yesterday, we covered the Latin alphabet and practiced pronunciation. Students learned simple greetings and phrases, such as 'Salve' and 'Vale'.",
   "spiral_links": {
     "recycled_vocab": [
-      "familia",
-      "schola",
-      "magister"
+      "Salve",
+      "Vale",
+      "Roma"
     ],
     "recycled_grammar": [
-      "noun-adjective agreement",
-      "first declension endings"
+      "subject-verb agreement",
+      "basic sentence structure"
     ],
     "prior_day_concepts": [
-      "noun-adjective agreement",
-      "basic sentence translation"
+      "Latin alphabet",
+      "simple greetings"
     ],
-    "prior_weeks": [
-      1
-    ]
+    "prior_weeks": []
   },
   "misconception_watchlist": [
-    "Confusing subject and object in sentences",
-    "Incorrect verb endings"
+    "Confusing Latin pronunciation with English",
+    "Misunderstanding noun-verb agreement"
   ],
   "objectives": {
     "primary": [
-      "Introduce basic Latin verb conjugations",
-      "Practice subject-verb agreement"
+      "Introduce basic Latin noun and verb forms",
+      "Practice simple sentence construction"
     ],
     "spiral_review": [
-      "Review noun-adjective agreement",
-      "Reinforce first declension endings"
+      "Review Latin alphabet and pronunciation",
+      "Reinforce simple greetings"
     ]
   },
   "materials": [
     "Whiteboard",
     "Markers",
-    "Handouts with verb conjugation tables",
-    "Flashcards"
+    "Handouts with vocabulary",
+    "Audio recordings for pronunciation"
   ],
   "lesson_flow": [
     {
       "type": "recall",
       "duration_minutes": 10,
-      "description": "Review noun-adjective agreement and first declension endings.",
-      "student_action": "Participate in a quick quiz and discussion.",
-      "teacher_notes": "Use flashcards to prompt students."
+      "description": "Review the Latin alphabet and pronunciation with a quick quiz.",
+      "student_action": "Students will participate in a verbal quiz to recall the alphabet and pronunciation.",
+      "teacher_notes": "Emphasize correct pronunciation and provide immediate feedback."
+    },
+    {
+      "type": "review",
+      "duration_minutes": 5,
+      "description": "Revisit simple greetings learned in previous lessons.",
+      "student_action": "Students will practice greetings with a partner.",
+      "teacher_notes": "Encourage students to use proper pronunciation and intonation."
     },
     {
       "type": "introduction",
       "duration_minutes": 10,
-      "description": "Introduce basic Latin verb conjugations and subject-verb agreement.",
-      "student_action": "Listen and take notes on verb conjugation patterns.",
-      "teacher_notes": "Highlight the importance of matching verb endings with subjects."
+      "description": "Introduce basic noun and verb forms in Latin.",
+      "student_action": "Listen and take notes on the new grammar concepts.",
+      "teacher_notes": "Use examples to illustrate noun-verb agreement."
     },
     {
       "type": "guided_practice",
       "duration_minutes": 10,
-      "description": "Practice conjugating verbs with the class using examples on the board.",
-      "student_action": "Conjugate verbs in pairs and share with the class.",
-      "teacher_notes": "Provide immediate feedback and correct common errors."
-    },
-    {
-      "type": "independent_practice",
-      "duration_minutes": 10,
-      "description": "Students work on a worksheet to practice verb conjugations independently.",
-      "student_action": "Complete the worksheet and check answers with a partner.",
-      "teacher_notes": "Circulate to offer help and ensure understanding."
+      "description": "Practice constructing simple sentences using new vocabulary and grammar.",
+      "student_action": "Work in pairs to create sentences and share with the class.",
+      "teacher_notes": "Provide sentence starters and circulate to offer help."
     },
     {
       "type": "assessment",
-      "duration_minutes": 5,
-      "description": "Quick quiz on verb conjugations and subject-verb agreement.",
+      "duration_minutes": 10,
+      "description": "Conduct a short written quiz on today's vocabulary and grammar.",
       "student_action": "Complete the quiz individually.",
-      "teacher_notes": "Use this to gauge understanding and readiness for next steps."
+      "teacher_notes": "Collect quizzes for review and provide feedback in the next class."
     }
   ],
   "behavior": {
     "tone": "Encouraging and supportive",
-    "loop_behavior": "Revisit difficult concepts with additional examples",
+    "loop_behavior": "Provide hints and encouragement if students struggle",
     "hints_max": 3,
     "wait_seconds": 5,
     "encouragement_frequency": "Frequent"

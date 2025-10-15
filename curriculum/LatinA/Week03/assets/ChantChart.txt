@@ -1,0 +1,1 @@
+{'Latin': 'Gloria in excelsis Deo, et in terra pax hominibus bonae voluntatis.', 'English': 'Glory to God in the highest, and on earth peace to people of good will.'}

@@ -184,6 +184,36 @@ def _prompt_user_to_continue(week: int, day: int, field: str) -> bool:
     return response == 'y'
 
 
+def _validate_class_name_subject(class_name: str) -> bool:
+    """
+    Validate that the class_name is about Latin and not off-topic.
+
+    Args:
+        class_name: The generated class name/title
+
+    Returns:
+        True if class_name appears to be about Latin, False otherwise
+    """
+    class_name_lower = class_name.lower()
+
+    # Red flag keywords that indicate wrong subject matter
+    off_topic_keywords = [
+        'ecosystem', 'ecosystems', 'organism', 'biology', 'ecology',
+        'fraction', 'fractions', 'numerator', 'denominator',
+        'geometry', 'algebra', 'multiplication', 'equation',
+        'chemistry', 'physics', 'math', 'science',
+        'photosynthesis', 'habitat', 'species'
+    ]
+
+    # Check for off-topic keywords
+    for keyword in off_topic_keywords:
+        if keyword in class_name_lower:
+            logger.warning(f"Class name contains off-topic keyword: '{keyword}'")
+            return False
+
+    return True
+
+
 def _validate_summary_subject(summary_content: str, week_spec: Dict[str, Any]) -> bool:
     """
     Validate that the summary is about Latin and not off-topic.
@@ -198,13 +228,14 @@ def _validate_summary_subject(summary_content: str, week_spec: Dict[str, Any]) -
     summary_lower = summary_content.lower()
 
     # Red flag keywords that indicate wrong subject matter
+    # NOTE: Avoid common Latin/English cognates like "area" (Latin: open space)
     off_topic_keywords = [
         'ecosystem', 'ecosystems', 'organism', 'biology', 'ecology',
-        'fraction', 'fractions', 'numerator', 'denominator', 'division',
+        'fraction', 'fractions', 'numerator', 'denominator',
         'geometry', 'algebra', 'multiplication', 'equation',
         'chemistry', 'physics', 'atom', 'molecule',
         'photosynthesis', 'habitat', 'species',
-        'perimeter', 'area', 'volume', 'angle'
+        'perimeter', 'volume', 'angle'
     ]
 
     # Check for off-topic keywords
@@ -267,25 +298,52 @@ def generate_day_fields(week: int, day: int, client: LLMClient) -> List[Path]:
     # Get prompts
     sys, usr, _ = task_day_fields(week_spec, day)
 
-    # Generate via LLM
-    response = client.generate(prompt=usr, system=sys)
+    # Generate day fields with retry loop for class_name validation
+    fields_data = None
+    for attempt in range(1, MAX_RETRIES + 1):
+        response = client.generate(prompt=usr, system=sys)
 
-    # Parse response
-    if response.json:
-        fields_data = response.json
-    else:
+        # Parse response
         try:
-            cleaned_text = _strip_markdown_fences(response.text)
-            fields_data = orjson.loads(cleaned_text)
-        except Exception:
-            # Fallback to minimal data
-            fields_data = {
-                "class_name": f"Week {week} Day {day}",
-                "summary": "Latin lesson",
-                "grade_level": "3-5",
-                "guidelines_for_sparky": "Teach Latin vocabulary",
-                "sparkys_greeting": "Welcome to Latin!"
-            }
+            if response.json:
+                fields_data = response.json
+            else:
+                cleaned_text = _strip_markdown_fences(response.text)
+                fields_data = orjson.loads(cleaned_text)
+        except Exception as e:
+            logger.warning(f"Failed to parse day fields response (attempt {attempt}): {e}")
+            if attempt < MAX_RETRIES:
+                time.sleep(2)
+                continue
+            else:
+                # Fallback to minimal data
+                fields_data = {
+                    "class_name": f"Week {week} Day {day}: Latin Foundations",
+                    "summary": "Latin lesson",
+                    "grade_level": "3-5"
+                }
+                break
+
+        # Validate class_name
+        class_name = fields_data.get("class_name", "")
+        if _validate_class_name_subject(class_name):
+            if attempt > 1:
+                logger.info(f"Week {week} Day {day} class_name validated successfully on attempt {attempt}")
+            break
+        else:
+            error_msg = f"Class name failed validation: '{class_name}'"
+            _log_retry_attempt(week, day, attempt, error_msg)
+            _save_invalid_response(week, day, "class_name", attempt, str(fields_data))
+
+            if attempt < MAX_RETRIES:
+                logger.warning(f"Retrying day fields generation (attempt {attempt + 1}/{MAX_RETRIES})")
+                time.sleep(2)
+                continue
+            else:
+                logger.error(f"Class name validation failed after {MAX_RETRIES} attempts - using fallback")
+                # Use fallback if all retries failed
+                fields_data["class_name"] = f"Week {week} Day {day}: Latin Foundations"
+                break
 
     # Generate role_context separately (field 04)
     sys_rc, usr_rc, schema_rc = task_day_role_context(week_spec, day)

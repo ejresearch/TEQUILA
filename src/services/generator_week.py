@@ -243,7 +243,7 @@ def _load_curriculum_outline() -> Dict[str, Any]:
 
 def generate_week_spec_from_outline(week: int, client: LLMClient) -> Path:
     """
-    Generate week specification using LLM from curriculum outline.
+    Generate week specification using LLM from curriculum outline with retry logic.
 
     Args:
         week: Week number (1-36)
@@ -251,7 +251,14 @@ def generate_week_spec_from_outline(week: int, client: LLMClient) -> Path:
 
     Returns:
         Path to the compiled week spec file
+
+    Raises:
+        ValueError: If generation fails after 5 retries
     """
+    import logging
+    import time
+    logger = logging.getLogger(__name__)
+
     # Ensure week spec directory exists (but don't overwrite existing files)
     spec_dir = week_spec_dir(week)
     spec_dir.mkdir(parents=True, exist_ok=True)
@@ -268,32 +275,59 @@ def generate_week_spec_from_outline(week: int, client: LLMClient) -> Path:
     # Get prompts
     sys, usr, config = task_week_spec(week, outline_snip)
 
-    # Generate via LLM (no schema, config has temp/max_tokens settings)
-    response = client.generate(prompt=usr, system=sys, json_schema=None)
+    # Retry loop (up to 5 attempts for week spec)
+    MAX_RETRIES = 5
+    spec_data = None
 
-    # Track usage
-    if response.provider and response.tokens_prompt:
-        get_tracker().track(
-            provider=response.provider,
-            model=response.model or "unknown",
-            tokens_prompt=response.tokens_prompt or 0,
-            tokens_completion=response.tokens_completion or 0,
-            operation=f"week_{week}_spec"
-        )
+    for attempt in range(1, MAX_RETRIES + 1):
+        # Generate via LLM (no schema, config has temp/max_tokens settings)
+        response = client.generate(prompt=usr, system=sys, json_schema=None)
 
-    # Parse response - STRICT: must be valid JSON
-    if response.json:
-        spec_data = response.json
-    else:
+        # Track usage
+        if response.provider and response.tokens_prompt:
+            get_tracker().track(
+                provider=response.provider,
+                model=response.model or "unknown",
+                tokens_prompt=response.tokens_prompt or 0,
+                tokens_completion=response.tokens_completion or 0,
+                operation=f"week_{week}_spec_attempt{attempt}"
+            )
+
+        # Parse response - STRICT: must be valid JSON
         try:
-            # Strip markdown code fences if present
-            cleaned_text = _strip_markdown_fences(response.text)
-            spec_data = orjson.loads(cleaned_text)
+            if response.json:
+                spec_data = response.json
+            else:
+                # Strip markdown code fences if present
+                cleaned_text = _strip_markdown_fences(response.text)
+                spec_data = orjson.loads(cleaned_text)
+
+            # Check for placeholder content like { ... }
+            response_text = response.text if response.text else str(spec_data)
+            if "{ ... }" in response_text or "{...}" in response_text:
+                raise ValueError("Response contains placeholder ellipses { ... }")
+
+            # Successfully parsed JSON
+            if attempt > 1:
+                logger.info(f"Week {week} spec generated successfully on attempt {attempt}")
+            break
+
         except Exception as e:
+            error_msg = f"Week {week} spec generation attempt {attempt}/{MAX_RETRIES} failed: {str(e)[:200]}"
+            logger.warning(error_msg)
+
             # Save invalid response for inspection
-            invalid_path = week_spec_dir(week) / "99_compiled_week_spec_INVALID.json"
+            invalid_path = week_spec_dir(week) / f"99_compiled_week_spec_INVALID_attempt{attempt}.json"
             write_file(invalid_path, response.text)
-            raise ValueError(f"LLM returned invalid JSON - cannot proceed. Error: {e}")
+
+            if attempt < MAX_RETRIES:
+                logger.info(f"Retrying week {week} spec generation...")
+                time.sleep(2)  # Brief pause before retry
+                continue
+            else:
+                # All retries exhausted
+                logger.error(f"Week {week} spec generation failed after {MAX_RETRIES} attempts")
+                raise ValueError(f"LLM returned invalid JSON after {MAX_RETRIES} attempts. Last error: {e}")
 
     # Transform LLM format to flat WeekSpec format
     spec_data = _transform_week_spec_response(spec_data)

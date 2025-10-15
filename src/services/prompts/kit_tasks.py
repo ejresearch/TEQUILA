@@ -1725,7 +1725,7 @@ def task_day_fields(week_spec: dict, day: int) -> Tuple[str, str, Optional[Dict]
         (system_prompt, user_prompt, json_schema_hint)
     """
     sys = (
-        "Generate the THREE metadata fields for a single day lesson:\n"
+        "Generate the THREE metadata fields for a single day lesson in a LATIN LANGUAGE curriculum:\n"
         "1. class_name - short lesson title\n"
         "2. summary - 2-3 sentence overview\n"
         "3. grade_level - target grade range\n"
@@ -1734,9 +1734,15 @@ def task_day_fields(week_spec: dict, day: int) -> Tuple[str, str, Optional[Dict]
         "- These are fields 01, 02, 03\n"
         "- Field 04 (role_context) is generated separately\n"
         "- Field 05 (guidelines), 06 (document), 07 (greeting) are generated separately\n\n"
+        "CRITICAL - LATIN CURRICULUM REQUIREMENTS:\n"
+        "- This is a LATIN LANGUAGE curriculum\n"
+        "- class_name must describe Latin content (grammar, vocabulary, pronunciation, etc.)\n"
+        "- summary must be about Latin learning - NOT math, science, or other subjects\n"
+        "- Topic should reference Latin grammar concepts, vocabulary themes, or language skills\n"
+        "- DO NOT use topics like 'ecosystems', 'fractions', 'biology', 'math', etc.\n\n"
         "INSTRUCTIONS:\n"
-        "- class_name: Format as 'Week X Day Y: Topic' (≤100 chars)\n"
-        "- summary: 2-3 sentences describing lesson focus (50-500 chars)\n"
+        "- class_name: Format as 'Week X Day Y: Topic' where Topic is a LATIN concept (≤100 chars)\n"
+        "- summary: 2-3 sentences describing LATIN lesson focus (50-500 chars)\n"
         "- grade_level: Format as 'N-M' where N and M are grade numbers (e.g., '3-5', '6-8')\n\n"
         "OUTPUT FORMAT:\n"
         "Return as JSON object with these keys.\n"
@@ -1747,7 +1753,8 @@ def task_day_fields(week_spec: dict, day: int) -> Tuple[str, str, Optional[Dict]
         "}\n\n"
         "SELF-CHECK:\n"
         "✓ Is class_name formatted as 'Week X Day Y: Topic'?\n"
-        "✓ Is summary 2-3 sentences (50-500 chars)?\n"
+        "✓ Does Topic describe LATIN content (not math/science)?\n"
+        "✓ Is summary 2-3 sentences about LATIN (50-500 chars)?\n"
         "✓ Is grade_level in 'N-M' format (e.g., '3-5')?\n"
     )
 

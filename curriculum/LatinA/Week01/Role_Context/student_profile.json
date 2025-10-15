@@ -1,6 +1,17 @@
 {
-  "age_range": "10-15 years",
-  "learning_stage": "Middle school students",
-  "interests": "Technology, games, and interactive learning",
-  "learning_styles": "Visual and kinesthetic learners"
+  "age_range": "8-14 years",
+  "learning_styles": [
+    "visual",
+    "auditory",
+    "kinesthetic"
+  ],
+  "interests": [
+    "technology",
+    "games",
+    "stories"
+  ],
+  "challenges": [
+    "short attention spans",
+    "varied learning paces"
+  ]
 }

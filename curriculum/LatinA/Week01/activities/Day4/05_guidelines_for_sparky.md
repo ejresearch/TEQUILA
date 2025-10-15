@@ -11,99 +11,100 @@ provenance:
   generator: "Steel"
   prompt_id: "prompt_for_guidelines"
   version: "1.0.0"
-  generated_at: "2025-10-15T18:50:28.619207Z"
+  generated_at: "2025-10-15T19:13:15.153111Z"
 ---
 
 # Week 1 Day 4: Week 1 Day 4
 
 ## Objectives & Success Criteria
 ### Objectives
-- Recite the Latin alphabet with correct pronunciation.
-- Recognize and pronounce basic Latin vocabulary.
-- Understand the importance of discipline in learning Latin.
+- Students will accurately pronounce the Latin alphabet letters A-H.
+- Students will recite the alphabet chant with confidence.
+- Students will connect discipline with consistent practice.
 
 ### Success Criteria
-- Students recite the alphabet confidently.
-- Students pronounce 'aqua' and 'terra' correctly.
-- Students explain the role of discipline in learning.
+- Students pronounce letters A-H correctly.
+- Students recite the alphabet chant from memory.
+- Students demonstrate understanding of hard 'C' and 'G' sounds.
 
 ## Materials & Setup
-- Chant chart (Latin Alphabet Chant)
-- Flashcards (aqua, terra, amicus)
+- Chant chart (from WeekSpec)
+- Flashcards (Aqua, Bellum, Civitas)
 - Parsing worksheet (cases, numbers)
-- Visual aids for the alphabet
+- Visual aids for letter sounds
 
 ## Minute-by-Minute Flow
 
 ### Phase 1: Greeting & Spiral Review (5 min)
 **Sparky says:**
-"Salvē! Today we'll practice **Discipline** as we learn Latin. Let's start by reviewing some words we've learned."
+"Salvē! Today we'll practice **Discipline** as we master our Latin sounds. Let's start with some words we know!"
 
 **Activity:**
-- Show flashcards: "What does 'aqua' mean?" (Hint: It's something you drink!)
-- Recycle grammar: "What sound does 'a' make in Latin?"
+- Show flashcards: Aqua, Bellum, Civitas
+- Ask: "What does 'Aqua' mean?" (Hint: It's something we drink!)
+- Recycle grammar: "How do we say 'C' in Latin?"
 
 **Check for Understanding:**
-- "Can you recite the Latin alphabet?"
+- "Can you pronounce the letter 'C'?"
 
 ---
 
 ### Phase 2: Chant Introduction/Practice (5–7 min)
 **Sparky says:**
-"Let's chant the alphabet together! We'll do it slowly first, then with rhythm."
+"Let's say the letters together! We'll chant it once slowly, then once with rhythm."
 
 **Activity:**
 - Display chant chart
 - Model chant (once slowly, once at tempo)
 - Students echo
-- Point to letters as they chant
+- Point to each letter as they chant
 
 **Check for Understanding:**
-- "What sound does 'a' make in Latin?"
+- "Who can recite the first part of the chant?"
 
 ---
 
 ### Phase 3: Grammar Instruction (8–10 min)
-**Focus:** Latin alphabet recitation, Correct pronunciation of vowels
+**Focus:** Pronunciation of Latin letters A-H, Understanding hard sounds of 'C' and 'G'
 
 **Sparky says:**
-"Remember, 'a' is like 'ah' in 'father'. Let's practice some words."
+"Remember, 'C' is always hard, like in 'cat'. Let's practice together!"
 
 **Activity:**
-- Introduce pronunciation of vowels
-- Show example words: 'aqua', 'terra'
-- Parse together (focus on vowel sounds)
+- Introduce pronunciation rules for 'C' and 'G'
+- Show example words: Civitas, Gloria
+- Practice pronunciation as a group
 - Highlight common misconceptions:
-  - Pattern: Mispronouncing 'a' as in 'cat'
-  - Correction cue: "Remember, 'a' is like 'ah' in 'father'."
+  - Pattern: Soft 'C' sound
+  - Correction cue: "Remember, 'C' is always hard in Latin."
 
 **Check for Understanding:**
-- "How do you say 'water' in Latin?"
+- "What sound does 'G' make in Latin?"
 
 ---
 
 ### Phase 4: Guided Practice (5–7 min)
 **Sparky says:**
-"Let's try saying some words together. Remember, practice makes perfect!"
+"Great job! Keep practicing! Let's try some words together."
 
 **Activity:**
-- Present practice words: 'amicus', 'terra'
+- Present practice words: Aqua, Bellum, Civitas
 - Students pronounce with guidance
 - Differentiation:
-  - **Support:** Use visual aids for pronunciation
-  - **Extension:** Challenge students to create a simple Latin phrase
+  - **Support:** Use visual aids for letter sounds
+  - **Extension:** Challenge students to spell simple words
 
 **Check for Understanding:**
-- "What does 'amicus' mean?"
+- "Why is 'In principio' important?"
 
 ---
 
 ### Phase 5: Closure & Virtue Tie-In (2–3 min)
 **Sparky says:**
-"Practicing the alphabet daily builds discipline. Let's keep up the good work!"
+"Practice makes perfect! Let's use discipline to master our Latin sounds."
 
 **Faith Integration:**
-"Remember 'In principio' as we begin our journey in Latin."
+"Remember, 'In principio' connects us to the beginning of our learning journey."
 
 **Activity:**
 - Review objectives
@@ -114,24 +115,26 @@ provenance:
 
 ## Coaching Notes
 ### Common Misconceptions
-- **Pattern:** Mispronouncing 'a' as in 'cat'
-  **Correction Cue:** "Remember, 'a' is like 'ah' in 'father'."
+- **Pattern:** Soft 'C' sound
+  **Correction Cue:** "Remember, 'C' is always hard in Latin."
+- **Pattern:** Soft 'G' sound
+  **Correction Cue:** "In Latin, 'G' is always hard, like 'go'."
 
 ### Differentiation Strategies
-- **Support:** Use visual aids for the alphabet, Pair students for chant practice
-- **Extension:** Challenge students to create a simple Latin phrase, Explore the history of the Latin alphabet
+- **Support:** Use visual aids for letter sounds, Pair students for chant practice
+- **Extension:** Challenge students to spell simple words, Introduce additional Latin vocabulary
 
 ### Classroom Management
-- Use hand signals for quieting down
-- Transition smoothly from chant to vocabulary practice
+- Keep transitions smooth with clear signals
+- Use a timer for chant practice
 
 ---
 
 ## Assessment Checkpoints
 Embedded in flow above:
-- Phase 1: "Can you recite the Latin alphabet?"
-- Phase 2: "What sound does 'a' make in Latin?"
-- Phase 3: "How do you say 'water' in Latin?"
-- Phase 4: "What does 'amicus' mean?"
+- Phase 1: "Can you pronounce the letter 'C'?"
+- Phase 2: "Who can recite the first part of the chant?"
+- Phase 3: "What sound does 'G' make in Latin?"
+- Phase 4: "Why is 'In principio' important?"
 - Phase 5: Self-assessment against success criteria
 ```

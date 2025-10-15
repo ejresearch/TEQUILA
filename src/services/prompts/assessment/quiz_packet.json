@@ -93,7 +93,14 @@
         "",
         "Each question should specify point value (sum = 20).",
         "",
-        "After the quiz markdown, output a JSON block named `answer_key_min` containing only the question numbers, section names, correct answers, and points.",
+        "### CRITICAL SPIRAL LEARNING REQUIREMENT",
+        "The quiz MUST include ≥25% content from prior weeks (spiral review).",
+        "- Include vocabulary from previous weeks (check week_spec's 03_vocabulary.json for recycled words)",
+        "- Include grammar concepts from earlier weeks",
+        "- Reference prior chants or declensions",
+        "- At least 5 out of 20 points (25%) must test prior week content",
+        "",
+        "After the quiz markdown, output a JSON block named `answer_key_min` containing only the question numbers, section names, correct_answers, and points.",
         "Do not include explanations or extended rationale in this step (that's for prompt_for_teacher_key)."
       ]
     }

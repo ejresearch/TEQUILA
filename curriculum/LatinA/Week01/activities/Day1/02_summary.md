@@ -6,29 +6,28 @@ validated_by: Steel
 originality_attestation: true
 ---
 
-# Week 1 Day 1: Introduction to Ecosystems
+# Week 1 Day 1: Introduction to Latin Nouns
 
 ## Objective
-Today, students will be introduced to the concept of ecosystems, learning key vocabulary and understanding the basic interactions within these natural communities.
+Today, students will begin their journey into Latin by learning about the basic structure of Latin nouns, focusing on their forms and functions in sentences.
 
 ## Prior Knowledge
-- Students have previously learned about different types of living organisms and their basic needs.
-- Familiarity with the concept of habitats and how animals and plants adapt to their environments.
+- Understanding of basic English grammar, such as nouns and their role in sentences.
+- Familiarity with the concept of gender in language, as seen in languages like Spanish or French.
 
 ## Focus for Today
-- **Grammar:** Introduction to simple present tense to describe habitual actions in ecosystems.
-- **Chant:** "Ecosystems, big and small, nature's balance, hear the call."
-- **Vocabulary:**
-  - Ecosystem
-  - Habitat
-  - Organism
-  - Interaction
-  - Community
-  - Environment
-  - Adaptation
+- Grammar: Introduction to the concept of declensions and the nominative case.
+- Chant: A simple chant to help memorize the first declension endings.
+- Vocabulary: 
+  - puella (girl)
+  - agricola (farmer)
+  - aqua (water)
+  - terra (earth)
+  - nauta (sailor)
+  - poeta (poet)
 
 ## Virtue & Faith Connection
-Today's virtue is "Harmony," reflecting how ecosystems thrive when all parts work together. The faith phrase "All creation sings in harmony" reminds us of the interconnectedness of life.
+As we explore the structure of Latin nouns, we reflect on the virtue of diligence, recognizing the importance of careful study and practice. Our faith phrase reminds us that "Veritas vos liberabit"—"The truth will set you free," encouraging us to seek truth in our learning.
 
 ## Teacher Notes
-Encourage students to pronounce "ecosystem" slowly, emphasizing each syllable: e-co-sys-tem. Allow time for students to practice the chant, focusing on rhythm and clarity. This will help reinforce the vocabulary and the concept of balance within ecosystems.
+Begin with a brief review of what nouns are in English to set the stage. Emphasize the pronunciation of Latin vowels, which are consistent and clear, unlike in English. Encourage students to practice the chant regularly to internalize the noun endings.

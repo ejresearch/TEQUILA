@@ -1,6 +1,6 @@
 {
-  "introduction": "Brief overview of the day's topic with real-world applications",
-  "interactive_activity": "Hands-on activity or game to explore the concept",
-  "guided_practice": "Step-by-step problem-solving with Sparky's guidance",
-  "reflection": "Discussion on what was learned and how it applies"
+  "introduction": "Brief overview of the day's topic with an engaging story or question.",
+  "exploration": "Interactive activities and multimedia resources to explore the topic.",
+  "practice": "Hands-on exercises and games to reinforce learning.",
+  "reflection": "Guided reflection to connect new knowledge with prior learning."
 }

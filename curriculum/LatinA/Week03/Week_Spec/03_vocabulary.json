@@ -1,0 +1,59 @@
+[
+  {
+    "latin": "puella",
+    "english": "girl",
+    "part_of_speech": "noun",
+    "pronunciation": "pweh-lah",
+    "example_phrase": "Puella est in horto."
+  },
+  {
+    "latin": "schola",
+    "english": "school",
+    "part_of_speech": "noun",
+    "pronunciation": "sko-lah",
+    "example_phrase": "Schola magna est."
+  },
+  {
+    "latin": "mensa",
+    "english": "table",
+    "part_of_speech": "noun",
+    "pronunciation": "men-sah",
+    "example_phrase": "Mensa est in aula."
+  },
+  {
+    "latin": "liber",
+    "english": "book",
+    "part_of_speech": "noun",
+    "pronunciation": "lee-ber",
+    "example_phrase": "Liber est in mensa.",
+    "recycled_from_week": 2
+  },
+  {
+    "latin": "aqua",
+    "english": "water",
+    "part_of_speech": "noun",
+    "pronunciation": "ah-kwah",
+    "example_phrase": "Aqua est frigida."
+  },
+  {
+    "latin": "via",
+    "english": "road",
+    "part_of_speech": "noun",
+    "pronunciation": "wee-ah",
+    "example_phrase": "Via longa est."
+  },
+  {
+    "latin": "terra",
+    "english": "earth",
+    "part_of_speech": "noun",
+    "pronunciation": "ter-rah",
+    "example_phrase": "Terra est plana."
+  },
+  {
+    "latin": "familia",
+    "english": "family",
+    "part_of_speech": "noun",
+    "pronunciation": "fa-mee-lee-ah",
+    "example_phrase": "Familia magna est."
+  }
+]

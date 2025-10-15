@@ -6,22 +6,27 @@ validated_by: Steel
 originality_attestation: true
 ---
 
-# Week 1 Day 2: Introduction to Fractions
+# Week 1 Day 2: Introduction to Latin Nouns
 
 ## Objective
-Today, students will learn the basics of fractions, understanding how they represent parts of a whole and how to identify and write simple fractions.
+Today, students will learn about the basic structure of Latin nouns, focusing on their forms and functions within sentences. They will practice translating simple Latin nouns and reciting them to build familiarity.
 
 ## Prior Knowledge
-- Understanding of whole numbers and their place on the number line.
-- Basic addition and subtraction skills.
+- Students have been introduced to the Latin alphabet, which is essential for reading and pronouncing Latin words correctly.
+- Basic Latin vocabulary such as "aqua" (water) and "terra" (earth) has been introduced to provide context for noun usage.
 
 ## Focus for Today
-- Grammar: Understanding mathematical language related to fractions.
-- Chant: Reinforce the concept of parts and wholes through rhythmic repetition.
-- Vocabulary: Fraction, numerator, denominator, whole, part, equal, divide, share.
+- Grammar: Introduction to Latin noun declensions.
+- Chant: Recitation of the first declension endings.
+- Vocabulary: 
+  - puella (girl)
+  - agricola (farmer)
+  - nauta (sailor)
+  - poeta (poet)
+  - femina (woman)
 
 ## Virtue & Faith Connection
-Today's lesson connects to the virtue of patience, as students learn to carefully divide and share equally. The faith phrase "We are all parts of one body" reminds us of the importance of each part working together harmoniously.
+Today's study of Latin nouns encourages students to appreciate the beauty of language structure, reflecting the virtue of diligence in learning. The faith phrase "In principio erat Verbum" (In the beginning was the Word) highlights the power of words and language.
 
 ## Teacher Notes
-Encourage students to visualize fractions using everyday objects, like slices of pizza or pieces of fruit. Remind them to pronounce "numerator" and "denominator" clearly, emphasizing the syllables to aid memory. Allow time for practice and questions, ensuring a solid grasp of these foundational concepts.
+Encourage students to practice the pronunciation of Latin nouns, focusing on vowel sounds. Use repetition and chanting to help memorize the first declension endings. Allow time for students to translate simple sentences using the vocabulary words, reinforcing their understanding of noun roles in Latin.

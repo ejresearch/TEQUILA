@@ -1,0 +1,18 @@
+{
+  "age_range": "8-14 years",
+  "learning_styles": [
+    "visual",
+    "auditory",
+    "kinesthetic"
+  ],
+  "interests": [
+    "technology",
+    "games",
+    "stories"
+  ],
+  "learning_goals": [
+    "improve problem-solving skills",
+    "enhance creativity",
+    "build foundational knowledge"
+  ]
+}

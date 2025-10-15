@@ -1,82 +1,58 @@
 [
   {
-    "latin": "aqua",
-    "english": "water",
-    "part_of_speech": "noun",
-    "pronunciation": "AH-kwah",
-    "example_phrase": "Aqua est necessaria.",
-    "notes": null,
-    "is_recycled": false,
-    "from_week": null
+    "latin": "A",
+    "english": "A",
+    "part_of_speech": "letter",
+    "pronunciation": "/aː/",
+    "example": "Aqua - Water"
   },
   {
-    "latin": "terra",
-    "english": "earth",
-    "part_of_speech": "noun",
-    "pronunciation": "TEHR-rah",
-    "example_phrase": "Terra est magna.",
-    "notes": null,
-    "is_recycled": false,
-    "from_week": null
+    "latin": "B",
+    "english": "B",
+    "part_of_speech": "letter",
+    "pronunciation": "/beː/",
+    "example": "Bellum - War"
   },
   {
-    "latin": "amicus",
-    "english": "friend",
-    "part_of_speech": "noun",
-    "pronunciation": "ah-MEE-koos",
-    "example_phrase": "Amicus bonus est.",
-    "notes": null,
-    "is_recycled": false,
-    "from_week": null
+    "latin": "C",
+    "english": "C",
+    "part_of_speech": "letter",
+    "pronunciation": "/keː/",
+    "example": "Civitas - State"
   },
   {
-    "latin": "luna",
-    "english": "moon",
-    "part_of_speech": "noun",
-    "pronunciation": "LOO-nah",
-    "example_phrase": "Luna clara est.",
-    "notes": null,
-    "is_recycled": false,
-    "from_week": null
+    "latin": "D",
+    "english": "D",
+    "part_of_speech": "letter",
+    "pronunciation": "/deː/",
+    "example": "Dominus - Lord"
   },
   {
-    "latin": "sol",
-    "english": "sun",
-    "part_of_speech": "noun",
-    "pronunciation": "sohl",
-    "example_phrase": "Sol lucet.",
-    "notes": null,
-    "is_recycled": false,
-    "from_week": null
+    "latin": "E",
+    "english": "E",
+    "part_of_speech": "letter",
+    "pronunciation": "/eː/",
+    "example": "Equus - Horse"
   },
   {
-    "latin": "via",
-    "english": "road",
-    "part_of_speech": "noun",
-    "pronunciation": "WEE-ah",
-    "example_phrase": "Via longa est.",
-    "notes": null,
-    "is_recycled": false,
-    "from_week": null
+    "latin": "F",
+    "english": "F",
+    "part_of_speech": "letter",
+    "pronunciation": "/ef/",
+    "example": "Filius - Son"
   },
   {
-    "latin": "domus",
-    "english": "house",
-    "part_of_speech": "noun",
-    "pronunciation": "DOH-moos",
-    "example_phrase": "Domus magna est.",
-    "notes": null,
-    "is_recycled": false,
-    "from_week": null
+    "latin": "G",
+    "english": "G",
+    "part_of_speech": "letter",
+    "pronunciation": "/geː/",
+    "example": "Gloria - Glory"
   },
   {
-    "latin": "flamma",
-    "english": "flame",
-    "part_of_speech": "noun",
-    "pronunciation": "FLAHM-mah",
-    "example_phrase": "Flamma calida est.",
-    "notes": null,
-    "is_recycled": false,
-    "from_week": null
+    "latin": "H",
+    "english": "H",
+    "part_of_speech": "letter",
+    "pronunciation": "/haː/",
+    "example": "Homo - Man"
   }
 ]

@@ -5,82 +5,90 @@
     "title": "Week 1 Day 3: Introduction to Latin Nouns",
     "duration_minutes": 45,
     "virtue": "Patience",
-    "faith_phrase": "Pax vobiscum"
+    "faith_phrase": "Patience is a virtue."
   },
-  "prior_knowledge_digest": "Students should be familiar with the basic structure of Latin sentences, including the subject-verb-object order. They have been introduced to the concept of Latin being an inflected language, where the endings of words change to indicate their role in the sentence. Familiarity with the first conjugation of verbs and basic vocabulary related to greetings and simple actions is also expected.",
-  "yesterday_recap": "Yesterday, we explored the concept of Latin verbs and their conjugations, focusing on the first conjugation. Students practiced forming simple sentences using these verbs.",
+  "prior_knowledge_digest": "Students should have a basic understanding of the Latin alphabet and pronunciation rules. They should also be familiar with the concept of nouns in English, including their role as subjects and objects in sentences. Prior exposure to the idea of grammatical gender and number in languages like Spanish or French will be beneficial, as Latin also uses these concepts. Students should recall the vocabulary introduced in the first two days, such as 'amicus' (friend) and 'familia' (family).",
+  "yesterday_recap": "Yesterday, we explored the Latin alphabet and practiced pronunciation. We also learned some basic vocabulary words and their meanings.",
   "spiral_links": {
     "recycled_vocab": [
-      "salve",
-      "vale",
-      "amare"
+      "amicus",
+      "familia",
+      "terra"
     ],
     "recycled_grammar": [
-      "subject-verb agreement",
-      "basic sentence structure"
+      "nouns",
+      "gender"
     ],
     "prior_day_concepts": [
-      "first conjugation verbs"
+      "Latin alphabet",
+      "basic vocabulary"
     ],
     "prior_weeks": []
   },
   "misconception_watchlist": [
     "Confusing noun endings with verb endings",
-    "Misidentifying the subject in a sentence"
+    "Misidentifying gender of nouns"
   ],
   "objectives": {
     "primary": [
-      "Introduce the concept of Latin nouns",
-      "Understand the role of noun endings in indicating case"
+      "Understand the concept of grammatical gender in Latin",
+      "Identify and use basic Latin nouns"
     ],
     "spiral_review": []
   },
   "materials": [
+    "Latin textbook",
     "Whiteboard",
     "Markers",
-    "Handouts with noun endings",
-    "Projector"
+    "Flashcards with vocabulary words"
   ],
   "lesson_flow": [
     {
       "type": "recall",
       "duration_minutes": 5,
-      "description": "Review the basic sentence structure and first conjugation verbs.",
-      "student_action": "Students recall and share examples of sentences using first conjugation verbs.",
-      "teacher_notes": "Encourage students to think of sentences they used in previous lessons."
+      "description": "Review the Latin alphabet and pronunciation rules.",
+      "student_action": "Students recite the alphabet and practice pronunciation.",
+      "teacher_notes": "Focus on correct pronunciation and address any lingering issues."
+    },
+    {
+      "type": "review",
+      "duration_minutes": 5,
+      "description": "Quick recap of vocabulary from previous lessons.",
+      "student_action": "Students match words with meanings using flashcards.",
+      "teacher_notes": "Encourage students to recall meanings without hints."
     },
     {
       "type": "introduction",
       "duration_minutes": 10,
-      "description": "Introduce Latin nouns and the concept of declensions.",
-      "student_action": "Listen and take notes on the introduction of nouns and declensions.",
-      "teacher_notes": "Use examples to illustrate how noun endings change."
+      "description": "Introduce the concept of grammatical gender in Latin nouns.",
+      "student_action": "Listen and take notes on the explanation of gender.",
+      "teacher_notes": "Use examples from familiar languages to illustrate gender."
     },
     {
       "type": "guided_practice",
       "duration_minutes": 10,
-      "description": "Practice identifying nouns and their roles in sentences.",
-      "student_action": "Work in pairs to identify nouns in example sentences and discuss their roles.",
-      "teacher_notes": "Provide immediate feedback and clarify any misconceptions."
+      "description": "Practice identifying the gender of Latin nouns using examples.",
+      "student_action": "Students work in pairs to classify nouns by gender.",
+      "teacher_notes": "Provide immediate feedback and correct misconceptions."
     },
     {
       "type": "independent_practice",
       "duration_minutes": 10,
-      "description": "Students complete a worksheet on identifying and using Latin nouns.",
-      "student_action": "Independently complete the worksheet, focusing on noun endings.",
-      "teacher_notes": "Circulate to offer help and check for understanding."
+      "description": "Students complete a worksheet on noun gender and vocabulary.",
+      "student_action": "Independently fill out the worksheet.",
+      "teacher_notes": "Circulate to assist and ensure understanding."
     },
     {
       "type": "closure",
       "duration_minutes": 5,
       "description": "Summarize the day's learning and preview the next lesson.",
-      "student_action": "Share one new thing learned about Latin nouns.",
-      "teacher_notes": "Encourage students to reflect on how noun endings affect meaning."
+      "student_action": "Students share one new thing they learned.",
+      "teacher_notes": "Highlight the importance of patience in learning a new language."
     }
   ],
   "behavior": {
     "tone": "Encouraging and supportive",
-    "loop_behavior": "Review and reinforce key concepts",
+    "loop_behavior": "Revisit challenging concepts with patience",
     "hints_max": 3,
     "wait_seconds": 5,
     "encouragement_frequency": "Frequent"

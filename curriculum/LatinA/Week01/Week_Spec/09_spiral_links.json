@@ -1,7 +1,9 @@
 {
-  "prior_knowledge": [],
-  "prior_weeks_dependencies": [],
-  "recycled_vocab": [],
-  "recycled_grammar": [],
-  "notes": null
+  "prior_knowledge": [
+    {
+      "source_week": 0,
+      "concept": "Basic English alphabet",
+      "reuse_reason": "Foundation for Latin alphabet"
+    }
+  ]
 }

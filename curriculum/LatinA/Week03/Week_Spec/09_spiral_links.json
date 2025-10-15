@@ -1,0 +1,14 @@
+{
+  "prior_knowledge": [
+    {
+      "source_week": 2,
+      "concept": "basic noun recognition",
+      "reuse_reason": "foundation for declension"
+    },
+    {
+      "source_week": 2,
+      "concept": "simple sentence structure",
+      "reuse_reason": "application in translation"
+    }
+  ]
+}

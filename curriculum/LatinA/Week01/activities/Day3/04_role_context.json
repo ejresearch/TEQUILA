@@ -7,79 +7,78 @@
     "title": "Week 1 Day 3"
   },
   "objectives": [
-    "Recite the Latin alphabet with correct pronunciation.",
-    "Pronounce basic Latin vocabulary words accurately.",
-    "Connect 'In principio' to its meaning and context."
+    "Students will pronounce Latin letters A-H accurately.",
+    "Students will recite the alphabet chant with confidence.",
+    "Students will connect discipline with consistent practice."
   ],
   "focus_areas": [
-    "Latin alphabet recitation",
-    "Correct pronunciation of vowels",
-    "Basic vocabulary pronunciation",
-    "Chant practice",
-    "Faith phrase connection"
+    "Pronunciation of Latin letters A-H",
+    "Alphabet chant practice",
+    "Understanding hard sounds of 'C' and 'G'",
+    "Connecting discipline with learning",
+    "Exploring 'In principio'"
   ],
   "spiral_hooks": {
     "vocabulary_spiral": [
-      "aqua",
-      "terra",
-      "amicus"
+      "Aqua",
+      "Bellum",
+      "Civitas"
     ],
     "grammar_spiral": [
-      "Latin alphabet",
-      "Pronunciation of vowels"
+      "Basic English alphabet",
+      "Hard sounds of 'C' and 'G'"
     ]
   },
   "virtue_integration": {
     "virtue": "Discipline",
-    "prompt": "Let's practice discipline by focusing on clear pronunciation."
+    "prompt": "Practice the alphabet chant daily to build discipline."
   },
   "faith_integration": {
     "phrase": "In principio",
-    "usage_note": "Use when introducing the day's lesson to connect with faith."
+    "usage_note": "Introduce at the start of the lesson to set the tone."
   },
   "coaching_cues": [
-    "Great job on those vowels!",
-    "Remember, 'a' is always 'ah'.",
-    "Let's chant together!",
-    "Who can say 'aqua' like a pro?",
-    "Discipline helps us learn better!"
+    "Let's say the alphabet together!",
+    "Remember, 'C' is like 'cat'!",
+    "Great job with 'G'!",
+    "Keep practicing, it gets easier!",
+    "Discipline helps us learn!"
   ],
   "common_misconceptions": [
     {
-      "pattern": "Mispronouncing 'a' as in 'cat'",
-      "correction_cue": "Remember, 'a' is like 'ah' in 'father'."
+      "pattern": "Soft 'C' sound",
+      "correction_cue": "Remember, 'C' is always hard, like 'cat'."
     },
     {
-      "pattern": "Skipping letters in the alphabet",
-      "correction_cue": "Let's try the chant again, slowly."
+      "pattern": "Soft 'G' sound",
+      "correction_cue": "'G' is always hard, like 'go'."
     }
   ],
   "checks_for_understanding": [
-    "Can you recite the alphabet without looking?",
-    "What sound does 'a' make in Latin?",
-    "How do you say 'water' in Latin?",
+    "Can you pronounce 'C' correctly?",
+    "What sound does 'G' make?",
+    "Who can recite the alphabet chant?",
     "What does 'In principio' mean?",
-    "Can you pronounce 'amicus' correctly?"
+    "How does discipline help us learn?"
   ],
   "success_criteria": [
-    "Students recite the alphabet confidently.",
-    "Students pronounce vocabulary words correctly.",
-    "Students explain the meaning of 'In principio'."
+    "Students pronounce letters A-H correctly.",
+    "Students recite the alphabet chant smoothly.",
+    "Students demonstrate understanding of 'In principio'."
   ],
   "differentiation": {
     "support": [
-      "Use visual aids for alphabet.",
-      "Provide pronunciation guides.",
-      "Repeat chants slowly."
+      "Use visual aids for letter sounds.",
+      "Pair students for chant practice."
     ],
     "extension": [
-      "Challenge with new vocabulary words.",
-      "Ask students to create simple Latin phrases."
+      "Challenge students to spell simple Latin words.",
+      "Introduce additional Latin letters."
     ]
   },
   "classroom_management": [
-    "Keep transitions smooth with chants.",
-    "Use hand signals for quieting down."
+    "Keep chant practice lively and fun.",
+    "Use hand signals for quiet transitions."
   ],
   "constraints": {
     "time_window_minutes": 25,

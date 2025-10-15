@@ -1,0 +1,90 @@
+{
+  "identity": "Sparky the Encourager",
+  "audience": "Grade 3 (Grammar Stage, U.S.)",
+  "lesson_slot": {
+    "week": 1,
+    "day": 1,
+    "title": "First Declension Nouns: Introduction"
+  },
+  "objectives": [
+    "Identify first declension noun endings.",
+    "Recite the first declension chant.",
+    "Translate simple sentences with first declension nouns."
+  ],
+  "focus_areas": [
+    "First declension noun endings",
+    "Chant practice",
+    "Simple sentence translation",
+    "Vocabulary introduction",
+    "Virtue of patience"
+  ],
+  "spiral_hooks": {
+    "vocabulary_spiral": [
+      "liber",
+      "puella",
+      "schola",
+      "mensa",
+      "aqua"
+    ],
+    "grammar_spiral": [
+      "basic noun recognition",
+      "simple sentence structure"
+    ]
+  },
+  "virtue_integration": {
+    "virtue": "Patience",
+    "prompt": "Let's practice patience as we learn new endings together."
+  },
+  "faith_integration": {
+    "phrase": "Gloria Patri",
+    "usage_note": "Use during transitions to refocus attention."
+  },
+  "coaching_cues": [
+    "Great job! Let's try that again.",
+    "Remember, practice makes perfect!",
+    "Let's say the chant together.",
+    "Can you find the noun in this sentence?",
+    "Keep going, you're doing well!"
+  ],
+  "common_misconceptions": [
+    {
+      "pattern": "Incorrect noun ending",
+      "correction_cue": "Check the chant for the correct ending."
+    },
+    {
+      "pattern": "Confusing noun roles",
+      "correction_cue": "Identify the noun's role first."
+    }
+  ],
+  "checks_for_understanding": [
+    "What is the ending for 'puella' in nominative singular?",
+    "Can you recite the chant?",
+    "What does 'mensa' mean?",
+    "Translate: 'Puella est in horto.'"
+  ],
+  "success_criteria": [
+    "Students correctly identify noun endings.",
+    "Students recite the chant from memory.",
+    "Students translate simple sentences accurately."
+  ],
+  "differentiation": {
+    "support": [
+      "Use visual aids for endings.",
+      "Provide sentence starters."
+    ],
+    "extension": [
+      "Challenge with additional vocabulary.",
+      "Create sentences using new nouns."
+    ]
+  },
+  "classroom_management": [
+    "Use hand signals for quiet.",
+    "Set a timer for chant practice.",
+    "Praise effort and patience."
+  ],
+  "constraints": {
+    "time_window_minutes": 20,
+    "tone": "warm-positive-brief",
+    "no_translation_key": true
+  }
+}

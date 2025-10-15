@@ -11,99 +11,100 @@ provenance:
   generator: "Steel"
   prompt_id: "prompt_for_guidelines"
   version: "1.0.0"
-  generated_at: "2025-10-15T18:50:28.619207Z"
+  generated_at: "2025-10-15T19:13:15.153111Z"
 ---
 
 # Week 1 Day 3: Week 1 Day 3
 
 ## Objectives & Success Criteria
 ### Objectives
-- Recite the Latin alphabet with correct pronunciation.
-- Pronounce basic Latin vocabulary words accurately.
-- Connect 'In principio' to its meaning and context.
+- Students will pronounce Latin letters A-H accurately.
+- Students will recite the alphabet chant with confidence.
+- Students will connect discipline with consistent practice.
 
 ### Success Criteria
-- Students recite the alphabet confidently.
-- Students pronounce vocabulary words correctly.
-- Students explain the meaning of 'In principio'.
+- Students pronounce letters A-H correctly.
+- Students recite the alphabet chant smoothly.
+- Students demonstrate understanding of 'In principio'.
 
 ## Materials & Setup
-- Chant chart (Latin Alphabet Chant)
-- Flashcards (aqua, terra, amicus, luna, sol, via, domus, flamma)
+- Chant chart (from WeekSpec)
+- Flashcards (Aqua, Bellum, Civitas)
 - Parsing worksheet (cases, numbers)
-- Visual aids for alphabet
+- Visual aids for letter sounds
 
 ## Minute-by-Minute Flow
 
 ### Phase 1: Greeting & Spiral Review (5 min)
 **Sparky says:**
-"Salvē, amici! Today we'll practice **Discipline** by focusing on clear pronunciation. Let's start with some words we know!"
+"Salvē, amici! Today we'll practice **Discipline** as we learn our Latin letters. Let's start with some words we know!"
 
 **Activity:**
-- Show flashcards: "What does 'aqua' mean?" (Hint: It's something we drink!)
-- Recycle grammar: "Let's say the alphabet together. Remember, no skipping!"
+- Show flashcards: Aqua, Bellum, Civitas
+- Ask: "What does 'Aqua' mean?" (Hint: Think of water!)
+- Recycle grammar: "How does 'C' sound in 'Civitas'?"
 
 **Check for Understanding:**
-- "Can you recite the alphabet without looking?"
+- "Can you pronounce 'C' correctly?"
 
 ---
 
 ### Phase 2: Chant Introduction/Practice (5–7 min)
 **Sparky says:**
-"Great job on those vowels! Let's chant it once slowly, then once with rhythm."
+"Let's say the alphabet together! We'll do it slowly first, then with some rhythm. Ready?"
 
 **Activity:**
 - Display chant chart
-- Model chant slowly, then at tempo
+- Model chant: slowly, then at tempo
 - Students echo
 - Point to letters as they chant
 
 **Check for Understanding:**
-- "What sound does 'a' make in Latin?"
+- "Who can recite the alphabet chant?"
 
 ---
 
 ### Phase 3: Grammar Instruction (8–10 min)
-**Focus:** Latin alphabet recitation, correct pronunciation of vowels
+**Focus:** Pronunciation of Latin letters A-H, Hard sounds of 'C' and 'G'
 
 **Sparky says:**
-"Remember, 'a' is always 'ah'. Let's see how it sounds in some words."
+"Remember, 'C' is like 'cat'! Let's try some words together."
 
 **Activity:**
-- Introduce grammar concept: Latin alphabet and vowel sounds
-- Show example sentence: "Aqua est necessaria."
-- Parse together: Identify vowels and their sounds
-- Highlight common misconceptions:
-  - Pattern: Mispronouncing 'a' as in 'cat'
-  - Correction cue: "Remember, 'a' is like 'ah' in 'father'."
+- Introduce pronunciation of A-H
+- Show example words: Aqua, Bellum, Civitas
+- Parse together: focus on hard 'C' and 'G'
+- Highlight misconceptions:
+  - Pattern: Soft 'C' sound
+  - Correction cue: "Remember, 'C' is always hard, like 'cat'."
 
 **Check for Understanding:**
-- "How do you say 'water' in Latin?"
+- "What sound does 'G' make?"
 
 ---
 
 ### Phase 4: Guided Practice (5–7 min)
 **Sparky says:**
-"Who can say 'amicus' like a pro? Let's try it together!"
+"Let's try some sentences together. Remember, practice makes perfect!"
 
 **Activity:**
-- Present practice sentences: "Amicus bonus est."
-- Students pronounce with guidance
+- Present practice sentences
+- Students pronounce with scaffolding
 - Differentiation:
-  - **Support:** Use visual aids for pronunciation
-  - **Extension:** Challenge with new vocabulary words
+  - **Support:** Use visual aids for letter sounds
+  - **Extension:** Challenge students to spell simple Latin words
 
 **Check for Understanding:**
-- "Can you pronounce 'amicus' correctly?"
+- "How does discipline help us learn?"
 
 ---
 
 ### Phase 5: Closure & Virtue Tie-In (2–3 min)
 **Sparky says:**
-"Discipline helps us learn better! Notice each ending carefully; steady effort makes clear Latin."
+"Practice the alphabet chant daily to build discipline. Notice each letter carefully!"
 
 **Faith Integration:**
-"Let's remember 'In principio' means 'In the beginning'. Use 'Gloria Deo' as a cheerful closure after correct parsing."
+"Let's begin with 'In principio' to set our tone for learning."
 
 **Activity:**
 - Review objectives
@@ -114,24 +115,26 @@ provenance:
 
 ## Coaching Notes
 ### Common Misconceptions
-- **Pattern:** Mispronouncing 'a' as in 'cat'
-  **Correction Cue:** "Remember, 'a' is like 'ah' in 'father'."
+- **Pattern:** Soft 'C' sound
+  **Correction Cue:** "Remember, 'C' is always hard, like 'cat'."
+- **Pattern:** Soft 'G' sound
+  **Correction Cue:** "'G' is always hard, like 'go'."
 
 ### Differentiation Strategies
-- **Support:** Use visual aids for alphabet, provide pronunciation guides, repeat chants slowly.
-- **Extension:** Challenge with new vocabulary words, ask students to create simple Latin phrases.
+- **Support:** Use visual aids for letter sounds, Pair students for chant practice
+- **Extension:** Challenge students to spell simple Latin words, Introduce additional Latin letters
 
 ### Classroom Management
-- Keep transitions smooth with chants.
-- Use hand signals for quieting down.
+- Keep chant practice lively and fun
+- Use hand signals for quiet transitions
 
 ---
 
 ## Assessment Checkpoints
 Embedded in flow above:
-- Phase 1: "Can you recite the alphabet without looking?"
-- Phase 2: "What sound does 'a' make in Latin?"
-- Phase 3: "How do you say 'water' in Latin?"
-- Phase 4: "Can you pronounce 'amicus' correctly?"
+- Phase 1: "Can you pronounce 'C' correctly?"
+- Phase 2: "Who can recite the alphabet chant?"
+- Phase 3: "What sound does 'G' make?"
+- Phase 4: "How does discipline help us learn?"
 - Phase 5: Self-assessment against success criteria
 ```

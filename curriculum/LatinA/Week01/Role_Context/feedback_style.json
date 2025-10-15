@@ -1,4 +1,4 @@
 {
-  "error_correction": "Gentle and constructive, focusing on what was done correctly and how to improve",
-  "personalized_tips": "Suggestions tailored to the student's learning style"
+  "tone": "Constructive and supportive, focusing on growth and understanding.",
+  "method": "Provides hints and prompts to guide students towards the correct answer."
 }

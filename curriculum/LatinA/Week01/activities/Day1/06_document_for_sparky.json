@@ -7,7 +7,7 @@
     "virtue": "Curiosity",
     "faith_phrase": "In principio erat Verbum"
   },
-  "prior_knowledge_digest": "Students are expected to have a basic understanding of language learning concepts, such as vocabulary, grammar, and pronunciation. They should be familiar with the idea of conjugating verbs and the importance of memorization in language acquisition. Previous exposure to any Romance language can be beneficial, but is not required.",
+  "prior_knowledge_digest": "Students should have a basic understanding of language structure in their native language, such as nouns, verbs, and simple sentence construction. Familiarity with the concept of conjugation and declension in any language is helpful but not required. The goal is to introduce students to Latin as a foundational language that has influenced many modern languages, including English.",
   "yesterday_recap": "N/A - This is the first day of the course.",
   "spiral_links": {
     "recycled_vocab": [],
@@ -16,29 +16,30 @@
     "prior_weeks": []
   },
   "misconception_watchlist": [
-    "Latin is a spoken language like modern languages.",
-    "Latin pronunciation is the same as English."
+    "Latin is a dead language and not useful",
+    "Latin grammar is the same as English grammar"
   ],
   "objectives": {
     "primary": [
-      "Introduce the Latin alphabet and pronunciation.",
-      "Familiarize students with basic Latin greetings and phrases.",
-      "Understand the significance of Latin in historical and modern contexts."
+      "Introduce the Latin alphabet and pronunciation",
+      "Familiarize students with basic Latin greetings",
+      "Explain the significance of Latin in historical and modern contexts"
     ],
     "spiral_review": []
   },
   "materials": [
     "Latin alphabet chart",
     "Pronunciation audio clips",
-    "Handout with basic greetings and phrases"
+    "Handout with basic greetings",
+    "Whiteboard and markers"
   ],
   "lesson_flow": [
     {
       "type": "greeting",
       "duration_minutes": 5,
       "description": "Welcome students and introduce the course.",
-      "student_action": "Listen and ask any initial questions.",
-      "teacher_notes": "Set a positive and welcoming tone."
+      "student_action": "Listen and ask questions about the course structure.",
+      "teacher_notes": "Set a positive tone and encourage curiosity."
     },
     {
       "type": "introduction",
@@ -50,28 +51,28 @@
     {
       "type": "guided_practice",
       "duration_minutes": 10,
-      "description": "Practice basic Latin greetings and phrases.",
-      "student_action": "Pair up and practice greetings with a partner.",
-      "teacher_notes": "Circulate to provide feedback and encouragement."
+      "description": "Practice basic Latin greetings with students.",
+      "student_action": "Engage in pair activities to practice greetings.",
+      "teacher_notes": "Monitor and assist with pronunciation."
     },
     {
-      "type": "faith_reflection",
-      "duration_minutes": 5,
-      "description": "Discuss the faith phrase 'In principio erat Verbum' and its significance.",
-      "student_action": "Reflect on the phrase and its meaning.",
-      "teacher_notes": "Connect the phrase to the importance of language in faith."
+      "type": "introduction",
+      "duration_minutes": 10,
+      "description": "Discuss the historical significance of Latin.",
+      "student_action": "Participate in discussion and take notes.",
+      "teacher_notes": "Highlight Latin's influence on modern languages."
     },
     {
       "type": "closure",
       "duration_minutes": 5,
       "description": "Review key points and preview the next lesson.",
-      "student_action": "Ask questions and note down homework.",
-      "teacher_notes": "Encourage students to review the alphabet and greetings at home."
+      "student_action": "Ask questions and reflect on what was learned.",
+      "teacher_notes": "Encourage students to think about how Latin connects to their own language."
     }
   ],
   "behavior": {
     "tone": "Encouraging and supportive",
-    "loop_behavior": "Reiterate key points if students seem confused.",
+    "loop_behavior": "Rephrase and simplify",
     "hints_max": 3,
     "wait_seconds": 5,
     "encouragement_frequency": "Frequent"

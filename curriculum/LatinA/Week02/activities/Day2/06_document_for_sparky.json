@@ -1,0 +1,82 @@
+{
+  "metadata": {
+    "week": 1,
+    "day": 2,
+    "title": "Week 1 Day 2: Introduction to Latin Nouns",
+    "duration_minutes": 45,
+    "virtue": "Patience",
+    "faith_phrase": "Omnia vincit amor"
+  },
+  "prior_knowledge_digest": "Students should be familiar with the Latin alphabet and basic pronunciation rules. They should also have a basic understanding of how Latin differs from English, particularly in terms of sentence structure and the use of inflections. Familiarity with the concept of nouns and verbs in English will be helpful as we begin to explore these parts of speech in Latin.",
+  "yesterday_recap": "Yesterday, we introduced the Latin alphabet and practiced pronunciation. We also discussed how Latin is an inflected language, meaning that word endings change to indicate grammatical function.",
+  "spiral_links": {
+    "recycled_vocab": [],
+    "recycled_grammar": [],
+    "prior_day_concepts": [
+      "Latin alphabet",
+      "Pronunciation rules"
+    ],
+    "prior_weeks": []
+  },
+  "misconception_watchlist": [
+    "Confusing Latin pronunciation with English",
+    "Misidentifying noun endings"
+  ],
+  "objectives": {
+    "primary": [
+      "Understand the concept of Latin nouns",
+      "Identify and pronounce basic Latin nouns"
+    ],
+    "spiral_review": []
+  },
+  "materials": [
+    "Latin textbook",
+    "Whiteboard",
+    "Markers",
+    "Pronunciation audio files"
+  ],
+  "lesson_flow": [
+    {
+      "type": "recall",
+      "duration_minutes": 5,
+      "description": "Review the Latin alphabet and pronunciation rules.",
+      "student_action": "Students recite the alphabet and practice pronunciation.",
+      "teacher_notes": "Focus on any letters that were challenging yesterday."
+    },
+    {
+      "type": "introduction",
+      "duration_minutes": 10,
+      "description": "Introduce the concept of nouns in Latin.",
+      "student_action": "Listen and take notes on the definition and examples of Latin nouns.",
+      "teacher_notes": "Use simple examples and relate to English nouns."
+    },
+    {
+      "type": "guided_practice",
+      "duration_minutes": 10,
+      "description": "Practice identifying nouns in simple Latin sentences.",
+      "student_action": "Work in pairs to identify nouns in provided sentences.",
+      "teacher_notes": "Provide feedback and correct any misunderstandings."
+    },
+    {
+      "type": "independent_practice",
+      "duration_minutes": 10,
+      "description": "Students complete a worksheet identifying Latin nouns.",
+      "student_action": "Independently identify and underline nouns in sentences.",
+      "teacher_notes": "Circulate to offer help and ensure understanding."
+    },
+    {
+      "type": "closure",
+      "duration_minutes": 5,
+      "description": "Recap the day's learning and preview the next lesson.",
+      "student_action": "Participate in a brief discussion about what was learned.",
+      "teacher_notes": "Highlight the importance of nouns in sentence structure."
+    }
+  ],
+  "behavior": {
+    "tone": "Encouraging and supportive",
+    "loop_behavior": "Reiterate key concepts if students show confusion",
+    "hints_max": 3,
+    "wait_seconds": 5,
+    "encouragement_frequency": "Frequent"
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "identity": "Sparky the Encourager",
+  "audience": "Grade 3 (Grammar Stage, U.S.)",
+  "lesson_slot": {
+    "week": 1,
+    "day": 2,
+    "title": "Week 1 Day 2"
+  },
+  "objectives": [
+    "Greet others using 'salve' and 'vale'.",
+    "Use 'Pax vobiscum' in context.",
+    "Identify simple Latin sentence structures."
+  ],
+  "focus_areas": [
+    "Practice greeting phrases.",
+    "Introduce 'Pax vobiscum'.",
+    "Review basic sentence structure.",
+    "Connect respect to language use.",
+    "Chant practice."
+  ],
+  "spiral_hooks": {
+    "vocabulary_spiral": [
+      "salve",
+      "vale",
+      "discipulus",
+      "magister",
+      "pax"
+    ],
+    "grammar_spiral": [
+      "Subject-Object-Verb order",
+      "plural forms",
+      "basic sentence structure"
+    ]
+  },
+  "virtue_integration": {
+    "virtue": "Respect",
+    "prompt": "Show respect by using polite Latin greetings."
+  },
+  "faith_integration": {
+    "phrase": "Pax vobiscum",
+    "usage_note": "Use during greetings to promote peace."
+  },
+  "coaching_cues": [
+    "Let's say 'salve' together!",
+    "Who can tell me what 'vale' means?",
+    "How do we greet our friends in Latin?",
+    "Remember, 'Pax vobiscum' means peace!",
+    "Great job using your Latin words!"
+  ],
+  "common_misconceptions": [
+    {
+      "pattern": "Mispronouncing 'salve' as 'sal-vay'",
+      "correction_cue": "Remember, it's 'SAL-veh'."
+    },
+    {
+      "pattern": "Using 'vale' incorrectly",
+      "correction_cue": "Use 'vale' when saying goodbye."
+    }
+  ],
+  "checks_for_understanding": [
+    "What does 'salve' mean?",
+    "How do you say 'goodbye' in Latin?",
+    "What is the Latin word for 'student'?",
+    "Can you use 'Pax vobiscum' in a sentence?",
+    "What is the order of words in a simple Latin sentence?"
+  ],
+  "success_criteria": [
+    "Students greet each other using 'salve' and 'vale'.",
+    "Students correctly use 'Pax vobiscum'.",
+    "Students identify Subject-Object-Verb order in sentences."
+  ],
+  "differentiation": {
+    "support": [
+      "Use visual aids for vocabulary.",
+      "Pair students for practice dialogues."
+    ],
+    "extension": [
+      "Create a short dialogue using new words.",
+      "Explore more complex sentence structures."
+    ]
+  },
+  "classroom_management": [
+    "Keep transitions smooth with clear signals.",
+    "Use a timer for chant practice."
+  ],
+  "constraints": {
+    "time_window_minutes": 25,
+    "tone": "warm-positive-brief",
+    "no_translation_key": true
+  }
+}

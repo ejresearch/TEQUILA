@@ -1,16 +1,13 @@
 {
-  "course": "Latin A",
-  "week": null,
   "week_title": "Latin Foundations: Alphabet and Pronunciation",
-  "grammar_focus": "Introduction to Latin Alphabet and Pronunciation",
-  "chant": "Latin Alphabet Chant",
+  "grammar_focus": "Introduction to Latin Alphabet and Sounds",
+  "chant": "Alphabet Chant",
   "virtue_focus": "Discipline",
   "faith_phrase": "In principio - In the beginning",
-  "vocabulary_summary": "Introduction to basic Latin words and pronunciation.",
+  "vocabulary_summary": "Basic Latin sounds and letters",
   "author_metadata": {
-    "author_name": "Steel",
-    "author_contact": "steel@tequila.org"
-  },
-  "originality_attestation": true,
-  "license": "CC BY 4.0"
+    "author": "TEQUILA Curriculum Team",
+    "originality_attestation": true,
+    "license": "CC BY 4.0"
+  }
 }

@@ -7,79 +7,76 @@
     "title": "Week 1 Day 4"
   },
   "objectives": [
-    "Recite the Latin alphabet with correct pronunciation.",
-    "Recognize and pronounce basic Latin vocabulary.",
-    "Understand the importance of discipline in learning Latin."
+    "Students will accurately pronounce the Latin alphabet letters A-H.",
+    "Students will recite the alphabet chant with confidence.",
+    "Students will connect discipline with consistent practice."
   ],
   "focus_areas": [
-    "Latin alphabet recitation",
-    "Correct pronunciation of vowels",
-    "Basic vocabulary introduction",
-    "Chant practice",
-    "Connecting discipline to learning"
+    "Pronunciation of Latin letters A-H",
+    "Alphabet chant practice",
+    "Understanding hard sounds of 'C' and 'G'"
   ],
   "spiral_hooks": {
     "vocabulary_spiral": [
-      "aqua",
-      "terra",
-      "amicus"
+      "Aqua",
+      "Bellum",
+      "Civitas"
     ],
     "grammar_spiral": [
-      "Latin alphabet",
-      "Pronunciation of vowels"
+      "Basic English alphabet",
+      "Consistent Latin pronunciation"
     ]
   },
   "virtue_integration": {
     "virtue": "Discipline",
-    "prompt": "Discuss how practicing the alphabet daily builds discipline."
+    "prompt": "Practice makes perfect! Let's use discipline to master our Latin sounds."
   },
   "faith_integration": {
     "phrase": "In principio",
-    "usage_note": "Use when introducing new concepts to highlight beginnings."
+    "usage_note": "Use when introducing the alphabet to connect with the phrase."
   },
   "coaching_cues": [
-    "Let's chant the alphabet together!",
-    "Remember, 'a' is like 'ah' in 'father'.",
-    "Great job pronouncing 'aqua'!",
-    "Keep practicing, discipline makes perfect!",
-    "Who can say 'amicus' with me?",
-    "Let's try the chant one more time!"
+    "Let's say the letters together!",
+    "Remember, 'C' is always hard, like in 'cat'.",
+    "Great job! Keep practicing!",
+    "Discipline helps us get better every day.",
+    "Try again, you can do it!"
   ],
   "common_misconceptions": [
     {
-      "pattern": "Mispronouncing 'a' as in 'cat'",
-      "correction_cue": "Remember, 'a' is like 'ah' in 'father'."
+      "pattern": "Soft 'C' sound",
+      "correction_cue": "Remember, 'C' is always hard in Latin."
     },
     {
-      "pattern": "Skipping letters in the chant",
-      "correction_cue": "Let's go through the chant slowly together."
+      "pattern": "Soft 'G' sound",
+      "correction_cue": "In Latin, 'G' is always hard, like 'go'."
     }
   ],
   "checks_for_understanding": [
-    "Can you recite the Latin alphabet?",
-    "What sound does 'a' make in Latin?",
-    "How do you say 'water' in Latin?",
-    "What does 'amicus' mean?",
-    "Why is discipline important in learning?"
+    "Can you pronounce the letter 'C'?",
+    "What sound does 'G' make in Latin?",
+    "Who can recite the first part of the chant?",
+    "What does 'discipline' help us do?",
+    "Why is 'In principio' important?"
   ],
   "success_criteria": [
-    "Students recite the alphabet confidently.",
-    "Students pronounce 'aqua' and 'terra' correctly.",
-    "Students explain the role of discipline in learning."
+    "Students pronounce letters A-H correctly.",
+    "Students recite the alphabet chant from memory.",
+    "Students demonstrate understanding of hard 'C' and 'G' sounds."
   ],
   "differentiation": {
     "support": [
-      "Use visual aids for the alphabet.",
+      "Use visual aids for letter sounds.",
       "Pair students for chant practice."
     ],
     "extension": [
-      "Challenge students to create a simple Latin phrase.",
-      "Explore the history of the Latin alphabet."
+      "Challenge students to spell simple words.",
+      "Introduce additional Latin vocabulary."
     ]
   },
   "classroom_management": [
-    "Use hand signals for quieting down.",
-    "Transition smoothly from chant to vocabulary practice."
+    "Keep transitions smooth with clear signals.",
+    "Use a timer for chant practice."
   ],
   "constraints": {
     "time_window_minutes": 25,

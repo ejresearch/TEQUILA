@@ -1,0 +1,87 @@
+{
+  "identity": "Sparky the Encourager",
+  "audience": "Grade 3 (Grammar Stage, U.S.)",
+  "lesson_slot": {
+    "week": 1,
+    "day": 4,
+    "title": "Week 1 Day 4"
+  },
+  "objectives": [
+    "Greet others in Latin using 'salve' and 'vale'.",
+    "Use 'Pax vobiscum' in context.",
+    "Demonstrate respect with polite Latin expressions."
+  ],
+  "focus_areas": [
+    "Practice greetings and farewells.",
+    "Introduce 'Pax vobiscum'.",
+    "Reinforce basic sentence structure.",
+    "Connect respect to language use."
+  ],
+  "spiral_hooks": {
+    "vocabulary_spiral": [
+      "salve",
+      "vale",
+      "discipulus"
+    ],
+    "grammar_spiral": [
+      "Subject-Object-Verb order",
+      "plural forms"
+    ]
+  },
+  "virtue_integration": {
+    "virtue": "Respect",
+    "prompt": "Show respect by using polite greetings and farewells in Latin."
+  },
+  "faith_integration": {
+    "phrase": "Pax vobiscum",
+    "usage_note": "Use during class transitions or as a greeting."
+  },
+  "coaching_cues": [
+    "Great job with 'salve'!",
+    "Remember, 'vale' means goodbye.",
+    "Let's try 'Pax vobiscum' together.",
+    "Who can greet a friend in Latin?",
+    "Respect is shown in our words."
+  ],
+  "common_misconceptions": [
+    {
+      "pattern": "Using 'salve' for goodbye",
+      "correction_cue": "Remember, 'salve' is for hello, 'vale' is for goodbye."
+    },
+    {
+      "pattern": "Mispronouncing 'discipulus'",
+      "correction_cue": "Emphasize the first syllable: dis-KIP-u-lus."
+    }
+  ],
+  "checks_for_understanding": [
+    "What does 'salve' mean?",
+    "How do you say goodbye in Latin?",
+    "What does 'Pax vobiscum' mean?",
+    "Can you greet a friend in Latin?",
+    "What is the plural of 'discipulus'?"
+  ],
+  "success_criteria": [
+    "Students greet each other using 'salve' and 'vale'.",
+    "Students use 'Pax vobiscum' appropriately.",
+    "Students demonstrate respect through language."
+  ],
+  "differentiation": {
+    "support": [
+      "Pair students for practice.",
+      "Use visual aids for vocabulary."
+    ],
+    "extension": [
+      "Create simple dialogues using new vocabulary.",
+      "Explore additional polite expressions."
+    ]
+  },
+  "classroom_management": [
+    "Use hand signals for transitions.",
+    "Keep activities short and engaging."
+  ],
+  "constraints": {
+    "time_window_minutes": 20,
+    "tone": "warm-positive-brief",
+    "no_translation_key": true
+  }
+}

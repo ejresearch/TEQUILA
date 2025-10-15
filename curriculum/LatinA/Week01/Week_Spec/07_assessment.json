@@ -2,26 +2,22 @@
   "quiz_structure": {
     "sections": [
       {
-        "type": "recitation",
-        "description": "Students will recite the Latin alphabet.",
-        "sample_items": []
-      },
-      {
         "type": "pronunciation",
-        "description": "Students will pronounce selected vocabulary words.",
-        "sample_items": []
+        "description": "Students pronounce given letters.",
+        "sample_items": [
+          "Pronounce the letter 'C'.",
+          "Pronounce the letter 'G'."
+        ]
       },
       {
-        "type": "translation",
-        "description": "Translate simple Latin phrases to English.",
-        "sample_items": []
+        "type": "chant_recall",
+        "description": "Students recite the alphabet chant.",
+        "sample_items": [
+          "Recite the first half of the alphabet chant."
+        ]
       }
     ],
-    "scoring_notes": null
-  },
-  "review_before_quiz": null,
-  "format": null,
-  "timing": null,
-  "prior_content_percentage": null,
-  "items": null
+    "scoring_notes": "Pronunciation accuracy and chant recall are scored equally.",
+    "review_before_quiz": "Review the alphabet chant and practice pronouncing each letter."
+  }
 }

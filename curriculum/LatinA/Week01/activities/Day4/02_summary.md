@@ -6,30 +6,27 @@ validated_by: Steel
 originality_attestation: true
 ---
 
-# Week 1 Day 4: Introduction to Fractions
+# Week 2 Day 4: Introduction to Latin Nouns
 
 ## Objective
-Today, students will learn the basics of fractions, understanding how they represent parts of a whole and how to identify and write simple fractions.
+Today, students will learn about Latin nouns, focusing on their basic forms and functions. This foundational knowledge will help in understanding how nouns fit into Latin sentences.
 
 ## Prior Knowledge
-- **Counting and Number Sense**: Recognizing numbers and understanding their order helps in grasping the concept of parts and wholes.
-- **Basic Addition and Subtraction**: These operations are foundational for understanding how fractions can be combined or separated.
+- Students have previously learned about basic Latin vocabulary, which will aid in recognizing nouns.
+- Understanding of simple Latin sentence structure will support identifying the role of nouns.
 
 ## Focus for Today
-- Grammar: Understanding the language of fractions, such as "half," "quarter," and "third."
-- Chant: Reinforce the rhythm of counting in fractions.
+- Grammar: Introduction to Latin nouns, including their roles and basic endings.
+- Chant: Practice chanting noun endings to reinforce memory.
 - Vocabulary: 
-  - Fraction
-  - Whole
-  - Half
-  - Quarter
-  - Numerator
-  - Denominator
-  - Equal Parts
-  - Divide
+  - puella
+  - servus
+  - bellum
+  - agricola
+  - nauta
 
 ## Virtue & Faith Connection
-Today's lesson connects to the virtue of patience, as understanding fractions requires careful thought and practice. The faith phrase "Every part has its purpose" reminds us that each fraction, like each person, is important in its own way.
+Today's study of Latin nouns encourages precision and clarity, virtues that reflect the faith phrase "Veritas vos liberabit" (The truth will set you free), reminding us that understanding language brings clarity and truth.
 
 ## Teacher Notes
-Encourage students to use manipulatives, such as fraction circles or bars, to visualize fractions. Remind them to pronounce "numerator" and "denominator" clearly, emphasizing the syllables to aid retention. Allow time for students to explore fractions with hands-on activities to solidify their understanding.
+Encourage students to pronounce each noun clearly, emphasizing the endings. Spend time on the chant to help students internalize the noun endings, which are crucial for recognizing and using nouns correctly in Latin sentences. Consider using visual aids to show how nouns change form based on their role in a sentence.

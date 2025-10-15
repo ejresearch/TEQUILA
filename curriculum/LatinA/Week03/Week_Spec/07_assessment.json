@@ -1,0 +1,10 @@
+{
+  "quiz_structure": "The quiz will include translation exercises, noun parsing, and chant recall.",
+  "sample_items": [
+    "Translate: Puella est in horto.",
+    "Parse: mensa (nominative singular)",
+    "Recite the first declension chant."
+  ],
+  "scoring_notes": "Each section is worth equal points. Emphasis on correct endings and translations.",
+  "review_before_quiz": "Review noun endings and practice translating simple sentences."
+}

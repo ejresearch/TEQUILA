@@ -1,15 +1,13 @@
-### Introduction to Latin Alphabet and Pronunciation
+### Introduction to the Latin Alphabet and Sounds
 
-Latin, the language of ancient Rome, begins with its alphabet. The Latin alphabet is the foundation of many modern languages, including English. This week, students will learn the Latin alphabet, which consists of 23 letters. Unlike English, Latin does not include the letters J, U, and W.
+The Latin alphabet is the foundation of our study. It consists of 23 letters, each with its unique sound. Unlike English, Latin pronunciation is consistent, making it easier to learn once the basic sounds are mastered.
 
-Correct pronunciation is crucial in Latin. Each letter has a distinct sound, and vowels are pronounced clearly. For example, 'a' is always pronounced as 'ah', similar to the 'a' in 'father'.
+To begin, we focus on the vowels: A, E, I, O, U. Each vowel has a long and short sound. For example, 'A' is pronounced as /aː/ in 'aqua' (water).
 
-To aid memorization, we will use the following chant:
+Consonants in Latin are generally pronounced as they are in English, with a few exceptions. For instance, 'C' is always hard, as in 'cat,' and 'G' is always hard, as in 'go.'
 
-```
-A, B, C, D, E, F, G,
-H, I, K, L, M, N, O,
-P, Q, R, S, T, U, X, Y, Z.
+```latin
+A, B, C, D, E, F, G, H, I, K, L, M, N, O, P, Q, R, S, T, U, V, X, Y, Z
 ```
 
-This chant helps students internalize the sequence and sounds of the Latin alphabet, setting a strong foundation for future learning.
+This chant helps students remember the order and sound of each letter, setting the stage for reading and writing in Latin.

@@ -1,0 +1,82 @@
+[
+  {
+    "latin": "salve",
+    "english": "hello",
+    "part_of_speech": "interjection",
+    "pronunciation": "SAL-veh",
+    "example_phrase": "Salve, amice!",
+    "notes": null,
+    "is_recycled": false,
+    "from_week": null
+  },
+  {
+    "latin": "vale",
+    "english": "goodbye",
+    "part_of_speech": "interjection",
+    "pronunciation": "WAH-leh",
+    "example_phrase": "Vale, discipule!",
+    "notes": null,
+    "is_recycled": false,
+    "from_week": null
+  },
+  {
+    "latin": "amice",
+    "english": "friend",
+    "part_of_speech": "noun",
+    "pronunciation": "AH-mee-keh",
+    "example_phrase": "Salve, amice!",
+    "notes": null,
+    "is_recycled": false,
+    "from_week": null
+  },
+  {
+    "latin": "discipulus",
+    "english": "student",
+    "part_of_speech": "noun",
+    "pronunciation": "dis-KIP-u-lus",
+    "example_phrase": "Salve, discipule!",
+    "notes": null,
+    "is_recycled": false,
+    "from_week": null
+  },
+  {
+    "latin": "magister",
+    "english": "teacher",
+    "part_of_speech": "noun",
+    "pronunciation": "mah-GIS-ter",
+    "example_phrase": "Salve, magister!",
+    "notes": null,
+    "is_recycled": false,
+    "from_week": null
+  },
+  {
+    "latin": "pax",
+    "english": "peace",
+    "part_of_speech": "noun",
+    "pronunciation": "pahks",
+    "example_phrase": "Pax vobiscum.",
+    "notes": null,
+    "is_recycled": false,
+    "from_week": null
+  },
+  {
+    "latin": "vobiscum",
+    "english": "with you",
+    "part_of_speech": "preposition",
+    "pronunciation": "wo-BIS-koom",
+    "example_phrase": "Pax vobiscum.",
+    "notes": null,
+    "is_recycled": false,
+    "from_week": null
+  },
+  {
+    "latin": "gratias",
+    "english": "thanks",
+    "part_of_speech": "noun",
+    "pronunciation": "GRAH-tee-ahs",
+    "example_phrase": "Gratias tibi ago.",
+    "notes": null,
+    "is_recycled": false,
+    "from_week": null
+  }
+]

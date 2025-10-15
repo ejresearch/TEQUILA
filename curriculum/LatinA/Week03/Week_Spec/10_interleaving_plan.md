@@ -1,0 +1,1 @@
+Encourage students to practice the chant daily. Use visual aids to show noun endings. Connect this week's content with prior knowledge of basic nouns. Prepare students for next week's introduction to adjectives.

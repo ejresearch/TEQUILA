@@ -1,61 +1,85 @@
 ```markdown
 # Latin A – Week 1 Quiz
 
-Hello, Grade 3 Latin learners! Let's see how much you've learned this week. Remember, do your best and have fun!
+Hello, Grade 3 Latin learners! Let's see how much you've learned this week. Remember to do your best and have fun!
 
 ## Vocabulary (5 points)
 
-1. **Fill in the blank:** The Latin word for "water" is _______. (1 point)
-   - a) terra
-   - b) aqua
-   - c) amicus
+1. **Fill in the blank:** The Latin letter "A" is pronounced as ____.
+   - a) /aː/
+   - b) /beː/
+   - c) /keː/
+   - d) /deː/
+   - **(1 point)**
 
-2. **Multiple Choice:** What is the English meaning of "terra"? (1 point)
-   - a) Sky
-   - b) Earth
-   - c) Fire
+2. **Multiple Choice:** Which Latin word means "War"?
+   - a) Aqua
+   - b) Bellum
+   - c) Civitas
+   - d) Domus
+   - **(1 point)**
 
-3. **Fill in the blank:** "Amicus" means _______ in English. (1 point)
-   - a) friend
-   - b) enemy
-   - c) teacher
+3. **Fill in the blank:** The Latin letter "C" is pronounced as ____.
+   - a) /aː/
+   - b) /beː/
+   - c) /keː/
+   - d) /deː/
+   - **(1 point)**
 
-4. **Multiple Choice:** How do you pronounce "aqua"? (1 point)
-   - a) AH-kwah
-   - b) AY-kwa
-   - c) AW-kwa
+4. **Multiple Choice:** What is the English translation of "Aqua"?
+   - a) State
+   - b) Water
+   - c) War
+   - d) House
+   - **(1 point)**
 
-5. **Fill in the blank:** The Latin word "terra" is a _______. (1 point)
-   - a) verb
-   - b) noun
-   - c) adjective
+5. **Fill in the blank:** The Latin letter "B" is pronounced as ____.
+   - a) /aː/
+   - b) /beː/
+   - c) /keː/
+   - d) /deː/
+   - **(1 point)**
 
 ## Grammar & Chant (5 points)
 
-6. **Short Response:** Recite the first five letters of the Latin alphabet. (1 point)
+6. **Short Response:** Write the first four letters of the Latin alphabet in order.
+   - **(1 point)**
 
-7. **Multiple Choice:** Which of these is a key part of the Latin Alphabet Chant? (1 point)
-   - a) Singing
-   - b) Clapping
-   - c) Reciting
+7. **Multiple Choice:** Which of the following is a hard 'C' sound in Latin?
+   - a) /seː/
+   - b) /keː/
+   - c) /deː/
+   - d) /eː/
+   - **(1 point)**
 
-8. **Fill in the blank:** The Latin word "aqua" is a _______ (noun/verb/adjective). (1 point)
+8. **Fill in the blank:** The Latin letter "G" is pronounced as ____.
+   - a) /geː/
+   - b) /jeː/
+   - c) /keː/
+   - d) /deː/
+   - **(1 point)**
 
-9. **Short Response:** What is the importance of discipline in learning Latin? (1 point)
+9. **Short Response:** Recite the chant for the Latin alphabet from A to H.
+   - **(1 point)**
 
-10. **Multiple Choice:** Which of these words is NOT in the Latin Alphabet Chant? (1 point)
-    - a) Alpha
-    - b) Beta
-    - c) Delta
+10. **Multiple Choice:** What is the correct pronunciation of the Latin letter "D"?
+    - a) /aː/
+    - b) /beː/
+    - c) /deː/
+    - d) /eː/
+    - **(1 point)**
 
 ## Translation (4 points)
 
-11. **Translate to English:** "Aqua est necessaria." (2 points)
+11. **Translation:** Translate "Salve" into English.
+    - **(2 points)**
 
-12. **Translate to Latin:** "The earth is big." (2 points)
+12. **Translation:** What is the Latin word for "State"?
+    - **(2 points)**
 
 ## Virtue Reflection (1 point)
 
-13. **Short Written Response:** How can being disciplined help you learn Latin better? Write a few sentences about how discipline can help you achieve your goals in learning Latin. (1 point)
+13. **Short Written Response:** How can practicing the Latin alphabet help you develop the virtue of discipline? Write one sentence.
+    - **(1 point)**
 
 ---

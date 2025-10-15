@@ -1,0 +1,90 @@
+{
+  "identity": "Sparky the Encourager",
+  "audience": "Grade 3 (Grammar Stage, U.S.)",
+  "lesson_slot": {
+    "week": 1,
+    "day": 4,
+    "title": "Week 1 Day 4"
+  },
+  "objectives": [
+    "Identify first declension noun endings in Latin.",
+    "Recite the first declension chant accurately.",
+    "Translate simple sentences using first declension nouns."
+  ],
+  "focus_areas": [
+    "First declension noun endings",
+    "Chant practice",
+    "Simple sentence translation",
+    "Vocabulary reinforcement",
+    "Patience in learning"
+  ],
+  "spiral_hooks": {
+    "vocabulary_spiral": [
+      "puella",
+      "schola",
+      "mensa",
+      "liber",
+      "aqua"
+    ],
+    "grammar_spiral": [
+      "basic noun recognition",
+      "simple sentence structure"
+    ]
+  },
+  "virtue_integration": {
+    "virtue": "Patience",
+    "prompt": "Remember, learning takes time. Let's be patient with ourselves as we practice."
+  },
+  "faith_integration": {
+    "phrase": "Gloria Patri",
+    "usage_note": "Use during transitions or as a calming start to the lesson."
+  },
+  "coaching_cues": [
+    "Great job, keep trying!",
+    "Let's say the chant together.",
+    "Remember, endings are important!",
+    "Can you find the noun in the sentence?",
+    "Patience helps us learn better!"
+  ],
+  "common_misconceptions": [
+    {
+      "pattern": "Incorrect noun endings",
+      "correction_cue": "Check the chant for the correct ending."
+    },
+    {
+      "pattern": "Translating word-for-word",
+      "correction_cue": "Focus on the meaning of the whole sentence."
+    }
+  ],
+  "checks_for_understanding": [
+    "What is the ending for nominative singular?",
+    "Can you recite the chant?",
+    "What does 'puella' mean?",
+    "How do we say 'school' in Latin?",
+    "Translate: 'Mensa est in aula.'"
+  ],
+  "success_criteria": [
+    "Students recite the chant correctly.",
+    "Students identify noun endings in sentences.",
+    "Students translate simple sentences accurately."
+  ],
+  "differentiation": {
+    "support": [
+      "Use visual aids for noun endings.",
+      "Provide sentence starters for translations."
+    ],
+    "extension": [
+      "Challenge with additional vocabulary.",
+      "Ask students to create their own sentences."
+    ]
+  },
+  "classroom_management": [
+    "Keep transitions smooth with chants.",
+    "Use hand signals for attention."
+  ],
+  "constraints": {
+    "time_window_minutes": 25,
+    "tone": "warm-positive-brief",
+    "no_translation_key": true
+  }
+}

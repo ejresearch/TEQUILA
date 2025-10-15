@@ -4,84 +4,86 @@
   "lesson_slot": {
     "week": 1,
     "day": 2,
-    "title": "Class: Week 1 Day 2"
+    "title": "Latin Foundations: Alphabet and Pronunciation"
   },
   "objectives": [
-    "Students will recite the Latin alphabet with correct pronunciation.",
-    "Students will pronounce basic Latin vocabulary accurately.",
-    "Students will connect 'In principio' to its meaning."
+    "Recognize and pronounce Latin letters A-H.",
+    "Understand basic sounds of Latin vowels and consonants.",
+    "Connect discipline with consistent pronunciation practice."
   ],
   "focus_areas": [
-    "Latin alphabet recitation",
-    "Correct pronunciation of vowels",
-    "Introduction to basic vocabulary",
-    "Chant practice",
-    "Connecting faith phrase"
+    "Latin alphabet pronunciation",
+    "Vowel and consonant sounds",
+    "Alphabet chant practice",
+    "Virtue of discipline",
+    "Faith phrase exploration"
   ],
   "spiral_hooks": {
     "vocabulary_spiral": [
-      "aqua",
-      "terra",
-      "amicus"
+      "Aqua",
+      "Bellum",
+      "Civitas",
+      "Dominus",
+      "Equus"
     ],
     "grammar_spiral": [
-      "Latin alphabet",
-      "Vowel pronunciation"
+      "Basic English alphabet",
+      "Consistent pronunciation",
+      "Hard 'C' and 'G' sounds"
     ]
   },
   "virtue_integration": {
     "virtue": "Discipline",
-    "prompt": "Practice the alphabet chant with discipline to improve."
+    "prompt": "Practice makes perfect! Let's use discipline to master Latin sounds."
   },
   "faith_integration": {
     "phrase": "In principio",
-    "usage_note": "Introduce at the start of the lesson to connect with beginnings."
+    "usage_note": "Introduce at the start of the lesson to set the tone."
   },
   "coaching_cues": [
-    "Let's chant the alphabet together!",
-    "Remember, 'a' is like 'ah' in 'father'.",
-    "Great job on 'aqua'! Keep it up!",
-    "Discipline helps us learn better!",
-    "Try saying 'sol' like 'sohl'.",
-    "Can you say 'In principio' with me?"
+    "Let's say the alphabet together!",
+    "Remember, 'C' is like 'cat'.",
+    "Great job with 'G'!",
+    "Keep practicing, it gets easier!",
+    "Discipline helps us learn!"
   ],
   "common_misconceptions": [
     {
-      "pattern": "Mispronouncing 'a' as 'ay'",
-      "correction_cue": "Remember, 'a' is 'ah' like in 'father'."
+      "pattern": "Soft 'C' sound",
+      "correction_cue": "Remember, 'C' is always hard, like 'cat'."
     },
     {
-      "pattern": "Skipping letters in the chant",
-      "correction_cue": "Let's chant slowly and clearly together."
+      "pattern": "Soft 'G' sound",
+      "correction_cue": "'G' is hard, like 'go'."
     }
   ],
   "checks_for_understanding": [
-    "Can you recite the alphabet without help?",
-    "What sound does 'a' make in Latin?",
-    "How do you say 'water' in Latin?",
+    "Can you pronounce the letter 'C'?",
+    "What sound does 'G' make?",
+    "Who can recite the alphabet chant?",
     "What does 'In principio' mean?",
-    "Can you pronounce 'amicus' correctly?"
+    "How does discipline help us learn?"
   ],
   "success_criteria": [
-    "Students recite the alphabet confidently.",
-    "Students pronounce vocabulary words correctly.",
-    "Students explain the meaning of 'In principio'.",
-    "Students participate in the chant with enthusiasm."
+    "Students pronounce letters A-H correctly.",
+    "Students recite the alphabet chant.",
+    "Students explain the sound of 'C' and 'G'.",
+    "Students connect discipline with practice."
   ],
   "differentiation": {
     "support": [
-      "Use visual aids for the alphabet.",
-      "Pair with a buddy for practice."
+      "Use visual aids for letter sounds.",
+      "Pair students for peer practice."
     ],
     "extension": [
-      "Challenge to write the alphabet from memory.",
-      "Introduce a new vocabulary word."
+      "Challenge with additional Latin words.",
+      "Explore the history of the Latin alphabet."
     ]
   },
   "classroom_management": [
     "Keep transitions smooth with clear signals.",
     "Use a timer for chant practice.",
-    "Encourage participation with positive feedback."
+    "Encourage quiet listening during pronunciation."
   ],
   "constraints": {
     "time_window_minutes": 25,

@@ -6,23 +6,29 @@ validated_by: Steel
 originality_attestation: true
 ---
 
-# Week 1 Day 3: Introduction to Fractions
+# Week 1 Day 3: Introduction to Latin Nouns
 
 ## Objective
-Today, students will review the basic concepts of fractions, ensuring they can identify and represent fractions using visual aids and simple equations.
+Today, students will review and reinforce their understanding of Latin nouns, focusing on their forms and functions within sentences.
 
 ## Prior Knowledge
-- Understanding of whole numbers and their place on a number line.
-- Basic addition and subtraction skills.
-- Familiarity with shapes and partitioning them into equal parts.
+- Students have previously learned the basic structure of Latin sentences, which includes subjects and predicates.
+- Familiarity with the Latin alphabet and pronunciation has been established.
 
 ## Focus for Today
-- Grammar: N/A
-- Chant: N/A
-- Vocabulary: Fraction, numerator, denominator, equal parts, whole, half, quarter, third
+- Grammar: Review of Latin noun cases and their uses.
+- Chant: Reinforce noun declension endings through rhythmic repetition.
+- Vocabulary: 
+  - puella
+  - servus
+  - bellum
+  - aqua
+  - terra
+  - agricola
+  - nauta
 
 ## Virtue & Faith Connection
-Today's lesson emphasizes the virtue of patience, as students learn to carefully divide and understand parts of a whole. The faith phrase "Unity in diversity" reflects how different parts come together to form a complete whole, much like fractions.
+Today's virtue focuses on perseverance, encouraging students to persist in mastering noun declensions. The faith phrase "Fides et Veritas" (Faith and Truth) reminds us of the importance of truth in language learning.
 
 ## Teacher Notes
-Encourage students to use visual aids like fraction circles or bars to better understand the concept of fractions. Remind them to pronounce "numerator" and "denominator" clearly, as these terms will be frequently used. Allow time for questions and ensure students can relate fractions to real-world examples, such as slicing a pizza or sharing a chocolate bar.
+Encourage students to chant the noun endings aloud to aid memorization. Remind them to pay attention to vowel lengths for accurate pronunciation. Allow time for questions and ensure students can identify noun cases in simple sentences.

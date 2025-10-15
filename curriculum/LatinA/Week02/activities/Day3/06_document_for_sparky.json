@@ -1,0 +1,89 @@
+{
+  "metadata": {
+    "week": 1,
+    "day": 3,
+    "title": "Week 1 Day 3: Introduction to Latin Nouns",
+    "duration_minutes": 45,
+    "virtue": "Patience",
+    "faith_phrase": "Per aspera ad astra"
+  },
+  "prior_knowledge_digest": "Students should have a basic understanding of Latin pronunciation and the alphabet. They should be familiar with the concept of nouns in English, including their function as people, places, things, or ideas. Previous lessons introduced simple Latin greetings and common classroom phrases, setting the stage for more structured language learning.",
+  "yesterday_recap": "Yesterday, we explored basic Latin greetings and classroom phrases, focusing on pronunciation and usage in simple dialogues.",
+  "spiral_links": {
+    "recycled_vocab": [
+      "salve",
+      "vale",
+      "magister"
+    ],
+    "recycled_grammar": [
+      "subject-verb agreement",
+      "basic sentence structure"
+    ],
+    "prior_day_concepts": [
+      "Latin greetings",
+      "classroom phrases"
+    ],
+    "prior_weeks": []
+  },
+  "misconception_watchlist": [
+    "confusing noun genders",
+    "mispronunciation of vowels"
+  ],
+  "objectives": {
+    "primary": [
+      "Identify and classify Latin nouns by gender",
+      "Understand the concept of declensions"
+    ],
+    "spiral_review": []
+  },
+  "materials": [
+    "Latin textbook",
+    "whiteboard",
+    "markers",
+    "noun flashcards"
+  ],
+  "lesson_flow": [
+    {
+      "type": "recall",
+      "duration_minutes": 5,
+      "description": "Review basic Latin greetings and classroom phrases.",
+      "student_action": "Students will repeat phrases and answer questions about their meanings.",
+      "teacher_notes": "Use flashcards to prompt responses."
+    },
+    {
+      "type": "introduction",
+      "duration_minutes": 10,
+      "description": "Introduce the concept of Latin nouns and their genders.",
+      "student_action": "Listen and take notes on noun classifications.",
+      "teacher_notes": "Explain the importance of gender in Latin nouns."
+    },
+    {
+      "type": "guided_practice",
+      "duration_minutes": 10,
+      "description": "Practice identifying noun genders using flashcards.",
+      "student_action": "Sort flashcards into masculine, feminine, and neuter categories.",
+      "teacher_notes": "Provide immediate feedback and correct misconceptions."
+    },
+    {
+      "type": "independent_practice",
+      "duration_minutes": 10,
+      "description": "Students complete a worksheet on noun genders and declensions.",
+      "student_action": "Fill out the worksheet individually.",
+      "teacher_notes": "Circulate to offer help and check for understanding."
+    },
+    {
+      "type": "closure",
+      "duration_minutes": 5,
+      "description": "Recap the day's lesson and preview the next topic.",
+      "student_action": "Participate in a brief Q&A session.",
+      "teacher_notes": "Highlight the importance of noun declensions in forming sentences."
+    }
+  ],
+  "behavior": {
+    "tone": "Encouraging and supportive",
+    "loop_behavior": "Rephrase and repeat key concepts as needed",
+    "hints_max": 3,
+    "wait_seconds": 5,
+    "encouragement_frequency": "Frequent"
+  }
+}

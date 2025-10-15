@@ -1,0 +1,1 @@
+['Gloria in excelsis Deo.', 'Et in terra pax hominibus.', 'Bonae voluntatis.']

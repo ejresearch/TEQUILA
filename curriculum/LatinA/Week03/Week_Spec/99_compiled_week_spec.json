@@ -1,0 +1,115 @@
+{
+  "01_metadata.json": {
+    "week_title": "First Declension Nouns: Introduction",
+    "grammar_focus": "First Declension Nouns",
+    "chant": "First Declension Noun Endings",
+    "virtue_focus": "Patience",
+    "faith_phrase": "Gloria Patri - Glory to the Father",
+    "vocabulary_summary": "Introduction to feminine nouns and basic classroom objects.",
+    "author_metadata": {
+      "author_name": "Steel",
+      "author_contact": "steel@tequila.org"
+    },
+    "originality_attestation": true,
+    "license": "CC BY 4.0"
+  },
+  "02_objectives.json": [
+    "Identify and use first declension noun endings in Latin.",
+    "Memorize and recite the chant for first declension noun endings.",
+    "Understand and apply the virtue of patience in learning.",
+    "Translate simple sentences using first declension nouns.",
+    "Recognize and use the faith phrase 'Gloria Patri' in context."
+  ],
+  "03_vocabulary.json": [
+    {
+      "latin": "puella",
+      "english": "girl",
+      "part_of_speech": "noun",
+      "pronunciation": "pweh-lah",
+      "example_phrase": "Puella est in horto."
+    },
+    {
+      "latin": "schola",
+      "english": "school",
+      "part_of_speech": "noun",
+      "pronunciation": "sko-lah",
+      "example_phrase": "Schola magna est."
+    },
+    {
+      "latin": "mensa",
+      "english": "table",
+      "part_of_speech": "noun",
+      "pronunciation": "men-sah",
+      "example_phrase": "Mensa est in aula."
+    },
+    {
+      "latin": "liber",
+      "english": "book",
+      "part_of_speech": "noun",
+      "pronunciation": "lee-ber",
+      "example_phrase": "Liber est in mensa.",
+      "recycled_from_week": 2
+    },
+    {
+      "latin": "aqua",
+      "english": "water",
+      "part_of_speech": "noun",
+      "pronunciation": "ah-kwah",
+      "example_phrase": "Aqua est frigida."
+    },
+    {
+      "latin": "via",
+      "english": "road",
+      "part_of_speech": "noun",
+      "pronunciation": "wee-ah",
+      "example_phrase": "Via longa est."
+    },
+    {
+      "latin": "terra",
+      "english": "earth",
+      "part_of_speech": "noun",
+      "pronunciation": "ter-rah",
+      "example_phrase": "Terra est plana."
+    },
+    {
+      "latin": "familia",
+      "english": "family",
+      "part_of_speech": "noun",
+      "pronunciation": "fa-mee-lee-ah",
+      "example_phrase": "Familia magna est."
+    }
+  ],
+  "04_grammar_focus.md": "This week, we explore the first declension nouns, which are typically feminine. These nouns have specific endings that change based on their role in the sentence. The endings are: -a, -ae, -ae, -am, -ā for singular, and -ae, -arum, -is, -as, -is for plural. \n\nThe chant for this week helps us remember these endings:\n\n```\n-a, -ae, -ae, -am, -ā\n-ae, -arum, -is, -as, -is\n```\n\nBuilding on our understanding of Latin nouns, we will practice identifying and using these endings in sentences. This foundation will support our future learning of more complex noun forms.",
+  "05_chant.json": {
+    "text": "Call: -a, -ae, -ae, -am, -ā\nResponse: -ae, -arum, -is, -as, -is"
+  },
+  "06_sessions_week_view.json": [],
+  "07_assessment.json": {
+    "quiz_structure": "The quiz will include translation exercises, noun parsing, and chant recall.",
+    "sample_items": [
+      "Translate: Puella est in horto.",
+      "Parse: mensa (nominative singular)",
+      "Recite the first declension chant."
+    ],
+    "scoring_notes": "Each section is worth equal points. Emphasis on correct endings and translations.",
+    "review_before_quiz": "Review noun endings and practice translating simple sentences."
+  },
+  "08_assets_index.json": [],
+  "09_spiral_links.json": {
+    "prior_knowledge": [
+      {
+        "source_week": 2,
+        "concept": "basic noun recognition",
+        "reuse_reason": "foundation for declension"
+      },
+      {
+        "source_week": 2,
+        "concept": "simple sentence structure",
+        "reuse_reason": "application in translation"
+      }
+    ]
+  },
+  "10_interleaving_plan.md": "Encourage students to practice the chant daily. Use visual aids to show noun endings. Connect this week's content with prior knowledge of basic nouns. Prepare students for next week's introduction to adjectives.",
+  "11_misconception_watchlist.json": [],
+  "12_preview_next_week.md": ""
+}

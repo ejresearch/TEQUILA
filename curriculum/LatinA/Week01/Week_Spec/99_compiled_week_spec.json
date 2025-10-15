@@ -1,154 +1,121 @@
 {
   "01_metadata.json": {
-    "course": "Latin A",
-    "week": null,
     "week_title": "Latin Foundations: Alphabet and Pronunciation",
-    "grammar_focus": "Introduction to Latin Alphabet and Pronunciation",
-    "chant": "Latin Alphabet Chant",
+    "grammar_focus": "Introduction to Latin Alphabet and Sounds",
+    "chant": "Alphabet Chant",
     "virtue_focus": "Discipline",
     "faith_phrase": "In principio - In the beginning",
-    "vocabulary_summary": "Introduction to basic Latin words and pronunciation.",
+    "vocabulary_summary": "Basic Latin sounds and letters",
     "author_metadata": {
-      "author_name": "Steel",
-      "author_contact": "steel@tequila.org"
-    },
-    "originality_attestation": true,
-    "license": "CC BY 4.0"
+      "author": "TEQUILA Curriculum Team",
+      "originality_attestation": true,
+      "license": "CC BY 4.0"
+    }
   },
   "02_objectives.json": [
-    "Students will be able to recite the Latin alphabet and demonstrate correct pronunciation.",
-    "Students will recognize and pronounce basic Latin vocabulary.",
-    "Students will understand the importance of discipline in language learning.",
-    "Students will connect the faith phrase 'In principio' to its meaning and context.",
-    "Students will begin to appreciate the structure and beauty of Latin as a foundational language."
+    "Students will recognize and pronounce each letter of the Latin alphabet.",
+    "Students will understand the basic sounds associated with Latin vowels and consonants.",
+    "Students will connect the virtue of discipline with consistent practice in pronunciation.",
+    "Students will explore the faith phrase 'In principio' and its significance.",
+    "Students will begin to appreciate the structure and beauty of the Latin language."
   ],
   "03_vocabulary.json": [
     {
-      "latin": "aqua",
-      "english": "water",
-      "part_of_speech": "noun",
-      "pronunciation": "AH-kwah",
-      "example_phrase": "Aqua est necessaria.",
-      "notes": null,
-      "is_recycled": false,
-      "from_week": null
+      "latin": "A",
+      "english": "A",
+      "part_of_speech": "letter",
+      "pronunciation": "/aː/",
+      "example": "Aqua - Water"
     },
     {
-      "latin": "terra",
-      "english": "earth",
-      "part_of_speech": "noun",
-      "pronunciation": "TEHR-rah",
-      "example_phrase": "Terra est magna.",
-      "notes": null,
-      "is_recycled": false,
-      "from_week": null
+      "latin": "B",
+      "english": "B",
+      "part_of_speech": "letter",
+      "pronunciation": "/beː/",
+      "example": "Bellum - War"
     },
     {
-      "latin": "amicus",
-      "english": "friend",
-      "part_of_speech": "noun",
-      "pronunciation": "ah-MEE-koos",
-      "example_phrase": "Amicus bonus est.",
-      "notes": null,
-      "is_recycled": false,
-      "from_week": null
+      "latin": "C",
+      "english": "C",
+      "part_of_speech": "letter",
+      "pronunciation": "/keː/",
+      "example": "Civitas - State"
     },
     {
-      "latin": "luna",
-      "english": "moon",
-      "part_of_speech": "noun",
-      "pronunciation": "LOO-nah",
-      "example_phrase": "Luna clara est.",
-      "notes": null,
-      "is_recycled": false,
-      "from_week": null
+      "latin": "D",
+      "english": "D",
+      "part_of_speech": "letter",
+      "pronunciation": "/deː/",
+      "example": "Dominus - Lord"
     },
     {
-      "latin": "sol",
-      "english": "sun",
-      "part_of_speech": "noun",
-      "pronunciation": "sohl",
-      "example_phrase": "Sol lucet.",
-      "notes": null,
-      "is_recycled": false,
-      "from_week": null
+      "latin": "E",
+      "english": "E",
+      "part_of_speech": "letter",
+      "pronunciation": "/eː/",
+      "example": "Equus - Horse"
     },
     {
-      "latin": "via",
-      "english": "road",
-      "part_of_speech": "noun",
-      "pronunciation": "WEE-ah",
-      "example_phrase": "Via longa est.",
-      "notes": null,
-      "is_recycled": false,
-      "from_week": null
+      "latin": "F",
+      "english": "F",
+      "part_of_speech": "letter",
+      "pronunciation": "/ef/",
+      "example": "Filius - Son"
     },
     {
-      "latin": "domus",
-      "english": "house",
-      "part_of_speech": "noun",
-      "pronunciation": "DOH-moos",
-      "example_phrase": "Domus magna est.",
-      "notes": null,
-      "is_recycled": false,
-      "from_week": null
+      "latin": "G",
+      "english": "G",
+      "part_of_speech": "letter",
+      "pronunciation": "/geː/",
+      "example": "Gloria - Glory"
     },
     {
-      "latin": "flamma",
-      "english": "flame",
-      "part_of_speech": "noun",
-      "pronunciation": "FLAHM-mah",
-      "example_phrase": "Flamma calida est.",
-      "notes": null,
-      "is_recycled": false,
-      "from_week": null
+      "latin": "H",
+      "english": "H",
+      "part_of_speech": "letter",
+      "pronunciation": "/haː/",
+      "example": "Homo - Man"
     }
   ],
-  "04_grammar_focus.md": "### Introduction to Latin Alphabet and Pronunciation\n\nLatin, the language of ancient Rome, begins with its alphabet. The Latin alphabet is the foundation of many modern languages, including English. This week, students will learn the Latin alphabet, which consists of 23 letters. Unlike English, Latin does not include the letters J, U, and W.\n\nCorrect pronunciation is crucial in Latin. Each letter has a distinct sound, and vowels are pronounced clearly. For example, 'a' is always pronounced as 'ah', similar to the 'a' in 'father'.\n\nTo aid memorization, we will use the following chant:\n\n```\nA, B, C, D, E, F, G,\nH, I, K, L, M, N, O,\nP, Q, R, S, T, U, X, Y, Z.\n```\n\nThis chant helps students internalize the sequence and sounds of the Latin alphabet, setting a strong foundation for future learning.",
+  "04_grammar_focus.md": "### Introduction to the Latin Alphabet and Sounds\n\nThe Latin alphabet is the foundation of our study. It consists of 23 letters, each with its unique sound. Unlike English, Latin pronunciation is consistent, making it easier to learn once the basic sounds are mastered.\n\nTo begin, we focus on the vowels: A, E, I, O, U. Each vowel has a long and short sound. For example, 'A' is pronounced as /aː/ in 'aqua' (water).\n\nConsonants in Latin are generally pronounced as they are in English, with a few exceptions. For instance, 'C' is always hard, as in 'cat,' and 'G' is always hard, as in 'go.'\n\n```latin\nA, B, C, D, E, F, G, H, I, K, L, M, N, O, P, Q, R, S, T, U, V, X, Y, Z\n```\n\nThis chant helps students remember the order and sound of each letter, setting the stage for reading and writing in Latin.",
   "05_chant.json": {
-    "text": "Latin Alphabet Chant\n\nA, B, C, D, E, F, G,\nH, I, K, L, M, N, O,\nP, Q, R, S, T, U, X, Y, Z.",
-    "latin_text": null,
-    "english_translation": null,
-    "source": null,
-    "notes": null
+    "text": "Call: A, B, C, D, E, F, G\nResponse: H, I, K, L, M, N, O\nCall: P, Q, R, S, T, U, V\nResponse: X, Y, Z"
   },
   "06_sessions_week_view.json": [],
   "07_assessment.json": {
     "quiz_structure": {
       "sections": [
         {
-          "type": "recitation",
-          "description": "Students will recite the Latin alphabet.",
-          "sample_items": []
-        },
-        {
           "type": "pronunciation",
-          "description": "Students will pronounce selected vocabulary words.",
-          "sample_items": []
+          "description": "Students pronounce given letters.",
+          "sample_items": [
+            "Pronounce the letter 'C'.",
+            "Pronounce the letter 'G'."
+          ]
         },
         {
-          "type": "translation",
-          "description": "Translate simple Latin phrases to English.",
-          "sample_items": []
+          "type": "chant_recall",
+          "description": "Students recite the alphabet chant.",
+          "sample_items": [
+            "Recite the first half of the alphabet chant."
+          ]
         }
       ],
-      "scoring_notes": null
-    },
-    "review_before_quiz": null,
-    "format": null,
-    "timing": null,
-    "prior_content_percentage": null,
-    "items": null
+      "scoring_notes": "Pronunciation accuracy and chant recall are scored equally.",
+      "review_before_quiz": "Review the alphabet chant and practice pronouncing each letter."
+    }
   },
   "08_assets_index.json": [],
   "09_spiral_links.json": {
-    "prior_knowledge": [],
-    "prior_weeks_dependencies": [],
-    "recycled_vocab": [],
-    "recycled_grammar": [],
-    "notes": null
+    "prior_knowledge": [
+      {
+        "source_week": 0,
+        "concept": "Basic English alphabet",
+        "reuse_reason": "Foundation for Latin alphabet"
+      }
+    ]
   },
-  "10_interleaving_plan.md": "### Teacher Notes\n\n- **Pronunciation Tips:** Emphasize the clear pronunciation of vowels. Use examples from English to help students relate.\n- **Pacing Advice:** Spend the first two days focusing on the alphabet and pronunciation. Use chants to reinforce learning.\n- **Connections:** This week sets the foundation for understanding Latin sounds, which will be crucial as we move into more complex grammar and vocabulary in the coming weeks.\n- **Encouragement:** Remind students that discipline in practice will lead to mastery and confidence in their Latin studies.",
+  "10_interleaving_plan.md": "### Teacher Notes\n\n- **Pronunciation Cues**: Emphasize the hard sounds of 'C' and 'G'.\n- **Pacing Advice**: Spend time each day on pronunciation drills. Use the chant to reinforce memory.\n- **Connections**: This week lays the groundwork for reading Latin. Next week, we'll build on this by introducing simple words.\n- **Encouragement**: Remind students that discipline in practice leads to mastery.",
   "11_misconception_watchlist.json": [],
   "12_preview_next_week.md": ""
 }

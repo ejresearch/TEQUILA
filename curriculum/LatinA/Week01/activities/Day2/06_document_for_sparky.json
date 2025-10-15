@@ -5,90 +5,77 @@
     "title": "Week 1 Day 2: Introduction to Latin Nouns",
     "duration_minutes": 45,
     "virtue": "Patience",
-    "faith_phrase": "Patience is a virtue."
+    "faith_phrase": "Ad astra per aspera"
   },
-  "prior_knowledge_digest": "Students should be familiar with the basic structure of Latin as an inflected language, where word endings change to convey meaning. They should understand the concept of nouns and have a basic grasp of English grammar, including subjects and objects. Familiarity with the idea of gender in language, as seen in languages like Spanish or French, will be helpful. Students should also recall the Latin alphabet and pronunciation rules introduced in Day 1.",
-  "yesterday_recap": "Yesterday, we introduced the Latin alphabet and pronunciation rules. Students practiced pronouncing simple Latin words and learned about the importance of inflection in Latin.",
+  "prior_knowledge_digest": "Students should have a basic understanding of the Latin alphabet and pronunciation rules. They should be familiar with the concept of nouns in English, including singular and plural forms. The previous lesson introduced the idea of Latin as an inflected language, where word endings change to convey meaning. Students should also recall the importance of word roots and derivatives in understanding vocabulary.",
+  "yesterday_recap": "Yesterday, we introduced the Latin alphabet and practiced pronunciation. We also discussed the concept of inflection in Latin and how it differs from English.",
   "spiral_links": {
-    "recycled_vocab": [
-      "puella",
-      "puer",
-      "familia"
-    ],
-    "recycled_grammar": [
-      "subject-verb agreement",
-      "basic noun recognition"
-    ],
+    "recycled_vocab": [],
+    "recycled_grammar": [],
     "prior_day_concepts": [
       "Latin alphabet",
-      "pronunciation rules"
+      "Pronunciation rules",
+      "Inflection"
     ],
     "prior_weeks": []
   },
   "misconception_watchlist": [
-    "Confusing noun genders",
-    "Mispronouncing vowel sounds"
+    "Confusing Latin pronunciation with English",
+    "Assuming Latin word order is the same as English"
   ],
   "objectives": {
     "primary": [
-      "Identify and classify Latin nouns by gender",
-      "Understand and apply basic noun endings"
+      "Introduce Latin nouns and their basic forms",
+      "Understand singular and plural in Latin"
     ],
     "spiral_review": []
   },
   "materials": [
     "Whiteboard",
     "Markers",
-    "Handouts with noun lists",
+    "Handout with noun examples",
     "Audio clips for pronunciation"
   ],
   "lesson_flow": [
     {
       "type": "recall",
       "duration_minutes": 5,
-      "description": "Review the Latin alphabet and pronunciation rules from Day 1.",
+      "description": "Review the Latin alphabet and pronunciation rules from the previous lesson.",
       "student_action": "Students recite the alphabet and practice pronunciation.",
-      "teacher_notes": "Focus on vowel sounds and common pronunciation errors."
+      "teacher_notes": "Focus on common pronunciation errors."
     },
     {
       "type": "introduction",
       "duration_minutes": 10,
-      "description": "Introduce Latin nouns and the concept of gender (masculine, feminine, neuter).",
-      "student_action": "Listen and take notes on noun gender and examples.",
-      "teacher_notes": "Use examples from familiar languages to illustrate gender."
+      "description": "Introduce the concept of nouns in Latin, focusing on singular and plural forms.",
+      "student_action": "Listen and take notes on the differences between Latin and English nouns.",
+      "teacher_notes": "Use examples to illustrate singular and plural forms."
     },
     {
       "type": "guided_practice",
       "duration_minutes": 10,
-      "description": "Practice identifying noun genders using a list of common Latin nouns.",
-      "student_action": "Work in pairs to classify nouns by gender.",
+      "description": "Practice identifying singular and plural nouns in Latin using examples.",
+      "student_action": "Work through examples with the teacher, identifying singular and plural forms.",
       "teacher_notes": "Provide immediate feedback and correct misconceptions."
     },
     {
       "type": "independent_practice",
       "duration_minutes": 10,
-      "description": "Students complete a worksheet classifying nouns and applying correct endings.",
-      "student_action": "Complete the worksheet individually.",
-      "teacher_notes": "Circulate to offer help and ensure understanding."
+      "description": "Students complete a worksheet identifying singular and plural nouns.",
+      "student_action": "Complete the worksheet individually, then pair up to discuss answers.",
+      "teacher_notes": "Circulate to provide support and answer questions."
     },
     {
       "type": "closure",
       "duration_minutes": 5,
-      "description": "Recap the day's lesson and preview the next topic.",
-      "student_action": "Participate in a brief Q&A session.",
-      "teacher_notes": "Encourage questions and highlight the importance of noun endings."
-    },
-    {
-      "type": "faith_reflection",
-      "duration_minutes": 5,
-      "description": "Discuss the virtue of patience in learning a new language.",
-      "student_action": "Reflect on how patience helps in language learning.",
-      "teacher_notes": "Connect the faith phrase to the day's learning experience."
+      "description": "Summarize the key points of the lesson and preview the next topic.",
+      "student_action": "Participate in a brief discussion and ask any remaining questions.",
+      "teacher_notes": "Highlight the importance of understanding noun forms for future lessons."
     }
   ],
   "behavior": {
     "tone": "Encouraging and supportive",
-    "loop_behavior": "Revisit challenging concepts with patience",
+    "loop_behavior": "Repeat instructions if students seem confused, using different examples.",
     "hints_max": 3,
     "wait_seconds": 5,
     "encouragement_frequency": "Frequent"

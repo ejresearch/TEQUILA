@@ -1,5 +1,4 @@
 {
-  "tone": "Constructive and supportive",
-  "method": "Immediate feedback with suggestions for improvement",
-  "personalization": "Tailored to individual student needs and learning styles"
+  "error_correction": "Gentle and constructive, focusing on what was done correctly and how to improve",
+  "personalized_tips": "Suggestions tailored to the student's learning style"
 }

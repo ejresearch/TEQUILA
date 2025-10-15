@@ -184,6 +184,60 @@ def _prompt_user_to_continue(week: int, day: int, field: str) -> bool:
     return response == 'y'
 
 
+def _validate_summary_subject(summary_content: str, week_spec: Dict[str, Any]) -> bool:
+    """
+    Validate that the summary is about Latin and not off-topic.
+
+    Args:
+        summary_content: The generated summary markdown
+        week_spec: The week specification containing Latin content
+
+    Returns:
+        True if summary appears to be about Latin, False otherwise
+    """
+    summary_lower = summary_content.lower()
+
+    # Red flag keywords that indicate wrong subject matter
+    off_topic_keywords = [
+        'ecosystem', 'ecosystems', 'organism', 'biology', 'ecology',
+        'fraction', 'fractions', 'numerator', 'denominator', 'division',
+        'geometry', 'algebra', 'multiplication', 'equation',
+        'chemistry', 'physics', 'atom', 'molecule',
+        'photosynthesis', 'habitat', 'species',
+        'perimeter', 'area', 'volume', 'angle'
+    ]
+
+    # Check for off-topic keywords
+    for keyword in off_topic_keywords:
+        if keyword in summary_lower:
+            logger.warning(f"Summary contains off-topic keyword: '{keyword}'")
+            return False
+
+    # Must contain Latin-related keywords
+    latin_keywords = [
+        'latin', 'declension', 'conjugation', 'vocabulary',
+        'pronunciation', 'grammar', 'alphabet', 'translate',
+        'noun', 'verb', 'adjective', 'case', 'gender'
+    ]
+
+    # Get expected Latin words from week_spec vocabulary
+    vocab_list = week_spec.get("03_vocabulary.json", [])
+    if vocab_list:
+        expected_latin_words = [v.get("latin", "").lower() for v in vocab_list if isinstance(v, dict)]
+    else:
+        expected_latin_words = []
+
+    # Check for Latin-related content
+    has_latin_keyword = any(keyword in summary_lower for keyword in latin_keywords)
+    has_latin_vocab = any(word in summary_lower for word in expected_latin_words if word)
+
+    if not (has_latin_keyword or has_latin_vocab):
+        logger.warning("Summary does not contain Latin-related keywords or vocabulary")
+        return False
+
+    return True
+
+
 # ============================================================================
 # LLM-BASED GENERATION FUNCTIONS WITH RETRY LOGIC
 # ============================================================================
@@ -258,7 +312,7 @@ def generate_day_fields(week: int, day: int, client: LLMClient) -> List[Path]:
     response_guide = client.generate(prompt=usr_guide, system=sys_guide)
     guidelines_content = response_guide.text
 
-    # Generate summary (field 02) - using dedicated task_day_summary function
+    # Generate summary (field 02) - using dedicated task_day_summary function with retry
     class_name = fields_data.get("class_name", f"Week {week} Day {day}")
 
     # Load the day_summary prompt spec to get the schema
@@ -273,18 +327,41 @@ def generate_day_fields(week: int, day: int, client: LLMClient) -> List[Path]:
         week_spec=week_spec,
         prior_knowledge_digest=None  # TODO: implement prior knowledge digest
     )
-    response_summary = client.generate(
-        prompt=usr_summary,
-        system=sys_summary,
-        json_schema=summary_schema
-    )
 
-    # Extract summary from JSON response
-    if response_summary.json:
-        summary_content = response_summary.json.get("day_summary", "")
-    else:
-        # Fallback to text response
-        summary_content = response_summary.text
+    # Retry loop for summary generation with subject validation
+    summary_content = ""
+    for attempt in range(1, MAX_RETRIES + 1):
+        response_summary = client.generate(
+            prompt=usr_summary,
+            system=sys_summary,
+            json_schema=summary_schema
+        )
+
+        # Extract summary from JSON response
+        if response_summary.json:
+            summary_content = response_summary.json.get("day_summary", "")
+        else:
+            # Fallback to text response
+            summary_content = response_summary.text
+
+        # Validate that summary is about Latin (not math/science/etc)
+        if _validate_summary_subject(summary_content, week_spec):
+            if attempt > 1:
+                logger.info(f"Week {week} Day {day} summary validated successfully on attempt {attempt}")
+            break
+        else:
+            error_msg = "Summary failed subject validation (appears to be about wrong subject)"
+            _log_retry_attempt(week, day, attempt, error_msg)
+            _save_invalid_response(week, day, "summary", attempt, summary_content)
+
+            if attempt < MAX_RETRIES:
+                logger.warning(f"Retrying summary generation (attempt {attempt + 1}/{MAX_RETRIES})")
+                time.sleep(2)
+                continue
+            else:
+                logger.error(f"Summary validation failed after {MAX_RETRIES} attempts - using last attempt anyway")
+                # Use the last generated content even if invalid
+                break
 
     # Generate greeting (field 07) - needs role_context and will need document later
     # For now generate without document (will be regenerated if needed)

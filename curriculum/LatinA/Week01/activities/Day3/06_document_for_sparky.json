@@ -2,92 +2,85 @@
   "metadata": {
     "week": 1,
     "day": 3,
-    "title": "Week 1 Day 3: Introduction to Basic Latin Vocabulary",
+    "title": "Week 1 Day 3: Introduction to Latin Nouns",
     "duration_minutes": 45,
     "virtue": "Patience",
     "faith_phrase": "Pax vobiscum"
   },
-  "prior_knowledge_digest": "Students should have a basic understanding of Latin pronunciation rules and the concept of noun cases. They should be familiar with the nominative and accusative cases and have been introduced to the idea of subject-verb-object order in simple Latin sentences. A basic vocabulary of common nouns and verbs has been established, focusing on words related to family and school.",
-  "yesterday_recap": "Yesterday, we focused on the nominative and accusative cases, practicing with simple sentences and learning vocabulary related to family members.",
+  "prior_knowledge_digest": "Students should be familiar with the basic structure of Latin sentences, including the subject-verb-object order. They have been introduced to the concept of Latin being an inflected language, where the endings of words change to indicate their role in the sentence. Familiarity with the first conjugation of verbs and basic vocabulary related to greetings and simple actions is also expected.",
+  "yesterday_recap": "Yesterday, we explored the concept of Latin verbs and their conjugations, focusing on the first conjugation. Students practiced forming simple sentences using these verbs.",
   "spiral_links": {
     "recycled_vocab": [
-      "familia",
-      "puer",
-      "puella",
-      "magister"
+      "salve",
+      "vale",
+      "amare"
     ],
     "recycled_grammar": [
-      "nominative case",
-      "accusative case"
+      "subject-verb agreement",
+      "basic sentence structure"
     ],
     "prior_day_concepts": [
-      "subject-verb-object order"
+      "first conjugation verbs"
     ],
     "prior_weeks": []
   },
   "misconception_watchlist": [
-    "Confusing nominative and accusative cases",
-    "Incorrect pronunciation of vowels"
+    "Confusing noun endings with verb endings",
+    "Misidentifying the subject in a sentence"
   ],
   "objectives": {
     "primary": [
-      "Introduce new vocabulary related to school",
-      "Practice using nominative and accusative cases in sentences"
+      "Introduce the concept of Latin nouns",
+      "Understand the role of noun endings in indicating case"
     ],
     "spiral_review": []
   },
   "materials": [
-    "Flashcards with vocabulary",
-    "Whiteboard and markers",
-    "Handouts with practice sentences"
+    "Whiteboard",
+    "Markers",
+    "Handouts with noun endings",
+    "Projector"
   ],
   "lesson_flow": [
     {
       "type": "recall",
       "duration_minutes": 5,
-      "description": "Review vocabulary from previous lessons using flashcards.",
-      "student_action": "Students will recall and pronounce vocabulary words aloud.",
-      "teacher_notes": "Focus on correct pronunciation and quick recall."
+      "description": "Review the basic sentence structure and first conjugation verbs.",
+      "student_action": "Students recall and share examples of sentences using first conjugation verbs.",
+      "teacher_notes": "Encourage students to think of sentences they used in previous lessons."
     },
     {
       "type": "introduction",
       "duration_minutes": 10,
-      "description": "Introduce new vocabulary related to school using flashcards and visuals.",
-      "student_action": "Students will listen and repeat new vocabulary words.",
-      "teacher_notes": "Use visuals to aid memory and understanding."
+      "description": "Introduce Latin nouns and the concept of declensions.",
+      "student_action": "Listen and take notes on the introduction of nouns and declensions.",
+      "teacher_notes": "Use examples to illustrate how noun endings change."
     },
     {
       "type": "guided_practice",
       "duration_minutes": 10,
-      "description": "Practice forming sentences using the new vocabulary and previously learned grammar.",
-      "student_action": "Students will form sentences in pairs, using the new vocabulary.",
-      "teacher_notes": "Circulate to provide support and correct errors."
+      "description": "Practice identifying nouns and their roles in sentences.",
+      "student_action": "Work in pairs to identify nouns in example sentences and discuss their roles.",
+      "teacher_notes": "Provide immediate feedback and clarify any misconceptions."
     },
     {
       "type": "independent_practice",
       "duration_minutes": 10,
-      "description": "Students complete a worksheet with sentences to translate using new vocabulary.",
-      "student_action": "Students work individually to translate sentences.",
-      "teacher_notes": "Encourage students to use their notes and flashcards."
-    },
-    {
-      "type": "review",
-      "duration_minutes": 5,
-      "description": "Review key points of the lesson and address any questions.",
-      "student_action": "Students ask questions and participate in a brief discussion.",
-      "teacher_notes": "Clarify any misconceptions and reinforce correct usage."
+      "description": "Students complete a worksheet on identifying and using Latin nouns.",
+      "student_action": "Independently complete the worksheet, focusing on noun endings.",
+      "teacher_notes": "Circulate to offer help and check for understanding."
     },
     {
       "type": "closure",
       "duration_minutes": 5,
-      "description": "Summarize the lesson and preview the next class.",
-      "student_action": "Students listen and note down key points for the next lesson.",
-      "teacher_notes": "Highlight the connection between today's lesson and future topics."
+      "description": "Summarize the day's learning and preview the next lesson.",
+      "student_action": "Share one new thing learned about Latin nouns.",
+      "teacher_notes": "Encourage students to reflect on how noun endings affect meaning."
     }
   ],
   "behavior": {
     "tone": "Encouraging and supportive",
-    "loop_behavior": "Repeat instructions and provide examples as needed",
+    "loop_behavior": "Review and reinforce key concepts",
     "hints_max": 3,
     "wait_seconds": 5,
     "encouragement_frequency": "Frequent"

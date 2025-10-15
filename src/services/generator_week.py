@@ -308,7 +308,7 @@ def generate_week_spec_from_outline(week: int, client: LLMClient) -> Path:
 
     try:
         validated_spec = WeekSpec(**spec_data)
-        spec_data = validated_spec.model_dump(by_alias=True)
+        spec_data = validated_spec.model_dump(by_alias=True, mode='json')
         logger.info(f"Week {week} spec passed Pydantic validation")
     except Exception as e:
         # Save for inspection but continue (lenient mode)

@@ -7,83 +7,80 @@
     "title": "Latin Foundations: Alphabet and Pronunciation"
   },
   "objectives": [
-    "Recognize and pronounce Latin alphabet letters.",
-    "Understand basic Latin vowel and consonant sounds.",
-    "Memorize and translate 'In principio'.",
-    "Demonstrate discipline in pronunciation practice."
+    "Recite the Latin alphabet with correct pronunciation.",
+    "Recognize and pronounce basic Latin vocabulary.",
+    "Understand the importance of discipline in language learning."
   ],
   "focus_areas": [
-    "Latin alphabet pronunciation",
-    "Vowel and consonant sounds",
-    "Alphabet chant practice",
-    "Faith phrase memorization",
-    "Discipline in study habits"
+    "Latin alphabet recitation",
+    "Correct pronunciation of vowels",
+    "Introduction to basic Latin vocabulary",
+    "Chanting for memorization",
+    "Connecting discipline to learning"
   ],
   "spiral_hooks": {
     "vocabulary_spiral": [
-      "Amicus",
-      "Bonus",
-      "Civis",
-      "Dominus",
-      "Equus"
+      "aqua",
+      "terra",
+      "amicus"
     ],
     "grammar_spiral": [
-      "Latin alphabet structure",
-      "Vowel sounds",
-      "Consonant sounds"
+      "Latin alphabet",
+      "vowel pronunciation"
     ]
   },
   "virtue_integration": {
     "virtue": "Discipline",
-    "prompt": "Let's practice our pronunciation with discipline, just like a musician practices daily to improve."
+    "prompt": "Let's practice discipline by focusing on each letter's sound carefully."
   },
   "faith_integration": {
     "phrase": "In principio",
-    "usage_note": "Introduce this phrase during the chant practice to connect faith with language learning."
+    "usage_note": "Introduce when discussing the importance of beginnings."
   },
   "coaching_cues": [
-    "Great job with that sound!",
-    "Let's try that letter again, nice and clear.",
-    "Remember, 'C' is always hard like 'cat'.",
-    "Keep practicing, you're getting better!",
-    "Discipline helps us master new skills."
+    "Great job on that pronunciation!",
+    "Let's try that chant again, together!",
+    "Remember, discipline helps us learn!",
+    "Can you say that word one more time?",
+    "You're doing fantastic, keep it up!"
   ],
   "common_misconceptions": [
     {
-      "pattern": "Soft 'C' pronunciation",
-      "correction_cue": "Remember, 'C' is always hard, like 'cat'."
+      "pattern": "Mispronouncing 'a' as in 'cat'",
+      "correction_cue": "Remember, 'a' is like 'ah' in 'father'."
     },
     {
-      "pattern": "Mixing up vowel sounds",
-      "correction_cue": "Let's repeat the vowel sounds slowly."
+      "pattern": "Skipping letters in the chant",
+      "correction_cue": "Let's go through the chant slowly together."
     }
   ],
   "checks_for_understanding": [
-    "Can you pronounce the letter 'C'?",
-    "What sound does 'G' make?",
-    "How do you say 'In principio'?",
-    "Can you recite the alphabet chant?",
-    "What does 'In principio' mean?"
+    "Can you recite the Latin alphabet?",
+    "What sound does the letter 'a' make?",
+    "How do you say 'water' in Latin?",
+    "What is the first word in our chant?",
+    "Why is discipline important in learning?"
   ],
   "success_criteria": [
-    "Students pronounce Latin letters correctly.",
-    "Students recite the alphabet chant confidently.",
-    "Students explain the meaning of 'In principio'.",
-    "Students show discipline in practice."
+    "Students recite the alphabet confidently.",
+    "Students pronounce 'aqua' and 'terra' correctly.",
+    "Students participate in the chant.",
+    "Students explain the role of discipline in learning."
   ],
   "differentiation": {
     "support": [
-      "Use visual aids for letter sounds.",
-      "Practice in pairs for peer support."
+      "Use visual aids for alphabet letters.",
+      "Pair students for peer practice."
     ],
     "extension": [
-      "Challenge students to create a new chant.",
-      "Explore additional Latin words starting with each letter."
+      "Challenge students to create their own Latin word chant.",
+      "Ask students to find Latin roots in English words."
     ]
   },
   "classroom_management": [
-    "Keep transitions smooth between activities.",
-    "Use a timer for focused practice sessions."
+    "Keep transitions smooth with clear signals.",
+    "Use a timer for chant practice.",
+    "Encourage quiet hand-raising for questions."
   ],
   "constraints": {
     "time_window_minutes": 25,

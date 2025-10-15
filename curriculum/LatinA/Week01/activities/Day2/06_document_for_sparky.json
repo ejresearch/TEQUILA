@@ -7,75 +7,88 @@
     "virtue": "Patience",
     "faith_phrase": "Patience is a virtue."
   },
-  "prior_knowledge_digest": "Students should have a basic understanding of the Latin alphabet and pronunciation. They should be familiar with the concept of nouns and their role in sentences from English grammar. This includes recognizing nouns as people, places, things, or ideas. Additionally, students should have been introduced to the idea of grammatical gender, though not yet in the context of Latin.",
-  "yesterday_recap": "Yesterday, we introduced the Latin alphabet and practiced pronunciation. We also discussed the concept of grammatical gender in Latin.",
+  "prior_knowledge_digest": "Students should be familiar with the basic structure of Latin as an inflected language, where word endings change to convey meaning. They should understand the concept of nouns and have a basic grasp of English grammar, including subjects and objects. Familiarity with the idea of gender in language, as seen in languages like Spanish or French, will be helpful. Students should also recall the Latin alphabet and pronunciation rules introduced in Day 1.",
+  "yesterday_recap": "Yesterday, we introduced the Latin alphabet and pronunciation rules. Students practiced pronouncing simple Latin words and learned about the importance of inflection in Latin.",
   "spiral_links": {
-    "recycled_vocab": [],
-    "recycled_grammar": [],
+    "recycled_vocab": [
+      "puella",
+      "puer",
+      "familia"
+    ],
+    "recycled_grammar": [
+      "subject-verb agreement",
+      "basic noun recognition"
+    ],
     "prior_day_concepts": [
       "Latin alphabet",
-      "Pronunciation",
-      "Grammatical gender"
+      "pronunciation rules"
     ],
     "prior_weeks": []
   },
   "misconception_watchlist": [
-    "Confusing Latin noun endings with English",
-    "Mispronunciation of Latin vowels"
+    "Confusing noun genders",
+    "Mispronouncing vowel sounds"
   ],
   "objectives": {
     "primary": [
-      "Identify Latin nouns",
-      "Understand the concept of grammatical gender in Latin"
+      "Identify and classify Latin nouns by gender",
+      "Understand and apply basic noun endings"
     ],
     "spiral_review": []
   },
   "materials": [
     "Whiteboard",
     "Markers",
-    "Handouts with Latin noun examples",
-    "Audio recordings of Latin pronunciation"
+    "Handouts with noun lists",
+    "Audio clips for pronunciation"
   ],
   "lesson_flow": [
     {
       "type": "recall",
       "duration_minutes": 5,
-      "description": "Review the Latin alphabet and pronunciation from yesterday.",
+      "description": "Review the Latin alphabet and pronunciation rules from Day 1.",
       "student_action": "Students recite the alphabet and practice pronunciation.",
-      "teacher_notes": "Ensure correct pronunciation and address any difficulties."
+      "teacher_notes": "Focus on vowel sounds and common pronunciation errors."
     },
     {
       "type": "introduction",
       "duration_minutes": 10,
-      "description": "Introduce Latin nouns and the concept of grammatical gender.",
-      "student_action": "Listen and take notes on the introduction to Latin nouns.",
-      "teacher_notes": "Use examples to illustrate the concept of gender in Latin nouns."
+      "description": "Introduce Latin nouns and the concept of gender (masculine, feminine, neuter).",
+      "student_action": "Listen and take notes on noun gender and examples.",
+      "teacher_notes": "Use examples from familiar languages to illustrate gender."
     },
     {
       "type": "guided_practice",
       "duration_minutes": 10,
-      "description": "Practice identifying Latin nouns and their genders with examples.",
-      "student_action": "Work through examples with the teacher, identifying nouns and their genders.",
+      "description": "Practice identifying noun genders using a list of common Latin nouns.",
+      "student_action": "Work in pairs to classify nouns by gender.",
       "teacher_notes": "Provide immediate feedback and correct misconceptions."
     },
     {
       "type": "independent_practice",
       "duration_minutes": 10,
-      "description": "Students complete a worksheet identifying nouns and their genders.",
-      "student_action": "Independently identify nouns and their genders on the worksheet.",
-      "teacher_notes": "Circulate to provide support and check for understanding."
+      "description": "Students complete a worksheet classifying nouns and applying correct endings.",
+      "student_action": "Complete the worksheet individually.",
+      "teacher_notes": "Circulate to offer help and ensure understanding."
     },
     {
       "type": "closure",
       "duration_minutes": 5,
-      "description": "Recap the day's learning and preview the next lesson.",
-      "student_action": "Participate in a brief discussion about what was learned.",
-      "teacher_notes": "Highlight key points and address any remaining questions."
+      "description": "Recap the day's lesson and preview the next topic.",
+      "student_action": "Participate in a brief Q&A session.",
+      "teacher_notes": "Encourage questions and highlight the importance of noun endings."
+    },
+    {
+      "type": "faith_reflection",
+      "duration_minutes": 5,
+      "description": "Discuss the virtue of patience in learning a new language.",
+      "student_action": "Reflect on how patience helps in language learning.",
+      "teacher_notes": "Connect the faith phrase to the day's learning experience."
     }
   ],
   "behavior": {
     "tone": "Encouraging and supportive",
-    "loop_behavior": "Provide positive reinforcement and gentle correction",
+    "loop_behavior": "Revisit challenging concepts with patience",
     "hints_max": 3,
     "wait_seconds": 5,
     "encouragement_frequency": "Frequent"

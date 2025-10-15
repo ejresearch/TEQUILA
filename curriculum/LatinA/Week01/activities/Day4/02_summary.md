@@ -9,19 +9,27 @@ originality_attestation: true
 # Week 1 Day 4: Introduction to Fractions
 
 ## Objective
-Today, students will explore the concept of fractions, understanding how they represent parts of a whole and how to identify and create simple fractions.
+Today, students will learn the basics of fractions, understanding how they represent parts of a whole and how to identify and write simple fractions.
 
 ## Prior Knowledge
-- **Counting and Number Recognition:** Students have practiced counting numbers up to 100, which helps in understanding parts of a whole.
-- **Basic Addition and Subtraction:** Familiarity with these operations aids in grasping how fractions can be combined or separated.
+- **Counting and Number Sense**: Recognizing numbers and understanding their order helps in grasping the concept of parts and wholes.
+- **Basic Addition and Subtraction**: These operations are foundational for understanding how fractions can be combined or separated.
 
 ## Focus for Today
-- Grammar: 
-- Chant: {}
-- Vocabulary: Fraction, Whole, Half, Quarter, Numerator, Denominator, Equal Parts, Divide
+- Grammar: Understanding the language of fractions, such as "half," "quarter," and "third."
+- Chant: Reinforce the rhythm of counting in fractions.
+- Vocabulary: 
+  - Fraction
+  - Whole
+  - Half
+  - Quarter
+  - Numerator
+  - Denominator
+  - Equal Parts
+  - Divide
 
 ## Virtue & Faith Connection
-Understanding fractions teaches us about sharing and fairness, reflecting the virtue of justice. Just as we learn to divide things equally, we are reminded of the faith phrase "Love your neighbor as yourself," promoting equality and kindness.
+Today's lesson connects to the virtue of patience, as understanding fractions requires careful thought and practice. The faith phrase "Every part has its purpose" reminds us that each fraction, like each person, is important in its own way.
 
 ## Teacher Notes
-Encourage students to visualize fractions using everyday objects like fruits or paper shapes. Remind them to pronounce "numerator" and "denominator" clearly, emphasizing the syllables to aid memory. Allow time for hands-on activities to solidify their understanding of fractions as parts of a whole.
+Encourage students to use manipulatives, such as fraction circles or bars, to visualize fractions. Remind them to pronounce "numerator" and "denominator" clearly, emphasizing the syllables to aid retention. Allow time for students to explore fractions with hands-on activities to solidify their understanding.

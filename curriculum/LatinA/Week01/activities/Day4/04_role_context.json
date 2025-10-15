@@ -4,86 +4,82 @@
   "lesson_slot": {
     "week": 1,
     "day": 4,
-    "title": "Class: Week 1 Day 4"
+    "title": "Week 1 Day 4"
   },
   "objectives": [
-    "Pronounce Latin letters A-H correctly.",
-    "Recite the alphabet chant from memory.",
-    "Understand the hard sounds of 'C' and 'G'."
+    "Recite the Latin alphabet with correct pronunciation.",
+    "Recognize and pronounce basic Latin vocabulary.",
+    "Understand the importance of discipline in learning Latin."
   ],
   "focus_areas": [
-    "Latin alphabet pronunciation",
-    "Alphabet chant practice",
-    "Hard sounds of 'C' and 'G'",
-    "Faith phrase memorization",
-    "Virtue of discipline"
+    "Latin alphabet recitation",
+    "Correct pronunciation of vowels",
+    "Basic vocabulary introduction",
+    "Chant practice",
+    "Connecting discipline to learning"
   ],
   "spiral_hooks": {
     "vocabulary_spiral": [
-      "Amicus",
-      "Bonus",
-      "Civis",
-      "Dominus",
-      "Equus"
+      "aqua",
+      "terra",
+      "amicus"
     ],
     "grammar_spiral": [
-      "Latin alphabet introduction",
-      "Vowel sounds",
-      "Consonant sounds"
+      "Latin alphabet",
+      "Pronunciation of vowels"
     ]
   },
   "virtue_integration": {
     "virtue": "Discipline",
-    "prompt": "Practice pronunciation daily to build discipline, just like a musician practices an instrument."
+    "prompt": "Discuss how practicing the alphabet daily builds discipline."
   },
   "faith_integration": {
     "phrase": "In principio",
-    "usage_note": "Use this phrase at the start of the lesson to set the tone."
+    "usage_note": "Use when introducing new concepts to highlight beginnings."
   },
   "coaching_cues": [
-    "Let's try saying 'A' like 'ah' in 'father'.",
-    "Remember, 'C' is always hard, like in 'cat'.",
-    "Great job! Let's keep practicing.",
-    "Discipline helps us get better every day.",
-    "Can you say 'G' like in 'go'?",
-    "Let's chant together!"
+    "Let's chant the alphabet together!",
+    "Remember, 'a' is like 'ah' in 'father'.",
+    "Great job pronouncing 'aqua'!",
+    "Keep practicing, discipline makes perfect!",
+    "Who can say 'amicus' with me?",
+    "Let's try the chant one more time!"
   ],
   "common_misconceptions": [
     {
-      "pattern": "Soft 'C' sound",
-      "correction_cue": "Remember, 'C' is always hard, like in 'cat'."
+      "pattern": "Mispronouncing 'a' as in 'cat'",
+      "correction_cue": "Remember, 'a' is like 'ah' in 'father'."
     },
     {
-      "pattern": "Soft 'G' sound",
-      "correction_cue": "'G' is hard, like in 'go'."
+      "pattern": "Skipping letters in the chant",
+      "correction_cue": "Let's go through the chant slowly together."
     }
   ],
   "checks_for_understanding": [
-    "How do we pronounce 'C'?",
-    "What sound does 'G' make?",
-    "Can you recite the alphabet chant?",
-    "What does 'In principio' mean?",
-    "How does discipline help us learn?"
+    "Can you recite the Latin alphabet?",
+    "What sound does 'a' make in Latin?",
+    "How do you say 'water' in Latin?",
+    "What does 'amicus' mean?",
+    "Why is discipline important in learning?"
   ],
   "success_criteria": [
-    "Students pronounce letters A-H correctly.",
-    "Students recite the alphabet chant from memory.",
-    "Students explain the hard sounds of 'C' and 'G'."
+    "Students recite the alphabet confidently.",
+    "Students pronounce 'aqua' and 'terra' correctly.",
+    "Students explain the role of discipline in learning."
   ],
   "differentiation": {
     "support": [
-      "Use visual aids for letter sounds.",
+      "Use visual aids for the alphabet.",
       "Pair students for chant practice."
     ],
     "extension": [
-      "Challenge students to spell simple Latin words.",
-      "Introduce additional Latin letters for advanced practice."
+      "Challenge students to create a simple Latin phrase.",
+      "Explore the history of the Latin alphabet."
     ]
   },
   "classroom_management": [
-    "Keep transitions smooth with clear signals.",
-    "Use a timer for chant practice.",
-    "Encourage quiet focus during pronunciation practice."
+    "Use hand signals for quieting down.",
+    "Transition smoothly from chant to vocabulary practice."
   ],
   "constraints": {
     "time_window_minutes": 25,

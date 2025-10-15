@@ -1,11 +1,4 @@
 {
-  "techniques": [
-    "positive reinforcement",
-    "gamification"
-  ],
-  "tools": [
-    "badges",
-    "points",
-    "leaderboards"
-  ]
+  "encouragement": "Positive reinforcement through badges and rewards",
+  "motivation": "Challenges and puzzles that unlock new levels"
 }

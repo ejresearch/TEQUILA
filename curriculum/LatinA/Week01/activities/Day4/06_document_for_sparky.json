@@ -1,90 +1,92 @@
 {
   "metadata": {
-    "week": 1,
+    "week": 2,
     "day": 4,
-    "title": "Week 1 Day 4: Introduction to Latin Nouns and Verbs",
+    "title": "Week 2 Day 4: Introduction to Latin Verbs",
     "duration_minutes": 45,
     "virtue": "Perseverance",
-    "faith_phrase": "Fortes fortuna adiuvat"
+    "faith_phrase": "Laborare est orare (To work is to pray)"
   },
-  "prior_knowledge_digest": "Students should have a basic understanding of the Latin alphabet and pronunciation rules. They should be familiar with simple greetings and phrases in Latin, as well as the concept of noun and verb agreement in English. Prior exposure to Latin roots in English vocabulary will be beneficial.",
-  "yesterday_recap": "Yesterday, we introduced basic Latin nouns and their singular forms. Students practiced identifying nouns in simple sentences.",
+  "prior_knowledge_digest": "Students should be familiar with basic Latin nouns and their declensions, as well as the concept of subject-verb agreement in English. They have been introduced to the first declension and some basic vocabulary, including common nouns and adjectives. Understanding of Latin sentence structure, particularly the Subject-Object-Verb order, is essential. Students should also recall the vocabulary related to family and school, as well as the concept of noun-adjective agreement.",
+  "yesterday_recap": "Yesterday, we explored more complex noun-adjective agreements and practiced translating simple sentences from Latin to English, focusing on the first declension.",
   "spiral_links": {
     "recycled_vocab": [
-      "salve",
-      "vale",
-      "amicus"
+      "familia",
+      "schola",
+      "magister"
     ],
     "recycled_grammar": [
-      "noun identification",
-      "basic sentence structure"
+      "noun-adjective agreement",
+      "first declension endings"
     ],
     "prior_day_concepts": [
-      "nouns",
-      "singular forms"
+      "noun-adjective agreement",
+      "basic sentence translation"
     ],
-    "prior_weeks": []
+    "prior_weeks": [
+      1
+    ]
   },
   "misconception_watchlist": [
-    "Confusing noun and verb endings",
-    "Mispronunciation of Latin vowels"
+    "Confusing subject and object in sentences",
+    "Incorrect verb endings"
   ],
   "objectives": {
     "primary": [
-      "Identify Latin verbs in simple sentences",
-      "Understand basic noun-verb agreement"
+      "Introduce basic Latin verb conjugations",
+      "Practice subject-verb agreement"
     ],
     "spiral_review": [
-      "Review Latin nouns",
-      "Practice pronunciation"
+      "Review noun-adjective agreement",
+      "Reinforce first declension endings"
     ]
   },
   "materials": [
-    "Latin textbook",
     "Whiteboard",
     "Markers",
+    "Handouts with verb conjugation tables",
     "Flashcards"
   ],
   "lesson_flow": [
     {
       "type": "recall",
       "duration_minutes": 10,
-      "description": "Review Latin nouns and their singular forms from previous lessons.",
-      "student_action": "Students will recall and list nouns learned previously.",
-      "teacher_notes": "Encourage students to use flashcards for quick recall."
-    },
-    {
-      "type": "review",
-      "duration_minutes": 5,
-      "description": "Quick pronunciation drill of Latin vowels.",
-      "student_action": "Students repeat after the teacher to practice correct pronunciation.",
-      "teacher_notes": "Focus on common vowel sounds and correct any errors."
+      "description": "Review noun-adjective agreement and first declension endings.",
+      "student_action": "Participate in a quick quiz and discussion.",
+      "teacher_notes": "Use flashcards to prompt students."
     },
     {
       "type": "introduction",
       "duration_minutes": 10,
-      "description": "Introduce basic Latin verbs and their role in sentences.",
-      "student_action": "Students listen and take notes on new verbs introduced.",
-      "teacher_notes": "Use examples to show how verbs function in sentences."
+      "description": "Introduce basic Latin verb conjugations and subject-verb agreement.",
+      "student_action": "Listen and take notes on verb conjugation patterns.",
+      "teacher_notes": "Highlight the importance of matching verb endings with subjects."
     },
     {
       "type": "guided_practice",
       "duration_minutes": 10,
-      "description": "Practice identifying verbs in simple Latin sentences.",
-      "student_action": "Students work in pairs to identify verbs in provided sentences.",
-      "teacher_notes": "Circulate to provide hints and correct misconceptions."
+      "description": "Practice conjugating verbs with the class using examples on the board.",
+      "student_action": "Conjugate verbs in pairs and share with the class.",
+      "teacher_notes": "Provide immediate feedback and correct common errors."
+    },
+    {
+      "type": "independent_practice",
+      "duration_minutes": 10,
+      "description": "Students work on a worksheet to practice verb conjugations independently.",
+      "student_action": "Complete the worksheet and check answers with a partner.",
+      "teacher_notes": "Circulate to offer help and ensure understanding."
     },
     {
       "type": "assessment",
-      "duration_minutes": 10,
-      "description": "Short quiz on identifying nouns and verbs in sentences.",
-      "student_action": "Students complete a written quiz individually.",
-      "teacher_notes": "Use this to assess understanding and identify areas needing review."
+      "duration_minutes": 5,
+      "description": "Quick quiz on verb conjugations and subject-verb agreement.",
+      "student_action": "Complete the quiz individually.",
+      "teacher_notes": "Use this to gauge understanding and readiness for next steps."
     }
   ],
   "behavior": {
     "tone": "Encouraging and supportive",
-    "loop_behavior": "Provide hints and encouragement if students struggle",
+    "loop_behavior": "Revisit difficult concepts with additional examples",
     "hints_max": 3,
     "wait_seconds": 5,
     "encouragement_frequency": "Frequent"

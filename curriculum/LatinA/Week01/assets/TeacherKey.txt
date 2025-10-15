@@ -1,68 +1,56 @@
 ```markdown
 # Teacher Key – Week 1
 
-Hello, Educators! Below you'll find the answer key for the Grade 3 Latin A Week 1 Quiz. Each answer includes explanations to help guide your students in their understanding of Latin vocabulary, grammar, and pronunciation. Enjoy teaching!
+Hello, educators! This key provides the correct answers, explanations, and additional teaching tips for the Grade 3 Latin A – Week 1 Quiz. Use it to guide your students through their learning journey.
 
 ## Vocabulary (5 points)
 
-1. **Fill in the blank:** The Latin letter "A" is pronounced as "___".  
-   **Correct Answer:** a) ah  
-   **Explanation:** In Latin, the letter "A" is pronounced as "ah," similar to the "a" in "father." This pronunciation is consistent and does not change based on word position.
+1. **Fill in the blank:** The Latin word for "water" is **b) aqua**. (1 point)  
+   **Explanation:** "Aqua" is the Latin word for water, commonly used in scientific and everyday contexts, such as "aquarium."
 
-2. **Multiple Choice:** What is the English meaning of the Latin word "Amicus"?  
-   **Correct Answer:** b) Friend  
-   **Explanation:** "Amicus" translates to "friend" in English. This word is often used to describe a person with whom one shares a bond of mutual affection.
+2. **Multiple Choice:** What is the English meaning of "terra"? **b) Earth**. (1 point)  
+   **Explanation:** "Terra" translates to "earth" in English, referring to the ground or land, and is the root of words like "terrestrial."
 
-3. **Fill in the blank:** The Latin letter "B" is pronounced as "___".  
-   **Correct Answer:** a) beh  
-   **Explanation:** The Latin "B" is pronounced as "beh," similar to the English "b" in "bed." It is a voiced bilabial plosive.
+3. **Fill in the blank:** "Amicus" means **a) friend** in English. (1 point)  
+   **Explanation:** "Amicus" is a noun meaning "friend," highlighting the importance of friendship in Roman culture.
 
-4. **Multiple Choice:** Which Latin letter is pronounced as "keh"?  
-   **Correct Answer:** b) C  
-   **Explanation:** In Latin, the letter "C" is always pronounced as "keh," like the "k" in "kite," regardless of its position in a word.
+4. **Multiple Choice:** How do you pronounce "aqua"? **a) AH-kwah**. (1 point)  
+   **Explanation:** The pronunciation "AH-kwah" reflects classical Latin pronunciation, where "a" is pronounced as in "father."
 
-5. **Fill in the blank:** The Latin word "Bonus" means "___" in English.  
-   **Correct Answer:** b) Good  
-   **Explanation:** "Bonus" translates to "good" in English. It is often used to describe something of high quality or moral virtue.
+5. **Fill in the blank:** The Latin word "terra" is a **b) noun**. (1 point)  
+   **Explanation:** "Terra" is a noun because it names a thing, specifically the earth or land.
 
 ## Grammar & Chant (5 points)
 
-6. **Short Response:** Write the first four letters of the Latin alphabet.  
-   **Correct Answer:** A, B, C, D  
-   **Explanation:** The Latin alphabet begins with A, B, C, and D, similar to the English alphabet. These letters are foundational in learning Latin phonetics.
+6. **Short Response:** Recite the first five letters of the Latin alphabet. **A, B, C, D, E**. (1 point)  
+   **Explanation:** These letters are pronounced similarly to English, forming the foundation of the Latin alphabet chant.
 
-7. **Multiple Choice:** Which of the following is a hard sound in Latin?  
-   **Correct Answer:** a) C as in "Civis"  
-   **Explanation:** The letter "C" in Latin is always hard, pronounced like "k" in "kite," as in "Civis" (citizen).
+7. **Multiple Choice:** Which of these is a key part of the Latin Alphabet Chant? **c) Reciting**. (1 point)  
+   **Explanation:** Reciting helps students memorize the alphabet through repetition, a key learning strategy.
 
-8. **Fill in the blank:** The chant helps us remember the Latin alphabet. What comes after "A" in the chant?  
-   **Correct Answer:** B  
-   **Explanation:** The chant sequence is A, B, C, D, and so on. This helps students memorize the order and pronunciation of the Latin alphabet. Rhythm tip: Clap or tap to keep a steady beat as you chant.
+8. **Fill in the blank:** The Latin word "aqua" is a **noun**. (1 point)  
+   **Explanation:** "Aqua" is a noun because it names a thing, specifically water, which is essential for life.
 
-9. **Short Response:** Explain the difference between the hard and soft sounds of the letter "C".  
-   **Correct Answer:** Hard 'C' as in 'Civis', soft 'C' as in 'Cicero'  
-   **Explanation:** In Latin, "C" is always hard, like "k." In English, "C" can be soft, like "s" in "Cicero," but this does not apply to Latin pronunciation.
+9. **Short Response:** What is the importance of discipline in learning Latin?  
+   **Sample Answer:** Discipline helps students consistently practice and review Latin, leading to better retention and understanding. (1 point)
 
-10. **Fill in the blank:** In the chant, the letter "D" is pronounced as "___".  
-    **Correct Answer:** deh  
-    **Explanation:** The Latin "D" is pronounced as "deh," similar to the "d" in "dog." It is a voiced dental plosive.
+10. **Multiple Choice:** Which of these words is NOT in the Latin Alphabet Chant? **c) Delta**. (1 point)  
+    **Explanation:** "Delta" is a Greek letter, not part of the Latin alphabet, which includes letters like "A" and "B."
 
 ## Translation (4 points)
 
-11. **Translate to English:** "In principio"  
-    **Correct Answer:** In the beginning  
-    **Explanation:** "In principio" literally translates to "in the beginning." It is a phrase often used to denote the start of something, famously used in the Bible.
+11. **Translate to English:** "Aqua est necessaria." **Water is necessary.** (2 points)  
+    **Explanation:** "Aqua" means water, "est" means is, and "necessaria" means necessary. This sentence highlights the essential nature of water.
 
-12. **Translate to Latin:** "Good"  
-    **Correct Answer:** Bonus  
-    **Explanation:** The English word "good" translates to "bonus" in Latin. This adjective describes something positive or beneficial.
+12. **Translate to Latin:** "The earth is big." **Terra est magna.** (2 points)  
+    **Explanation:** "Terra" means earth, "est" means is, and "magna" means big. This sentence describes the vastness of the earth.
 
 ## Virtue Reflection (1 point)
 
-13. **Short Written Response:** How can practicing discipline help you learn Latin better? Write one or two sentences.  
-    **Sample Response:** Practicing discipline helps you study regularly and improve your skills. By setting aside time each day to review Latin, you build a strong foundation and make steady progress.
+13. **Short Written Response:** How can being disciplined help you learn Latin better?  
+    **Sample Answer:** Being disciplined helps me set aside regular study time, which improves my Latin skills and helps me achieve my learning goals. (1 point)
 
 ---
 
-Thank you for guiding your students through their Latin journey. Your dedication to their learning is invaluable!
+Thank you for using this key to support your students' learning in Latin. Encourage them to practice regularly and enjoy the beauty of this classical language!
 ```

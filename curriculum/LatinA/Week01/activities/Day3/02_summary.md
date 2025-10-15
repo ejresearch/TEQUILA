@@ -9,19 +9,20 @@ originality_attestation: true
 # Week 1 Day 3: Introduction to Fractions
 
 ## Objective
-Today, students will deepen their understanding of fractions by reviewing key concepts and answering questions to reinforce mastery.
+Today, students will review the basic concepts of fractions, ensuring they can identify and represent fractions using visual aids and simple equations.
 
 ## Prior Knowledge
-- Understanding of whole numbers and their properties.
-- Basic arithmetic operations such as addition and subtraction.
+- Understanding of whole numbers and their place on a number line.
+- Basic addition and subtraction skills.
+- Familiarity with shapes and partitioning them into equal parts.
 
 ## Focus for Today
-- Grammar: 
-- Chant: {}
-- Vocabulary: Fraction, Numerator, Denominator, Whole, Part, Equal, Divide, Share
+- Grammar: N/A
+- Chant: N/A
+- Vocabulary: Fraction, numerator, denominator, equal parts, whole, half, quarter, third
 
 ## Virtue & Faith Connection
-In learning about fractions, we explore the virtue of patience, as understanding parts of a whole requires careful thought and practice. Our faith teaches us that every part has its purpose, much like every fraction has its place in math.
+Today's lesson emphasizes the virtue of patience, as students learn to carefully divide and understand parts of a whole. The faith phrase "Unity in diversity" reflects how different parts come together to form a complete whole, much like fractions.
 
 ## Teacher Notes
-Encourage students to ask questions and engage with the material actively. Use visual aids like fraction circles or bars to help illustrate concepts. Remind students to pronounce "numerator" and "denominator" clearly, emphasizing the syllables to aid memory retention. Maintain a steady pace, allowing time for discussion and clarification.
+Encourage students to use visual aids like fraction circles or bars to better understand the concept of fractions. Remind them to pronounce "numerator" and "denominator" clearly, as these terms will be frequently used. Allow time for questions and ensure students can relate fractions to real-world examples, such as slicing a pizza or sharing a chocolate bar.

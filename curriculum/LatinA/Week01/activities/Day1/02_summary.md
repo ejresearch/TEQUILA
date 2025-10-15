@@ -6,22 +6,29 @@ validated_by: Steel
 originality_attestation: true
 ---
 
-# Week 1 Day 1: Introduction to Fractions
+# Week 1 Day 1: Introduction to Ecosystems
 
 ## Objective
-Today, students will learn the basic concept of fractions, understanding how they represent parts of a whole. They will also be introduced to simple fraction vocabulary and symbols.
+Today, students will be introduced to the concept of ecosystems, learning key vocabulary and understanding the basic interactions within these natural communities.
 
 ## Prior Knowledge
-- Students have previously learned about whole numbers and their place value.
-- They understand basic addition and subtraction, which will help in grasping the concept of combining and separating parts.
+- Students have previously learned about different types of living organisms and their basic needs.
+- Familiarity with the concept of habitats and how animals and plants adapt to their environments.
 
 ## Focus for Today
-- Grammar: Introduction to mathematical symbols and their meanings.
-- Chant: {}
-- Vocabulary: Fraction, numerator, denominator, whole, part, equal, divide, share
+- **Grammar:** Introduction to simple present tense to describe habitual actions in ecosystems.
+- **Chant:** "Ecosystems, big and small, nature's balance, hear the call."
+- **Vocabulary:**
+  - Ecosystem
+  - Habitat
+  - Organism
+  - Interaction
+  - Community
+  - Environment
+  - Adaptation
 
 ## Virtue & Faith Connection
-Today’s lesson emphasizes the virtue of patience, as understanding fractions requires careful thought and practice. The faith phrase "Every part has its place" reminds us that each fraction, like each person, is important in the grand design.
+Today's virtue is "Harmony," reflecting how ecosystems thrive when all parts work together. The faith phrase "All creation sings in harmony" reminds us of the interconnectedness of life.
 
 ## Teacher Notes
-Begin with a simple explanation of what a fraction is, using visual aids like pie charts or fraction bars. Encourage students to use their hands or objects to physically divide items into parts. Remind them that the numerator is the top number, indicating how many parts we have, while the denominator is the bottom number, showing how many equal parts the whole is divided into. Keep the pace steady, allowing time for questions and practice.
+Encourage students to pronounce "ecosystem" slowly, emphasizing each syllable: e-co-sys-tem. Allow time for students to practice the chant, focusing on rhythm and clarity. This will help reinforce the vocabulary and the concept of balance within ecosystems.

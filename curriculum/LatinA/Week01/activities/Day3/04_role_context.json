@@ -7,84 +7,79 @@
     "title": "Week 1 Day 3"
   },
   "objectives": [
-    "Pronounce each letter of the Latin alphabet correctly.",
-    "Recite the alphabet chant with confidence.",
-    "Understand the hard sounds of 'C' and 'G'.",
-    "Connect discipline with daily practice."
+    "Recite the Latin alphabet with correct pronunciation.",
+    "Pronounce basic Latin vocabulary words accurately.",
+    "Connect 'In principio' to its meaning and context."
   ],
   "focus_areas": [
-    "Latin alphabet pronunciation",
-    "Alphabet chant practice",
-    "Hard sounds of 'C' and 'G'",
-    "Virtue of discipline",
-    "Faith phrase 'In principio'"
+    "Latin alphabet recitation",
+    "Correct pronunciation of vowels",
+    "Basic vocabulary pronunciation",
+    "Chant practice",
+    "Faith phrase connection"
   ],
   "spiral_hooks": {
     "vocabulary_spiral": [
-      "Amicus",
-      "Bonus",
-      "Civis",
-      "Dominus",
-      "Equus"
+      "aqua",
+      "terra",
+      "amicus"
     ],
     "grammar_spiral": [
       "Latin alphabet",
-      "Vowel sounds",
-      "Consonant sounds"
+      "Pronunciation of vowels"
     ]
   },
   "virtue_integration": {
     "virtue": "Discipline",
-    "prompt": "Let's practice our letters every day to become masters of Latin!"
+    "prompt": "Let's practice discipline by focusing on clear pronunciation."
   },
   "faith_integration": {
     "phrase": "In principio",
-    "usage_note": "Use when starting the lesson to set the tone."
+    "usage_note": "Use when introducing the day's lesson to connect with faith."
   },
   "coaching_cues": [
-    "Great job on that letter!",
-    "Let's try that sound again, nice and clear.",
-    "Remember, 'C' is like 'cat'!",
-    "Keep practicing, you're getting better!",
-    "Discipline helps us learn!"
+    "Great job on those vowels!",
+    "Remember, 'a' is always 'ah'.",
+    "Let's chant together!",
+    "Who can say 'aqua' like a pro?",
+    "Discipline helps us learn better!"
   ],
   "common_misconceptions": [
     {
-      "pattern": "Soft 'C' sound",
-      "correction_cue": "Remember, 'C' is always hard, like 'cat'."
+      "pattern": "Mispronouncing 'a' as in 'cat'",
+      "correction_cue": "Remember, 'a' is like 'ah' in 'father'."
     },
     {
-      "pattern": "Soft 'G' sound",
-      "correction_cue": "'G' is hard, like 'go'."
+      "pattern": "Skipping letters in the alphabet",
+      "correction_cue": "Let's try the chant again, slowly."
     }
   ],
   "checks_for_understanding": [
-    "Can you pronounce the letter 'C'?",
-    "What sound does 'G' make?",
-    "Can you recite the alphabet chant?",
+    "Can you recite the alphabet without looking?",
+    "What sound does 'a' make in Latin?",
+    "How do you say 'water' in Latin?",
     "What does 'In principio' mean?",
-    "How does discipline help us learn?"
+    "Can you pronounce 'amicus' correctly?"
   ],
   "success_criteria": [
-    "Students pronounce each letter correctly.",
-    "Students recite the alphabet chant smoothly.",
-    "Students demonstrate understanding of hard sounds.",
-    "Students show discipline in practice."
+    "Students recite the alphabet confidently.",
+    "Students pronounce vocabulary words correctly.",
+    "Students explain the meaning of 'In principio'."
   ],
   "differentiation": {
     "support": [
-      "Use visual aids for letter sounds.",
-      "Pair students for peer practice."
+      "Use visual aids for alphabet.",
+      "Provide pronunciation guides.",
+      "Repeat chants slowly."
     ],
     "extension": [
-      "Challenge with additional Latin words.",
-      "Introduce simple Latin phrases."
+      "Challenge with new vocabulary words.",
+      "Ask students to create simple Latin phrases."
     ]
   },
   "classroom_management": [
-    "Keep transitions quick between activities.",
-    "Encourage quiet, focused practice.",
-    "Use positive reinforcement for participation."
+    "Keep transitions smooth with chants.",
+    "Use hand signals for quieting down."
   ],
   "constraints": {
     "time_window_minutes": 25,

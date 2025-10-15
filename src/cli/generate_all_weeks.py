@@ -93,6 +93,12 @@ def generate_week(week_number: int, client, export: bool = True) -> bool:
             result = hydrate_day_from_llm(week_number, day, client)
             if result.get("status") == "success":
                 print(f"    ✓ Generated all fields successfully")
+
+                # Show Day 4 assessment status
+                if day == 4 and "assessment_paths" in result:
+                    print(f"    ✓ Quiz packet and teacher key generated")
+                elif day == 4 and "assessment_error" in result:
+                    print(f"    ⚠ Assessment generation failed: {result['assessment_error']}")
             else:
                 print(f"    ⚠ Generation completed with warnings")
         except ValueError as e:

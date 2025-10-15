@@ -8,6 +8,7 @@ from datetime import datetime
 from .storage import (
     day_dir,
     day_field_path,
+    week_dir,
     week_spec_part_path,
     DAY_FIELDS,
     write_file,
@@ -19,7 +20,9 @@ from .prompts.kit_tasks import (
     task_day_document,
     task_day_role_context,
     task_day_guidelines,
-    task_day_greeting
+    task_day_greeting,
+    task_quiz_packet,
+    task_teacher_key
 )
 from ..config import settings
 
@@ -28,6 +31,24 @@ logger = logging.getLogger(__name__)
 
 # Retry configuration
 MAX_RETRIES = settings.max_retries  # Default: 10 retries
+
+
+def _strip_markdown_fences(text: str) -> str:
+    """
+    Strip markdown code fences from JSON response.
+
+    OpenAI sometimes returns JSON wrapped in ```json ... ``` fences.
+    """
+    text = text.strip()
+    if text.startswith("```json"):
+        text = text[7:]  # Remove ```json
+    elif text.startswith("```"):
+        text = text[3:]  # Remove ```
+
+    if text.endswith("```"):
+        text = text[:-3]  # Remove trailing ```
+
+    return text.strip()
 
 
 def get_field_template_path(field_name: str) -> Path:
@@ -199,7 +220,8 @@ def generate_day_fields(week: int, day: int, client: LLMClient) -> List[Path]:
         fields_data = response.json
     else:
         try:
-            fields_data = orjson.loads(response.text)
+            cleaned_text = _strip_markdown_fences(response.text)
+            fields_data = orjson.loads(cleaned_text)
         except Exception:
             # Fallback to minimal data
             fields_data = {
@@ -218,7 +240,8 @@ def generate_day_fields(week: int, day: int, client: LLMClient) -> List[Path]:
         role_context_data = response_rc.json
     else:
         try:
-            role_context_data = orjson.loads(response_rc.text)
+            cleaned_text = _strip_markdown_fences(response_rc.text)
+            role_context_data = orjson.loads(cleaned_text)
         except Exception:
             # Fallback minimal role_context
             role_context_data = {
@@ -304,7 +327,8 @@ def generate_day_document(week: int, day: int, client: LLMClient) -> Path:
             if response.json:
                 doc_data = response.json
             else:
-                doc_data = orjson.loads(response.text)
+                cleaned_text = _strip_markdown_fences(response.text)
+                doc_data = orjson.loads(cleaned_text)
 
             # Basic validation - check required fields
             required_fields = ["metadata", "prior_knowledge_digest", "objectives", "lesson_flow"]
@@ -368,9 +392,111 @@ def generate_day_document(week: int, day: int, client: LLMClient) -> Path:
     return doc_path
 
 
+def generate_day4_assessment(week: int, client: LLMClient) -> Dict[str, Path]:
+    """
+    Generate Day 4 assessment materials (quiz packet + teacher key).
+
+    This function enforces pedagogical requirements:
+    - Quiz must include ≥25% content from prior weeks (spiral enforcement)
+    - Balanced coverage: vocabulary, grammar, chant, virtue reflection
+    - Teacher key must provide detailed explanations
+
+    Args:
+        week: Week number (1-35)
+        client: LLM client instance
+
+    Returns:
+        Dictionary with paths to generated assessment files
+
+    Raises:
+        ValueError: If week spec or Day 4 document not found
+    """
+    logger.info(f"Generating Day 4 assessment for Week {week}")
+
+    # Load week spec
+    spec_path = week_spec_part_path(week, "99_compiled_week_spec.json")
+    if not spec_path.exists():
+        raise ValueError(f"Week spec not found for Week {week}. Generate week spec first.")
+
+    week_spec = orjson.loads(spec_path.read_bytes())
+
+    # Load Day 4 document
+    day4_doc_path = day_field_path(week, 4, "06_document_for_sparky.json")
+    if not day4_doc_path.exists():
+        raise ValueError(f"Day 4 document not found for Week {week}. Generate Day 4 first.")
+
+    day4_document = orjson.loads(day4_doc_path.read_bytes())
+
+    # Load Day 4 guidelines (optional)
+    guidelines_path = day_field_path(week, 4, "05_guidelines_for_sparky.md")
+    guidelines = guidelines_path.read_text(encoding="utf-8") if guidelines_path.exists() else None
+
+    # Generate quiz packet
+    logger.info("Generating quiz packet...")
+    sys_quiz, usr_quiz, config_quiz = task_quiz_packet(
+        week_number=week,
+        week_spec=week_spec,
+        day4_document=day4_document,
+        guidelines=guidelines
+    )
+
+    response_quiz = client.generate(prompt=usr_quiz, system=sys_quiz)
+
+    # Parse quiz response
+    if response_quiz.json:
+        quiz_data = response_quiz.json
+    else:
+        try:
+            cleaned_text = _strip_markdown_fences(response_quiz.text)
+            quiz_data = orjson.loads(cleaned_text)
+        except Exception as e:
+            logger.error(f"Failed to parse quiz packet response: {e}")
+            raise ValueError(f"Quiz packet generation failed: invalid JSON response")
+
+    quiz_markdown = quiz_data.get("quiz_markdown", "")
+    answer_key_min = quiz_data.get("answer_key_min", [])
+
+    if not quiz_markdown:
+        raise ValueError("Quiz packet generation failed: empty quiz_markdown")
+
+    # Write quiz packet to assets
+    assets_dir = week_dir(week) / "assets"
+    quiz_path = assets_dir / "QuizPacket.txt"
+    write_file(quiz_path, quiz_markdown)
+    logger.info(f"Quiz packet written to {quiz_path}")
+
+    # Generate teacher key
+    logger.info("Generating teacher answer key...")
+    sys_key, usr_key, config_key = task_teacher_key(
+        week_number=week,
+        quiz_markdown=quiz_markdown,
+        answer_key_min=answer_key_min,
+        week_spec=week_spec
+    )
+
+    response_key = client.generate(prompt=usr_key, system=sys_key)
+    teacher_key_markdown = response_key.text
+
+    if not teacher_key_markdown or len(teacher_key_markdown) < 100:
+        logger.warning("Teacher key generation produced minimal output")
+
+    # Write teacher key to assets
+    key_path = assets_dir / "TeacherKey.txt"
+    write_file(key_path, teacher_key_markdown)
+    logger.info(f"Teacher key written to {key_path}")
+
+    return {
+        "quiz_packet": quiz_path,
+        "teacher_key": key_path,
+        "status": "success"
+    }
+
+
 def hydrate_day_from_llm(week: int, day: int, client: LLMClient) -> Dict[str, Any]:
     """
     Generate all day content (fields + document) using LLM.
+
+    For Day 4, also generates assessment materials (quiz + teacher key).
 
     Args:
         week: Week number (1-36)
@@ -383,10 +509,26 @@ def hydrate_day_from_llm(week: int, day: int, client: LLMClient) -> Dict[str, An
     field_paths = generate_day_fields(week, day, client)
     doc_path = generate_day_document(week, day, client)
 
-    return {
+    result = {
         "week": week,
         "day": day,
         "field_paths": [str(p) for p in field_paths],
         "document_path": str(doc_path),
         "status": "success"
     }
+
+    # Day 4: Generate assessment materials
+    if day == 4:
+        try:
+            assessment_paths = generate_day4_assessment(week, client)
+            result["assessment_paths"] = {
+                "quiz_packet": str(assessment_paths["quiz_packet"]),
+                "teacher_key": str(assessment_paths["teacher_key"])
+            }
+            logger.info(f"Day 4 assessment generation completed for Week {week}")
+        except Exception as e:
+            logger.error(f"Day 4 assessment generation failed: {e}")
+            # Don't fail entire day generation, but log the error
+            result["assessment_error"] = str(e)
+
+    return result

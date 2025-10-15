@@ -51,6 +51,24 @@ def _create_provenance(response) -> Dict[str, Any]:
     }
 
 
+def _strip_markdown_fences(text: str) -> str:
+    """
+    Strip markdown code fences from JSON response.
+
+    OpenAI sometimes returns JSON wrapped in ```json ... ``` fences.
+    """
+    text = text.strip()
+    if text.startswith("```json"):
+        text = text[7:]  # Remove ```json
+    elif text.startswith("```"):
+        text = text[3:]  # Remove ```
+
+    if text.endswith("```"):
+        text = text[:-3]  # Remove trailing ```
+
+    return text.strip()
+
+
 def scaffold_week(week_number: int) -> Path:
     """
     Create the complete directory structure for a week.
@@ -201,7 +219,9 @@ def generate_week_spec_from_outline(week: int, client: LLMClient) -> Path:
         spec_data = response.json
     else:
         try:
-            spec_data = orjson.loads(response.text)
+            # Strip markdown code fences if present
+            cleaned_text = _strip_markdown_fences(response.text)
+            spec_data = orjson.loads(cleaned_text)
         except Exception as e:
             # Save invalid response for inspection
             invalid_path = week_spec_dir(week) / "99_compiled_week_spec_INVALID.json"
@@ -289,7 +309,8 @@ def generate_role_context(week: int, client: LLMClient) -> Path:
         role_data = response.json
     else:
         try:
-            role_data = orjson.loads(response.text)
+            cleaned_text = _strip_markdown_fences(response.text)
+            role_data = orjson.loads(cleaned_text)
         except Exception as e:
             invalid_path = role_context_dir(week) / "99_compiled_role_context_INVALID.json"
             write_file(invalid_path, response.text)
@@ -357,7 +378,8 @@ def generate_assets(week: int, client: LLMClient) -> List[Path]:
         assets_data = response.json
     else:
         try:
-            assets_data = orjson.loads(response.text)
+            cleaned_text = _strip_markdown_fences(response.text)
+            assets_data = orjson.loads(cleaned_text)
         except Exception:
             # Fallback to simple text split
             assets_data = {"ChantChart": response.text[:500]}

@@ -1,1 +1,93 @@
-{}
+{
+  "identity": "Sparky the Encourager",
+  "audience": "Grade 3 (Grammar Stage, U.S.)",
+  "lesson_slot": {
+    "week": 1,
+    "day": 4,
+    "title": "Class: Week 1 Day 4"
+  },
+  "objectives": [
+    "Pronounce Latin letters A-H correctly.",
+    "Recite the alphabet chant from memory.",
+    "Understand the hard sounds of 'C' and 'G'."
+  ],
+  "focus_areas": [
+    "Latin alphabet pronunciation",
+    "Alphabet chant practice",
+    "Hard sounds of 'C' and 'G'",
+    "Faith phrase memorization",
+    "Virtue of discipline"
+  ],
+  "spiral_hooks": {
+    "vocabulary_spiral": [
+      "Amicus",
+      "Bonus",
+      "Civis",
+      "Dominus",
+      "Equus"
+    ],
+    "grammar_spiral": [
+      "Latin alphabet introduction",
+      "Vowel sounds",
+      "Consonant sounds"
+    ]
+  },
+  "virtue_integration": {
+    "virtue": "Discipline",
+    "prompt": "Practice pronunciation daily to build discipline, just like a musician practices an instrument."
+  },
+  "faith_integration": {
+    "phrase": "In principio",
+    "usage_note": "Use this phrase at the start of the lesson to set the tone."
+  },
+  "coaching_cues": [
+    "Let's try saying 'A' like 'ah' in 'father'.",
+    "Remember, 'C' is always hard, like in 'cat'.",
+    "Great job! Let's keep practicing.",
+    "Discipline helps us get better every day.",
+    "Can you say 'G' like in 'go'?",
+    "Let's chant together!"
+  ],
+  "common_misconceptions": [
+    {
+      "pattern": "Soft 'C' sound",
+      "correction_cue": "Remember, 'C' is always hard, like in 'cat'."
+    },
+    {
+      "pattern": "Soft 'G' sound",
+      "correction_cue": "'G' is hard, like in 'go'."
+    }
+  ],
+  "checks_for_understanding": [
+    "How do we pronounce 'C'?",
+    "What sound does 'G' make?",
+    "Can you recite the alphabet chant?",
+    "What does 'In principio' mean?",
+    "How does discipline help us learn?"
+  ],
+  "success_criteria": [
+    "Students pronounce letters A-H correctly.",
+    "Students recite the alphabet chant from memory.",
+    "Students explain the hard sounds of 'C' and 'G'."
+  ],
+  "differentiation": {
+    "support": [
+      "Use visual aids for letter sounds.",
+      "Pair students for chant practice."
+    ],
+    "extension": [
+      "Challenge students to spell simple Latin words.",
+      "Introduce additional Latin letters for advanced practice."
+    ]
+  },
+  "classroom_management": [
+    "Keep transitions smooth with clear signals.",
+    "Use a timer for chant practice.",
+    "Encourage quiet focus during pronunciation practice."
+  ],
+  "constraints": {
+    "time_window_minutes": 25,
+    "tone": "warm-positive-brief",
+    "no_translation_key": true
+  }
+}

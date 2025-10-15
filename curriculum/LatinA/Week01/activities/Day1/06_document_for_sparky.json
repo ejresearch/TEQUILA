@@ -2,13 +2,13 @@
   "metadata": {
     "week": 1,
     "day": 1,
-    "title": "Week 1 Day 1: Introduction to Latin Alphabet",
+    "title": "Week 1 Day 1: Introduction to Latin",
     "duration_minutes": 45,
-    "virtue": "Discipline",
-    "faith_phrase": "In principio - In the beginning"
+    "virtue": "Curiosity",
+    "faith_phrase": "In principio erat Verbum"
   },
-  "prior_knowledge_digest": "This lesson assumes no prior knowledge of Latin, as it is the first day of instruction. Students will be introduced to the Latin alphabet, its pronunciation, and basic vocabulary. The focus will be on familiarizing students with the sounds and letters of Latin, setting a foundation for future learning. The virtue of discipline will be highlighted as an essential part of language learning, encouraging students to develop consistent study habits.",
-  "yesterday_recap": "N/A - This is the first day of the course.",
+  "prior_knowledge_digest": "Students are expected to have a basic understanding of language learning concepts, such as vocabulary, grammar, and sentence structure from their native language studies. Familiarity with the concept of conjugation and noun-adjective agreement in English will be beneficial. No prior knowledge of Latin is required, as this is the introductory lesson.",
+  "yesterday_recap": "N/A - This is the first lesson.",
   "spiral_links": {
     "recycled_vocab": [],
     "recycled_grammar": [],
@@ -16,72 +16,62 @@
     "prior_weeks": []
   },
   "misconception_watchlist": [
-    "Confusing Latin pronunciation with English",
-    "Misidentifying Latin letters with similar English counterparts"
+    "Latin is a dead language and not useful",
+    "Latin pronunciation is the same as English"
   ],
   "objectives": {
     "primary": [
-      "Students will recognize and pronounce the Latin alphabet.",
-      "Students will understand the importance of discipline in language learning.",
-      "Students will learn the faith phrase 'In principio' and its significance.",
-      "Students will begin to build a basic Latin vocabulary.",
-      "Students will connect the virtue of discipline with their study habits."
+      "Introduce students to the Latin alphabet and pronunciation",
+      "Familiarize students with basic Latin greetings",
+      "Understand the significance of Latin in historical and modern contexts"
     ],
     "spiral_review": []
   },
   "materials": [
     "Latin alphabet chart",
-    "Audio recordings of Latin pronunciation",
-    "Vocabulary flashcards",
-    "Whiteboard and markers"
+    "Pronunciation audio clips",
+    "Basic greetings handout"
   ],
   "lesson_flow": [
     {
       "type": "greeting",
       "duration_minutes": 5,
-      "description": "Welcome students and introduce the day's objectives.",
-      "student_action": "Listen and prepare for the lesson.",
-      "teacher_notes": "Set a positive tone and emphasize the virtue of discipline."
+      "description": "Welcome students and introduce the course objectives.",
+      "student_action": "Listen and ask any initial questions.",
+      "teacher_notes": "Set a positive and welcoming tone for the course."
     },
     {
       "type": "introduction",
       "duration_minutes": 10,
       "description": "Introduce the Latin alphabet and its pronunciation.",
-      "student_action": "Listen and repeat the sounds of each letter.",
-      "teacher_notes": "Use the alphabet chart and audio recordings to demonstrate."
-    },
-    {
-      "type": "chant",
-      "duration_minutes": 5,
-      "description": "Lead students in the Alphabet Chant to reinforce pronunciation.",
-      "student_action": "Participate in the chant, focusing on correct pronunciation.",
-      "teacher_notes": "Encourage enthusiasm and correct any mispronunciations."
+      "student_action": "Repeat after the teacher and practice pronunciation.",
+      "teacher_notes": "Use audio clips to demonstrate correct pronunciation."
     },
     {
       "type": "guided_practice",
       "duration_minutes": 10,
-      "description": "Practice pronouncing basic vocabulary words.",
-      "student_action": "Repeat vocabulary words after the teacher.",
-      "teacher_notes": "Use flashcards and focus on clear pronunciation."
+      "description": "Practice basic Latin greetings with the class.",
+      "student_action": "Engage in pair activities to practice greetings.",
+      "teacher_notes": "Circulate to provide feedback and encouragement."
     },
     {
       "type": "faith_reflection",
       "duration_minutes": 5,
-      "description": "Discuss the faith phrase 'In principio' and its significance.",
+      "description": "Discuss the faith phrase 'In principio erat Verbum' and its significance.",
       "student_action": "Reflect on the phrase and its meaning.",
-      "teacher_notes": "Connect the phrase to the virtue of discipline."
+      "teacher_notes": "Connect the phrase to the importance of language."
     },
     {
       "type": "closure",
       "duration_minutes": 5,
-      "description": "Review the day's learning and preview the next lesson.",
-      "student_action": "Ask questions and prepare for the next class.",
-      "teacher_notes": "Reiterate the importance of discipline in learning."
+      "description": "Review key points of the lesson and preview the next class.",
+      "student_action": "Ask questions and note down any assignments.",
+      "teacher_notes": "Encourage students to practice pronunciation at home."
     }
   ],
   "behavior": {
     "tone": "Encouraging and supportive",
-    "loop_behavior": "Reinforce correct pronunciation through repetition",
+    "loop_behavior": "Reiterate key points with enthusiasm",
     "hints_max": 3,
     "wait_seconds": 5,
     "encouragement_frequency": "Frequent"

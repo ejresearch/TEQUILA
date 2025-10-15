@@ -1,22 +1,22 @@
 {
-  "total_requests": 10,
-  "total_tokens_prompt": 9300,
-  "total_tokens_completion": 20895,
-  "estimated_cost_usd": 0.23220000000000002,
+  "total_requests": 16,
+  "total_tokens_prompt": 14880,
+  "total_tokens_completion": 32653,
+  "estimated_cost_usd": 0.36373,
   "by_provider": {
     "openai": {
-      "requests": 10,
-      "tokens_prompt": 9300,
-      "tokens_completion": 20895,
-      "cost_usd": 0.23220000000000002
+      "requests": 16,
+      "tokens_prompt": 14880,
+      "tokens_completion": 32653,
+      "cost_usd": 0.36373
     }
   },
   "by_model": {
     "gpt-4o": {
-      "requests": 10,
-      "tokens_prompt": 9300,
-      "tokens_completion": 20895,
-      "cost_usd": 0.23220000000000002
+      "requests": 16,
+      "tokens_prompt": 14880,
+      "tokens_completion": 32653,
+      "cost_usd": 0.36373
     }
   },
   "sessions": [
@@ -109,7 +109,61 @@
       "tokens_prompt": 930,
       "tokens_completion": 2965,
       "cost_usd": 0.032
+    },
+    {
+      "timestamp": "2025-10-15T17:28:42.298661Z",
+      "provider": "openai",
+      "model": "gpt-4o",
+      "operation": "week_1_spec",
+      "tokens_prompt": 930,
+      "tokens_completion": 1954,
+      "cost_usd": 0.0219
+    },
+    {
+      "timestamp": "2025-10-15T17:30:49.680899Z",
+      "provider": "openai",
+      "model": "gpt-4o",
+      "operation": "week_1_spec",
+      "tokens_prompt": 930,
+      "tokens_completion": 1700,
+      "cost_usd": 0.0193
+    },
+    {
+      "timestamp": "2025-10-15T17:32:57.982595Z",
+      "provider": "openai",
+      "model": "gpt-4o",
+      "operation": "week_1_spec",
+      "tokens_prompt": 930,
+      "tokens_completion": 2143,
+      "cost_usd": 0.0238
+    },
+    {
+      "timestamp": "2025-10-15T17:48:01.513363Z",
+      "provider": "openai",
+      "model": "gpt-4o",
+      "operation": "week_1_spec",
+      "tokens_prompt": 930,
+      "tokens_completion": 1980,
+      "cost_usd": 0.0221
+    },
+    {
+      "timestamp": "2025-10-15T18:07:32.236481Z",
+      "provider": "openai",
+      "model": "gpt-4o",
+      "operation": "week_1_spec",
+      "tokens_prompt": 930,
+      "tokens_completion": 2043,
+      "cost_usd": 0.0228
+    },
+    {
+      "timestamp": "2025-10-15T18:24:31.235189Z",
+      "provider": "openai",
+      "model": "gpt-4o",
+      "operation": "week_1_spec",
+      "tokens_prompt": 930,
+      "tokens_completion": 1938,
+      "cost_usd": 0.0217
     }
   ],
-  "last_updated": "2025-10-15T17:00:19.322296Z"
+  "last_updated": "2025-10-15T18:24:31.235213Z"
 }

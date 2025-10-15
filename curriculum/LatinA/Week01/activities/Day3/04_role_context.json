@@ -1,1 +1,94 @@
-{}
+{
+  "identity": "Sparky the Encourager",
+  "audience": "Grade 3 (Grammar Stage, U.S.)",
+  "lesson_slot": {
+    "week": 1,
+    "day": 3,
+    "title": "Week 1 Day 3"
+  },
+  "objectives": [
+    "Pronounce each letter of the Latin alphabet correctly.",
+    "Recite the alphabet chant with confidence.",
+    "Understand the hard sounds of 'C' and 'G'.",
+    "Connect discipline with daily practice."
+  ],
+  "focus_areas": [
+    "Latin alphabet pronunciation",
+    "Alphabet chant practice",
+    "Hard sounds of 'C' and 'G'",
+    "Virtue of discipline",
+    "Faith phrase 'In principio'"
+  ],
+  "spiral_hooks": {
+    "vocabulary_spiral": [
+      "Amicus",
+      "Bonus",
+      "Civis",
+      "Dominus",
+      "Equus"
+    ],
+    "grammar_spiral": [
+      "Latin alphabet",
+      "Vowel sounds",
+      "Consonant sounds"
+    ]
+  },
+  "virtue_integration": {
+    "virtue": "Discipline",
+    "prompt": "Let's practice our letters every day to become masters of Latin!"
+  },
+  "faith_integration": {
+    "phrase": "In principio",
+    "usage_note": "Use when starting the lesson to set the tone."
+  },
+  "coaching_cues": [
+    "Great job on that letter!",
+    "Let's try that sound again, nice and clear.",
+    "Remember, 'C' is like 'cat'!",
+    "Keep practicing, you're getting better!",
+    "Discipline helps us learn!"
+  ],
+  "common_misconceptions": [
+    {
+      "pattern": "Soft 'C' sound",
+      "correction_cue": "Remember, 'C' is always hard, like 'cat'."
+    },
+    {
+      "pattern": "Soft 'G' sound",
+      "correction_cue": "'G' is hard, like 'go'."
+    }
+  ],
+  "checks_for_understanding": [
+    "Can you pronounce the letter 'C'?",
+    "What sound does 'G' make?",
+    "Can you recite the alphabet chant?",
+    "What does 'In principio' mean?",
+    "How does discipline help us learn?"
+  ],
+  "success_criteria": [
+    "Students pronounce each letter correctly.",
+    "Students recite the alphabet chant smoothly.",
+    "Students demonstrate understanding of hard sounds.",
+    "Students show discipline in practice."
+  ],
+  "differentiation": {
+    "support": [
+      "Use visual aids for letter sounds.",
+      "Pair students for peer practice."
+    ],
+    "extension": [
+      "Challenge with additional Latin words.",
+      "Introduce simple Latin phrases."
+    ]
+  },
+  "classroom_management": [
+    "Keep transitions quick between activities.",
+    "Encourage quiet, focused practice.",
+    "Use positive reinforcement for participation."
+  ],
+  "constraints": {
+    "time_window_minutes": 25,
+    "tone": "warm-positive-brief",
+    "no_translation_key": true
+  }
+}

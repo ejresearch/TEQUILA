@@ -580,8 +580,8 @@ def task_role_context(week_spec: dict) -> Tuple[str, str, Optional[Dict]]:
         "Base this Sparky role context on the week metadata and spiral links:\n\n"
         + orjson.dumps(
             {
-                "metadata": week_spec.get("metadata", {}),
-                "spiral_links": week_spec.get("spiral_links", {})
+                "metadata": week_spec.get("01_metadata.json", {}),
+                "spiral_links": week_spec.get("09_spiral_links.json", {})
             },
             option=orjson.OPT_INDENT_2
         ).decode()
@@ -616,10 +616,10 @@ def task_assets(week_spec: dict) -> Tuple[str, str, Optional[Dict]]:
         "Week information:\n\n"
         + orjson.dumps(
             {
-                "title": week_spec.get("metadata", {}).get("title", ""),
-                "vocabulary": week_spec.get("vocabulary", [])[:5],  # Sample
-                "chant": week_spec.get("chant", {}),
-                "virtue_focus": week_spec.get("metadata", {}).get("virtue_focus", "")
+                "title": week_spec.get("01_metadata.json", {}).get("title", ""),
+                "vocabulary": week_spec.get("03_vocabulary.json", [])[:5],  # Sample
+                "chant": week_spec.get("05_chant.json", {}),
+                "virtue_focus": week_spec.get("01_metadata.json", {}).get("virtue_focus", "")
             },
             option=orjson.OPT_INDENT_2
         ).decode()
@@ -759,25 +759,28 @@ def task_day_summary(
 
     # If week_spec provided, interpolate its fields
     if week_spec:
+        metadata = week_spec.get("01_metadata.json", {})
         user_content = user_content.replace(
             "{{week_spec.title}}",
-            week_spec.get("title", "")
+            metadata.get("week_title", "")
         )
         user_content = user_content.replace(
             "{{week_spec.grammar_focus}}",
-            week_spec.get("grammar_focus", "")
+            metadata.get("grammar_focus", "")
         )
+        chant_data = week_spec.get("05_chant.json", {})
+        chant_text = chant_data.get("text", "") if isinstance(chant_data, dict) else str(chant_data)
         user_content = user_content.replace(
             "{{week_spec.chant}}",
-            week_spec.get("chant", "")
+            chant_text
         )
         user_content = user_content.replace(
             "{{week_spec.virtue_focus}}",
-            week_spec.get("virtue_focus", "")
+            metadata.get("virtue_focus", "")
         )
         user_content = user_content.replace(
             "{{week_spec.faith_phrase}}",
-            week_spec.get("faith_phrase", "")
+            metadata.get("faith_phrase", "")
         )
     else:
         # Leave placeholders for file/API reference
@@ -1589,8 +1592,8 @@ def task_day_role_context(week_spec: dict, day: int) -> Tuple[str, str, Optional
     system_content = prompt_spec["messages"][0]["content_template"]
     user_template = "\n".join(prompt_spec["messages"][1]["content_template"])
 
-    # Extract metadata for interpolation
-    metadata = week_spec.get("metadata", {})
+    # Extract metadata for interpolation (using prefixed key from compiled week spec)
+    metadata = week_spec.get("01_metadata.json", {})
     week_number = metadata.get("week", metadata.get("week_number", 1))
 
     # Build user prompt with interpolations (simplified version - we don't have all dependencies yet)
@@ -1673,8 +1676,8 @@ def task_day_guidelines(
             "wait_time_seconds": 5
         }
 
-    # Extract metadata for interpolation
-    metadata = week_spec.get("metadata", {})
+    # Extract metadata for interpolation (using prefixed key from compiled week spec)
+    metadata = week_spec.get("01_metadata.json", {})
     week_number = metadata.get("week", metadata.get("week_number", 1))
 
     # Build user prompt with interpolations
@@ -1752,8 +1755,8 @@ def task_day_fields(week_spec: dict, day: int) -> Tuple[str, str, Optional[Dict]
         f"Week metadata and objectives for Day {day}:\n\n"
         + orjson.dumps(
             {
-                "metadata": week_spec.get("metadata", {}),
-                "objectives": week_spec.get("objectives", []),
+                "metadata": week_spec.get("01_metadata.json", {}),
+                "objectives": week_spec.get("02_objectives.json", []),
                 "day": day
             },
             option=orjson.OPT_INDENT_2
@@ -1786,11 +1789,11 @@ def task_day_document(week_spec: dict, day: int) -> Tuple[str, str, Optional[Dic
     """
     sys = _load_system_prompt("day_system.txt")
 
-    metadata = week_spec.get("metadata", {})
-    objectives = week_spec.get("objectives", [])
-    vocabulary = week_spec.get("vocabulary", [])
-    spiral_links = week_spec.get("spiral_links", {})
-    misconception_watchlist = week_spec.get("misconception_watchlist", [])
+    metadata = week_spec.get("01_metadata.json", {})
+    objectives = week_spec.get("02_objectives.json", [])
+    vocabulary = week_spec.get("03_vocabulary.json", [])
+    spiral_links = week_spec.get("09_spiral_links.json", {})
+    misconception_watchlist = week_spec.get("11_misconception_watchlist.json", [])
 
     usr = (
         f"Generate Day {day} document_for_sparky JSON.\n\n"
@@ -1860,8 +1863,8 @@ def task_day_greeting(
             "encouragement_triggers": ["first_attempt"]
         }
 
-    # Extract metadata for interpolation
-    metadata = week_spec.get("metadata", {})
+    # Extract metadata for interpolation (using prefixed key from compiled week spec)
+    metadata = week_spec.get("01_metadata.json", {})
     week_number = metadata.get("week", metadata.get("week_number", 1))
 
     # Build user prompt with interpolations

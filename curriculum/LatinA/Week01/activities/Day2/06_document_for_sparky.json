@@ -2,81 +2,80 @@
   "metadata": {
     "week": 1,
     "day": 2,
-    "title": "Week 1 Day 2: Introduction to Latin Alphabet",
+    "title": "Week 1 Day 2: Introduction to Latin Nouns",
     "duration_minutes": 45,
-    "virtue": "Discipline",
-    "faith_phrase": "In principio - In the beginning"
+    "virtue": "Patience",
+    "faith_phrase": "Patience is a virtue."
   },
-  "prior_knowledge_digest": "Students should have a basic understanding of the concept of alphabets and their role in language. Familiarity with the English alphabet will aid in recognizing similarities and differences with the Latin alphabet. Understanding the importance of discipline in learning new languages is also beneficial.",
-  "yesterday_recap": "Yesterday, we introduced the concept of the Latin alphabet and began exploring its pronunciation. We also discussed the virtue of discipline and its importance in language learning.",
+  "prior_knowledge_digest": "Students should have a basic understanding of the Latin alphabet and pronunciation. They should be familiar with the concept of nouns and their role in sentences from English grammar. This includes recognizing nouns as people, places, things, or ideas. Additionally, students should have been introduced to the idea of grammatical gender, though not yet in the context of Latin.",
+  "yesterday_recap": "Yesterday, we introduced the Latin alphabet and practiced pronunciation. We also discussed the concept of grammatical gender in Latin.",
   "spiral_links": {
     "recycled_vocab": [],
     "recycled_grammar": [],
     "prior_day_concepts": [
       "Latin alphabet",
-      "discipline in learning"
+      "Pronunciation",
+      "Grammatical gender"
     ],
     "prior_weeks": []
   },
   "misconception_watchlist": [
-    "Confusing Latin pronunciation with English",
-    "Overlooking the importance of discipline"
+    "Confusing Latin noun endings with English",
+    "Mispronunciation of Latin vowels"
   ],
   "objectives": {
     "primary": [
-      "Students will recognize and pronounce the Latin alphabet.",
-      "Students will understand the importance of discipline in language learning.",
-      "Students will learn the faith phrase 'In principio' and its significance.",
-      "Students will begin to build a basic Latin vocabulary."
+      "Identify Latin nouns",
+      "Understand the concept of grammatical gender in Latin"
     ],
     "spiral_review": []
   },
   "materials": [
-    "Latin alphabet chart",
-    "Audio recordings of Latin pronunciation",
-    "Faith phrase poster",
-    "Vocabulary flashcards"
+    "Whiteboard",
+    "Markers",
+    "Handouts with Latin noun examples",
+    "Audio recordings of Latin pronunciation"
   ],
   "lesson_flow": [
     {
       "type": "recall",
       "duration_minutes": 5,
-      "description": "Review the Latin alphabet introduced yesterday.",
-      "student_action": "Students recite the alphabet with the teacher.",
-      "teacher_notes": "Focus on correct pronunciation."
+      "description": "Review the Latin alphabet and pronunciation from yesterday.",
+      "student_action": "Students recite the alphabet and practice pronunciation.",
+      "teacher_notes": "Ensure correct pronunciation and address any difficulties."
     },
     {
       "type": "introduction",
       "duration_minutes": 10,
-      "description": "Introduce new vocabulary words and their pronunciation.",
-      "student_action": "Students listen and repeat new vocabulary words.",
-      "teacher_notes": "Use flashcards to visually reinforce learning."
+      "description": "Introduce Latin nouns and the concept of grammatical gender.",
+      "student_action": "Listen and take notes on the introduction to Latin nouns.",
+      "teacher_notes": "Use examples to illustrate the concept of gender in Latin nouns."
     },
     {
       "type": "guided_practice",
       "duration_minutes": 10,
-      "description": "Practice the pronunciation of the Latin alphabet and new vocabulary.",
-      "student_action": "Students practice in pairs, taking turns to pronounce words.",
-      "teacher_notes": "Circulate to provide feedback and correct pronunciation."
+      "description": "Practice identifying Latin nouns and their genders with examples.",
+      "student_action": "Work through examples with the teacher, identifying nouns and their genders.",
+      "teacher_notes": "Provide immediate feedback and correct misconceptions."
     },
     {
-      "type": "faith_reflection",
-      "duration_minutes": 5,
-      "description": "Discuss the faith phrase 'In principio' and its significance.",
-      "student_action": "Students reflect on the phrase and its meaning.",
-      "teacher_notes": "Connect the phrase to the virtue of discipline."
+      "type": "independent_practice",
+      "duration_minutes": 10,
+      "description": "Students complete a worksheet identifying nouns and their genders.",
+      "student_action": "Independently identify nouns and their genders on the worksheet.",
+      "teacher_notes": "Circulate to provide support and check for understanding."
     },
     {
       "type": "closure",
       "duration_minutes": 5,
-      "description": "Summarize the day's learning and reinforce the importance of discipline.",
-      "student_action": "Students share one thing they learned today.",
-      "teacher_notes": "Encourage students to apply discipline in their study habits."
+      "description": "Recap the day's learning and preview the next lesson.",
+      "student_action": "Participate in a brief discussion about what was learned.",
+      "teacher_notes": "Highlight key points and address any remaining questions."
     }
   ],
   "behavior": {
     "tone": "Encouraging and supportive",
-    "loop_behavior": "Gently redirect focus to the task",
+    "loop_behavior": "Provide positive reinforcement and gentle correction",
     "hints_max": 3,
     "wait_seconds": 5,
     "encouragement_frequency": "Frequent"

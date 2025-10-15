@@ -100,11 +100,6 @@
         "    \"time_window_minutes\": integer,       // 20–25",
         "    \"tone\": \"warm-positive-brief\",",
         "    \"no_translation_key\": boolean         // true → never give full answer first",
-        "  },",
-        "  \"__provenance\": {                       // generation hints (optional but recommended)",
-        "    \"provider\": string,",
-        "    \"model\": string,",
-        "    \"generated_at\": string                // ISO-8601",
         "  }",
         "}"
       ]
@@ -191,15 +186,6 @@
             "no_translation_key": { "type": "boolean" }
           },
           "required": ["time_window_minutes", "tone", "no_translation_key"],
-          "additionalProperties": false
-        },
-        "__provenance": {
-          "type": "object",
-          "properties": {
-            "provider": { "type": "string" },
-            "model": { "type": "string" },
-            "generated_at": { "type": "string" }
-          },
           "additionalProperties": false
         }
       },

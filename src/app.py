@@ -1,6 +1,7 @@
 """FastAPI application for Latin A curriculum management."""
-from fastapi import FastAPI, HTTPException, Path as PathParam, Header, Depends
+from fastapi import FastAPI, HTTPException, Path as PathParam, Header, Depends, WebSocket, WebSocketDisconnect
 from fastapi.responses import JSONResponse, FileResponse
+from fastapi.middleware.cors import CORSMiddleware
 from typing import Dict, Any, Optional
 from pathlib import Path
 import os
@@ -36,12 +37,22 @@ from .services.storage import (
 from .services.validator import validate_week
 from .services.exporter import export_week_to_zip
 from .services.usage_tracker import get_tracker
+from .services.websocket import manager
 
 # Create FastAPI app
 app = FastAPI(
     title="Latin A Curriculum API",
     description="API for managing 36-week Latin A curriculum with per-field file structure",
     version="1.0.0"
+)
+
+# Add CORS middleware for frontend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],  # Frontend URLs
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
@@ -97,6 +108,31 @@ def reset_usage(_auth: None = Depends(require_api_key)):
     """Reset usage statistics. Requires API key."""
     get_tracker().reset()
     return {"message": "Usage statistics reset successfully"}
+
+
+# ============================================================================
+# WEBSOCKET FOR REAL-TIME PROGRESS
+# ============================================================================
+
+@app.websocket("/ws")
+async def websocket_endpoint(websocket: WebSocket):
+    """
+    WebSocket endpoint for real-time generation progress updates.
+
+    Clients can connect to receive:
+    - Progress updates during generation
+    - Validation results
+    - Error notifications
+    """
+    await manager.connect(websocket)
+    try:
+        while True:
+            # Keep connection alive and listen for ping/pong
+            data = await websocket.receive_text()
+            if data == "ping":
+                await websocket.send_text("pong")
+    except WebSocketDisconnect:
+        manager.disconnect(websocket)
 
 
 # ============================================================================

@@ -21,6 +21,7 @@ from .prompts.kit_tasks import (
     task_day_role_context,
     task_day_guidelines,
     task_day_greeting,
+    task_day_summary,
     task_quiz_packet,
     task_teacher_key
 )
@@ -257,6 +258,34 @@ def generate_day_fields(week: int, day: int, client: LLMClient) -> List[Path]:
     response_guide = client.generate(prompt=usr_guide, system=sys_guide)
     guidelines_content = response_guide.text
 
+    # Generate summary (field 02) - using dedicated task_day_summary function
+    class_name = fields_data.get("class_name", f"Week {week} Day {day}")
+
+    # Load the day_summary prompt spec to get the schema
+    from .prompts.kit_tasks import _load_prompt_json
+    summary_prompt_spec = _load_prompt_json("day/day_summary.json")
+    summary_schema = summary_prompt_spec["output_contract"]["schema"]
+
+    sys_summary, usr_summary, config_summary = task_day_summary(
+        week_number=week,
+        day_number=day,
+        class_name=class_name,
+        week_spec=week_spec,
+        prior_knowledge_digest=None  # TODO: implement prior knowledge digest
+    )
+    response_summary = client.generate(
+        prompt=usr_summary,
+        system=sys_summary,
+        json_schema=summary_schema
+    )
+
+    # Extract summary from JSON response
+    if response_summary.json:
+        summary_content = response_summary.json.get("day_summary", "")
+    else:
+        # Fallback to text response
+        summary_content = response_summary.text
+
     # Generate greeting (field 07) - needs role_context and will need document later
     # For now generate without document (will be regenerated if needed)
     sys_greet, usr_greet, schema_greet = task_day_greeting(week_spec, day, role_context_data, None)
@@ -271,8 +300,8 @@ def generate_day_fields(week: int, day: int, client: LLMClient) -> List[Path]:
 
     # Write field files (fields 01-03, 05, 07)
     field_mapping = {
-        "01_class_name.txt": fields_data.get("class_name", ""),
-        "02_summary.md": fields_data.get("summary", ""),
+        "01_class_name.txt": class_name,
+        "02_summary.md": summary_content,
         "03_grade_level.txt": fields_data.get("grade_level", ""),
         "05_guidelines_for_sparky.md": guidelines_content,
         "07_sparkys_greeting.txt": greeting_content
@@ -310,8 +339,8 @@ def generate_day_document(week: int, day: int, client: LLMClient) -> Path:
     Raises:
         ValueError: If generation fails after MAX_RETRIES and user aborts
     """
-    # Ensure day directory exists
-    scaffold_day(week, day)
+    # Day directory should already exist from generate_day_fields()
+    # DO NOT call scaffold_day() here - it would overwrite the field files!
 
     # Load week spec to inform day document
     spec_path = week_spec_part_path(week, "99_compiled_week_spec.json")

@@ -2,97 +2,89 @@
   "metadata": {
     "week": 1,
     "day": 4,
-    "title": "Week 1 Day 4: Latin Alphabet and Basic Vocabulary",
+    "title": "Week 1 Day 4: Introduction to Latin Nouns and Verbs",
     "duration_minutes": 45,
-    "virtue": "Discipline",
-    "faith_phrase": "In principio - In the beginning"
+    "virtue": "Perseverance",
+    "faith_phrase": "Fortes fortuna adiuvat"
   },
-  "prior_knowledge_digest": "Students should have a basic understanding of the Latin alphabet and its pronunciation. They should be familiar with the concept of discipline as a virtue and its application in learning. Students have been introduced to the faith phrase 'In principio' and its significance in the context of beginnings. Basic vocabulary such as 'amicus', 'familia', and 'terra' have been introduced, focusing on pronunciation and simple usage in phrases.",
-  "yesterday_recap": "Yesterday, students practiced the Latin alphabet through chants and learned new vocabulary words including 'aqua', 'luna', and 'sol'. They also explored the virtue of discipline in their study habits.",
+  "prior_knowledge_digest": "Students should have a basic understanding of the Latin alphabet and pronunciation rules. They should be familiar with simple greetings and phrases in Latin, as well as the concept of noun and verb agreement in English. Prior exposure to Latin roots in English vocabulary will be beneficial.",
+  "yesterday_recap": "Yesterday, we introduced basic Latin nouns and their singular forms. Students practiced identifying nouns in simple sentences.",
   "spiral_links": {
     "recycled_vocab": [
-      "amicus",
-      "familia",
-      "terra"
+      "salve",
+      "vale",
+      "amicus"
     ],
     "recycled_grammar": [
-      "noun usage",
-      "simple phrases"
+      "noun identification",
+      "basic sentence structure"
     ],
     "prior_day_concepts": [
-      "Latin alphabet",
-      "discipline"
+      "nouns",
+      "singular forms"
     ],
     "prior_weeks": []
   },
   "misconception_watchlist": [
-    "Confusing pronunciation of 'c' and 'g'",
-    "Mixing up noun endings"
+    "Confusing noun and verb endings",
+    "Mispronunciation of Latin vowels"
   ],
   "objectives": {
     "primary": [
-      "Students will recognize and pronounce the Latin alphabet.",
-      "Students will learn and use basic Latin vocabulary in context.",
-      "Students will connect the virtue of discipline with their study habits."
+      "Identify Latin verbs in simple sentences",
+      "Understand basic noun-verb agreement"
     ],
     "spiral_review": [
-      "Review pronunciation of previously learned vocabulary.",
-      "Reinforce understanding of the faith phrase 'In principio'."
+      "Review Latin nouns",
+      "Practice pronunciation"
     ]
   },
   "materials": [
-    "Alphabet chart",
-    "Vocabulary flashcards",
-    "Chant audio",
-    "Faith phrase poster"
+    "Latin textbook",
+    "Whiteboard",
+    "Markers",
+    "Flashcards"
   ],
   "lesson_flow": [
     {
       "type": "recall",
       "duration_minutes": 10,
-      "description": "Review the Latin alphabet and previously learned vocabulary using flashcards.",
-      "student_action": "Students will recite the alphabet and vocabulary words aloud.",
-      "teacher_notes": "Focus on correct pronunciation and encourage participation."
+      "description": "Review Latin nouns and their singular forms from previous lessons.",
+      "student_action": "Students will recall and list nouns learned previously.",
+      "teacher_notes": "Encourage students to use flashcards for quick recall."
     },
     {
       "type": "review",
       "duration_minutes": 5,
-      "description": "Discuss the faith phrase 'In principio' and its importance.",
-      "student_action": "Students will repeat the phrase and discuss its meaning.",
-      "teacher_notes": "Connect the phrase to the concept of beginnings and discipline."
+      "description": "Quick pronunciation drill of Latin vowels.",
+      "student_action": "Students repeat after the teacher to practice correct pronunciation.",
+      "teacher_notes": "Focus on common vowel sounds and correct any errors."
+    },
+    {
+      "type": "introduction",
+      "duration_minutes": 10,
+      "description": "Introduce basic Latin verbs and their role in sentences.",
+      "student_action": "Students listen and take notes on new verbs introduced.",
+      "teacher_notes": "Use examples to show how verbs function in sentences."
     },
     {
       "type": "guided_practice",
       "duration_minutes": 10,
-      "description": "Introduce new vocabulary words and practice pronunciation.",
-      "student_action": "Students will listen and repeat new words, using them in simple phrases.",
-      "teacher_notes": "Use visual aids and examples to enhance understanding."
-    },
-    {
-      "type": "independent_practice",
-      "duration_minutes": 10,
-      "description": "Students will create simple sentences using new and reviewed vocabulary.",
-      "student_action": "Students will write and share their sentences with the class.",
-      "teacher_notes": "Provide feedback on sentence structure and vocabulary usage."
-    },
-    {
-      "type": "closure",
-      "duration_minutes": 5,
-      "description": "Reflect on the virtue of discipline and its role in learning Latin.",
-      "student_action": "Students will share how they applied discipline in today's lesson.",
-      "teacher_notes": "Encourage students to set personal goals for improvement."
+      "description": "Practice identifying verbs in simple Latin sentences.",
+      "student_action": "Students work in pairs to identify verbs in provided sentences.",
+      "teacher_notes": "Circulate to provide hints and correct misconceptions."
     },
     {
       "type": "assessment",
-      "duration_minutes": 5,
-      "description": "Quick oral quiz on vocabulary and alphabet pronunciation.",
-      "student_action": "Students will answer questions and demonstrate their knowledge.",
-      "teacher_notes": "Use this to gauge understanding and identify areas needing review."
+      "duration_minutes": 10,
+      "description": "Short quiz on identifying nouns and verbs in sentences.",
+      "student_action": "Students complete a written quiz individually.",
+      "teacher_notes": "Use this to assess understanding and identify areas needing review."
     }
   ],
   "behavior": {
     "tone": "Encouraging and supportive",
-    "loop_behavior": "Repeat instructions with varied examples if needed",
+    "loop_behavior": "Provide hints and encouragement if students struggle",
     "hints_max": 3,
     "wait_seconds": 5,
     "encouragement_frequency": "Frequent"

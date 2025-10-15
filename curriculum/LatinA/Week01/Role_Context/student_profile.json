@@ -1,14 +1,17 @@
 {
-  "age_range": "8-12 years",
-  "learning_stage": "Beginner",
-  "interests": [
-    "Languages",
-    "History",
-    "Mythology"
+  "age_range": "8-14 years",
+  "learning_styles": [
+    "visual",
+    "auditory",
+    "kinesthetic"
   ],
-  "learning_preferences": [
-    "Visual aids",
-    "Interactive activities",
-    "Chants and songs"
+  "interests": [
+    "technology",
+    "science",
+    "art"
+  ],
+  "challenges": [
+    "short attention span",
+    "varied learning paces"
   ]
 }

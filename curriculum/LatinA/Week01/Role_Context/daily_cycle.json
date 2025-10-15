@@ -1,6 +1,6 @@
 {
-  "warm_up": "Begin with a chant of the Latin alphabet to set the tone.",
-  "core_lesson": "Introduce the Latin alphabet and basic pronunciation through interactive activities.",
-  "practice": "Engage in vocabulary exercises using flashcards and games.",
-  "reflection": "Discuss the virtue of discipline and relate it to the learning process."
+  "introduction": "Brief overview of the day's topic with engaging questions",
+  "interactive_activity": "Hands-on tasks or games related to the lesson",
+  "guided_practice": "Step-by-step exercises with Sparky's support",
+  "reflection": "Encouragement to share what was learned and any questions"
 }

@@ -1,58 +1,58 @@
 [
   {
-    "latin": "amicus",
-    "english": "friend",
-    "part_of_speech": "noun",
-    "pronunciation": "ah-mee-koos",
-    "example_phrase": "Amicus bonus est."
+    "latin": "A",
+    "english": "A",
+    "part_of_speech": "letter",
+    "pronunciation": "ah",
+    "example_phrase": "Amicus - Friend"
   },
   {
-    "latin": "familia",
-    "english": "family",
-    "part_of_speech": "noun",
-    "pronunciation": "fah-mee-lee-ah",
-    "example_phrase": "Familia magna est."
+    "latin": "B",
+    "english": "B",
+    "part_of_speech": "letter",
+    "pronunciation": "beh",
+    "example_phrase": "Bonus - Good"
   },
   {
-    "latin": "terra",
-    "english": "earth",
-    "part_of_speech": "noun",
-    "pronunciation": "teh-rah",
-    "example_phrase": "Terra rotunda est."
+    "latin": "C",
+    "english": "C",
+    "part_of_speech": "letter",
+    "pronunciation": "keh",
+    "example_phrase": "Civis - Citizen"
   },
   {
-    "latin": "aqua",
-    "english": "water",
-    "part_of_speech": "noun",
-    "pronunciation": "ah-kwah",
-    "example_phrase": "Aqua clara est."
+    "latin": "D",
+    "english": "D",
+    "part_of_speech": "letter",
+    "pronunciation": "deh",
+    "example_phrase": "Dominus - Lord"
   },
   {
-    "latin": "luna",
-    "english": "moon",
-    "part_of_speech": "noun",
-    "pronunciation": "loo-nah",
-    "example_phrase": "Luna plena est."
+    "latin": "E",
+    "english": "E",
+    "part_of_speech": "letter",
+    "pronunciation": "eh",
+    "example_phrase": "Equus - Horse"
   },
   {
-    "latin": "sol",
-    "english": "sun",
-    "part_of_speech": "noun",
-    "pronunciation": "sohl",
-    "example_phrase": "Sol lucet."
+    "latin": "F",
+    "english": "F",
+    "part_of_speech": "letter",
+    "pronunciation": "ef",
+    "example_phrase": "Filius - Son"
   },
   {
-    "latin": "via",
-    "english": "road",
-    "part_of_speech": "noun",
-    "pronunciation": "wee-ah",
-    "example_phrase": "Via longa est."
+    "latin": "G",
+    "english": "G",
+    "part_of_speech": "letter",
+    "pronunciation": "geh",
+    "example_phrase": "Gloria - Glory"
   },
   {
-    "latin": "vita",
-    "english": "life",
-    "part_of_speech": "noun",
-    "pronunciation": "wee-tah",
-    "example_phrase": "Vita bella est."
+    "latin": "H",
+    "english": "H",
+    "part_of_speech": "letter",
+    "pronunciation": "hah",
+    "example_phrase": "Homo - Man"
   }
 ]

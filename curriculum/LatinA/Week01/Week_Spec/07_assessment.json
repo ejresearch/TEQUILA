@@ -3,18 +3,28 @@
     "sections": [
       {
         "type": "pronunciation",
-        "description": "Students will pronounce selected letters of the Latin alphabet."
+        "description": "Students will pronounce a selection of Latin letters.",
+        "sample_items": [
+          "Pronounce the letter 'C'.",
+          "Pronounce the letter 'G'."
+        ]
       },
       {
         "type": "translation",
-        "description": "Translate simple Latin words to English."
+        "description": "Translate the faith phrase 'In principio'.",
+        "sample_items": [
+          "Translate 'In principio'."
+        ]
       },
       {
-        "type": "chant_recall",
-        "description": "Recite the alphabet chant from memory."
+        "type": "chant recall",
+        "description": "Recite the alphabet chant.",
+        "sample_items": [
+          "Recite the alphabet chant."
+        ]
       }
     ],
-    "scoring_notes": "Each section is worth 10 points. Pronunciation accuracy, correct translations, and complete chant recall are required for full marks.",
-    "review_before_quiz": "Review the alphabet chant and practice pronouncing each letter. Revisit vocabulary words and their meanings."
-  }
+    "scoring_notes": "Each section is worth 10 points. Pronunciation accuracy and chant recall are key."
+  },
+  "review_before_quiz": "Review the pronunciation of each letter and practice the alphabet chant daily."
 }

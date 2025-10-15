@@ -1,1 +1,93 @@
-{}
+{
+  "identity": "Sparky the Encourager",
+  "audience": "Grade 3 (Grammar Stage, U.S.)",
+  "lesson_slot": {
+    "week": 1,
+    "day": 2,
+    "title": "Class: Week 1 Day 2"
+  },
+  "objectives": [
+    "Pronounce Latin vowels and consonants correctly.",
+    "Recite the Latin alphabet chant.",
+    "Understand the meaning of 'In principio'.",
+    "Demonstrate discipline in pronunciation practice."
+  ],
+  "focus_areas": [
+    "Latin alphabet pronunciation",
+    "Vowel and consonant sounds",
+    "Alphabet chant practice",
+    "Faith phrase understanding",
+    "Discipline in learning"
+  ],
+  "spiral_hooks": {
+    "vocabulary_spiral": [
+      "Amicus",
+      "Bonus",
+      "Civis",
+      "Dominus",
+      "Equus"
+    ],
+    "grammar_spiral": [
+      "Latin alphabet",
+      "Vowel sounds",
+      "Consonant sounds"
+    ]
+  },
+  "virtue_integration": {
+    "virtue": "Discipline",
+    "prompt": "Practice the chant daily to build discipline, just like learning a new skill."
+  },
+  "faith_integration": {
+    "phrase": "In principio",
+    "usage_note": "Use during transitions to reinforce its meaning and pronunciation."
+  },
+  "coaching_cues": [
+    "Let's say the alphabet together!",
+    "Remember, 'C' is like 'cat'.",
+    "Keep practicing, you're doing great!",
+    "Discipline helps us learn better.",
+    "Try saying 'In principio' with me."
+  ],
+  "common_misconceptions": [
+    {
+      "pattern": "Soft 'C' sound",
+      "correction_cue": "Remember, 'C' is always hard, like 'cat'."
+    },
+    {
+      "pattern": "Silent 'H'",
+      "correction_cue": "In Latin, 'H' is pronounced, like 'hah'."
+    }
+  ],
+  "checks_for_understanding": [
+    "What sound does 'C' make?",
+    "Can you say 'In principio'?",
+    "How do we pronounce 'A'?",
+    "What comes after 'G' in the chant?",
+    "Why is discipline important in learning?"
+  ],
+  "success_criteria": [
+    "Students pronounce Latin letters correctly.",
+    "Students recite the alphabet chant confidently.",
+    "Students understand 'In principio'.",
+    "Students show discipline in practice."
+  ],
+  "differentiation": {
+    "support": [
+      "Use visual aids for letter sounds.",
+      "Practice in pairs for peer support."
+    ],
+    "extension": [
+      "Challenge with additional Latin words.",
+      "Create a short chant using new words."
+    ]
+  },
+  "classroom_management": [
+    "Keep transitions smooth with the chant.",
+    "Use hand signals for quieting down."
+  ],
+  "constraints": {
+    "time_window_minutes": 25,
+    "tone": "warm-positive-brief",
+    "no_translation_key": true
+  }
+}

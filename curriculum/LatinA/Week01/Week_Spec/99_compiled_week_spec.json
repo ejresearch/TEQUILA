@@ -1,11 +1,11 @@
 {
   "01_metadata.json": {
     "week_title": "Latin Foundations: Alphabet and Pronunciation",
-    "grammar_focus": "Introduction to Latin Alphabet",
+    "grammar_focus": "Introduction to Latin Alphabet and Sounds",
     "chant": "Alphabet Chant",
     "virtue_focus": "Discipline",
     "faith_phrase": "In principio - In the beginning",
-    "vocabulary_summary": "Introduction to basic Latin vocabulary",
+    "vocabulary_summary": "Basic Latin sounds and letters",
     "author_metadata": {
       "author_name": "Steel",
       "author_contact": "steel@tequila.org"
@@ -14,73 +14,73 @@
     "license": "CC BY 4.0"
   },
   "02_objectives.json": [
-    "Students will recognize and pronounce the Latin alphabet.",
-    "Students will understand the importance of discipline in language learning.",
-    "Students will learn the faith phrase 'In principio' and its significance.",
-    "Students will begin to build a basic Latin vocabulary.",
-    "Students will connect the virtue of discipline with their study habits."
+    "Recognize and pronounce each letter of the Latin alphabet.",
+    "Understand the basic sounds associated with Latin vowels and consonants.",
+    "Memorize the faith phrase 'In principio' and its translation.",
+    "Demonstrate discipline in practicing pronunciation daily.",
+    "Connect the virtue of discipline with consistent study habits."
   ],
   "03_vocabulary.json": [
     {
-      "latin": "amicus",
-      "english": "friend",
-      "part_of_speech": "noun",
-      "pronunciation": "ah-mee-koos",
-      "example_phrase": "Amicus bonus est."
+      "latin": "A",
+      "english": "A",
+      "part_of_speech": "letter",
+      "pronunciation": "ah",
+      "example_phrase": "Amicus - Friend"
     },
     {
-      "latin": "familia",
-      "english": "family",
-      "part_of_speech": "noun",
-      "pronunciation": "fah-mee-lee-ah",
-      "example_phrase": "Familia magna est."
+      "latin": "B",
+      "english": "B",
+      "part_of_speech": "letter",
+      "pronunciation": "beh",
+      "example_phrase": "Bonus - Good"
     },
     {
-      "latin": "terra",
-      "english": "earth",
-      "part_of_speech": "noun",
-      "pronunciation": "teh-rah",
-      "example_phrase": "Terra rotunda est."
+      "latin": "C",
+      "english": "C",
+      "part_of_speech": "letter",
+      "pronunciation": "keh",
+      "example_phrase": "Civis - Citizen"
     },
     {
-      "latin": "aqua",
-      "english": "water",
-      "part_of_speech": "noun",
-      "pronunciation": "ah-kwah",
-      "example_phrase": "Aqua clara est."
+      "latin": "D",
+      "english": "D",
+      "part_of_speech": "letter",
+      "pronunciation": "deh",
+      "example_phrase": "Dominus - Lord"
     },
     {
-      "latin": "luna",
-      "english": "moon",
-      "part_of_speech": "noun",
-      "pronunciation": "loo-nah",
-      "example_phrase": "Luna plena est."
+      "latin": "E",
+      "english": "E",
+      "part_of_speech": "letter",
+      "pronunciation": "eh",
+      "example_phrase": "Equus - Horse"
     },
     {
-      "latin": "sol",
-      "english": "sun",
-      "part_of_speech": "noun",
-      "pronunciation": "sohl",
-      "example_phrase": "Sol lucet."
+      "latin": "F",
+      "english": "F",
+      "part_of_speech": "letter",
+      "pronunciation": "ef",
+      "example_phrase": "Filius - Son"
     },
     {
-      "latin": "via",
-      "english": "road",
-      "part_of_speech": "noun",
-      "pronunciation": "wee-ah",
-      "example_phrase": "Via longa est."
+      "latin": "G",
+      "english": "G",
+      "part_of_speech": "letter",
+      "pronunciation": "geh",
+      "example_phrase": "Gloria - Glory"
     },
     {
-      "latin": "vita",
-      "english": "life",
-      "part_of_speech": "noun",
-      "pronunciation": "wee-tah",
-      "example_phrase": "Vita bella est."
+      "latin": "H",
+      "english": "H",
+      "part_of_speech": "letter",
+      "pronunciation": "hah",
+      "example_phrase": "Homo - Man"
     }
   ],
-  "04_grammar_focus.md": "### Grammar Focus: Introduction to the Latin Alphabet\n\nLatin uses the same alphabet as English, with a few differences in pronunciation. This week, we will learn to recognize and pronounce each letter correctly. The Latin alphabet consists of 23 letters, excluding 'J', 'U', and 'W'.\n\nTo help memorize the alphabet, we will use the following chant:\n\n```\nA, B, C, D, E, F, G,\nH, I, K, L, M, N, O,\nP, Q, R, S, T, V, X, Y, Z.\n```\n\nUnderstanding the alphabet is the first step in reading and writing Latin. It lays the foundation for all future learning in this language.",
+  "04_grammar_focus.md": "### Introduction to Latin Alphabet and Sounds\n\nThe Latin alphabet consists of 23 letters, similar to the English alphabet but without J, U, and W. Each letter has a distinct sound, which is crucial for proper pronunciation. Understanding these sounds lays the foundation for reading and speaking Latin fluently.\n\nTo begin, focus on the vowels: A, E, I, O, U. Each vowel has a long and short sound. For example, 'A' is pronounced 'ah' as in 'father'.\n\nConsonants like 'C' and 'G' are always hard, as in 'cat' and 'go'. Practice these sounds with the chant:\n\n```\nA, B, C, D, E, F, G,\nH, I, K, L, M, N, O, P,\nQ, R, S, T, U, X, Y, Z.\n```\n\nThis chant will help you remember the order and sounds of the Latin letters, building a strong foundation for future lessons.",
   "05_chant.json": {
-    "text": "Call: A, B, C, D, E, F, G,\nResponse: H, I, K, L, M, N, O,\nCall: P, Q, R, S, T, V, X, Y, Z."
+    "text": "Call: A, B, C, D, E, F, G,\nResponse: H, I, K, L, M, N, O, P,\nCall: Q, R, S, T, U, X, Y, Z."
   },
   "06_sessions_week_view.json": [],
   "07_assessment.json": {
@@ -88,26 +88,36 @@
       "sections": [
         {
           "type": "pronunciation",
-          "description": "Students will pronounce selected letters of the Latin alphabet."
+          "description": "Students will pronounce a selection of Latin letters.",
+          "sample_items": [
+            "Pronounce the letter 'C'.",
+            "Pronounce the letter 'G'."
+          ]
         },
         {
           "type": "translation",
-          "description": "Translate simple Latin words to English."
+          "description": "Translate the faith phrase 'In principio'.",
+          "sample_items": [
+            "Translate 'In principio'."
+          ]
         },
         {
-          "type": "chant_recall",
-          "description": "Recite the alphabet chant from memory."
+          "type": "chant recall",
+          "description": "Recite the alphabet chant.",
+          "sample_items": [
+            "Recite the alphabet chant."
+          ]
         }
       ],
-      "scoring_notes": "Each section is worth 10 points. Pronunciation accuracy, correct translations, and complete chant recall are required for full marks.",
-      "review_before_quiz": "Review the alphabet chant and practice pronouncing each letter. Revisit vocabulary words and their meanings."
-    }
+      "scoring_notes": "Each section is worth 10 points. Pronunciation accuracy and chant recall are key."
+    },
+    "review_before_quiz": "Review the pronunciation of each letter and practice the alphabet chant daily."
   },
   "08_assets_index.json": [],
   "09_spiral_links.json": {
     "prior_knowledge": []
   },
-  "10_interleaving_plan.md": "### Teacher Notes\n\n- **Pronunciation Tips**: Emphasize the differences in vowel sounds between Latin and English. Use clear examples to demonstrate.\n- **Pacing Advice**: Spend time each day practicing the alphabet chant. Encourage students to practice at home.\n- **Connections**: This week sets the stage for understanding Latin sounds, which will be crucial in upcoming lessons on vocabulary and grammar.",
+  "10_interleaving_plan.md": "### Teacher Notes\n\n- **Pronunciation Cues**: Emphasize the hard sounds of 'C' and 'G'.\n- **Pacing Advice**: Spend the first two days focusing on vowels, then move to consonants.\n- **Connection to Prior/Next Weeks**: This week sets the foundation for reading and speaking. Next week, we'll build on these sounds with simple words.\n- **Encouragement**: Remind students that discipline in practice leads to mastery.",
   "11_misconception_watchlist.json": [],
   "12_preview_next_week.md": ""
 }

@@ -1,3 +1,11 @@
 {
-  "approach": "Positive reinforcement through praise and rewards like stickers or points for participation and effort."
+  "techniques": [
+    "positive reinforcement",
+    "gamification"
+  ],
+  "tools": [
+    "badges",
+    "points",
+    "leaderboards"
+  ]
 }

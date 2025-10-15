@@ -1582,105 +1582,36 @@ def task_day_role_context(week_spec: dict, day: int) -> Tuple[str, str, Optional
     Returns:
         (system_prompt, user_prompt, json_schema_hint)
     """
-    sys = _load_system_prompt("day_role_context_system.txt")
+    # Load prompt from JSON library
+    prompt_spec = _load_prompt_json("day/role_context.json")
 
-    # Extract spiral links for context
-    spiral_links = week_spec.get("spiral_links", {})
+    # Extract system and user prompts from JSON
+    system_content = prompt_spec["messages"][0]["content_template"]
+    user_template = "\n".join(prompt_spec["messages"][1]["content_template"])
+
+    # Extract metadata for interpolation
     metadata = week_spec.get("metadata", {})
-    week_number = metadata.get("week_number", "?")
+    week_number = metadata.get("week", metadata.get("week_number", 1))
 
-    # Build spiral emphasis suggestions based on week_spec
-    spiral_suggestions = []
-    if spiral_links:
-        if "prior_vocabulary" in spiral_links:
-            prior_vocab = spiral_links.get("prior_vocabulary", [])
-            if prior_vocab:
-                spiral_suggestions.append(f"Prior vocabulary from weeks: {prior_vocab}")
-        if "prior_grammar" in spiral_links:
-            prior_grammar = spiral_links.get("prior_grammar", [])
-            if prior_grammar:
-                spiral_suggestions.append(f"Prior grammar concepts: {prior_grammar}")
+    # Build user prompt with interpolations (simplified version - we don't have all dependencies yet)
+    user_content = user_template.replace("{{project_name}}", "Latin A (Grammar Stage)")
+    user_content = user_content.replace("{{week_number}}", str(week_number))
+    user_content = user_content.replace("{{day_number}}", str(day))
+    user_content = user_content.replace("{{grade_level_fixed}}", "Grade 3 (Grammar Stage, U.S.)")
+    user_content = user_content.replace("{{class_name}}", f"Week {week_number} Day {day}")
 
-    # Day-specific behavioral hints
-    day_behaviors = {
-        1: "patient, exploratory, high encouragement for first attempts",
-        2: "reinforcing, practice-focused, celebrate progress",
-        3: "application-oriented, challenge students to synthesize",
-        4: "review-focused, spiral-heavy, assess prior knowledge"
-    }
+    # Serialize week_spec for context
+    week_spec_json = json.dumps(week_spec, indent=2)
+    user_content = user_content.replace("{{week_spec}}", week_spec_json)
 
-    # Build example skeleton
-    example_skeleton = {
-        "sparky_role": "e.g., 'patient guide', 'socratic questioner', 'encouraging coach'",
-        "focus_mode": _get_day_focus(day),
-        "hints_enabled": True,
-        "spiral_emphasis": spiral_suggestions if day >= 2 else [],
-        "encouragement_triggers": ["first_attempt", "corrected_error", "progress_shown"],
-        "max_hints": 3,
-        "wait_time_seconds": 5,
-        "virtue_callout": f"How to integrate week's virtue: {metadata.get('virtue_focus', 'N/A')}"
-    }
+    # Placeholders for missing dependencies (will be empty for now)
+    user_content = user_content.replace("{{prior_knowledge_digest}}", "{}")
+    user_content = user_content.replace("{{day_summary}}", "")
 
-    usr = (
-        f"Generate day-specific role_context JSON for Week {week_number} Day {day}.\n\n"
-        f"BEHAVIORAL GUIDANCE FOR DAY {day}: {day_behaviors.get(day, 'general instruction')}\n\n"
-        "TASK: Produce a role_context JSON object that defines Sparky's teaching behavior for this specific day.\n\n"
-        "INPUTS (week metadata and spiral links):\n"
-        + orjson.dumps(
-            {
-                "metadata": metadata,
-                "spiral_links": spiral_links,
-                "day": day,
-                "day_focus": _get_day_focus(day),
-                "spiral_suggestions": spiral_suggestions
-            },
-            option=orjson.OPT_INDENT_2
-        ).decode()
-        + "\n\n"
-        "EXPECTED OUTPUT STRUCTURE (use this as your template):\n"
-        + json.dumps(example_skeleton, indent=2)
-        + "\n\n"
-        "INSTRUCTIONS:\n"
-        "1. Set sparky_role to match the day's behavioral guidance above (≤50 chars).\n"
-        "2. Set focus_mode to the exact day_focus value provided in inputs.\n"
-        "3. Set hints_enabled to true (always enable hints for Latin A students).\n"
-        "4. Populate spiral_emphasis array:\n"
-        f"   - For Day {day}: "
-        + ("Include ≥2 specific prior content references from spiral_suggestions above." if day >= 2 else "Leave empty (no prior content yet).")
-        + "\n"
-        "5. Set encouragement_triggers to at least 3 events (use examples or add custom ones).\n"
-        "6. Set max_hints to 3 (standard for this grade level).\n"
-        "7. Set wait_time_seconds to 5 (allow thinking time).\n"
-        "8. Include virtue_callout if week metadata specifies a virtue_focus.\n\n"
-        "OUTPUT FORMAT:\n"
-        "- Return ONLY valid JSON (no markdown, no code fences, no explanatory text).\n"
-        "- Match the structure of the example skeleton exactly.\n"
-        "- All string values must be concise (sparky_role ≤50 chars, focus_mode ≤30 chars).\n\n"
-        "SELF-CHECK BEFORE RETURNING:\n"
-        "✓ Is the JSON valid and parseable?\n"
-        f"✓ Does focus_mode match the required value: '{_get_day_focus(day)}'?\n"
-        f"✓ For Day {day}, does spiral_emphasis have {'≥2 items' if day >= 2 else '0 items (empty array)'}?\n"
-        "✓ Are all required fields present: sparky_role, focus_mode, hints_enabled?\n"
-        "✓ Are string lengths within limits (sparky_role ≤50, focus_mode ≤30)?\n"
-    )
+    # Extract JSON schema from output_contract
+    schema = prompt_spec["output_contract"]["schema"]
 
-    schema = {  # Strict JSON schema for structured output mode
-        "type": "object",
-        "properties": {
-            "sparky_role": {"type": "string"},
-            "focus_mode": {"type": "string"},
-            "hints_enabled": {"type": "boolean"},
-            "spiral_emphasis": {"type": "array", "items": {"type": "string"}},
-            "encouragement_triggers": {"type": "array", "items": {"type": "string"}},
-            "max_hints": {"type": "integer"},
-            "wait_time_seconds": {"type": "integer"},
-            "virtue_callout": {"type": "string"}
-        },
-        "required": ["sparky_role", "focus_mode", "hints_enabled", "spiral_emphasis", "encouragement_triggers", "max_hints", "wait_time_seconds", "virtue_callout"],
-        "additionalProperties": False
-    }
-
-    return sys, usr, schema
+    return (system_content, user_content, schema)
 
 
 def _get_day_focus(day: int) -> str:
@@ -1723,7 +1654,12 @@ def task_day_guidelines(
     Returns:
         (system_prompt, user_prompt, None) - No JSON schema (output is markdown)
     """
-    sys = _load_system_prompt("guidelines_system.txt")
+    # Load prompt from JSON library
+    prompt_spec = _load_prompt_json("day/guidelines.json")
+
+    # Extract system and user prompts from JSON
+    system_content = prompt_spec["messages"][0]["content_template"]
+    user_template = "\n".join(prompt_spec["messages"][1]["content_template"])
 
     # Handle missing role_context (fallback)
     if not role_context:
@@ -1737,109 +1673,30 @@ def task_day_guidelines(
             "wait_time_seconds": 5
         }
 
+    # Extract metadata for interpolation
     metadata = week_spec.get("metadata", {})
-    objectives = week_spec.get("objectives", [])
-    spiral_links = week_spec.get("spiral_links", {})
-    vocabulary = week_spec.get("vocabulary", [])[:5]  # Sample first 5
-    misconception_watchlist = week_spec.get("misconception_watchlist", [])
+    week_number = metadata.get("week", metadata.get("week_number", 1))
 
-    # Build YAML references template
-    vocab_items = []
-    for v in vocabulary:
-        if isinstance(v, dict):
-            vocab_items.append(v.get("latin", ""))
-        elif isinstance(v, str):
-            vocab_items.append(v)
+    # Build user prompt with interpolations
+    user_content = user_template.replace("{{project_name}}", "Latin A (Grammar Stage)")
+    user_content = user_content.replace("{{week_number}}", str(week_number))
+    user_content = user_content.replace("{{day_number}}", str(day))
+    user_content = user_content.replace("{{grade_level_fixed}}", "Grade 3 (Grammar Stage, U.S.)")
+    user_content = user_content.replace("{{class_name}}", f"Week {week_number} Day {day}")
 
-    yaml_references = {
-        "prior_knowledge": spiral_links.get("prior_vocabulary", []),
-        "vocabulary": vocab_items,
-        "grammar_focus": metadata.get("grammar_focus", ""),
-        "virtue": metadata.get("virtue_focus", "")
-    }
+    # Serialize week_spec and role_context for context
+    week_spec_json = json.dumps(week_spec, indent=2)
+    user_content = user_content.replace("{{week_spec}}", week_spec_json)
 
-    # Markdown template
-    markdown_template = f"""---
-references:
-  prior_knowledge: {yaml_references['prior_knowledge']}
-  vocabulary: {yaml_references['vocabulary']}
-  grammar_focus: "{yaml_references['grammar_focus']}"
-  virtue: "{yaml_references['virtue']}"
----
+    role_context_json = json.dumps(role_context, indent=2)
+    user_content = user_content.replace("{{role_context}}", role_context_json)
 
-# Week {metadata.get('week_number', '?')} Day {day}: Teaching Guidelines
+    # Placeholders for missing dependencies
+    user_content = user_content.replace("{{prior_knowledge_digest}}", "{}")
+    user_content = user_content.replace("{{day_summary}}", "")
+    user_content = user_content.replace("{{week_summary}}", "")
 
-## Sparky's Role for This Day
-**Persona:** {role_context.get('sparky_role', 'encouraging guide')}
-**Focus Mode:** {role_context.get('focus_mode', 'general')}
-**Hints Enabled:** {role_context.get('hints_enabled', True)}
-
-## Lesson Objectives
-- [List primary objectives from week_spec]
-- [Include spiral review objectives for Day 4]
-
-## Teaching Flow Overview
-1. **Greeting & Activation** (2-3 min)
-2. **Prior Knowledge Recall** (3-5 min) - Spiral emphasis: {role_context.get('spiral_emphasis', [])}
-3. **New Content Introduction** (10-15 min)
-4. **Guided Practice** (10-12 min)
-5. **Assessment / Closure** (3-5 min)
-
-## Behavioral Hints
-- Encouragement triggers: {role_context.get('encouragement_triggers', [])}
-- Max hints before revealing answer: {role_context.get('max_hints', 3)}
-- Wait time: {role_context.get('wait_time_seconds', 5)} seconds
-
-## Common Misconceptions
-- [List from week_spec misconception_watchlist]
-
-## Day-Specific Notes
-{"- Day 4: Ensure ≥25% content is spiral review from prior weeks" if day == 4 else ""}
-{"- Day 1: Focus on exploration and novelty, high encouragement" if day == 1 else ""}
-"""
-
-    usr = (
-        f"Generate teaching guidelines (markdown) for Week {metadata.get('week_number', '?')} Day {day}.\n\n"
-        "TASK: Produce field 05_guidelines_for_sparky.md — a markdown document with YAML references header.\n\n"
-        "INPUTS:\n"
-        "Week Spec:\n"
-        + orjson.dumps(
-            {
-                "metadata": metadata,
-                "objectives": objectives,
-                "spiral_links": spiral_links,
-                "vocabulary_sample": vocabulary,
-                "misconception_watchlist": misconception_watchlist
-            },
-            option=orjson.OPT_INDENT_2
-        ).decode()
-        + "\n\nRole Context (from field 04):\n"
-        + json.dumps(role_context, indent=2)
-        + "\n\n"
-        "EXPECTED OUTPUT STRUCTURE (use as template):\n"
-        + markdown_template
-        + "\n\n"
-        "INSTRUCTIONS:\n"
-        "1. Start with YAML frontmatter (--- references: --- block) pointing to prior_knowledge, vocabulary, grammar_focus, virtue.\n"
-        "2. Include section: '## Sparky's Role for This Day' with persona, focus_mode, hints_enabled from role_context.\n"
-        "3. List lesson objectives from week_spec objectives array (minimum 2, maximum 5).\n"
-        "4. Provide teaching flow overview with 5 phases (greeting, recall, introduction, practice, closure).\n"
-        "5. Include behavioral hints section with encouragement_triggers, max_hints, wait_time from role_context.\n"
-        "6. List common misconceptions from week_spec misconception_watchlist (if present).\n"
-        f"7. Add day-specific notes: {'Day 4 must emphasize ≥25% spiral review' if day == 4 else 'Day 1 focuses on exploration'}.\n\n"
-        "OUTPUT FORMAT:\n"
-        "- Return ONLY markdown text (no JSON, no code fences around the markdown itself).\n"
-        "- Begin with YAML frontmatter (---\\nreferences:\\n  ...).\n"
-        "- Use proper markdown heading hierarchy (# ## ###).\n\n"
-        "SELF-CHECK BEFORE RETURNING:\n"
-        "✓ Does output start with YAML frontmatter (--- references: ---)?.\n"
-        "✓ Are all 4 YAML reference keys present: prior_knowledge, vocabulary, grammar_focus, virtue?\n"
-        "✓ Does '## Sparky's Role' section include persona, focus_mode, hints_enabled?\n"
-        "✓ Are spiral_emphasis items from role_context mentioned in 'Prior Knowledge Recall' step?\n"
-        f"✓ For Day {day}: {'Is ≥25% spiral content emphasized?' if day == 4 else 'Is exploration/novelty emphasized?' if day == 1 else 'Is practice/application emphasized?'}\n"
-    )
-
-    return sys, usr, None  # No JSON schema (markdown output)
+    return (system_content, user_content, None)  # No JSON schema (markdown output)
 
 
 # ============================================================================
@@ -1988,7 +1845,12 @@ def task_day_greeting(
     Returns:
         (system_prompt, user_prompt, None) - No JSON schema (output is plain text)
     """
-    sys = _load_system_prompt("greeting_system.txt")
+    # Load prompt from JSON library
+    prompt_spec = _load_prompt_json("day/greeting.json")
+
+    # Extract system and user prompts from JSON
+    system_content = prompt_spec["messages"][0]["content_template"]
+    user_template = "\n".join(prompt_spec["messages"][1]["content_template"])
 
     # Handle missing role_context (fallback)
     if not role_context:
@@ -1998,62 +1860,38 @@ def task_day_greeting(
             "encouragement_triggers": ["first_attempt"]
         }
 
+    # Extract metadata for interpolation
     metadata = week_spec.get("metadata", {})
+    week_number = metadata.get("week", metadata.get("week_number", 1))
 
-    # Extract topic from document if available
-    topic = "Latin"
-    if document and "metadata" in document:
-        topic = document["metadata"].get("title", "Latin")
+    # Build user prompt with interpolations
+    user_content = user_template.replace("{{week_number}}", str(week_number))
+    user_content = user_content.replace("{{day_number}}", str(day))
+    user_content = user_content.replace("{{class_name}}", f"Week {week_number} Day {day}")
+    user_content = user_content.replace("{{grade_level}}", "Grade 3 (Grammar Stage, U.S.)")
 
-    # Persona-specific greeting templates
-    persona_hints = {
-        "patient guide": "Use gentle, inviting language",
-        "socratic questioner": "Pose a curious question",
-        "cheerleader": "Use energetic, enthusiastic tone",
-        "encouraging coach": "Motivational and supportive"
-    }
+    # Replace week_spec attributes
+    user_content = user_content.replace("{{week_spec.virtue_focus}}", metadata.get("virtue_focus", ""))
+    user_content = user_content.replace("{{week_spec.faith_phrase}}", metadata.get("faith_phrase", ""))
 
-    sparky_role = role_context.get("sparky_role", "encouraging Latin guide")
-    persona_hint = persona_hints.get(sparky_role, "Use warm, friendly language")
+    # Serialize role_context and document for context
+    role_context_json = json.dumps(role_context, indent=2)
+    user_content = user_content.replace("{{role_context}}", role_context_json)
 
-    example_greetings = [
-        f"Welcome, young scholars! Today we'll explore {topic} together.",
-        f"Salvē, students! Are you ready to discover the beauty of {topic}?",
-        f"Greetings, Latin learners! Let's dive into {topic} with curiosity and joy."
-    ]
+    if document:
+        lesson_steps = document.get("lesson_flow", document.get("lesson_steps", ""))
+        if isinstance(lesson_steps, dict):
+            lesson_steps = json.dumps(lesson_steps)
+        elif isinstance(lesson_steps, list):
+            lesson_steps = "\n".join(f"- {step}" for step in lesson_steps)
+        user_content = user_content.replace("{{day_document.lesson_steps}}", str(lesson_steps))
+    else:
+        user_content = user_content.replace("{{day_document.lesson_steps}}", "")
 
-    usr = (
-        f"Generate Sparky's greeting for Week {metadata.get('week_number', '?')} Day {day}.\n\n"
-        "TASK: Produce field 07_sparkys_greeting.txt — a 1-2 sentence welcome message for students.\n\n"
-        "INPUTS:\n"
-        f"Sparky's Role: {sparky_role}\n"
-        f"Focus Mode: {role_context.get('focus_mode', 'general')}\n"
-        f"Lesson Topic: {topic}\n"
-        f"Week Theme: {metadata.get('theme', 'Latin fundamentals')}\n"
-        f"Virtue Focus: {metadata.get('virtue_focus', 'N/A')}\n\n"
-        "PERSONA GUIDANCE:\n"
-        f"{persona_hint}\n\n"
-        "EXAMPLE GREETINGS (for inspiration):\n"
-        + "\n".join(f"- {ex}" for ex in example_greetings)
-        + "\n\n"
-        "INSTRUCTIONS:\n"
-        "1. Write a greeting that reflects Sparky's persona (sparky_role above).\n"
-        "2. Reference the lesson topic or week theme specifically (avoid generic greetings).\n"
-        "3. Keep it concise: 1-2 sentences, maximum 200 characters.\n"
-        "4. Use warm, encouraging, age-appropriate language (grades 3-8).\n"
-        "5. Optional: incorporate virtue focus if present.\n"
-        f"6. Day-specific tone: {'Welcoming and exploratory' if day == 1 else 'Reinforcing and encouraging' if day == 2 else 'Challenging and enthusiastic' if day == 3 else 'Review-focused and celebratory' if day == 4 else 'Warm and inviting'}.\n\n"
-        "OUTPUT FORMAT:\n"
-        "- Return ONLY the greeting text (no JSON, no markdown, no labels).\n"
-        "- Plain text, 1-2 sentences, maximum 200 characters.\n\n"
-        "SELF-CHECK:\n"
-        "✓ Is greeting 1-2 sentences (≤200 chars)?\n"
-        f"✓ Does greeting reflect persona '{sparky_role}'?\n"
-        "✓ Does greeting reference the specific lesson topic?\n"
-        "✓ Is tone warm, encouraging, and age-appropriate?\n"
-    )
+    # Extract JSON schema from output_contract (greeting returns JSON with greeting_text key)
+    schema = prompt_spec["output_contract"]["schema"]
 
-    return sys, usr, None  # No JSON schema (plain text output)
+    return (system_content, user_content, schema)
 
 
 # ============================================================================

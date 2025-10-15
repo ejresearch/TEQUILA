@@ -252,8 +252,9 @@ def generate_week_spec_from_outline(week: int, client: LLMClient) -> Path:
     Returns:
         Path to the compiled week spec file
     """
-    # Ensure week directory exists
-    scaffold_week(week)
+    # Ensure week spec directory exists (but don't overwrite existing files)
+    spec_dir = week_spec_dir(week)
+    spec_dir.mkdir(parents=True, exist_ok=True)
 
     # Load curriculum outline snippet for this week
     outline = _load_curriculum_outline()
@@ -362,8 +363,9 @@ def generate_role_context(week: int, client: LLMClient) -> Path:
     Returns:
         Path to the compiled role context file
     """
-    # Ensure week directory exists
-    scaffold_week(week)
+    # Ensure role context directory exists (but don't overwrite existing files)
+    context_dir = role_context_dir(week)
+    context_dir.mkdir(parents=True, exist_ok=True)
 
     # Load week spec to inform role context
     spec_path = week_spec_part_path(week, "99_compiled_week_spec.json")
@@ -430,9 +432,10 @@ def generate_assets(week: int, client: LLMClient) -> List[Path]:
     Returns:
         List of paths to generated asset files
     """
-    # Ensure week directory exists
-    week_path = scaffold_week(week)
+    # Ensure assets directory exists (but don't overwrite existing files)
+    week_path = week_dir(week)
     assets_dir = week_path / "assets"
+    assets_dir.mkdir(parents=True, exist_ok=True)
 
     # Load week spec to inform assets
     spec_path = week_spec_part_path(week, "99_compiled_week_spec.json")

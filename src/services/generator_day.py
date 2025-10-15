@@ -259,9 +259,15 @@ def generate_day_fields(week: int, day: int, client: LLMClient) -> List[Path]:
 
     # Generate greeting (field 07) - needs role_context and will need document later
     # For now generate without document (will be regenerated if needed)
-    sys_greet, usr_greet, _ = task_day_greeting(week_spec, day, role_context_data, None)
-    response_greet = client.generate(prompt=usr_greet, system=sys_greet)
-    greeting_content = response_greet.text
+    sys_greet, usr_greet, schema_greet = task_day_greeting(week_spec, day, role_context_data, None)
+    response_greet = client.generate(prompt=usr_greet, system=sys_greet, json_schema=schema_greet)
+
+    # Extract greeting_text from JSON response
+    if response_greet.json:
+        greeting_content = response_greet.json.get("greeting_text", "")
+    else:
+        # Fallback to plain text if JSON parsing fails
+        greeting_content = response_greet.text
 
     # Write field files (fields 01-03, 05, 07)
     field_mapping = {

@@ -1,2 +1,1 @@
-# QuizPacket - Week 1
-
+{'assessment_questions': ["1. What is the Latin word for 'a'?", "2. Translate 'Bellum est malum.' into English.", "3. What letter comes after 'C' in the Latin alphabet?", "4. Write a sentence using the word 'domus'.", "5. What is the English translation of 'Equus est fortis.'?"]}

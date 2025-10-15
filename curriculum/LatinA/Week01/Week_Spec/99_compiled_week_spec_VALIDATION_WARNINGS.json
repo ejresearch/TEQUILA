@@ -1,0 +1,124 @@
+{
+  "metadata": {
+    "week_title": "Latin Foundations: Alphabet and Pronunciation",
+    "grammar_focus": "",
+    "chant": "",
+    "virtue_focus": "Discipline",
+    "faith_phrase": "In principio - In the beginning",
+    "vocabulary_summary": "Introduction to basic Latin vocabulary.",
+    "author_metadata": {
+      "author_name": "Steel",
+      "author_contact": "steel@tequila.org"
+    },
+    "originality_attestation": true,
+    "license": "CC BY 4.0"
+  },
+  "objectives": [
+    "Students will recognize and pronounce each letter of the Latin alphabet.",
+    "Students will understand the importance of discipline in language learning.",
+    "Students will memorize and recite the faith phrase 'In principio'.",
+    "Students will learn basic Latin vocabulary related to the alphabet.",
+    "Students will connect the virtue of discipline to their study habits."
+  ],
+  "vocabulary": [
+    {
+      "latin": "a",
+      "english": "a",
+      "part_of_speech": "letter",
+      "pronunciation": "ah",
+      "example_phrase": "Aqua est vita."
+    },
+    {
+      "latin": "b",
+      "english": "b",
+      "part_of_speech": "letter",
+      "pronunciation": "beh",
+      "example_phrase": "Bellum est malum."
+    },
+    {
+      "latin": "c",
+      "english": "c",
+      "part_of_speech": "letter",
+      "pronunciation": "keh",
+      "example_phrase": "Cibus est bonus."
+    },
+    {
+      "latin": "d",
+      "english": "d",
+      "part_of_speech": "letter",
+      "pronunciation": "deh",
+      "example_phrase": "Domus est magna."
+    },
+    {
+      "latin": "e",
+      "english": "e",
+      "part_of_speech": "letter",
+      "pronunciation": "eh",
+      "example_phrase": "Equus est fortis."
+    },
+    {
+      "latin": "f",
+      "english": "f",
+      "part_of_speech": "letter",
+      "pronunciation": "ef",
+      "example_phrase": "Flos est pulcher."
+    },
+    {
+      "latin": "g",
+      "english": "g",
+      "part_of_speech": "letter",
+      "pronunciation": "geh",
+      "example_phrase": "Gladius est acutus."
+    },
+    {
+      "latin": "h",
+      "english": "h",
+      "part_of_speech": "letter",
+      "pronunciation": "hah",
+      "example_phrase": "Hortus est viridis."
+    }
+  ],
+  "grammar_focus": "### Grammar Focus: The Latin Alphabet\n\nThe Latin alphabet is the foundation of our journey into the language. It consists of 23 letters, each with its own distinct pronunciation. Unlike English, Latin pronunciation is consistent, which means once you learn the sound of each letter, you can read any Latin word with confidence.\n\nTo aid in memorization, we will use the following chant:\n\n```\nA, B, C, D, E, F, G,\nH, I, K, L, M, N, O, P,\nQ, R, S, T, U, X, Y, Z.\n```\n\nThis chant helps students internalize the sequence and sound of each letter, building a strong foundation for future vocabulary and grammar studies.",
+  "spiral_links": {
+    "prior_knowledge": []
+  },
+  "chant": {
+    "text": "Call: A, B, C, D, E, F, G,\nResponse: H, I, K, L, M, N, O, P,\nCall: Q, R, S, T, U, X, Y, Z."
+  },
+  "assessment": {
+    "quiz_structure": {
+      "sections": [
+        {
+          "type": "pronunciation",
+          "items": 5,
+          "description": "Identify and pronounce Latin letters."
+        },
+        {
+          "type": "translation",
+          "items": 3,
+          "description": "Translate simple phrases using learned vocabulary."
+        },
+        {
+          "type": "chant recall",
+          "items": 1,
+          "description": "Recite the alphabet chant."
+        }
+      ],
+      "scoring_notes": "Each section is equally weighted. Pronunciation accuracy is key.",
+      "review_before_quiz": "Review the alphabet chant and practice pronunciation of each letter."
+    }
+  },
+  "interleaving_plan": "### Teacher Notes\n\n- **Pronunciation Cues**: Emphasize the consistent sounds of Latin letters. Use the chant to reinforce learning.\n- **Pacing Advice**: Spend ample time on each letter, ensuring students are comfortable before moving on.\n- **Connections**: This week sets the stage for vocabulary building. Next week, we'll introduce simple nouns and verbs.\n- **Engagement Tip**: Use visual aids, like flashcards, to help students associate letters with sounds.",
+  "sessions": [],
+  "assets": [],
+  "misconception_watchlist": [],
+  "preview_next_week": "",
+  "__generation": {
+    "provider": "openai",
+    "model": "gpt-4o",
+    "created_at": "2025-10-15T16:18:19.952182Z",
+    "git_commit": "e4bab4bc",
+    "tokens_prompt": 930,
+    "tokens_completion": 1724
+  }
+}

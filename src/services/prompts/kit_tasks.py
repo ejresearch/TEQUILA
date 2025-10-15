@@ -1676,7 +1676,7 @@ def task_day_role_context(week_spec: dict, day: int) -> Tuple[str, str, Optional
             "wait_time_seconds": {"type": "integer"},
             "virtue_callout": {"type": "string"}
         },
-        "required": ["sparky_role", "focus_mode", "hints_enabled"],
+        "required": ["sparky_role", "focus_mode", "hints_enabled", "spiral_emphasis", "encouragement_triggers", "max_hints", "wait_time_seconds", "virtue_callout"],
         "additionalProperties": False
     }
 

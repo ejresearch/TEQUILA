@@ -1,0 +1,89 @@
+{
+  "metadata": {
+    "week": 1,
+    "day": 1,
+    "title": "Week 1 Day 1: Introduction to the Latin Alphabet",
+    "duration_minutes": 45,
+    "virtue": "Discipline",
+    "faith_phrase": "In principio - In the beginning"
+  },
+  "prior_knowledge_digest": "Students are expected to have a basic understanding of the concept of alphabets from their native language. They should be familiar with the idea that different languages have different sounds and letters. This lesson will build on their existing knowledge of alphabets by introducing the Latin alphabet, focusing on pronunciation and basic vocabulary.",
+  "yesterday_recap": "N/A - This is the first day of the course.",
+  "spiral_links": {
+    "recycled_vocab": [],
+    "recycled_grammar": [],
+    "prior_day_concepts": [],
+    "prior_weeks": []
+  },
+  "misconception_watchlist": [
+    "Confusing Latin letter sounds with English sounds.",
+    "Mispronouncing vowels, especially 'a', 'e', and 'i'."
+  ],
+  "objectives": {
+    "primary": [
+      "Students will recognize and pronounce each letter of the Latin alphabet.",
+      "Students will understand the importance of discipline in language learning.",
+      "Students will memorize and recite the faith phrase 'In principio'.",
+      "Students will learn basic Latin vocabulary related to the alphabet.",
+      "Students will connect the virtue of discipline to their study habits."
+    ],
+    "spiral_review": []
+  },
+  "materials": [
+    "Latin alphabet chart",
+    "Audio recordings of Latin pronunciation",
+    "Flashcards with Latin letters and example phrases",
+    "Whiteboard and markers"
+  ],
+  "lesson_flow": [
+    {
+      "type": "greeting",
+      "duration_minutes": 5,
+      "description": "Welcome students and introduce the day's objectives.",
+      "student_action": "Listen and prepare for the lesson.",
+      "teacher_notes": "Set a positive tone and emphasize the virtue of discipline."
+    },
+    {
+      "type": "introduction",
+      "duration_minutes": 10,
+      "description": "Introduce the Latin alphabet and its importance.",
+      "student_action": "Observe the alphabet chart and listen to the pronunciation.",
+      "teacher_notes": "Highlight differences between Latin and English alphabets."
+    },
+    {
+      "type": "guided_practice",
+      "duration_minutes": 15,
+      "description": "Practice pronunciation of each letter with the class.",
+      "student_action": "Repeat after the teacher and practice pronunciation.",
+      "teacher_notes": "Use audio recordings to ensure correct pronunciation."
+    },
+    {
+      "type": "chant",
+      "duration_minutes": 5,
+      "description": "Chant the faith phrase 'In principio' together.",
+      "student_action": "Chant along with the teacher.",
+      "teacher_notes": "Explain the meaning of the phrase and its significance."
+    },
+    {
+      "type": "independent_practice",
+      "duration_minutes": 5,
+      "description": "Students practice writing the Latin letters.",
+      "student_action": "Write each letter and say its pronunciation.",
+      "teacher_notes": "Circulate to provide feedback and encouragement."
+    },
+    {
+      "type": "closure",
+      "duration_minutes": 5,
+      "description": "Review the day's learning and connect to the virtue of discipline.",
+      "student_action": "Reflect on what they learned and how discipline helps in learning.",
+      "teacher_notes": "Encourage students to practice at home."
+    }
+  ],
+  "behavior": {
+    "tone": "Encouraging and supportive",
+    "loop_behavior": "Reinforce correct pronunciation through repetition.",
+    "hints_max": 3,
+    "wait_seconds": 5,
+    "encouragement_frequency": "Frequent"
+  }
+}

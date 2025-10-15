@@ -1,0 +1,101 @@
+{
+  "metadata": {
+    "week": 1,
+    "day": 3,
+    "title": "Week 1 Day 3: Latin Alphabet and Pronunciation",
+    "duration_minutes": 45,
+    "virtue": "Discipline",
+    "faith_phrase": "In principio - In the beginning"
+  },
+  "prior_knowledge_digest": "Students should have a basic understanding of the Latin alphabet's structure and pronunciation. Familiarity with the concept of discipline as a virtue in learning is essential. Students should also be able to recite the faith phrase 'In principio' and recognize its significance. Basic vocabulary related to the alphabet, such as 'aqua' and 'bellum', should be known.",
+  "yesterday_recap": "Yesterday, students practiced pronouncing the first half of the Latin alphabet and began to memorize the faith phrase 'In principio'. They also explored the virtue of discipline in the context of language learning.",
+  "spiral_links": {
+    "recycled_vocab": [
+      "aqua",
+      "bellum",
+      "cibus",
+      "domus",
+      "equus",
+      "flos",
+      "gladius",
+      "hortus"
+    ],
+    "recycled_grammar": [],
+    "prior_day_concepts": [
+      "Latin alphabet pronunciation",
+      "discipline as a virtue"
+    ],
+    "prior_weeks": []
+  },
+  "misconception_watchlist": [
+    "Confusing similar-sounding letters",
+    "Mispronouncing vowels"
+  ],
+  "objectives": {
+    "primary": [
+      "Students will recognize and pronounce each letter of the Latin alphabet.",
+      "Students will understand the importance of discipline in language learning.",
+      "Students will memorize and recite the faith phrase 'In principio'.",
+      "Students will learn basic Latin vocabulary related to the alphabet.",
+      "Students will connect the virtue of discipline to their study habits."
+    ],
+    "spiral_review": []
+  },
+  "materials": [
+    "Latin alphabet chart",
+    "Pronunciation audio clips",
+    "Faith phrase poster",
+    "Vocabulary flashcards"
+  ],
+  "lesson_flow": [
+    {
+      "type": "recall",
+      "duration_minutes": 5,
+      "description": "Review the pronunciation of the first half of the Latin alphabet.",
+      "student_action": "Students recite the letters 'a' to 'h' with correct pronunciation.",
+      "teacher_notes": "Focus on clarity and confidence in pronunciation."
+    },
+    {
+      "type": "introduction",
+      "duration_minutes": 5,
+      "description": "Introduce the second half of the Latin alphabet.",
+      "student_action": "Students listen and repeat after the teacher.",
+      "teacher_notes": "Use audio clips to reinforce correct pronunciation."
+    },
+    {
+      "type": "guided_practice",
+      "duration_minutes": 10,
+      "description": "Practice pronouncing the entire Latin alphabet.",
+      "student_action": "Students repeat the full alphabet in unison.",
+      "teacher_notes": "Correct any pronunciation errors immediately."
+    },
+    {
+      "type": "chant",
+      "duration_minutes": 5,
+      "description": "Chant the faith phrase 'In principio'.",
+      "student_action": "Students chant the phrase together.",
+      "teacher_notes": "Emphasize the meaning and importance of the phrase."
+    },
+    {
+      "type": "independent_practice",
+      "duration_minutes": 10,
+      "description": "Students practice writing and pronouncing vocabulary words.",
+      "student_action": "Students write and say each vocabulary word aloud.",
+      "teacher_notes": "Encourage students to use flashcards for self-testing."
+    },
+    {
+      "type": "closure",
+      "duration_minutes": 5,
+      "description": "Reflect on the virtue of discipline in learning Latin.",
+      "student_action": "Students share how they applied discipline in today's lesson.",
+      "teacher_notes": "Highlight examples of discipline observed during the lesson."
+    }
+  ],
+  "behavior": {
+    "tone": "Encouraging and supportive",
+    "loop_behavior": "Reinforce correct pronunciation through repetition",
+    "hints_max": 3,
+    "wait_seconds": 5,
+    "encouragement_frequency": "Frequent"
+  }
+}

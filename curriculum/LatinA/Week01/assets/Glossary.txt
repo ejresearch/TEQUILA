@@ -1,2 +1,1 @@
-# Glossary - Week 1
-
+{'vocabulary_list': [{'latin': 'a', 'english': 'a', 'definition': 'The first letter of the Latin alphabet.', 'example': 'Aqua est vita.'}, {'latin': 'b', 'english': 'b', 'definition': 'The second letter of the Latin alphabet.', 'example': 'Bellum est malum.'}, {'latin': 'c', 'english': 'c', 'definition': 'The third letter of the Latin alphabet.', 'example': 'Cibus est bonus.'}, {'latin': 'd', 'english': 'd', 'definition': 'The fourth letter of the Latin alphabet.', 'example': 'Domus est magna.'}, {'latin': 'e', 'english': 'e', 'definition': 'The fifth letter of the Latin alphabet.', 'example': 'Equus est fortis.'}]}

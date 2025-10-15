@@ -1,0 +1,97 @@
+{
+  "metadata": {
+    "week": 1,
+    "day": 4,
+    "title": "Week 1 Day 4: Latin Alphabet and Discipline",
+    "duration_minutes": 45,
+    "virtue": "Discipline",
+    "faith_phrase": "In principio - In the beginning"
+  },
+  "prior_knowledge_digest": "Students should be familiar with the basic sounds of the Latin alphabet and have an understanding of the importance of discipline in learning. They should have been introduced to the faith phrase 'In principio' and its significance. Basic vocabulary related to the alphabet, including the pronunciation of letters 'a' through 'h', should be known. Previous lessons have focused on the pronunciation and memorization of these letters and their example phrases.",
+  "yesterday_recap": "Yesterday, students practiced the pronunciation of the Latin letters 'a' to 'h' and learned the example phrases associated with each letter. They also discussed the virtue of discipline and how it applies to their language studies.",
+  "spiral_links": {
+    "recycled_vocab": [
+      "a",
+      "b",
+      "c",
+      "d",
+      "e",
+      "f",
+      "g",
+      "h"
+    ],
+    "recycled_grammar": [
+      "pronunciation",
+      "memorization"
+    ],
+    "prior_day_concepts": [
+      "Latin alphabet pronunciation",
+      "discipline in learning"
+    ],
+    "prior_weeks": []
+  },
+  "misconception_watchlist": [
+    "Confusing similar sounds like 'c' and 'g'",
+    "Mispronouncing 'h' as silent"
+  ],
+  "objectives": {
+    "primary": [
+      "Students will accurately pronounce each letter of the Latin alphabet.",
+      "Students will recite the faith phrase 'In principio'.",
+      "Students will demonstrate understanding of discipline in their study habits."
+    ],
+    "spiral_review": [
+      "Review pronunciation of letters 'a' to 'h'.",
+      "Reinforce the connection between discipline and learning."
+    ]
+  },
+  "materials": [
+    "Latin alphabet chart",
+    "Flashcards with letters and example phrases",
+    "Audio recordings of pronunciation"
+  ],
+  "lesson_flow": [
+    {
+      "type": "recall",
+      "duration_minutes": 10,
+      "description": "Review the pronunciation of letters 'a' to 'h' using flashcards.",
+      "student_action": "Students will pronounce each letter and its example phrase.",
+      "teacher_notes": "Focus on correct pronunciation and address any common errors."
+    },
+    {
+      "type": "review",
+      "duration_minutes": 5,
+      "description": "Discuss the importance of discipline in language learning.",
+      "student_action": "Students will share how they applied discipline in their studies.",
+      "teacher_notes": "Encourage students to give specific examples."
+    },
+    {
+      "type": "introduction",
+      "duration_minutes": 10,
+      "description": "Introduce the faith phrase 'In principio' and its pronunciation.",
+      "student_action": "Students will listen and repeat the phrase.",
+      "teacher_notes": "Explain the meaning and context of the phrase."
+    },
+    {
+      "type": "guided_practice",
+      "duration_minutes": 10,
+      "description": "Practice reciting the faith phrase and connecting it to the virtue of discipline.",
+      "student_action": "Students will recite the phrase in pairs and discuss its meaning.",
+      "teacher_notes": "Monitor pronunciation and provide feedback."
+    },
+    {
+      "type": "assessment",
+      "duration_minutes": 10,
+      "description": "Conduct a short quiz on the pronunciation of letters and the faith phrase.",
+      "student_action": "Students will write down the pronunciation of each letter and the faith phrase.",
+      "teacher_notes": "Use this to gauge understanding and correct any misconceptions."
+    }
+  ],
+  "behavior": {
+    "tone": "encouraging and supportive",
+    "loop_behavior": "review and reinforce",
+    "hints_max": 3,
+    "wait_seconds": 5,
+    "encouragement_frequency": "frequent"
+  }
+}

@@ -1,2 +1,1 @@
-# TeacherKey - Week 1
-
+{'answer_key': ['1. a', '2. War is bad.', '3. D', '4. Example: Domus est magna.', '5. The horse is strong.']}

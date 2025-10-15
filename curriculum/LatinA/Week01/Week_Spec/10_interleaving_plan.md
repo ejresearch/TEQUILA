@@ -1,23 +1,5 @@
-# Interleaving Plan - Week 1
+### Teacher Notes
 
-## Previous Content Integration
-- Week [X]: [Concept to interleave]
-- Week [Y]: [Concept to interleave]
-
-## Interleaving Strategy
-[Description of how prior content is woven into new lessons]
-
-## Day-by-Day Breakdown
-### Day 1
-- [Interleaved element]
-
-### Day 2
-- [Interleaved element]
-
-### Day 3
-- [Interleaved element]
-
-### Day 4 (25% Spiral Content)
-- [Major review component 1]
-- [Major review component 2]
-- [Integration with new content]
+- **Pronunciation Tips**: Emphasize the differences in vowel sounds between Latin and English. Use clear examples to demonstrate.
+- **Pacing Advice**: Spend time each day practicing the alphabet chant. Encourage students to practice at home.
+- **Connections**: This week sets the stage for understanding Latin sounds, which will be crucial in upcoming lessons on vocabulary and grammar.

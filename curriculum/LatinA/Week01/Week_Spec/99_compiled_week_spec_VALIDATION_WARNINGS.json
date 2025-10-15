@@ -1,11 +1,11 @@
 {
   "metadata": {
     "week_title": "Latin Foundations: Alphabet and Pronunciation",
-    "grammar_focus": "Introduction to Latin Alphabet and Pronunciation",
+    "grammar_focus": "Introduction to Latin Alphabet",
     "chant": "Alphabet Chant",
     "virtue_focus": "Discipline",
     "faith_phrase": "In principio - In the beginning",
-    "vocabulary_summary": "Introduction to basic Latin vocabulary related to classroom objects and greetings.",
+    "vocabulary_summary": "Introduction to basic Latin vocabulary",
     "author_metadata": {
       "author_name": "Steel",
       "author_contact": "steel@tequila.org"
@@ -14,71 +14,71 @@
     "license": "CC BY 4.0"
   },
   "objectives": [
-    "Students will recite the Latin alphabet with correct pronunciation.",
-    "Students will identify and pronounce basic Latin vocabulary related to classroom objects.",
-    "Students will understand the virtue of discipline in the context of language learning.",
-    "Students will translate the faith phrase 'In principio' and discuss its significance.",
-    "Students will demonstrate the ability to connect Latin sounds to written letters."
+    "Students will recognize and pronounce the Latin alphabet.",
+    "Students will understand the importance of discipline in language learning.",
+    "Students will learn the faith phrase 'In principio' and its significance.",
+    "Students will begin to build a basic Latin vocabulary.",
+    "Students will connect the virtue of discipline with their study habits."
   ],
   "vocabulary": [
     {
-      "latin": "liber",
-      "english": "book",
+      "latin": "amicus",
+      "english": "friend",
       "part_of_speech": "noun",
-      "pronunciation": "LEE-ber",
-      "example_phrase": "Liber in mensa est."
+      "pronunciation": "ah-mee-koos",
+      "example_phrase": "Amicus bonus est."
     },
     {
-      "latin": "mensa",
-      "english": "table",
+      "latin": "familia",
+      "english": "family",
       "part_of_speech": "noun",
-      "pronunciation": "MEN-sa",
-      "example_phrase": "Mensa magna est."
+      "pronunciation": "fah-mee-lee-ah",
+      "example_phrase": "Familia magna est."
     },
     {
-      "latin": "magister",
-      "english": "teacher",
+      "latin": "terra",
+      "english": "earth",
       "part_of_speech": "noun",
-      "pronunciation": "ma-GIS-ter",
-      "example_phrase": "Magister docet."
+      "pronunciation": "teh-rah",
+      "example_phrase": "Terra rotunda est."
     },
     {
-      "latin": "schola",
-      "english": "school",
+      "latin": "aqua",
+      "english": "water",
       "part_of_speech": "noun",
-      "pronunciation": "SKO-la",
-      "example_phrase": "Schola nova est."
+      "pronunciation": "ah-kwah",
+      "example_phrase": "Aqua clara est."
     },
     {
-      "latin": "salve",
-      "english": "hello",
-      "part_of_speech": "interjection",
-      "pronunciation": "SAL-we",
-      "example_phrase": "Salve, amice!"
+      "latin": "luna",
+      "english": "moon",
+      "part_of_speech": "noun",
+      "pronunciation": "loo-nah",
+      "example_phrase": "Luna plena est."
     },
     {
-      "latin": "discipulus",
-      "english": "student",
+      "latin": "sol",
+      "english": "sun",
       "part_of_speech": "noun",
-      "pronunciation": "dis-KIP-u-lus",
-      "example_phrase": "Discipulus studet."
+      "pronunciation": "sohl",
+      "example_phrase": "Sol lucet."
     },
     {
-      "latin": "tabula",
-      "english": "board",
+      "latin": "via",
+      "english": "road",
       "part_of_speech": "noun",
-      "pronunciation": "TA-bu-la",
-      "example_phrase": "Tabula alba est."
+      "pronunciation": "wee-ah",
+      "example_phrase": "Via longa est."
     },
     {
-      "latin": "sella",
-      "english": "chair",
+      "latin": "vita",
+      "english": "life",
       "part_of_speech": "noun",
-      "pronunciation": "SEL-la",
-      "example_phrase": "Sella vacua est."
+      "pronunciation": "wee-tah",
+      "example_phrase": "Vita bella est."
     }
   ],
-  "grammar_focus": "### Introduction to Latin Alphabet and Pronunciation\n\nLatin, like English, uses an alphabet to represent sounds. The Latin alphabet consists of 23 letters, similar to the English alphabet but without J, U, and W. Each letter has a distinct pronunciation, which is crucial for reading and speaking Latin accurately.\n\nTo help remember the alphabet, we use the following chant:\n\n```\nA, B, C, D, E, F, G,\nH, I, K, L, M, N, O,\nP, Q, R, S, T, V, X, Y, Z.\n```\n\nThis week, we focus on mastering these sounds, which will form the foundation for all future Latin learning. Understanding the pronunciation will aid in recognizing patterns and building vocabulary.",
+  "grammar_focus": "### Grammar Focus: Introduction to the Latin Alphabet\n\nLatin uses the same alphabet as English, with a few differences in pronunciation. This week, we will learn to recognize and pronounce each letter correctly. The Latin alphabet consists of 23 letters, excluding 'J', 'U', and 'W'.\n\nTo help memorize the alphabet, we will use the following chant:\n\n```\nA, B, C, D, E, F, G,\nH, I, K, L, M, N, O,\nP, Q, R, S, T, V, X, Y, Z.\n```\n\nUnderstanding the alphabet is the first step in reading and writing Latin. It lays the foundation for all future learning in this language.",
   "spiral_links": {
     "prior_knowledge": []
   },
@@ -90,33 +90,22 @@
       "sections": [
         {
           "type": "pronunciation",
-          "description": "Students will pronounce selected letters of the Latin alphabet.",
-          "sample_items": [
-            "Pronounce the letter 'C'.",
-            "Pronounce the letter 'V'."
-          ]
+          "description": "Students will pronounce selected letters of the Latin alphabet."
         },
         {
-          "type": "vocabulary_translation",
-          "description": "Translate basic Latin vocabulary into English.",
-          "sample_items": [
-            "Translate 'liber'.",
-            "Translate 'mensa'."
-          ]
+          "type": "translation",
+          "description": "Translate simple Latin words to English."
         },
         {
-          "type": "faith_phrase_explanation",
-          "description": "Explain the meaning of the faith phrase 'In principio'.",
-          "sample_items": [
-            "What does 'In principio' mean?"
-          ]
+          "type": "chant_recall",
+          "description": "Recite the alphabet chant from memory."
         }
       ],
-      "scoring_notes": "Each section is worth equal points. Pronunciation is evaluated on accuracy and clarity.",
-      "review_before_quiz": "Review the alphabet chant and practice vocabulary pronunciation."
+      "scoring_notes": "Each section is worth 10 points. Pronunciation accuracy, correct translations, and complete chant recall are required for full marks.",
+      "review_before_quiz": "Review the alphabet chant and practice pronouncing each letter. Revisit vocabulary words and their meanings."
     }
   },
-  "interleaving_plan": "### Teacher Notes\n\n- **Pronunciation Tips**: Emphasize the clear enunciation of each letter. Latin pronunciation is consistent, which aids in reading and speaking.\n- **Pacing Advice**: Spend time each day on the alphabet chant to build confidence. Use repetition to reinforce learning.\n- **Connections**: This week's focus on the alphabet sets the stage for future vocabulary and grammar lessons. Next week, we will begin simple sentence structures.\n- **Encouragement**: Remind students that discipline in practice leads to mastery. Celebrate small victories to build motivation.",
+  "interleaving_plan": "### Teacher Notes\n\n- **Pronunciation Tips**: Emphasize the differences in vowel sounds between Latin and English. Use clear examples to demonstrate.\n- **Pacing Advice**: Spend time each day practicing the alphabet chant. Encourage students to practice at home.\n- **Connections**: This week sets the stage for understanding Latin sounds, which will be crucial in upcoming lessons on vocabulary and grammar.",
   "sessions": [],
   "assets": [],
   "misconception_watchlist": [],
@@ -124,9 +113,9 @@
   "__generation": {
     "provider": "openai",
     "model": "gpt-4o",
-    "created_at": "2025-10-15T16:30:44.463822Z",
-    "git_commit": "2f2a5f9e",
+    "created_at": "2025-10-15T17:00:19.322767Z",
+    "git_commit": "a116eacb",
     "tokens_prompt": 930,
-    "tokens_completion": 2050
+    "tokens_completion": 2965
   }
 }

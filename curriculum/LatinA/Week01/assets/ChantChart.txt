@@ -1,1 +1,1 @@
-{'formatted_chant': 'Call: A, B, C, D, E, F, G,\nResponse: H, I, K, L, M, N, O,\nCall: P, Q, R, S, T, V, X, Y, Z.', 'latin': 'Vocatio: A, B, C, D, E, F, G,\nResponsum: H, I, K, L, M, N, O,\nVocatio: P, Q, R, S, T, V, X, Y, Z.'}
+{'Latin': 'Call: A, B, C, D, E, F, G,\nResponse: H, I, K, L, M, N, O,\nCall: P, Q, R, S, T, V, X, Y, Z.', 'English': 'Call: A, B, C, D, E, F, G,\nResponse: H, I, K, L, M, N, O,\nCall: P, Q, R, S, T, V, X, Y, Z.'}

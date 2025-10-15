@@ -1,1 +1,1 @@
-['Liber in mensa est.', 'Mensa magna est.', 'Magister docet.', 'Schola nova est.', 'Salve, amice!']
+['Amicus bonus est.', 'Familia magna est.', 'Terra rotunda est.', 'Aqua clara est.', 'Luna plena est.']

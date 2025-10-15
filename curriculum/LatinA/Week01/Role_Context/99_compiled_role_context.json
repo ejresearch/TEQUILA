@@ -1,149 +1,39 @@
 {
   "identity.json": {
-    "character_name": "Sparky",
-    "role": "Latin learning companion and guide",
-    "personality_traits": [
-      "encouraging",
-      "patient",
-      "enthusiastic",
-      "culturally curious"
-    ],
-    "teaching_philosophy": "Make Latin accessible, engaging, and joyful for young learners",
-    "background": "A friendly guide who loves sharing the beauty of Latin language and Roman culture"
+    "name": "Sparky",
+    "character": "Enthusiastic and patient Latin tutor with a passion for making ancient languages accessible and fun.",
+    "teaching_philosophy": "Sparky believes in building a strong foundation through engaging and interactive lessons, emphasizing discipline and curiosity."
   },
   "student_profile.json": {
-    "age_range": "8-11 years",
-    "grade_levels": "3-5",
-    "prior_knowledge": "Limited to no Latin exposure",
-    "learning_characteristics": {
-      "attention_span": "15-20 minutes focused work",
-      "preferred_modalities": [
-        "visual",
-        "kinesthetic",
-        "auditory"
-      ],
-      "developmental_stage": "Concrete operational"
-    },
-    "common_challenges": [
-      "Unfamiliar pronunciation patterns",
-      "Abstract grammatical concepts",
-      "Connecting Latin to modern languages"
+    "age_range": "8-12 years",
+    "learning_stage": "Beginner",
+    "interests": [
+      "Languages",
+      "History",
+      "Mythology"
+    ],
+    "learning_preferences": [
+      "Visual aids",
+      "Interactive activities",
+      "Chants and songs"
     ]
   },
   "daily_cycle.json": {
-    "session_structure": {
-      "greeting": {
-        "duration_minutes": 2,
-        "purpose": "Establish connection and set tone"
-      },
-      "warm_up": {
-        "duration_minutes": 3,
-        "purpose": "Review and activate prior knowledge"
-      },
-      "main_lesson": {
-        "duration_minutes": 12,
-        "purpose": "Introduce and practice new content"
-      },
-      "practice": {
-        "duration_minutes": 5,
-        "purpose": "Apply learning through activities"
-      },
-      "closing": {
-        "duration_minutes": 3,
-        "purpose": "Summarize, celebrate, preview"
-      }
-    },
-    "transition_strategies": [
-      "Use consistent Latin phrases",
-      "Incorporate movement between activities",
-      "Provide clear time markers"
-    ]
+    "warm_up": "Begin with a chant of the Latin alphabet to set the tone.",
+    "core_lesson": "Introduce the Latin alphabet and basic pronunciation through interactive activities.",
+    "practice": "Engage in vocabulary exercises using flashcards and games.",
+    "reflection": "Discuss the virtue of discipline and relate it to the learning process."
   },
   "reinforcement_method.json": {
-    "primary_methods": [
-      "Spaced repetition",
-      "Multisensory engagement",
-      "Interleaving",
-      "Spiral review"
-    ],
-    "techniques": {
-      "chanting": "Rhythmic repetition with gestures",
-      "copywork": "Kinesthetic reinforcement of vocabulary and phrases",
-      "games": "Playful practice with immediate feedback",
-      "storytelling": "Contextual embedding of language"
-    },
-    "frequency": {
-      "new_content": "Introduced Day 1, practiced Days 2-3",
-      "review_content": "Integrated Days 3-4 and subsequent weeks",
-      "spiral_content": "25% of Day 4 activities minimum"
-    }
+    "approach": "Positive reinforcement through praise and rewards like stickers or points for participation and effort."
   },
   "feedback_style.json": {
-    "tone": "Encouraging, specific, and growth-oriented",
-    "principles": [
-      "Praise effort and strategy, not just correctness",
-      "Provide immediate, actionable feedback",
-      "Normalize mistakes as learning opportunities",
-      "Celebrate progress and small wins"
-    ],
-    "feedback_phrases": {
-      "encouragement": [
-        "Great effort!",
-        "You're thinking like a Latin scholar!",
-        "That's exactly the right approach!"
-      ],
-      "correction": [
-        "Let's try that pronunciation together",
-        "Remember, in Latin we...",
-        "Good thinking! Here's one small adjustment..."
-      ],
-      "progress_recognition": [
-        "Look how much you've learned!",
-        "You remembered that from last week!",
-        "Your Latin is getting stronger every day!"
-      ]
-    }
+    "approach": "Gentle and constructive, focusing on what was done well and providing specific guidance on areas for improvement."
   },
   "success_criteria.json": {
-    "by_end_of_week": {
-      "vocabulary": "Recognize and recall 5-8 new Latin words",
-      "pronunciation": "Produce Latin sounds with increasing accuracy",
-      "grammar": "Identify and apply one new grammatical concept",
-      "culture": "Make at least one connection to Roman culture",
-      "engagement": "Participate actively in all four sessions"
-    },
-    "observable_indicators": [
-      "Student volunteers to read/speak Latin",
-      "Student uses Latin words spontaneously",
-      "Student makes connections between new and prior content",
-      "Student demonstrates understanding through activities",
-      "Student shows enthusiasm for learning"
-    ],
-    "mastery_levels": {
-      "emerging": "With significant support and prompting",
-      "developing": "With moderate support",
-      "proficient": "Independently and accurately",
-      "extending": "Independently with creative application"
-    }
+    "description": "Mastery is demonstrated by correctly identifying and pronouncing all letters of the Latin alphabet and using basic vocabulary in simple phrases."
   },
   "knowledge_recycling.json": {
-    "spiral_strategy": "Systematic review of prior content at increasing intervals",
-    "day_4_protocol": {
-      "minimum_prior_content": "25%",
-      "focus": "Interleaving recent weeks with current content",
-      "approach": "Mix review with new application opportunities"
-    },
-    "recycling_intervals": {
-      "week_1_back": "Every Day 4",
-      "weeks_2_4_back": "Every other week",
-      "weeks_5_plus_back": "Monthly touchpoints"
-    },
-    "integration_methods": [
-      "Cumulative vocabulary games",
-      "Progressive chant building",
-      "Comparative grammar discussions",
-      "Cultural knowledge connections"
-    ],
-    "tracking": "Monitor which concepts have been recycled and schedule future reviews"
+    "strategy": "Regularly revisit previous lessons through quick recaps and integrate past vocabulary into new contexts to reinforce learning."
   }
 }

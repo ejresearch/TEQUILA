@@ -1,72 +1,69 @@
 ```markdown
 # Teacher Key – Week 1
 
-Hello, educators! Below you'll find the answer key for the Grade 3 Latin A Week 1 Quiz. Each answer includes explanations to help you guide your students in understanding the material. Let's help our students grow in their Latin knowledge!
+Hello, educators! Below you'll find the answer key for the Latin A – Week 1 Quiz. This key includes correct answers, explanations, and additional insights to help guide your students through their Latin learning journey. Enjoy!
 
 ## Vocabulary (5 points)
 
-1. **Fill in the blank:** The Latin word for "book" is **liber**. (1 point)  
-   **Explanation:** "Liber" is the Latin word for "book," which is a common noun used in educational contexts.  
-   **Chant Reference:** N/A
+1. **Fill in the blank:** The Latin word for "friend" is __________.  
+   **Correct Answer:** b) amicus  
+   **Explanation:** "Amicus" is the Latin word for "friend." It is a masculine noun, often used to describe a male friend.
 
-2. **Multiple Choice:** What does "mensa" mean in English? **b) Table** (1 point)  
-   **Explanation:** "Mensa" translates to "table" in English. It's important for students to connect Latin vocabulary with everyday objects.  
-   **Chant Reference:** N/A
+2. **Multiple Choice:** What is the English meaning of "familia"?  
+   **Correct Answer:** b) Family  
+   **Explanation:** "Familia" translates directly to "family" in English, referring to a household or family unit.
 
-3. **Fill in the blank:** "Salve" is a Latin word used to say **Hello**. (1 point)  
-   **Explanation:** "Salve" is a common greeting in Latin, equivalent to "hello" in English, used to greet someone warmly.  
-   **Chant Reference:** N/A
+3. **Fill in the blank:** The Latin word "terra" means __________ in English.  
+   **Correct Answer:** earth  
+   **Explanation:** "Terra" is the Latin term for "earth," commonly used to describe the ground or the planet.
 
-4. **Multiple Choice:** How do you pronounce "magister"? **a) MAH-gis-ter** (1 point)  
-   **Explanation:** The pronunciation "MAH-gis-ter" follows classical Latin pronunciation rules, where "g" is hard as in "go."  
-   **Chant Reference:** N/A
+4. **Multiple Choice:** How do you pronounce "aqua"?  
+   **Correct Answer:** a) ah-kwah  
+   **Explanation:** In Latin, "aqua" is pronounced "ah-kwah," with a hard "k" sound for the "q."
 
-5. **Fill in the blank:** The Latin word for "teacher" is **magister**. (1 point)  
-   **Explanation:** "Magister" is the Latin term for "teacher," often used in educational settings.  
-   **Chant Reference:** N/A
+5. **Fill in the blank:** "Luna" means __________ in English.  
+   **Correct Answer:** moon  
+   **Explanation:** "Luna" is the Latin word for "moon," often used in both scientific and poetic contexts.
 
 ## Grammar & Chant (5 points)
 
-6. **Short Response:** Recite the Latin alphabet from A to E. **A, B, C, D, E** (1 point)  
-   **Explanation:** The Latin alphabet begins with these letters, similar to the English alphabet.  
-   **Chant Reference:** "A, B, C, D, E" - Remember to pronounce "C" as "K."
+6. **Short Response:** Write the first five letters of the Latin alphabet.  
+   **Correct Answer:** A, B, C, D, E  
+   **Explanation:** The Latin alphabet begins with these letters, similar to the English alphabet. The pronunciation follows the Alphabet Chant.
 
-7. **Multiple Choice:** Which of the following is a noun? **b) liber** (1 point)  
-   **Explanation:** "Liber" is a noun, meaning "book," while "salve" is a greeting and "et" is a conjunction.  
-   **Chant Reference:** N/A
+7. **Multiple Choice:** Which of these is a noun in Latin?  
+   **Correct Answer:** a) amicus  
+   **Explanation:** "Amicus" is a noun meaning "friend," while "et" is a conjunction meaning "and," and "est" is a verb meaning "is."
 
-8. **Fill in the blank:** The phrase "Liber in mensa est" means "The book is on the **table**." (1 point)  
-   **Explanation:** "Mensa" translates to "table," and the phrase describes the book's location.  
-   **Chant Reference:** N/A
+8. **Fill in the blank:** In the phrase "Amicus bonus est," "amicus" is a __________.  
+   **Correct Answer:** noun  
+   **Explanation:** "Amicus" functions as the subject of the sentence, identifying "friend" as the noun.
 
-9. **Short Response:** What is the correct pronunciation of the letter "C" in Latin? **K** (1 point)  
-   **Explanation:** In classical Latin, "C" is always pronounced as "K," regardless of the following vowel.  
-   **Chant Reference:** "C" is pronounced as "K" in chants.
+9. **Short Response:** What is the correct pronunciation of the letter "c" in Latin?  
+   **Correct Answer:** k  
+   **Explanation:** In classical Latin, the letter "c" is always pronounced as a hard "k" sound, regardless of the following vowel.
 
-10. **Chant Recall:** What comes after "G" in the Latin alphabet chant? **H** (1 point)  
-    **Explanation:** The sequence of the Latin alphabet follows the same order as the English alphabet.  
-    **Chant Reference:** "A, B, C, D, E, F, G, H" - Keep the rhythm steady.
+10. **Multiple Choice:** Which chant helps you remember the Latin alphabet?  
+    **Correct Answer:** b) Alphabet Chant  
+    **Explanation:** The Alphabet Chant is a helpful tool for memorizing the sequence and pronunciation of the Latin alphabet.
 
 ## Translation (4 points)
 
-11. **Translate to English:** "Magister in mensa est." **The teacher is on the table.** (2 points)  
-    **Explanation:** "Magister" means "teacher," "in" means "on," and "mensa" means "table." The sentence structure is similar to English.  
-    **Literal Translation:** "Teacher on table is."  
-    **Idiomatic Translation:** "The teacher is on the table."
+11. **Translate to English:** "Familia magna est."  
+    **Correct Answer:** The family is large.  
+    **Explanation:** "Familia" means "family," "magna" means "large," and "est" means "is." The sentence describes the size of the family.
 
-12. **Translate to Latin:** "Hello, teacher." **Salve, magister.** (2 points)  
-    **Explanation:** "Salve" is the greeting "hello," and "magister" is the noun for "teacher."  
-    **Literal Translation:** "Hello, teacher."  
-    **Idiomatic Translation:** "Salve, magister."
+12. **Translate to Latin:** "The earth is round."  
+    **Correct Answer:** Terra rotunda est.  
+    **Explanation:** "Terra" translates to "earth," "rotunda" means "round," and "est" is the verb "is." The sentence describes the shape of the earth.
 
 ## Virtue Reflection (1 point)
 
-13. **Short Written Response:** How can practicing discipline help you learn Latin better? Write one or two sentences. (1 point)  
-    **Sample Response:** Practicing discipline helps me focus and remember what I've learned. It encourages me to study regularly and improve my Latin skills.  
-    **Virtue Focus:** N/A  
-    **Faith Phrase:** N/A
+13. **Short Written Response:** How can the virtue of discipline help you learn Latin better? Write one sentence.  
+    **Sample Answer:** Discipline helps me practice regularly, ensuring I improve my Latin skills consistently.  
+    **Explanation:** Encouraging students to reflect on discipline emphasizes the importance of regular practice and dedication in learning a new language.
 
 ---
 
-Thank you for guiding your students through their Latin journey. Your dedication to their learning is invaluable!
+Thank you for guiding your students through their Latin studies. Your dedication to their education is invaluable!
 ```

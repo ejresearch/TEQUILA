@@ -1,11 +1,14 @@
 {
-  "week_number": 0,
-  "title": "Week Title",
-  "theme": "Weekly Theme",
-  "virtue_focus": "",
-  "faith_phrase": "",
-  "created_date": "",
-  "last_modified": "",
-  "author": "Latin A Curriculum System",
-  "version": "1.0"
+  "week_title": "Latin Foundations: Alphabet and Pronunciation",
+  "grammar_focus": "Introduction to Latin Alphabet",
+  "chant": "Alphabet Chant",
+  "virtue_focus": "Discipline",
+  "faith_phrase": "In principio - In the beginning",
+  "vocabulary_summary": "Introduction to basic Latin vocabulary",
+  "author_metadata": {
+    "author_name": "Steel",
+    "author_contact": "steel@tequila.org"
+  },
+  "originality_attestation": true,
+  "license": "CC BY 4.0"
 }

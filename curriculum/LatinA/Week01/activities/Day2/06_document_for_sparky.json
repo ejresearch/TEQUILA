@@ -2,94 +2,81 @@
   "metadata": {
     "week": 1,
     "day": 2,
-    "title": "Week 1 Day 2: Latin Alphabet and Classroom Vocabulary",
+    "title": "Week 1 Day 2: Introduction to Latin Alphabet",
     "duration_minutes": 45,
     "virtue": "Discipline",
     "faith_phrase": "In principio - In the beginning"
   },
-  "prior_knowledge_digest": "Students should have a basic understanding of the Latin alphabet and its pronunciation. They should be familiar with the concept of connecting sounds to written letters, as well as the importance of discipline in learning a new language. Additionally, they should have been introduced to some basic Latin vocabulary related to classroom objects and greetings.",
-  "yesterday_recap": "Yesterday, we introduced the Latin alphabet and practiced its pronunciation. We also began learning basic vocabulary related to classroom objects.",
+  "prior_knowledge_digest": "Students should have a basic understanding of the concept of alphabets and their role in language. Familiarity with the English alphabet will aid in recognizing similarities and differences with the Latin alphabet. Understanding the importance of discipline in learning new languages is also beneficial.",
+  "yesterday_recap": "Yesterday, we introduced the concept of the Latin alphabet and began exploring its pronunciation. We also discussed the virtue of discipline and its importance in language learning.",
   "spiral_links": {
-    "recycled_vocab": [
-      "liber",
-      "mensa",
-      "magister"
-    ],
-    "recycled_grammar": [
-      "noun identification",
-      "basic pronunciation"
-    ],
+    "recycled_vocab": [],
+    "recycled_grammar": [],
     "prior_day_concepts": [
       "Latin alphabet",
-      "basic vocabulary"
+      "discipline in learning"
     ],
     "prior_weeks": []
   },
   "misconception_watchlist": [
     "Confusing Latin pronunciation with English",
-    "Misidentifying parts of speech"
+    "Overlooking the importance of discipline"
   ],
   "objectives": {
     "primary": [
-      "Students will recite the Latin alphabet with correct pronunciation.",
-      "Students will identify and pronounce basic Latin vocabulary related to classroom objects.",
-      "Students will understand the virtue of discipline in the context of language learning.",
-      "Students will translate the faith phrase 'In principio' and discuss its significance.",
-      "Students will demonstrate the ability to connect Latin sounds to written letters."
-    ]
+      "Students will recognize and pronounce the Latin alphabet.",
+      "Students will understand the importance of discipline in language learning.",
+      "Students will learn the faith phrase 'In principio' and its significance.",
+      "Students will begin to build a basic Latin vocabulary."
+    ],
+    "spiral_review": []
   },
   "materials": [
-    "Alphabet chart",
-    "Flashcards with vocabulary words",
-    "Whiteboard and markers"
+    "Latin alphabet chart",
+    "Audio recordings of Latin pronunciation",
+    "Faith phrase poster",
+    "Vocabulary flashcards"
   ],
   "lesson_flow": [
     {
       "type": "recall",
       "duration_minutes": 5,
-      "description": "Review the Latin alphabet with the class using the alphabet chart.",
-      "student_action": "Students recite the alphabet along with the teacher.",
-      "teacher_notes": "Focus on correct pronunciation and rhythm."
-    },
-    {
-      "type": "recall",
-      "duration_minutes": 5,
-      "description": "Quick review of vocabulary from Day 1 using flashcards.",
-      "student_action": "Students pronounce each word as it is shown.",
-      "teacher_notes": "Correct any pronunciation errors immediately."
+      "description": "Review the Latin alphabet introduced yesterday.",
+      "student_action": "Students recite the alphabet with the teacher.",
+      "teacher_notes": "Focus on correct pronunciation."
     },
     {
       "type": "introduction",
       "duration_minutes": 10,
-      "description": "Introduce new vocabulary related to classroom objects.",
-      "student_action": "Students listen and repeat each new word.",
-      "teacher_notes": "Use visuals to help students connect words with objects."
+      "description": "Introduce new vocabulary words and their pronunciation.",
+      "student_action": "Students listen and repeat new vocabulary words.",
+      "teacher_notes": "Use flashcards to visually reinforce learning."
     },
     {
       "type": "guided_practice",
       "duration_minutes": 10,
-      "description": "Practice pronunciation and usage of new vocabulary in simple sentences.",
-      "student_action": "Students form sentences using the new vocabulary.",
-      "teacher_notes": "Encourage students to use vocabulary in context."
+      "description": "Practice the pronunciation of the Latin alphabet and new vocabulary.",
+      "student_action": "Students practice in pairs, taking turns to pronounce words.",
+      "teacher_notes": "Circulate to provide feedback and correct pronunciation."
     },
     {
       "type": "faith_reflection",
       "duration_minutes": 5,
       "description": "Discuss the faith phrase 'In principio' and its significance.",
-      "student_action": "Students reflect on the phrase and share thoughts.",
+      "student_action": "Students reflect on the phrase and its meaning.",
       "teacher_notes": "Connect the phrase to the virtue of discipline."
     },
     {
       "type": "closure",
       "duration_minutes": 5,
-      "description": "Recap the day's learning and preview the next lesson.",
+      "description": "Summarize the day's learning and reinforce the importance of discipline.",
       "student_action": "Students share one thing they learned today.",
-      "teacher_notes": "Encourage students to practice at home."
+      "teacher_notes": "Encourage students to apply discipline in their study habits."
     }
   ],
   "behavior": {
     "tone": "Encouraging and supportive",
-    "loop_behavior": "Reinforce correct pronunciation through repetition",
+    "loop_behavior": "Gently redirect focus to the task",
     "hints_max": 3,
     "wait_seconds": 5,
     "encouragement_frequency": "Frequent"

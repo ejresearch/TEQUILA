@@ -1,98 +1,113 @@
 {
   "01_metadata.json": {
-    "week_number": 0,
-    "title": "Week Title",
-    "theme": "Weekly Theme",
-    "virtue_focus": "",
-    "faith_phrase": "",
-    "created_date": "",
-    "last_modified": "",
-    "author": "Latin A Curriculum System",
-    "version": "1.0"
+    "week_title": "Latin Foundations: Alphabet and Pronunciation",
+    "grammar_focus": "Introduction to Latin Alphabet",
+    "chant": "Alphabet Chant",
+    "virtue_focus": "Discipline",
+    "faith_phrase": "In principio - In the beginning",
+    "vocabulary_summary": "Introduction to basic Latin vocabulary",
+    "author_metadata": {
+      "author_name": "Steel",
+      "author_contact": "steel@tequila.org"
+    },
+    "originality_attestation": true,
+    "license": "CC BY 4.0"
   },
-  "02_objectives.json": {
-    "learning_objectives": [
-      "Students will be able to...",
-      "Students will demonstrate...",
-      "Students will understand..."
-    ],
-    "linguistic_goals": [],
-    "cultural_goals": [],
-    "virtue_integration": ""
-  },
-  "03_vocabulary.json": {
-    "new_vocabulary": [],
-    "review_vocabulary": [],
-    "vocabulary_notes": ""
-  },
-  "04_grammar_focus.md": "# Grammar Focus - Week 1\n\n## Primary Grammar Concept\n[Main grammar concept for the week]\n\n## Teaching Sequence\n1. Introduction\n2. Guided practice\n3. Independent application\n\n## Examples\n- Example 1\n- Example 2\n- Example 3\n\n## Common Errors to Address\n- Error pattern 1\n- Error pattern 2\n",
+  "02_objectives.json": [
+    "Students will recognize and pronounce the Latin alphabet.",
+    "Students will understand the importance of discipline in language learning.",
+    "Students will learn the faith phrase 'In principio' and its significance.",
+    "Students will begin to build a basic Latin vocabulary.",
+    "Students will connect the virtue of discipline with their study habits."
+  ],
+  "03_vocabulary.json": [
+    {
+      "latin": "amicus",
+      "english": "friend",
+      "part_of_speech": "noun",
+      "pronunciation": "ah-mee-koos",
+      "example_phrase": "Amicus bonus est."
+    },
+    {
+      "latin": "familia",
+      "english": "family",
+      "part_of_speech": "noun",
+      "pronunciation": "fah-mee-lee-ah",
+      "example_phrase": "Familia magna est."
+    },
+    {
+      "latin": "terra",
+      "english": "earth",
+      "part_of_speech": "noun",
+      "pronunciation": "teh-rah",
+      "example_phrase": "Terra rotunda est."
+    },
+    {
+      "latin": "aqua",
+      "english": "water",
+      "part_of_speech": "noun",
+      "pronunciation": "ah-kwah",
+      "example_phrase": "Aqua clara est."
+    },
+    {
+      "latin": "luna",
+      "english": "moon",
+      "part_of_speech": "noun",
+      "pronunciation": "loo-nah",
+      "example_phrase": "Luna plena est."
+    },
+    {
+      "latin": "sol",
+      "english": "sun",
+      "part_of_speech": "noun",
+      "pronunciation": "sohl",
+      "example_phrase": "Sol lucet."
+    },
+    {
+      "latin": "via",
+      "english": "road",
+      "part_of_speech": "noun",
+      "pronunciation": "wee-ah",
+      "example_phrase": "Via longa est."
+    },
+    {
+      "latin": "vita",
+      "english": "life",
+      "part_of_speech": "noun",
+      "pronunciation": "wee-tah",
+      "example_phrase": "Vita bella est."
+    }
+  ],
+  "04_grammar_focus.md": "### Grammar Focus: Introduction to the Latin Alphabet\n\nLatin uses the same alphabet as English, with a few differences in pronunciation. This week, we will learn to recognize and pronounce each letter correctly. The Latin alphabet consists of 23 letters, excluding 'J', 'U', and 'W'.\n\nTo help memorize the alphabet, we will use the following chant:\n\n```\nA, B, C, D, E, F, G,\nH, I, K, L, M, N, O,\nP, Q, R, S, T, V, X, Y, Z.\n```\n\nUnderstanding the alphabet is the first step in reading and writing Latin. It lays the foundation for all future learning in this language.",
   "05_chant.json": {
-    "chant_text": "",
-    "translation": "",
-    "pronunciation_guide": "",
-    "teaching_notes": "",
-    "gestures_movements": []
+    "text": "Call: A, B, C, D, E, F, G,\nResponse: H, I, K, L, M, N, O,\nCall: P, Q, R, S, T, V, X, Y, Z."
   },
-  "06_sessions_week_view.json": {
-    "day_1": {
-      "focus": "Introduction and exploration",
-      "activities": [],
-      "duration_minutes": 20
-    },
-    "day_2": {
-      "focus": "Practice and reinforcement",
-      "activities": [],
-      "duration_minutes": 20
-    },
-    "day_3": {
-      "focus": "Application and extension",
-      "activities": [],
-      "duration_minutes": 20
-    },
-    "day_4": {
-      "focus": "Review and spiral (25% prior content)",
-      "activities": [],
-      "duration_minutes": 20,
-      "spiral_content_percentage": 25
-    }
-  },
+  "06_sessions_week_view.json": [],
   "07_assessment.json": {
-    "formative_assessments": [],
-    "summative_assessment": "",
-    "success_criteria": [],
-    "rubric": {
-      "exceeds": "",
-      "meets": "",
-      "approaching": "",
-      "beginning": ""
+    "quiz_structure": {
+      "sections": [
+        {
+          "type": "pronunciation",
+          "description": "Students will pronounce selected letters of the Latin alphabet."
+        },
+        {
+          "type": "translation",
+          "description": "Translate simple Latin words to English."
+        },
+        {
+          "type": "chant_recall",
+          "description": "Recite the alphabet chant from memory."
+        }
+      ],
+      "scoring_notes": "Each section is worth 10 points. Pronunciation accuracy, correct translations, and complete chant recall are required for full marks.",
+      "review_before_quiz": "Review the alphabet chant and practice pronouncing each letter. Revisit vocabulary words and their meanings."
     }
   },
-  "08_assets_index.json": {
-    "chant_chart": "assets/ChantChart.txt",
-    "glossary": "assets/Glossary.txt",
-    "copywork": "assets/Copywork.txt",
-    "quiz_packet": "assets/QuizPacket.txt",
-    "teacher_key": "assets/TeacherKey.txt",
-    "virtue_entry": "assets/VirtueEntry.txt",
-    "additional_resources": []
-  },
+  "08_assets_index.json": [],
   "09_spiral_links.json": {
-    "links_to_previous_weeks": [],
-    "concepts_to_review": [],
-    "vocabulary_to_recycle": [],
-    "grammar_connections": []
+    "prior_knowledge": []
   },
-  "10_interleaving_plan.md": "# Interleaving Plan - Week 1\n\n## Previous Content Integration\n- Week [X]: [Concept to interleave]\n- Week [Y]: [Concept to interleave]\n\n## Interleaving Strategy\n[Description of how prior content is woven into new lessons]\n\n## Day-by-Day Breakdown\n### Day 1\n- [Interleaved element]\n\n### Day 2\n- [Interleaved element]\n\n### Day 3\n- [Interleaved element]\n\n### Day 4 (25% Spiral Content)\n- [Major review component 1]\n- [Major review component 2]\n- [Integration with new content]\n",
-  "11_misconception_watchlist.json": {
-    "common_misconceptions": [
-      {
-        "misconception": "",
-        "why_it_occurs": "",
-        "correction_strategy": ""
-      }
-    ],
-    "pronunciation_pitfalls": [],
-    "grammar_confusion_points": []
-  },
-  "12_preview_next_week.md": "# Preview: Week 2\n\n## Coming Up Next\n[Brief description of next week's focus]\n\n## Preparation Needed\n- [Teacher preparation item 1]\n- [Teacher preparation item 2]\n\n## Connection to Current Week\n[How next week builds on this week]\n"
+  "10_interleaving_plan.md": "### Teacher Notes\n\n- **Pronunciation Tips**: Emphasize the differences in vowel sounds between Latin and English. Use clear examples to demonstrate.\n- **Pacing Advice**: Spend time each day practicing the alphabet chant. Encourage students to practice at home.\n- **Connections**: This week sets the stage for understanding Latin sounds, which will be crucial in upcoming lessons on vocabulary and grammar.",
+  "11_misconception_watchlist.json": [],
+  "12_preview_next_week.md": ""
 }

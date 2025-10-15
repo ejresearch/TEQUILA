@@ -1,5 +1,58 @@
-{
-  "new_vocabulary": [],
-  "review_vocabulary": [],
-  "vocabulary_notes": ""
-}
+[
+  {
+    "latin": "amicus",
+    "english": "friend",
+    "part_of_speech": "noun",
+    "pronunciation": "ah-mee-koos",
+    "example_phrase": "Amicus bonus est."
+  },
+  {
+    "latin": "familia",
+    "english": "family",
+    "part_of_speech": "noun",
+    "pronunciation": "fah-mee-lee-ah",
+    "example_phrase": "Familia magna est."
+  },
+  {
+    "latin": "terra",
+    "english": "earth",
+    "part_of_speech": "noun",
+    "pronunciation": "teh-rah",
+    "example_phrase": "Terra rotunda est."
+  },
+  {
+    "latin": "aqua",
+    "english": "water",
+    "part_of_speech": "noun",
+    "pronunciation": "ah-kwah",
+    "example_phrase": "Aqua clara est."
+  },
+  {
+    "latin": "luna",
+    "english": "moon",
+    "part_of_speech": "noun",
+    "pronunciation": "loo-nah",
+    "example_phrase": "Luna plena est."
+  },
+  {
+    "latin": "sol",
+    "english": "sun",
+    "part_of_speech": "noun",
+    "pronunciation": "sohl",
+    "example_phrase": "Sol lucet."
+  },
+  {
+    "latin": "via",
+    "english": "road",
+    "part_of_speech": "noun",
+    "pronunciation": "wee-ah",
+    "example_phrase": "Via longa est."
+  },
+  {
+    "latin": "vita",
+    "english": "life",
+    "part_of_speech": "noun",
+    "pronunciation": "wee-tah",
+    "example_phrase": "Vita bella est."
+  }
+]

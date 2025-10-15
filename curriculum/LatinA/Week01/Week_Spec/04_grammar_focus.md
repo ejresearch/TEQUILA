@@ -1,18 +1,13 @@
-# Grammar Focus - Week 1
+### Grammar Focus: Introduction to the Latin Alphabet
 
-## Primary Grammar Concept
-[Main grammar concept for the week]
+Latin uses the same alphabet as English, with a few differences in pronunciation. This week, we will learn to recognize and pronounce each letter correctly. The Latin alphabet consists of 23 letters, excluding 'J', 'U', and 'W'.
 
-## Teaching Sequence
-1. Introduction
-2. Guided practice
-3. Independent application
+To help memorize the alphabet, we will use the following chant:
 
-## Examples
-- Example 1
-- Example 2
-- Example 3
+```
+A, B, C, D, E, F, G,
+H, I, K, L, M, N, O,
+P, Q, R, S, T, V, X, Y, Z.
+```
 
-## Common Errors to Address
-- Error pattern 1
-- Error pattern 2
+Understanding the alphabet is the first step in reading and writing Latin. It lays the foundation for all future learning in this language.

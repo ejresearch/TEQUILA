@@ -1,22 +1,3 @@
 {
-  "by_end_of_week": {
-    "vocabulary": "Recognize and recall 5-8 new Latin words",
-    "pronunciation": "Produce Latin sounds with increasing accuracy",
-    "grammar": "Identify and apply one new grammatical concept",
-    "culture": "Make at least one connection to Roman culture",
-    "engagement": "Participate actively in all four sessions"
-  },
-  "observable_indicators": [
-    "Student volunteers to read/speak Latin",
-    "Student uses Latin words spontaneously",
-    "Student makes connections between new and prior content",
-    "Student demonstrates understanding through activities",
-    "Student shows enthusiasm for learning"
-  ],
-  "mastery_levels": {
-    "emerging": "With significant support and prompting",
-    "developing": "With moderate support",
-    "proficient": "Independently and accurately",
-    "extending": "Independently with creative application"
-  }
+  "description": "Mastery is demonstrated by correctly identifying and pronouncing all letters of the Latin alphabet and using basic vocabulary in simple phrases."
 }

@@ -1,11 +1,20 @@
 {
-  "formative_assessments": [],
-  "summative_assessment": "",
-  "success_criteria": [],
-  "rubric": {
-    "exceeds": "",
-    "meets": "",
-    "approaching": "",
-    "beginning": ""
+  "quiz_structure": {
+    "sections": [
+      {
+        "type": "pronunciation",
+        "description": "Students will pronounce selected letters of the Latin alphabet."
+      },
+      {
+        "type": "translation",
+        "description": "Translate simple Latin words to English."
+      },
+      {
+        "type": "chant_recall",
+        "description": "Recite the alphabet chant from memory."
+      }
+    ],
+    "scoring_notes": "Each section is worth 10 points. Pronunciation accuracy, correct translations, and complete chant recall are required for full marks.",
+    "review_before_quiz": "Review the alphabet chant and practice pronouncing each letter. Revisit vocabulary words and their meanings."
   }
 }

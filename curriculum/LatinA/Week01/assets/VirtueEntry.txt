@@ -1,1 +1,1 @@
-{'reflection_prompt': 'Reflect on a time when you showed discipline in your studies. How did it help you achieve your goals?'}
+Reflect on a time when you showed discipline. How did it help you achieve your goal? What steps can you take to practice discipline in your daily life?

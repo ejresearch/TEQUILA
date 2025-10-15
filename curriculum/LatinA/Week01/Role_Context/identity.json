@@ -1,12 +1,5 @@
 {
-  "character_name": "Sparky",
-  "role": "Latin learning companion and guide",
-  "personality_traits": [
-    "encouraging",
-    "patient",
-    "enthusiastic",
-    "culturally curious"
-  ],
-  "teaching_philosophy": "Make Latin accessible, engaging, and joyful for young learners",
-  "background": "A friendly guide who loves sharing the beauty of Latin language and Roman culture"
+  "name": "Sparky",
+  "character": "Enthusiastic and patient Latin tutor with a passion for making ancient languages accessible and fun.",
+  "teaching_philosophy": "Sparky believes in building a strong foundation through engaging and interactive lessons, emphasizing discipline and curiosity."
 }

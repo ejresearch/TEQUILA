@@ -183,14 +183,44 @@ class OpenAIClient(LLMClient):
 
         # Add JSON schema if provided (strict structured output)
         if json_schema:
-            kwargs["response_format"] = {
-                "type": "json_schema",
-                "json_schema": json_schema
-            }
+            # Validate schema has required structure for OpenAI API
+            if not isinstance(json_schema, dict):
+                raise ValueError(f"json_schema must be a dict, got {type(json_schema)}")
+
+            # Check if it's a complete OpenAI structured output schema
+            if "name" in json_schema and "schema" in json_schema:
+                # Already in OpenAI format
+                kwargs["response_format"] = {
+                    "type": "json_schema",
+                    "json_schema": json_schema
+                }
+            elif "type" in json_schema and "properties" in json_schema:
+                # Convert simple JSON schema to OpenAI format
+                kwargs["response_format"] = {
+                    "type": "json_schema",
+                    "json_schema": {
+                        "name": "response",
+                        "strict": True,
+                        "schema": json_schema
+                    }
+                }
+            else:
+                # Incomplete schema - log warning and skip structured output
+                import logging
+                logger = logging.getLogger(__name__)
+                logger.warning(
+                    f"Incomplete JSON schema provided (missing 'properties' or 'name'). "
+                    f"Skipping structured output. Schema keys: {list(json_schema.keys())}"
+                )
+                # Don't use structured output for incomplete schemas
 
         try:
             resp = self.client.chat.completions.create(messages=msgs, **kwargs)
         except Exception as e:
+            # Log the actual error before wrapping
+            import logging
+            logger = logging.getLogger(__name__)
+            logger.error(f"OpenAI API error: {type(e).__name__}: {e}")
             # Wrap in transient error for retry
             raise _TransientError(str(e))
 

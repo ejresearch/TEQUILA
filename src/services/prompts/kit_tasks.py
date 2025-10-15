@@ -1676,7 +1676,8 @@ def task_day_role_context(week_spec: dict, day: int) -> Tuple[str, str, Optional
             "wait_time_seconds": {"type": "integer"},
             "virtue_callout": {"type": "string"}
         },
-        "required": ["sparky_role", "focus_mode", "hints_enabled"]
+        "required": ["sparky_role", "focus_mode", "hints_enabled"],
+        "additionalProperties": False
     }
 
     return sys, usr, schema
@@ -1951,15 +1952,9 @@ def task_day_document(week_spec: dict, day: int) -> Tuple[str, str, Optional[Dic
         ).decode()
     )
 
-    # Strict JSON schema for structured output
-    schema = {
-        "type": "object",
-        "required": [
-            "metadata", "prior_knowledge_digest", "yesterday_recap",
-            "spiral_links", "misconception_watchlist", "objectives",
-            "materials", "lesson_flow", "behavior"
-        ]
-    }
+    # No structured output schema - let LLM return JSON naturally
+    # The incomplete schema was causing API errors
+    schema = None
 
     return sys, usr, schema
 

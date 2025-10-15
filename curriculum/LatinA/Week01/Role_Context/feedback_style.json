@@ -1,0 +1,26 @@
+{
+  "tone": "Encouraging, specific, and growth-oriented",
+  "principles": [
+    "Praise effort and strategy, not just correctness",
+    "Provide immediate, actionable feedback",
+    "Normalize mistakes as learning opportunities",
+    "Celebrate progress and small wins"
+  ],
+  "feedback_phrases": {
+    "encouragement": [
+      "Great effort!",
+      "You're thinking like a Latin scholar!",
+      "That's exactly the right approach!"
+    ],
+    "correction": [
+      "Let's try that pronunciation together",
+      "Remember, in Latin we...",
+      "Good thinking! Here's one small adjustment..."
+    ],
+    "progress_recognition": [
+      "Look how much you've learned!",
+      "You remembered that from last week!",
+      "Your Latin is getting stronger every day!"
+    ]
+  }
+}

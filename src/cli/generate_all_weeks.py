@@ -15,7 +15,12 @@ from pathlib import Path
 from typing import Optional
 
 from ..config import get_llm_client, settings
-from ..services.generator_week import scaffold_week
+from ..services.generator_week import (
+    scaffold_week,
+    generate_week_spec_from_outline,
+    generate_role_context,
+    generate_assets
+)
 from ..services.generator_day import hydrate_day_from_llm
 from ..services.validator import validate_week
 from ..services.exporter import export_week_to_zip
@@ -55,6 +60,31 @@ def generate_week(week_number: int, client, export: bool = True) -> bool:
     print(f"  Scaffolding Week {week_number}...")
     week_path = scaffold_week(week_number)
     print(f"  ✓ Created structure at {week_path}")
+
+    # Generate week-level content
+    print(f"\n  Generating week specification...")
+    try:
+        generate_week_spec_from_outline(week_number, client)
+        print(f"    ✓ Week spec generated")
+    except Exception as e:
+        print(f"    ✗ Week spec failed: {e}")
+        raise
+
+    print(f"  Generating role context...")
+    try:
+        generate_role_context(week_number, client)
+        print(f"    ✓ Role context generated")
+    except Exception as e:
+        print(f"    ✗ Role context failed: {e}")
+        raise
+
+    print(f"  Generating assets...")
+    try:
+        generate_assets(week_number, client)
+        print(f"    ✓ Assets generated")
+    except Exception as e:
+        print(f"    ✗ Assets failed: {e}")
+        raise
 
     # Generate all 4 days
     for day in range(1, 5):

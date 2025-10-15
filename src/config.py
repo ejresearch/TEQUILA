@@ -28,8 +28,8 @@ class Settings(BaseSettings):
     OPENAI_API_KEY: Optional[str] = None
     MODEL_NAME: str = "gpt-4o"
     GEN_TEMP: float = 0.25
-    GEN_MAX_TOKENS: int = 3000
-    TIMEOUT_S: int = 30
+    GEN_MAX_TOKENS: int = 4000
+    TIMEOUT_S: int = 120
 
     # Cost Control & Safety (tracking only, enforcement disabled)
     DRY_RUN: bool = False

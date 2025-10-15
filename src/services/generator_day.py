@@ -14,7 +14,13 @@ from .storage import (
     write_json
 )
 from .llm_client import LLMClient
-from .prompts.kit_tasks import task_day_fields, task_day_document, task_day_role_context
+from .prompts.kit_tasks import (
+    task_day_fields,
+    task_day_document,
+    task_day_role_context,
+    task_day_guidelines,
+    task_day_greeting
+)
 from ..config import settings
 
 # Configure logging
@@ -204,9 +210,9 @@ def generate_day_fields(week: int, day: int, client: LLMClient) -> List[Path]:
                 "sparkys_greeting": "Welcome to Latin!"
             }
 
-    # Generate role_context separately
-    sys_rc, usr_rc, _ = task_day_role_context(week_spec, day)
-    response_rc = client.generate(prompt=usr_rc, system=sys_rc)
+    # Generate role_context separately (field 04)
+    sys_rc, usr_rc, schema_rc = task_day_role_context(week_spec, day)
+    response_rc = client.generate(prompt=usr_rc, system=sys_rc, json_schema=schema_rc)
 
     if response_rc.json:
         role_context_data = response_rc.json
@@ -223,13 +229,24 @@ def generate_day_fields(week: int, day: int, client: LLMClient) -> List[Path]:
                 "encouragement_triggers": ["first_attempt"]
             }
 
-    # Write field files (excluding document_for_sparky which is generated separately)
+    # Generate guidelines (field 05) - needs role_context
+    sys_guide, usr_guide, _ = task_day_guidelines(week_spec, day, role_context_data)
+    response_guide = client.generate(prompt=usr_guide, system=sys_guide)
+    guidelines_content = response_guide.text
+
+    # Generate greeting (field 07) - needs role_context and will need document later
+    # For now generate without document (will be regenerated if needed)
+    sys_greet, usr_greet, _ = task_day_greeting(week_spec, day, role_context_data, None)
+    response_greet = client.generate(prompt=usr_greet, system=sys_greet)
+    greeting_content = response_greet.text
+
+    # Write field files (fields 01-03, 05, 07)
     field_mapping = {
         "01_class_name.txt": fields_data.get("class_name", ""),
         "02_summary.md": fields_data.get("summary", ""),
         "03_grade_level.txt": fields_data.get("grade_level", ""),
-        "05_guidelines_for_sparky.md": fields_data.get("guidelines_for_sparky", ""),
-        "07_sparkys_greeting.txt": fields_data.get("sparkys_greeting", "")
+        "05_guidelines_for_sparky.md": guidelines_content,
+        "07_sparkys_greeting.txt": greeting_content
     }
 
     created_paths = []
@@ -238,7 +255,7 @@ def generate_day_fields(week: int, day: int, client: LLMClient) -> List[Path]:
         write_file(field_path, str(content))
         created_paths.append(field_path)
 
-    # Write role_context JSON
+    # Write role_context JSON (field 04)
     rc_path = day_field_path(week, day, "04_role_context.json")
     write_json(rc_path, role_context_data)
     created_paths.append(rc_path)

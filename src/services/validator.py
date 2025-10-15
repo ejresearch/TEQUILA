@@ -111,6 +111,24 @@ def validate_day_fields(week_number: int, day_number: int) -> ValidationResult:
         if field_path.stat().st_size == 0:
             result.add_warning(location, "Field file is empty")
 
+        # Check for placeholder content
+        if field_path.stat().st_size > 0:
+            content = field_path.read_text(encoding="utf-8")
+            placeholder_patterns = [
+                "[brief description",
+                "[activity description",
+                "[concept",
+                "{{",
+                "Week Title",
+                "Weekly Theme",
+                "Students will be able to...",
+                "Students will demonstrate..."
+            ]
+            for pattern in placeholder_patterns:
+                if pattern.lower() in content.lower():
+                    result.add_error(location, f"Contains placeholder text: '{pattern}'")
+                    break
+
     # Validate role_context structure if present
     if layout == "7field":
         rc_path = day_path / "04_role_context.json"
@@ -246,6 +264,19 @@ def validate_week_spec(week_number: int) -> ValidationResult:
                                 location,
                                 f"Metadata missing required field: {field}"
                             )
+                    # Check for placeholder values
+                    if data.get("title") == "Week Title" or data.get("week_number") == 0:
+                        result.add_error(location, "Metadata contains placeholder values")
+
+                # Validate vocabulary has actual content
+                if part == "03_vocabulary.json":
+                    if isinstance(data, dict):
+                        new_vocab = data.get("new_vocabulary", [])
+                        if not new_vocab or len(new_vocab) == 0:
+                            result.add_error(location, "Vocabulary list is empty - no Latin words defined")
+                    elif isinstance(data, list):
+                        if len(data) == 0:
+                            result.add_error(location, "Vocabulary list is empty - no Latin words defined")
             except json.JSONDecodeError as e:
                 result.add_error(location, f"Invalid JSON: {e}")
 

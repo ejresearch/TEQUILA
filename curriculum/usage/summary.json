@@ -1,0 +1,34 @@
+{
+  "total_requests": 1,
+  "total_tokens_prompt": 930,
+  "total_tokens_completion": 1731,
+  "estimated_cost_usd": 0.019635,
+  "by_provider": {
+    "openai": {
+      "requests": 1,
+      "tokens_prompt": 930,
+      "tokens_completion": 1731,
+      "cost_usd": 0.019635
+    }
+  },
+  "by_model": {
+    "gpt-4o": {
+      "requests": 1,
+      "tokens_prompt": 930,
+      "tokens_completion": 1731,
+      "cost_usd": 0.019635
+    }
+  },
+  "sessions": [
+    {
+      "timestamp": "2025-10-15T15:28:07.513010Z",
+      "provider": "openai",
+      "model": "gpt-4o",
+      "operation": "week_1_spec",
+      "tokens_prompt": 930,
+      "tokens_completion": 1731,
+      "cost_usd": 0.0196
+    }
+  ],
+  "last_updated": "2025-10-15T15:28:07.513017Z"
+}

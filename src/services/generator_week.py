@@ -181,10 +181,10 @@ def generate_week_spec_from_outline(week: int, client: LLMClient) -> Path:
     })
 
     # Get prompts
-    sys, usr, schema = task_week_spec(outline_snip)
+    sys, usr, config = task_week_spec(week, outline_snip)
 
-    # Generate via LLM
-    response = client.generate(prompt=usr, system=sys, json_schema=schema)
+    # Generate via LLM (no schema, config has temp/max_tokens settings)
+    response = client.generate(prompt=usr, system=sys, json_schema=None)
 
     # Track usage
     if response.provider and response.tokens_prompt:

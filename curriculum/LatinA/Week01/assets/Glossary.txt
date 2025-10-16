@@ -1,1 +1,0 @@
-[{'word': 'Gloria', 'definition': 'Glory, praise, or honor.'}, {'word': 'Excelsis', 'definition': 'The highest, referring to the heavens.'}, {'word': 'Pax', 'definition': 'Peace, a state of tranquility or quiet.'}, {'word': 'Voluntatis', 'definition': 'Will, intention, or desire.'}]

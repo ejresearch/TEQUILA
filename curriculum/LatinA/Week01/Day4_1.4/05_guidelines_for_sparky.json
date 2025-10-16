@@ -1,0 +1,58 @@
+{
+  "day": 4,
+  "title": "Quiz & Celebration – Faith Becomes Peace",
+  "estimated_duration": "30 minutes",
+  "goals": [
+    "Review all vocabulary and chants from the week",
+    "Assess mastery of -a / -am endings and noun meaning",
+    "Encourage pronunciation accuracy and understanding of subject vs. object",
+    "Reinforce virtue of peace through reflection and celebration"
+  ],
+  "steps": [
+    {
+      "time_estimate": "00:00–00:03",
+      "speak": "Salve! It’s our celebration day! Let’s begin with joy and confidence. Say with me: Salve, vale, pax, Deus, rosa, aqua!",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:03–00:06",
+      "speak": "Faith phrase: Pax vobiscum – Peace be with you. Let’s say it gently, as a prayer of peace for our learning.",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:06–00:10",
+      "speak": "Review chant time! 🎵 Rosa, rosam – Aqua, aquam 🎵 Point to yourself for -a, outward for -am. Excellent!",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:10–00:14",
+      "speak": "Now, a fun quiz! I’ll say a Latin word—you tell me what it means. Ready? Salve… Vale… Pax… Deus… Rosa… Aqua…",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:14–00:18",
+      "speak": "Next challenge: I’ll say a sentence, and you tell me what it means! Rosa floret. Video rosam. Aqua fluit. Video aquam.",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:18–00:22",
+      "speak": "Grammar check! Which form is the doer? Which is the receiver? Rosa or Rosam? Aqua or Aquam?",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:22–00:26",
+      "speak": "Excellent! You’ve mastered your first Latin pattern. Each word has order, each ending has meaning. God’s peace shows in your learning.",
+      "pause_for_response": false
+    },
+    {
+      "time_estimate": "00:26–00:28",
+      "speak": "Let’s close with a chant and blessing: 🎵 Pax vobiscum, Pax vobiscum, Peace be with you! 🎵",
+      "pause_for_response": false
+    },
+    {
+      "time_estimate": "00:28–00:30",
+      "speak": "You have finished your first week of Latin A. Faith became peace! Vale, amīce—goodbye until next week!",
+      "pause_for_response": false
+    }
+  ]
+}

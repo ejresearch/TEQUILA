@@ -1,0 +1,20 @@
+{
+  "day": 2,
+  "title": "Reinforcement – Practice and Derivatives",
+  "estimated_duration": "10–13 minutes",
+  "goals": ["Solidify verb endings and forms","Introduce English derivatives from Latin roots","Practice subject–verb agreement"],
+  "steps": [
+    {"time_estimate":"00:00–00:01","speak":"Salve! Day 2 begins with a warm-up chant. Say the endings with me – ō, s, t / mus, tis, nt.","pause_for_response":true},
+    {"time_estimate":"00:01–00:02","speak":"Now the full forms of amō: amō, amās, amat, amāmus, amātis, amant.","pause_for_response":true},
+    {"time_estimate":"00:02–00:03","speak":"Derivatives time! From amō we get amiable and amorous; from portō portable and transport; from vocō vocal and vocation; from parō prepare; from laudō laudatory.","pause_for_response":false},
+    {"time_estimate":"00:03–00:04","speak":"Which Latin verb gives us the English word vocation?","pause_for_response":true},
+    {"time_estimate":"00:04–00:05","speak":"Yes – vocō. Which verb gives us portable?","pause_for_response":true},
+    {"time_estimate":"00:05–00:06","speak":"Right – portō. Now dictation of endings: say or write the endings for I, they, we, you all.","pause_for_response":true},
+    {"time_estimate":"00:06–00:07","speak":"Answer key: –ō, –nt, –mus, –tis. Accuracy first, speed second.","pause_for_response":false},
+    {"time_estimate":"00:07–00:09","speak":"Subject–verb agreement game – I’ll say a subject; you supply the correct verb ending. Puella am__ ?","pause_for_response":true},
+    {"time_estimate":"00:09–00:10","speak":"Singular puella takes –t → amat. Now discipuli am__ ?","pause_for_response":true},
+    {"time_estimate":"00:10–00:11","speak":"Plural discipuli takes –nt → amant. Make one example of your own and say it aloud.","pause_for_response":true},
+    {"time_estimate":"00:11–00:12","speak":"Excellent! Close with our faith phrase: Deus nos amat – God loves us.","pause_for_response":true},
+    {"time_estimate":"00:12–00:13","speak":"Bene factum! Tomorrow we will read short sentences and translate.","pause_for_response":false}
+  ]
+}

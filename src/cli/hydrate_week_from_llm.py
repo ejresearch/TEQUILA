@@ -8,9 +8,8 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from src.config import get_llm_client
 from src.services.generator_week import (
-    generate_week_spec_from_outline,
-    generate_role_context,
-    generate_assets
+    scaffold_week,
+    generate_week_planning
 )
 from src.services.generator_day import hydrate_day_from_llm
 from src.services.validator import validate_week
@@ -34,36 +33,35 @@ def main():
         print("Error: WEEK must be an integer")
         sys.exit(1)
 
-    print(f"Hydrating Week {week} using LLM...")
+    print(f"Hydrating Week {week} using LLM (Two-Phase Generation)...")
     print("=" * 60)
 
     try:
         client = get_llm_client()
 
-        # Generate week-level content
-        print("\n[1/6] Generating week specification...")
-        spec_path = generate_week_spec_from_outline(week, client)
-        print(f"  ✓ {spec_path}")
+        # Scaffold week structure if needed
+        print("\n[1/6] Scaffolding week structure...")
+        week_path = scaffold_week(week)
+        print(f"  ✓ {week_path}")
 
-        print("\n[2/6] Generating role context...")
-        role_path = generate_role_context(week, client)
-        print(f"  ✓ {role_path}")
+        # PHASE 1: Generate week planning documents
+        print("\n[2/6] PHASE 1: Generating week planning (internal_documents/)...")
+        planning_paths = generate_week_planning(week, client)
+        print(f"  ✓ week_spec.json: {planning_paths['week_spec']}")
+        print(f"  ✓ week_summary.md: {planning_paths['week_summary']}")
+        print(f"  ✓ role_context.json: {planning_paths['role_context']}")
+        print(f"  ✓ generation_log.json: {planning_paths['generation_log']}")
 
-        print("\n[3/6] Generating assets...")
-        asset_paths = generate_assets(week, client)
-        for path in asset_paths:
-            print(f"  ✓ {path}")
-
-        # Generate day-level content
+        # PHASE 2: Generate day-level content from planning documents
         for day in range(1, 5):
-            print(f"\n[{3+day}/6] Generating Day {day}...")
+            print(f"\n[{2+day}/6] PHASE 2: Generating Day {day} from planning documents...")
             day_result = hydrate_day_from_llm(week, day, client)
-            print(f"  ✓ Fields: {len(day_result['field_paths'])} files")
-            print(f"  ✓ Document: {day_result['document_path']}")
+            print(f"    ✓ Fields: {len(day_result['field_paths'])} files")
+            print(f"    ✓ Documents: {day_result['document_path']}")
 
         # Validate
         print("\n" + "=" * 60)
-        print("Running validation...")
+        print("[6/6] Running validation...")
         result = validate_week(week)
         print(result.summary())
 

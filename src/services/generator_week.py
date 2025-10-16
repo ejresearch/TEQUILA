@@ -1,28 +1,39 @@
-"""Week structure generation service."""
+"""Week structure generation with internal_documents planning architecture.
+
+New Architecture:
+1. Generate internal_documents/ first (week planning)
+   - week_spec.json: Complete curriculum outline
+   - week_summary.md: Human-readable overview
+   - role_context.json: Sparky's week-level profile
+   - generation_log.json: Provenance metadata
+
+2. Generate Day folders using internal_documents as source
+   - Days pull week-level data from internal_documents/
+   - 06_document_for_sparky/ populated from week_spec.json
+   - 04_role_context.json customized from week role_context
+"""
 from pathlib import Path
 from typing import List, Dict, Any
 from datetime import datetime
 import subprocess
 import orjson
+import logging
+
 from .storage import (
     week_dir,
-    week_spec_dir,
-    role_context_dir,
-    week_spec_part_path,
-    role_context_part_path,
-    WEEK_SPEC_PARTS,
-    ROLE_CONTEXT_PARTS,
+    internal_documents_dir,
+    internal_doc_path,
+    INTERNAL_DOCUMENTS,
     write_file,
-    write_json
+    write_json,
+    read_json
 )
+from .generator_day import scaffold_day
 from .llm_client import LLMClient
-from .prompts.kit_tasks import task_week_spec, task_role_context, task_assets
+from .prompts.kit_tasks import task_week_spec, task_role_context
 from .usage_tracker import get_tracker
 
-
-def get_template_path(template_type: str) -> Path:
-    """Get the base path for template files."""
-    return Path(__file__).parent.parent / "templates" / "week_kit" / template_type
+logger = logging.getLogger(__name__)
 
 
 def _get_git_commit() -> str:
@@ -39,174 +50,45 @@ def _get_git_commit() -> str:
         return "unknown"
 
 
-def _create_provenance(response) -> Dict[str, Any]:
-    """Create generation provenance metadata from LLM response."""
-    return {
-        "provider": response.provider,
-        "model": response.model,
-        "created_at": datetime.utcnow().isoformat() + "Z",
-        "git_commit": _get_git_commit(),
-        "tokens_prompt": response.tokens_prompt,
-        "tokens_completion": response.tokens_completion
-    }
-
-
 def _strip_markdown_fences(text: str) -> str:
-    """
-    Strip markdown code fences from JSON response.
-
-    OpenAI sometimes returns JSON wrapped in ```json ... ``` fences.
-    """
+    """Strip markdown code fences from JSON response."""
     text = text.strip()
     if text.startswith("```json"):
-        text = text[7:]  # Remove ```json
+        text = text[7:]
     elif text.startswith("```"):
-        text = text[3:]  # Remove ```
-
+        text = text[3:]
     if text.endswith("```"):
-        text = text[:-3]  # Remove trailing ```
-
+        text = text[:-3]
     return text.strip()
-
-
-def _transform_week_spec_response(llm_response: Dict[str, Any]) -> Dict[str, Any]:
-    """
-    Transform LLM's week_spec_kit format to flat WeekSpec schema format.
-
-    LLM returns: {week_info: {...}, generated_files: [{file_name, content}, ...]}
-    WeekSpec expects: {metadata: {...}, objectives: [...], vocabulary: [...], ...}
-    """
-    # If already in flat format, return as-is
-    if "metadata" in llm_response and "objectives" in llm_response:
-        return llm_response
-
-    # Extract week_info and generated_files
-    week_info = llm_response.get("week_info", {})
-    generated_files = llm_response.get("generated_files", [])
-
-    # Build flat structure by extracting content from generated_files
-    flat_spec = {}
-
-    for file_obj in generated_files:
-        file_name = file_obj.get("file_name", "")
-        content = file_obj.get("content")
-
-        if file_name == "01_metadata.json":
-            flat_spec["metadata"] = content
-        elif file_name == "02_objectives.json":
-            flat_spec["objectives"] = content.get("objectives", []) if isinstance(content, dict) else content
-        elif file_name == "03_vocabulary.json":
-            flat_spec["vocabulary"] = content.get("vocabulary", []) if isinstance(content, dict) else content
-        elif file_name == "04_grammar_focus.md":
-            flat_spec["grammar_focus"] = content
-        elif file_name == "05_chant.json" or file_name == "08_chant_chart.txt":
-            # Chant can be in either file
-            if "chant" not in flat_spec:
-                flat_spec["chant"] = {"text": content} if isinstance(content, str) else content
-        elif file_name == "06_sessions_week_view.json":
-            flat_spec["sessions"] = content
-        elif file_name == "07_assessment.json" or file_name == "09_assessment_overview.json":
-            flat_spec["assessment"] = content
-        elif file_name == "08_assets_index.json":
-            flat_spec["assets"] = content
-        elif file_name == "09_spiral_links.json" or file_name == "07_prior_knowledge_digest.json":
-            flat_spec["spiral_links"] = content
-        elif file_name == "10_interleaving_plan.md" or file_name == "10_teacher_notes.md":
-            flat_spec["interleaving_plan"] = content
-        elif file_name == "11_misconception_watchlist.json":
-            flat_spec["misconception_watchlist"] = content
-        elif file_name == "12_preview_next_week.md":
-            flat_spec["preview_next_week"] = content
-
-    # Add missing required fields with defaults
-    if "sessions" not in flat_spec:
-        flat_spec["sessions"] = []
-    if "assets" not in flat_spec:
-        flat_spec["assets"] = []
-    if "spiral_links" not in flat_spec:
-        flat_spec["spiral_links"] = {}
-    if "interleaving_plan" not in flat_spec:
-        flat_spec["interleaving_plan"] = ""
-    if "misconception_watchlist" not in flat_spec:
-        flat_spec["misconception_watchlist"] = []
-    if "preview_next_week" not in flat_spec:
-        flat_spec["preview_next_week"] = ""
-
-    return flat_spec
 
 
 def scaffold_week(week_number: int) -> Path:
     """
-    Create the complete directory structure for a week.
+    Create week structure: internal_documents/ + 4 day folders.
 
-    Creates:
-    - Week_Spec/ directory with all 12 part files
-    - Role_Context/ directory with all 7 part files
-    - activities/ directory (empty, days added separately)
+    Args:
+        week_number: The week number (1-36)
 
-    Returns the path to the week directory.
+    Returns:
+        Path to the created week directory.
     """
     week_path = week_dir(week_number)
+    week_path.mkdir(parents=True, exist_ok=True)
 
-    # Create Week_Spec directory and files
-    spec_dir = week_spec_dir(week_number)
-    spec_dir.mkdir(parents=True, exist_ok=True)
+    # Create internal_documents/ with placeholder files
+    internal_dir = internal_documents_dir(week_number)
+    internal_dir.mkdir(parents=True, exist_ok=True)
 
-    template_spec_dir = get_template_path("spec_parts")
-    for part in WEEK_SPEC_PARTS:
-        template_path = template_spec_dir / part
-        target_path = spec_dir / part
-
-        if template_path.exists():
-            content = template_path.read_text(encoding="utf-8")
-            # Replace template variables
-            content = content.replace("{week_number}", str(week_number))
-            content = content.replace("{next_week_number}", str(week_number + 1))
-            target_path.write_text(content, encoding="utf-8")
+    for doc in INTERNAL_DOCUMENTS:
+        doc_path = internal_doc_path(week_number, doc)
+        if doc.endswith(".json"):
+            write_json(doc_path, {})
         else:
-            # Create empty placeholder
-            if part.endswith(".json"):
-                write_json(target_path, {})
-            else:
-                write_file(target_path, "")
+            write_file(doc_path, "")
 
-    # Create Role_Context directory and files
-    context_dir = role_context_dir(week_number)
-    context_dir.mkdir(parents=True, exist_ok=True)
-
-    template_context_dir = get_template_path("role_context_parts")
-    for part in ROLE_CONTEXT_PARTS:
-        template_path = template_context_dir / part
-        target_path = context_dir / part
-
-        if template_path.exists():
-            content = template_path.read_text(encoding="utf-8")
-            target_path.write_text(content, encoding="utf-8")
-        else:
-            # Create empty JSON placeholder
-            write_json(target_path, {})
-
-    # Create activities directory (days will be added separately)
-    activities_dir = week_path / "activities"
-    activities_dir.mkdir(parents=True, exist_ok=True)
-
-    # Create assets directory with placeholder files
-    assets_dir = week_path / "assets"
-    assets_dir.mkdir(parents=True, exist_ok=True)
-
-    # Create placeholder asset files
-    asset_files = [
-        "ChantChart.txt",
-        "Glossary.txt",
-        "Copywork.txt",
-        "QuizPacket.txt",
-        "TeacherKey.txt",
-        "VirtueEntry.txt"
-    ]
-
-    for asset_file in asset_files:
-        asset_path = assets_dir / asset_file
-        write_file(asset_path, f"# {asset_file.replace('.txt', '')} - Week {week_number}\n\n")
+    # Create 4 day folders with 7-field structure
+    for day_num in range(1, 5):
+        scaffold_day(week_number, day_num)
 
     return week_path
 
@@ -229,10 +111,6 @@ def scaffold_all_weeks(num_weeks: int = 36) -> List[Path]:
     return week_paths
 
 
-# ============================================================================
-# LLM-BASED GENERATION FUNCTIONS
-# ============================================================================
-
 def _load_curriculum_outline() -> Dict[str, Any]:
     """Load the curriculum outline JSON."""
     outline_path = Path(__file__).parent.parent.parent / "curriculum" / "curriculum_outline.json"
@@ -243,25 +121,22 @@ def _load_curriculum_outline() -> Dict[str, Any]:
 
 def generate_week_spec_from_outline(week: int, client: LLMClient) -> Path:
     """
-    Generate week specification using LLM from curriculum outline with retry logic.
+    Generate week_spec.json using LLM from curriculum outline.
+
+    Saves to: Week{N}/internal_documents/week_spec.json
 
     Args:
         week: Week number (1-36)
         client: LLM client instance
 
     Returns:
-        Path to the compiled week spec file
-
-    Raises:
-        ValueError: If generation fails after 5 retries
+        Path to generated week_spec.json
     """
-    import logging
     import time
-    logger = logging.getLogger(__name__)
 
-    # Ensure week spec directory exists (but don't overwrite existing files)
-    spec_dir = week_spec_dir(week)
-    spec_dir.mkdir(parents=True, exist_ok=True)
+    # Ensure internal_documents directory exists
+    internal_dir = internal_documents_dir(week)
+    internal_dir.mkdir(parents=True, exist_ok=True)
 
     # Load curriculum outline snippet for this week
     outline = _load_curriculum_outline()
@@ -275,12 +150,11 @@ def generate_week_spec_from_outline(week: int, client: LLMClient) -> Path:
     # Get prompts
     sys, usr, config = task_week_spec(week, outline_snip)
 
-    # Retry loop (up to 5 attempts for week spec)
+    # Retry loop (up to 5 attempts)
     MAX_RETRIES = 5
     spec_data = None
 
     for attempt in range(1, MAX_RETRIES + 1):
-        # Generate via LLM (no schema, config has temp/max_tokens settings)
         response = client.generate(prompt=usr, system=sys, json_schema=None)
 
         # Track usage
@@ -293,222 +167,209 @@ def generate_week_spec_from_outline(week: int, client: LLMClient) -> Path:
                 operation=f"week_{week}_spec_attempt{attempt}"
             )
 
-        # Parse response - STRICT: must be valid JSON
+        # Parse response
         try:
             if response.json:
                 spec_data = response.json
             else:
-                # Strip markdown code fences if present
                 cleaned_text = _strip_markdown_fences(response.text)
                 spec_data = orjson.loads(cleaned_text)
 
-            # Check for placeholder content like { ... }
+            # Check for placeholder content
             response_text = response.text if response.text else str(spec_data)
             if "{ ... }" in response_text or "{...}" in response_text:
-                raise ValueError("Response contains placeholder ellipses { ... }")
+                raise ValueError("Response contains placeholder ellipses")
 
-            # Successfully parsed JSON
             if attempt > 1:
                 logger.info(f"Week {week} spec generated successfully on attempt {attempt}")
             break
 
         except Exception as e:
-            error_msg = f"Week {week} spec generation attempt {attempt}/{MAX_RETRIES} failed: {str(e)[:200]}"
-            logger.warning(error_msg)
+            logger.warning(f"Week {week} spec attempt {attempt}/{MAX_RETRIES} failed: {str(e)[:200]}")
 
-            # Save invalid response for inspection
-            invalid_path = week_spec_dir(week) / f"99_compiled_week_spec_INVALID_attempt{attempt}.json"
+            # Save invalid response
+            invalid_path = internal_doc_path(week, f"week_spec_INVALID_attempt{attempt}.json")
             write_file(invalid_path, response.text)
 
             if attempt < MAX_RETRIES:
-                logger.info(f"Retrying week {week} spec generation...")
-                time.sleep(2)  # Brief pause before retry
+                time.sleep(2)
                 continue
             else:
-                # All retries exhausted
-                logger.error(f"Week {week} spec generation failed after {MAX_RETRIES} attempts")
-                raise ValueError(f"LLM returned invalid JSON after {MAX_RETRIES} attempts. Last error: {e}")
+                logger.error(f"Week {week} spec failed after {MAX_RETRIES} attempts")
+                raise ValueError(f"LLM returned invalid JSON after {MAX_RETRIES} attempts: {e}")
 
-    # Transform LLM format to flat WeekSpec format
-    spec_data = _transform_week_spec_response(spec_data)
+    # Write to internal_documents/week_spec.json
+    spec_path = internal_doc_path(week, "week_spec.json")
+    write_json(spec_path, spec_data)
+    logger.info(f"Week {week} spec saved to {spec_path}")
 
-    # Add generation provenance
-    spec_data["__generation"] = _create_provenance(response)
-
-    # Validate against Pydantic schema (lenient mode - log warnings but don't fail)
-    from ..models import WeekSpec
-    import logging
-    logger = logging.getLogger(__name__)
-
-    try:
-        validated_spec = WeekSpec(**spec_data)
-        spec_data = validated_spec.model_dump(by_alias=True, mode='json')
-        logger.info(f"Week {week} spec passed Pydantic validation")
-    except Exception as e:
-        # Save for inspection but continue (lenient mode)
-        invalid_path = week_spec_dir(week) / "99_compiled_week_spec_VALIDATION_WARNINGS.json"
-        write_json(invalid_path, spec_data)
-        logger.warning(f"Week {week} spec has validation warnings (continuing anyway): {str(e)[:200]}")
-        # Continue with the generated data even if validation fails
-
-    # Write to individual part files
-    _write_week_spec_parts(week, spec_data)
-
-    # Write compiled spec
-    compiled_path = week_spec_part_path(week, "99_compiled_week_spec.json")
-    write_json(compiled_path, spec_data)
-
-    return compiled_path
+    return spec_path
 
 
-def _write_week_spec_parts(week: int, spec_data: Dict[str, Any]) -> None:
-    """Write week spec data to individual part files."""
-    mapping = {
-        "01_metadata.json": spec_data.get("metadata", {}),
-        "02_objectives.json": spec_data.get("objectives", []),
-        "03_vocabulary.json": spec_data.get("vocabulary", []),
-        "04_grammar_focus.md": spec_data.get("grammar_focus", ""),
-        "05_chant.json": spec_data.get("chant", {}),
-        "06_sessions_week_view.json": spec_data.get("sessions", []),
-        "07_assessment.json": spec_data.get("assessment", {}),
-        "08_assets_index.json": spec_data.get("assets", []),
-        "09_spiral_links.json": spec_data.get("spiral_links", {}),
-        "10_interleaving_plan.md": spec_data.get("interleaving_plan", ""),
-        "11_misconception_watchlist.json": spec_data.get("misconception_watchlist", []),
-        "12_preview_next_week.md": spec_data.get("preview_next_week", "")
-    }
-
-    for part_name, content in mapping.items():
-        part_path = week_spec_part_path(week, part_name)
-        if part_name.endswith(".json"):
-            write_json(part_path, content)
-        else:
-            write_file(part_path, str(content))
-
-
-def generate_role_context(week: int, client: LLMClient) -> Path:
+def generate_week_summary(week: int, client: LLMClient) -> Path:
     """
-    Generate Sparky role context using LLM.
+    Generate week_summary.md using LLM.
+
+    Saves to: Week{N}/internal_documents/week_summary.md
 
     Args:
         week: Week number (1-36)
         client: LLM client instance
 
     Returns:
-        Path to the compiled role context file
+        Path to generated week_summary.md
     """
-    # Ensure role context directory exists (but don't overwrite existing files)
-    context_dir = role_context_dir(week)
-    context_dir.mkdir(parents=True, exist_ok=True)
+    # Load week_spec
+    week_spec_path = internal_doc_path(week, "week_spec.json")
+    if not week_spec_path.exists():
+        raise FileNotFoundError(f"Week spec not found. Run generate_week_spec_from_outline({week}) first.")
 
-    # Load week spec to inform role context
-    spec_path = week_spec_part_path(week, "99_compiled_week_spec.json")
-    if spec_path.exists():
-        week_spec = orjson.loads(spec_path.read_bytes())
-    else:
-        week_spec = {"metadata": {"week": week}}
+    week_spec = read_json(week_spec_path)
 
-    # Get prompts
+    # TODO: Add task_week_summary prompt
+    # For now, generate simple summary from spec
+    summary_content = f"""# Week {week} Summary
+
+**Title:** {week_spec.get('metadata', {}).get('title', f'Week {week}')}
+**Virtue:** {week_spec.get('metadata', {}).get('virtue', 'N/A')}
+**Faith Phrase:** {week_spec.get('metadata', {}).get('faith_phrase', 'N/A')}
+
+## Objectives
+{chr(10).join(f"- {obj}" for obj in week_spec.get('objectives', []))}
+
+## Grammar Focus
+{week_spec.get('grammar_focus', 'N/A')}
+
+## Daily Arc
+- Day 1: {week_spec.get('daily_arc', {}).get('day_1', 'Discovery')}
+- Day 2: {week_spec.get('daily_arc', {}).get('day_2', 'Practice')}
+- Day 3: {week_spec.get('daily_arc', {}).get('day_3', 'Integration')}
+- Day 4: {week_spec.get('daily_arc', {}).get('day_4', 'Assessment')}
+"""
+
+    summary_path = internal_doc_path(week, "week_summary.md")
+    write_file(summary_path, summary_content)
+    logger.info(f"Week {week} summary saved to {summary_path}")
+
+    return summary_path
+
+
+def generate_week_role_context(week: int, client: LLMClient) -> Path:
+    """
+    Generate role_context.json using LLM.
+
+    Saves to: Week{N}/internal_documents/role_context.json
+
+    Args:
+        week: Week number (1-36)
+        client: LLM client instance
+
+    Returns:
+        Path to generated role_context.json
+    """
+    # Load week_spec
+    week_spec_path = internal_doc_path(week, "week_spec.json")
+    if not week_spec_path.exists():
+        raise FileNotFoundError(f"Week spec not found. Run generate_week_spec_from_outline({week}) first.")
+
+    week_spec = read_json(week_spec_path)
+
+    # Get prompt
     sys, usr, _ = task_role_context(week_spec)
 
-    # Generate via LLM
+    # Generate
     response = client.generate(prompt=usr, system=sys)
 
-    # Parse response
-    if response.json:
-        role_data = response.json
-    else:
-        try:
+    # Parse
+    try:
+        if response.json:
+            role_data = response.json
+        else:
             cleaned_text = _strip_markdown_fences(response.text)
             role_data = orjson.loads(cleaned_text)
-        except Exception as e:
-            invalid_path = role_context_dir(week) / "99_compiled_role_context_INVALID.json"
-            write_file(invalid_path, response.text)
-            raise ValueError(f"LLM returned invalid JSON: {e}")
+    except Exception as e:
+        logger.error(f"Failed to parse role context: {e}")
+        # Fallback
+        role_data = {
+            "identity": "Sparky the Latin tutor",
+            "tone": "Warm, encouraging",
+            "wait_time": "2-3 seconds",
+            "praise_words": ["Optime!", "Bene!", "Excellent!"]
+        }
 
-    # Write to individual part files
-    _write_role_context_parts(week, role_data)
+    # Write
+    role_path = internal_doc_path(week, "role_context.json")
+    write_json(role_path, role_data)
+    logger.info(f"Week {week} role context saved to {role_path}")
 
-    # Write compiled role context
-    compiled_path = role_context_part_path(week, "99_compiled_role_context.json")
-    write_json(compiled_path, role_data)
-
-    return compiled_path
-
-
-def _write_role_context_parts(week: int, role_data: Dict[str, Any]) -> None:
-    """Write role context data to individual part files."""
-    parts = [
-        "identity.json",
-        "student_profile.json",
-        "daily_cycle.json",
-        "reinforcement_method.json",
-        "feedback_style.json",
-        "success_criteria.json",
-        "knowledge_recycling.json"
-    ]
-
-    for part in parts:
-        part_key = part.replace(".json", "")
-        content = role_data.get(part_key, {})
-        part_path = role_context_part_path(week, part)
-        write_json(part_path, content)
+    return role_path
 
 
-def generate_assets(week: int, client: LLMClient) -> List[Path]:
+def save_generation_log(week: int, model_info: Dict[str, Any] = None) -> Path:
     """
-    Generate week assets (text files) using LLM.
+    Save generation log with provenance metadata.
+
+    Args:
+        week: Week number
+        model_info: Optional dict with model/token info
+
+    Returns:
+        Path to generation_log.json
+    """
+    log_data = {
+        "week": week,
+        "generated_at": datetime.utcnow().isoformat() + "Z",
+        "git_commit": _get_git_commit(),
+        "architecture": "7-field day-centric with internal_documents",
+        "model_info": model_info or {}
+    }
+
+    log_path = internal_doc_path(week, "generation_log.json")
+    write_json(log_path, log_data)
+
+    return log_path
+
+
+def generate_week_planning(week: int, client: LLMClient) -> Dict[str, Path]:
+    """
+    Generate all internal planning documents for a week (Phase 1).
+
+    Creates internal_documents/ with:
+    - week_spec.json (curriculum outline)
+    - week_summary.md (teacher overview)
+    - role_context.json (Sparky profile)
+    - generation_log.json (provenance)
 
     Args:
         week: Week number (1-36)
         client: LLM client instance
 
     Returns:
-        List of paths to generated asset files
+        Dict with paths to created documents
     """
-    # Ensure assets directory exists (but don't overwrite existing files)
-    week_path = week_dir(week)
-    assets_dir = week_path / "assets"
-    assets_dir.mkdir(parents=True, exist_ok=True)
+    logger.info(f"=== Phase 1: Generating week {week} planning documents ===")
 
-    # Load week spec to inform assets
-    spec_path = week_spec_part_path(week, "99_compiled_week_spec.json")
-    if spec_path.exists():
-        week_spec = orjson.loads(spec_path.read_bytes())
-    else:
-        week_spec = {"metadata": {"week": week, "title": f"Week {week}"}}
+    # 1. Generate week_spec.json
+    logger.info(f"Generating week_spec.json...")
+    week_spec_path = generate_week_spec_from_outline(week, client)
 
-    # Get prompts
-    sys, usr, _ = task_assets(week_spec)
+    # 2. Generate week_summary.md
+    logger.info(f"Generating week_summary.md...")
+    summary_path = generate_week_summary(week, client)
 
-    # Generate via LLM
-    response = client.generate(prompt=usr, system=sys)
+    # 3. Generate role_context.json
+    logger.info(f"Generating role_context.json...")
+    role_path = generate_week_role_context(week, client)
 
-    # Parse response
-    if response.json:
-        assets_data = response.json
-    else:
-        try:
-            cleaned_text = _strip_markdown_fences(response.text)
-            assets_data = orjson.loads(cleaned_text)
-        except Exception:
-            # Fallback to simple text split
-            assets_data = {"ChantChart": response.text[:500]}
+    # 4. Save generation log
+    logger.info(f"Saving generation_log.json...")
+    log_path = save_generation_log(week)
 
-    # Write asset files
-    asset_mapping = {
-        "ChantChart.txt": assets_data.get("ChantChart", ""),
-        "Glossary.txt": assets_data.get("Glossary", ""),
-        "Copywork.txt": assets_data.get("Copywork", ""),
-        "QuizPacket.txt": assets_data.get("QuizPacket", ""),
-        "TeacherKey.txt": assets_data.get("TeacherKey", ""),
-        "VirtueEntry.txt": assets_data.get("VirtueEntry", "")
+    logger.info(f"=== Phase 1 complete: Week {week} planning done ===")
+
+    return {
+        "week_spec": week_spec_path,
+        "week_summary": summary_path,
+        "role_context": role_path,
+        "generation_log": log_path
     }
-
-    created_paths = []
-    for filename, content in asset_mapping.items():
-        asset_path = assets_dir / filename
-        write_file(asset_path, str(content))
-        created_paths.append(asset_path)
-
-    return created_paths

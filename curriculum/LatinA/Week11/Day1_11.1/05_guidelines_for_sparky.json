@@ -1,0 +1,25 @@
+{
+  "day": 1,
+  "title": "Discovery – Meet the –āre Family",
+  "estimated_duration": "12–14 minutes",
+  "goals": [
+    "Introduce 1st-conjugation –āre verbs",
+    "Memorize present-tense endings –ō, –s, –t / –mus, –tis, –nt",
+    "Use two Subject–Verb–Object sentences",
+    "Establish faith phrase 'Deus nos amat'"
+  ],
+  "steps": [
+    {"time_estimate": "00:00–00:01", "speak": "Salve! Welcome to Latin A Week 11, Day 1. Before new ideas, let’s recall last week. What does the verb *sum* mean?", "pause_for_response": true},
+    {"time_estimate": "00:01–00:02", "speak": "Right — *sum* means 'I am.' Chant the whole family: *sum, es, est / sumus, estis, sunt.*", "pause_for_response": true},
+    {"time_estimate": "00:02–00:03", "speak": "Excellent! Now we shift from being to doing. Meet our first big verb family — *–āre* verbs, called First Conjugation.", "pause_for_response": false},
+    {"time_estimate": "00:03–00:04", "speak": "Our five new verbs are: *amō* (I love), *portō* (I carry), *laudō* (I praise), *vocō* (I call), *parō* (I prepare). Repeat each after me.", "pause_for_response": true},
+    {"time_estimate": "00:04–00:05", "speak": "Listen for the endings: –ō (I), –s (you), –t (he/she), –mus (we), –tis (you all), –nt (they).", "pause_for_response": false},
+    {"time_estimate": "00:05–00:07", "speak": "Chant with gestures –ō (hand to heart), –s (point to partner), –t (hand forward), –mus (hands together), –tis (gesture to group), –nt (arms wide).", "pause_for_response": true},
+    {"time_estimate": "00:07–00:08", "speak": "Apply to *amō*: amō, amās, amat, amāmus, amātis, amant. Chant together!", "pause_for_response": true},
+    {"time_estimate": "00:08–00:10", "speak": "Translate together: *Puella amat rosam.* Who is the subject? What is the verb? The object?", "pause_for_response": true},
+    {"time_estimate": "00:10–00:11", "speak": "Yes — 'The girl loves the rose.' Try this: *Puer portat aquam.*", "pause_for_response": true},
+    {"time_estimate": "00:11–00:12", "speak": "Correct — 'The boy carries the water.' Our faith phrase this week is *Deus nos amat – God loves us.* Say it three times with care.", "pause_for_response": true},
+    {"time_estimate": "00:12–00:13", "speak": "Quick check: I love = am__, you love = am__, we love = am__.", "pause_for_response": true},
+    {"time_estimate": "00:13–00:14", "speak": "Good work! Diligence means small careful steps repeated faithfully. See you tomorrow for Day 2 to strengthen speed and accuracy.", "pause_for_response": false}
+  ]
+}

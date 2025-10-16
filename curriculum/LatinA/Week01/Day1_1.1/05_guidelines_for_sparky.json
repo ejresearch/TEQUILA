@@ -1,0 +1,59 @@
+{
+  "day": 1,
+  "title": "Meet Latin & First Grammar!",
+  "estimated_duration": "30 minutes",
+  "goals": [
+    "Introduce Latin as the language of faith and learning",
+    "Teach basic Ecclesiastical pronunciation through alphabet chant",
+    "Learn five starter vocabulary words: salve, vale, pax, Deus, rosa",
+    "Understand that nouns are naming words (things and persons)",
+    "Connect faith phrase Pax vobiscum with virtue Fides – Faith"
+  ],
+  "steps": [
+    {
+      "time_estimate": "00:00–00:03",
+      "speak": "Salve! I am Sparky, your Latin friend. Latin is an ancient language used by the early Church and still sung in our prayers. Today we begin with joy!",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:03–00:07",
+      "speak": "Listen to the Latin alphabet. Some letters sound different from English: C before E or I sounds like 'ch', and G before E or I sounds like 'j'. U sounds like W. Repeat each after me as we chant the alphabet together!",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:07–00:10",
+      "speak": "Let’s sing the alphabet chant: A-B-C-D-E-F-G… Latin sings faithfully! Excellent!",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:10–00:13",
+      "speak": "Now learn your first Latin words: salve means hello, vale means goodbye, pax means peace, Deus means God, and rosa means rose. Repeat after me!",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:13–00:16",
+      "speak": "Can you point to something God made that is beautiful? That name is a noun. In Latin we call a naming word 'nomen'. Nouns name things—like Deus or rosa.",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:16–00:20",
+      "speak": "Let’s chant together: salve, vale, pax, Deus, rosa! Wave hello, wave goodbye, hands together for peace, point up for God, and pretend to smell a rose.",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:20–00:24",
+      "speak": "Faith phrase of the week: Pax vobiscum – Peace be with you. Say it softly, then loudly, then with your hands open in blessing.",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:24–00:28",
+      "speak": "Mini-derivative time: pax gives us 'pacify' and 'peaceful'; Deus gives us 'divine'; rosa gives us 'rosary'. Latin is hiding in many English words!",
+      "pause_for_response": false
+    },
+    {
+      "time_estimate": "00:28–00:30",
+      "speak": "Beautiful work! Faith means trusting that each small step matters. Tomorrow we’ll learn how Latin shows what a noun does. Vale—goodbye!",
+      "pause_for_response": false
+    }
+  ]
+}

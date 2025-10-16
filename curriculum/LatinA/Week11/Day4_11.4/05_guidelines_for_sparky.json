@@ -1,0 +1,62 @@
+{
+  "day": 4,
+  "title": "Assessment – Mastery and Reflection",
+  "estimated_duration": "10–12 minutes",
+  "goals": [
+    "Assess verb recall and translation accuracy",
+    "Reflect on diligence and steady learning",
+    "Conclude Week 11 with gratitude and praise"
+  ],
+  "steps": [
+    {
+      "time_estimate": "00:00–00:01",
+      "speak": "Salve! It’s assessment day—let’s start with our chant one more time: ō, s, t / mus, tis, nt.",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:01–00:02",
+      "speak": "Now say all six forms of amō.",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:02–00:03",
+      "speak": "Good! Quick quiz: What does –t mean?",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:03–00:04",
+      "speak": "Right—‘he or she.’ What does –nt mean?",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:04–00:05",
+      "speak": "Translate together: Puer portat aquam. Puella amat rosam. Agricola vocat puerōs.",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:05–00:06",
+      "speak": "Now independent translation: write or say one –āre verb sentence of your own.",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:06–00:08",
+      "speak": "Mini reflection: what helped you remember endings this week?",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:08–00:09",
+      "speak": "Faith phrase together: Deus nos amat – God loves us. We studied with diligence because God is faithful.",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:09–00:10",
+      "speak": "Closing prayer: Gratias tibi, Deus, pro studiō et diligentiā – Thank you, God, for study and diligence.",
+      "pause_for_response": false
+    },
+    {
+      "time_estimate": "00:10–00:11",
+      "speak": "Preview: Next week we will meet the –ēre family—Second Conjugation verbs.",
+      "pause_for_response": false
+    }
+  ]
+}

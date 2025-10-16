@@ -1,0 +1,73 @@
+{
+  "day": 1,
+  "title": "Discovery – Meet the –ēre Family",
+  "estimated_duration": "12–14 minutes",
+  "goals": [
+    "Introduce 2nd-Conjugation (–ēre) verbs",
+    "Chant present-tense endings –eō, –ēs, –et / –ēmus, –ētis, –ent",
+    "Compare with –āre endings from Week 11",
+    "Establish faith phrase 'Deus videt'"
+  ],
+  "steps": [
+    {
+      "time_estimate": "00:00–00:01",
+      "speak": "Salve! Welcome to Week 12 Day 1. Let’s recall our –āre verbs from last week. Say amō, amās, amat …",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:01–00:02",
+      "speak": "Excellent! Those belong to the First Conjugation. Today we meet a new family that likes a long ē sound – the Second Conjugation.",
+      "pause_for_response": false
+    },
+    {
+      "time_estimate": "00:02–00:03",
+      "speak": "Our new verbs are videō (I see), moneō (I warn), teneō (I hold), habeō (I have), timeō (I fear). Repeat each after me.",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:03–00:04",
+      "speak": "Listen for the endings: –eō (I), –ēs (you), –et (he/she), –ēmus (we), –ētis (you all), –ent (they).",
+      "pause_for_response": false
+    },
+    {
+      "time_estimate": "00:04–00:06",
+      "speak": "Chant with me: videō, vidēs, videt / vidēmus, vidētis, vident.",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:06–00:07",
+      "speak": "Compare with Week 11 –āre verbs: amō vs videō, amās vs vidēs … Notice how the sound changes from short a to long ē.",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:07–00:09",
+      "speak": "Translate together: Puella videt rosam. Who is the subject? What is the verb? The object?",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:09–00:10",
+      "speak": "Yes – 'The girl sees the rose.' Now try: Puer moneō Deum – adjust the verb form so it fits the subject.",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:10–00:11",
+      "speak": "Answer – Puer monet Deum – 'The boy warns the Lord.' Good!",
+      "pause_for_response": false
+    },
+    {
+      "time_estimate": "00:11–00:12",
+      "speak": "Faith phrase time: Deus videt – God sees. Say it slowly and clearly three times.",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:12–00:13",
+      "speak": "Virtue reflection – Prudentia means seeing wisely and choosing well. How does that connect to our new verbs?",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:13–00:14",
+      "speak": "Excellent work! Tomorrow we will practice speed and find English words that grow from these verbs.",
+      "pause_for_response": false
+    }
+  ]
+}

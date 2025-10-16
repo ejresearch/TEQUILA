@@ -1,0 +1,64 @@
+{
+  "day": 2,
+  "title": "Naming Words – The First Declension Begins",
+  "estimated_duration": "30 minutes",
+  "goals": [
+    "Review greetings and Pax vobiscum",
+    "Teach that Latin nouns change endings to show jobs in a sentence",
+    "Learn the -a (subject) and -am (object) forms with rosa",
+    "Practice through gestures and chant",
+    "Connect the idea of order in grammar to God's order in creation"
+  ],
+  "steps": [
+    {
+      "time_estimate": "00:00–00:03",
+      "speak": "Salve iterum! Let’s greet one another: Salve, vale, pax, Deus, rosa!",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:03–00:06",
+      "speak": "Faith phrase: Pax vobiscum – Peace be with you. Say it slowly, then together with open hands.",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:06–00:09",
+      "speak": "Yesterday we learned that a noun names something. Today we’ll see how its ending changes. In Latin, endings tell the noun’s job!",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:09–00:12",
+      "speak": "Here’s our model noun: rosa – rose. Say it: rosa.",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:12–00:15",
+      "speak": "When the rose does the action, we say 'rosa'. When something happens to the rose, we say 'rosam'.",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:15–00:19",
+      "speak": "Chant with me: rosa (subject), rosam (object). Point to yourself for rosa, point outward for rosam!",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:19–00:22",
+      "speak": "Let’s use them: Rosa floret – The rose blooms. Video rosam – I see the rose.",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:22–00:25",
+      "speak": "Mini-quiz! I say a Latin word, you tell me if it’s the doer or the receiver. Ready? Rosa… Rosam…",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:25–00:28",
+      "speak": "Derivative time: rosa gives us rose and rosary; pax gives us pacify; Deus gives us deity.",
+      "pause_for_response": false
+    },
+    {
+      "time_estimate": "00:28–00:30",
+      "speak": "Beautiful work! God made order in language—endings show meaning. Tomorrow we’ll add more words and practice again. Vale!",
+      "pause_for_response": false
+    }
+  ]
+}

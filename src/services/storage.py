@@ -11,8 +11,26 @@ DAY_FIELDS = [
     "03_grade_level.txt",
     "04_role_context.json",
     "05_guidelines_for_sparky.md",
-    "06_document_for_sparky.json",
+    "06_document_for_sparky/",  # Directory containing 6 .txt files
     "07_sparkys_greeting.txt"
+]
+
+# Document sub-files within 06_document_for_sparky/
+DOCUMENT_FOR_SPARKY_FILES = [
+    "spiral_review_document.txt",
+    "weekly_topics_document.txt",
+    "virtue_and_faith_document.txt",
+    "vocabulary_key_document.txt",
+    "chant_chart_document.txt",
+    "teacher_voice_tips_document.txt"
+]
+
+# Internal documents (week planning & reference)
+INTERNAL_DOCUMENTS = [
+    "week_spec.json",
+    "week_summary.md",
+    "role_context.json",
+    "generation_log.json"
 ]
 
 # Legacy 6-field layout (for backward compatibility)
@@ -72,7 +90,7 @@ def week_dir(week_number: int) -> Path:
 
 def day_dir(week_number: int, day_number: int) -> Path:
     """Get the directory path for a specific day's activities."""
-    return week_dir(week_number) / "activities" / f"Day{day_number}"
+    return week_dir(week_number) / f"Day{day_number}_{week_number}.{day_number}"
 
 
 def week_spec_dir(week_number: int) -> Path:
@@ -88,6 +106,26 @@ def role_context_dir(week_number: int) -> Path:
 def day_field_path(week_number: int, day_number: int, field_name: str) -> Path:
     """Get the file path for a specific day field."""
     return day_dir(week_number, day_number) / field_name
+
+
+def document_for_sparky_dir(week_number: int, day_number: int) -> Path:
+    """Get the directory path for 06_document_for_sparky/."""
+    return day_dir(week_number, day_number) / "06_document_for_sparky"
+
+
+def document_for_sparky_file_path(week_number: int, day_number: int, doc_file_name: str) -> Path:
+    """Get the file path for a specific document within 06_document_for_sparky/."""
+    return document_for_sparky_dir(week_number, day_number) / doc_file_name
+
+
+def internal_documents_dir(week_number: int) -> Path:
+    """Get the internal_documents directory for a week."""
+    return week_dir(week_number) / "internal_documents"
+
+
+def internal_doc_path(week_number: int, doc_name: str) -> Path:
+    """Get path to specific internal document."""
+    return internal_documents_dir(week_number) / doc_name
 
 
 def week_spec_part_path(week_number: int, part_name: str) -> Path:
@@ -195,6 +233,22 @@ def compile_day_flint_bundle(week_number: int, day_number: int) -> Dict[str, Any
     fields = get_day_fields(week_number, day_number)
 
     for field in fields:
+        # Special handling for 06_document_for_sparky/ directory
+        if field == "06_document_for_sparky/":
+            doc_dir = document_for_sparky_dir(week_number, day_number)
+            if doc_dir.exists():
+                doc_bundle = {}
+                for doc_file in DOCUMENT_FOR_SPARKY_FILES:
+                    doc_file_path = document_for_sparky_file_path(week_number, day_number, doc_file)
+                    if doc_file_path.exists():
+                        doc_bundle[doc_file.replace(".txt", "")] = read_file(doc_file_path)
+                    else:
+                        doc_bundle[doc_file.replace(".txt", "")] = None
+                bundle["06_document_for_sparky"] = doc_bundle
+            else:
+                bundle["06_document_for_sparky"] = None
+            continue
+
         field_path = day_field_path(week_number, day_number, field)
         if not field_path.exists():
             bundle[field] = None

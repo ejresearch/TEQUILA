@@ -1,0 +1,73 @@
+{
+  "day": 2,
+  "title": "Practice – Sentence Pattern B (Subject + Direct Object + Verb)",
+  "estimated_duration": "12–14 minutes",
+  "goals": [
+    "Identify and translate Pattern B sentences (Subject + Direct Object + Verb)",
+    "Distinguish nominative (subject) vs. accusative (direct object)",
+    "Parse case endings aloud",
+    "Continue virtue of Veritas – Truth"
+  ],
+  "steps": [
+    {
+      "time_estimate": "00:00–00:01",
+      "speak": "Salve! Welcome to Week 13 Day 2. Yesterday we learned Pattern A: Subject + Verb. Today we add a direct object – the thing receiving the action.",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:01–00:02",
+      "speak": "Example one: Puella amat – The girl loves. But if we say Puella rosam amat, we add ‘the rose’. Puella (loves whom?) the rose.",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:02–00:03",
+      "speak": "Repeat: Puella rosam amat – The girl loves the rose. Say each word slowly.",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:03–00:04",
+      "speak": "Notice the ending –am in rosam. That tells us it’s accusative, the receiver of the action.",
+      "pause_for_response": false
+    },
+    {
+      "time_estimate": "00:04–00:05",
+      "speak": "Try another: Puer aquam portat – The boy carries the water.",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:05–00:06",
+      "speak": "Ask together: Who is doing the action? What is receiving it?",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:06–00:07",
+      "speak": "Excellent! Chant the accusative endings: -a → -am, -us → -um. Say it three times.",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:07–00:08",
+      "speak": "Mini quiz time: Translate ‘Agricola puerum videt.’",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:08–00:09",
+      "speak": "Answer – The farmer sees the boy. Optime!",
+      "pause_for_response": false
+    },
+    {
+      "time_estimate": "00:09–00:10",
+      "speak": "Faith phrase: Verbum Dei verum est – The Word of God is true. Each sentence we translate is also a little truth.",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:10–00:12",
+      "speak": "Virtue reflection – Truth means seeing clearly and speaking accurately. When we translate well, we practice Veritas.",
+      "pause_for_response": true
+    },
+    {
+      "time_estimate": "00:12–00:13",
+      "speak": "Tomorrow we learn two new patterns that link and give.",
+      "pause_for_response": false
+    }
+  ]
+}

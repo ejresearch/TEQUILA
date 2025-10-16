@@ -8,16 +8,15 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from src.config import get_llm_client
 from src.services.generator_week import (
-    generate_week_spec_from_outline,
-    generate_role_context,
-    generate_assets
+    scaffold_week,
+    generate_week_planning
 )
 from src.services.generator_day import hydrate_day_from_llm
 
 
 def main():
-    """Generate all content for all 36 weeks using LLM."""
-    print("Hydrating all 36 weeks using LLM...")
+    """Generate all content for all 36 weeks using LLM (Two-Phase Generation)."""
+    print("Hydrating all 36 weeks using LLM (Two-Phase Generation)...")
     print("=" * 60)
     print("WARNING: This will take a significant amount of time and API credits.")
     print("=" * 60)
@@ -38,19 +37,17 @@ def main():
             print('=' * 60)
 
             try:
-                # Generate week content
-                print("  [1/6] Week spec...")
-                generate_week_spec_from_outline(week, client)
+                # Scaffold week
+                print("  [1/6] Scaffolding...")
+                scaffold_week(week)
 
-                print("  [2/6] Role context...")
-                generate_role_context(week, client)
+                # PHASE 1: Generate week planning
+                print("  [2/6] PHASE 1: Generating week planning (internal_documents/)...")
+                generate_week_planning(week, client)
 
-                print("  [3/6] Assets...")
-                generate_assets(week, client)
-
-                # Generate days
+                # PHASE 2: Generate days from planning
                 for day in range(1, 5):
-                    print(f"  [{3+day}/6] Day {day}...")
+                    print(f"  [{2+day}/6] PHASE 2: Generating Day {day}...")
                     hydrate_day_from_llm(week, day, client)
 
                 print(f"  ✓ Week {week} complete")

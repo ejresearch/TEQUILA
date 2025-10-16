@@ -10,9 +10,14 @@ from .storage import (
     day_field_path,
     week_dir,
     week_spec_part_path,
+    document_for_sparky_dir,
+    document_for_sparky_file_path,
+    internal_doc_path,
+    DOCUMENT_FOR_SPARKY_FILES,
     DAY_FIELDS,
     write_file,
-    write_json
+    write_json,
+    read_json
 )
 from .llm_client import LLMClient
 from .prompts.kit_tasks import (
@@ -82,6 +87,16 @@ def scaffold_day(week_number: int, day_number: int) -> Path:
 
     # Create each field file from templates
     for field in DAY_FIELDS:
+        # Special handling for 06_document_for_sparky/ directory
+        if field == "06_document_for_sparky/":
+            doc_dir = document_for_sparky_dir(week_number, day_number)
+            doc_dir.mkdir(parents=True, exist_ok=True)
+            # Create placeholder files for each document
+            for doc_file in DOCUMENT_FOR_SPARKY_FILES:
+                doc_path = document_for_sparky_file_path(week_number, day_number, doc_file)
+                write_file(doc_path, "")
+            continue
+
         template_path = get_field_template_path(field)
         target_path = day_field_path(week_number, day_number, field)
 
@@ -277,6 +292,9 @@ def generate_day_fields(week: int, day: int, client: LLMClient) -> List[Path]:
     """
     Generate the seven Flint field files for a day using LLM.
 
+    Phase 2 of generation: Reads week_spec.json from internal_documents/
+    to generate day-specific field content.
+
     Args:
         week: Week number (1-36)
         day: Day number (1-4)
@@ -284,16 +302,32 @@ def generate_day_fields(week: int, day: int, client: LLMClient) -> List[Path]:
 
     Returns:
         List of paths to generated field files
+
+    Raises:
+        FileNotFoundError: If internal_documents/week_spec.json is missing
     """
     # Ensure day directory exists
     scaffold_day(week, day)
 
-    # Load week spec to inform day fields
-    spec_path = week_spec_part_path(week, "99_compiled_week_spec.json")
-    if spec_path.exists():
-        week_spec = orjson.loads(spec_path.read_bytes())
+    # Load week spec from internal_documents/ (Phase 1 output)
+    week_spec_path = internal_doc_path(week, "week_spec.json")
+
+    if not week_spec_path.exists():
+        # Fallback to legacy Week_Spec for backward compatibility
+        legacy_spec_path = week_spec_part_path(week, "99_compiled_week_spec.json")
+        if legacy_spec_path.exists():
+            logger.warning(
+                f"Using legacy Week_Spec for Week {week}. "
+                f"Consider running generate_week_planning() to create internal_documents/."
+            )
+            week_spec = orjson.loads(legacy_spec_path.read_bytes())
+        else:
+            raise FileNotFoundError(
+                f"Week spec not found at {week_spec_path}. "
+                f"Run generate_week_planning() first (Phase 1)."
+            )
     else:
-        week_spec = {"metadata": {"week": week, "title": f"Week {week}"}}
+        week_spec = read_json(week_spec_path)
 
     # Get prompts
     sys, usr, _ = task_day_fields(week_spec, day)
@@ -458,10 +492,12 @@ def generate_day_fields(week: int, day: int, client: LLMClient) -> List[Path]:
 
 def generate_day_document(week: int, day: int, client: LLMClient) -> Path:
     """
-    Generate the document_for_sparky JSON for a day using LLM with retry logic.
+    Generate the 6 document_for_sparky .txt files for a day by reading from
+    internal_documents/ and transforming via LLM with retry logic.
 
-    Retries up to MAX_RETRIES (10) times on validation failure.
-    If all retries fail, prompts user for confirmation to continue.
+    Phase 2 of generation: Reads week_spec.json and role_context.json from
+    internal_documents/, then uses LLM to transform this data into day-specific
+    instructional documents for Sparky.
 
     Args:
         week: Week number (1-35)
@@ -469,22 +505,34 @@ def generate_day_document(week: int, day: int, client: LLMClient) -> Path:
         client: LLM client instance
 
     Returns:
-        Path to generated document_for_sparky.json
+        Path to generated document_for_sparky/ directory
 
     Raises:
         ValueError: If generation fails after MAX_RETRIES and user aborts
+        FileNotFoundError: If internal_documents are missing
     """
     # Day directory should already exist from generate_day_fields()
     # DO NOT call scaffold_day() here - it would overwrite the field files!
 
-    # Load week spec to inform day document
-    spec_path = week_spec_part_path(week, "99_compiled_week_spec.json")
-    if spec_path.exists():
-        week_spec = orjson.loads(spec_path.read_bytes())
-    else:
-        week_spec = {"metadata": {"week": week, "title": f"Week {week}"}}
+    # Load week planning documents from internal_documents/
+    week_spec_path = internal_doc_path(week, "week_spec.json")
+    role_context_path = internal_doc_path(week, "role_context.json")
 
-    # Get prompts
+    if not week_spec_path.exists():
+        raise FileNotFoundError(
+            f"Week spec not found at {week_spec_path}. "
+            f"Run generate_week_planning() first (Phase 1)."
+        )
+
+    if not role_context_path.exists():
+        logger.warning(f"Role context not found at {role_context_path}. Using fallback.")
+        week_role_context = {}
+    else:
+        week_role_context = read_json(role_context_path)
+
+    week_spec = read_json(week_spec_path)
+
+    # Get prompts - task_day_document now receives internal_documents data
     sys, usr, schema = task_day_document(week_spec, day)
 
     # Retry loop
@@ -501,11 +549,19 @@ def generate_day_document(week: int, day: int, client: LLMClient) -> Path:
                 doc_data = orjson.loads(cleaned_text)
 
             # Basic validation - check required fields
-            required_fields = ["metadata", "prior_knowledge_digest", "objectives", "lesson_flow"]
+            # Updated to expect the 6 document keys
+            required_fields = [
+                "spiral_review_document",
+                "weekly_topics_document",
+                "virtue_and_faith_document",
+                "vocabulary_key_document",
+                "chant_chart_document",
+                "teacher_voice_tips_document"
+            ]
             missing_fields = [f for f in required_fields if f not in doc_data]
 
             if missing_fields:
-                error_msg = f"Missing required fields: {missing_fields}"
+                error_msg = f"Missing required document fields: {missing_fields}"
                 _log_retry_attempt(week, day, attempt, error_msg)
                 _save_invalid_response(week, day, "document", attempt, response.text)
 
@@ -517,14 +573,34 @@ def generate_day_document(week: int, day: int, client: LLMClient) -> Path:
                         raise ValueError(f"Generation aborted by user after {MAX_RETRIES} attempts")
                     break
 
-            # Write document_for_sparky.json (field 06 in 7-field architecture)
-            doc_path = day_field_path(week, day, "06_document_for_sparky.json")
-            write_json(doc_path, doc_data)
+            # Create 06_document_for_sparky/ directory and write 6 separate .txt files
+            doc_dir = document_for_sparky_dir(week, day)
+            doc_dir.mkdir(parents=True, exist_ok=True)
+
+            # Map expected keys from LLM response to file names
+            key_to_file_map = {
+                "spiral_review_document": "spiral_review_document.txt",
+                "weekly_topics_document": "weekly_topics_document.txt",
+                "virtue_and_faith_document": "virtue_and_faith_document.txt",
+                "vocabulary_key_document": "vocabulary_key_document.txt",
+                "chant_chart_document": "chant_chart_document.txt",
+                "teacher_voice_tips_document": "teacher_voice_tips_document.txt"
+            }
+
+            # Write each document to its own .txt file
+            for key, filename in key_to_file_map.items():
+                content = doc_data.get(key, "")
+                if content:
+                    file_path = document_for_sparky_file_path(week, day, filename)
+                    write_file(file_path, str(content))
+                else:
+                    logger.warning(f"Missing or empty content for {key}")
 
             if attempt > 1:
                 logger.info(f"Week {week} Day {day} document generated successfully on attempt {attempt}")
 
-            return doc_path
+            logger.info(f"✓ Generated {len(required_fields)} documents for Week {week} Day {day}")
+            return doc_dir
 
         except orjson.JSONDecodeError as e:
             error_msg = f"Invalid JSON response: {e}"
@@ -537,10 +613,10 @@ def generate_day_document(week: int, day: int, client: LLMClient) -> Path:
             else:
                 if not _prompt_user_to_continue(week, day, "document_for_sparky"):
                     raise ValueError(f"Generation aborted by user after {MAX_RETRIES} attempts")
-                # User chose to continue - save what we have
-                doc_path = day_field_path(week, day, "06_document_for_sparky.json")
-                write_file(doc_path, "{}")
-                return doc_path
+                # User chose to continue - create empty directory
+                doc_dir = document_for_sparky_dir(week, day)
+                doc_dir.mkdir(parents=True, exist_ok=True)
+                return doc_dir
 
         except Exception as e:
             error_msg = f"Unexpected error: {e}"
@@ -552,14 +628,15 @@ def generate_day_document(week: int, day: int, client: LLMClient) -> Path:
             else:
                 if not _prompt_user_to_continue(week, day, "document_for_sparky"):
                     raise ValueError(f"Generation aborted by user after {MAX_RETRIES} attempts")
-                # User chose to continue - save placeholder
-                doc_path = day_field_path(week, day, "06_document_for_sparky.json")
-                write_file(doc_path, "{}")
-                return doc_path
+                # User chose to continue - create empty directory
+                doc_dir = document_for_sparky_dir(week, day)
+                doc_dir.mkdir(parents=True, exist_ok=True)
+                return doc_dir
 
     # Fallback if loop completes without return
-    doc_path = day_field_path(week, day, "06_document_for_sparky.json")
-    return doc_path
+    doc_dir = document_for_sparky_dir(week, day)
+    doc_dir.mkdir(parents=True, exist_ok=True)
+    return doc_dir
 
 
 def generate_day4_assessment(week: int, client: LLMClient) -> Dict[str, Path]:
@@ -570,6 +647,8 @@ def generate_day4_assessment(week: int, client: LLMClient) -> Dict[str, Path]:
     - Quiz must include ≥25% content from prior weeks (spiral enforcement)
     - Balanced coverage: vocabulary, grammar, chant, virtue reflection
     - Teacher key must provide detailed explanations
+
+    Phase 2 of generation: Reads from internal_documents/week_spec.json
 
     Args:
         week: Week number (1-35)
@@ -583,19 +662,37 @@ def generate_day4_assessment(week: int, client: LLMClient) -> Dict[str, Path]:
     """
     logger.info(f"Generating Day 4 assessment for Week {week}")
 
-    # Load week spec
-    spec_path = week_spec_part_path(week, "99_compiled_week_spec.json")
-    if not spec_path.exists():
-        raise ValueError(f"Week spec not found for Week {week}. Generate week spec first.")
+    # Load week spec from internal_documents/ (Phase 1 output)
+    week_spec_path = internal_doc_path(week, "week_spec.json")
 
-    week_spec = orjson.loads(spec_path.read_bytes())
+    if not week_spec_path.exists():
+        # Fallback to legacy Week_Spec for backward compatibility
+        legacy_spec_path = week_spec_part_path(week, "99_compiled_week_spec.json")
+        if legacy_spec_path.exists():
+            logger.warning(
+                f"Using legacy Week_Spec for Week {week} assessment. "
+                f"Consider running generate_week_planning() to create internal_documents/."
+            )
+            week_spec = orjson.loads(legacy_spec_path.read_bytes())
+        else:
+            raise ValueError(f"Week spec not found for Week {week}. Generate week planning first (Phase 1).")
+    else:
+        week_spec = read_json(week_spec_path)
 
-    # Load Day 4 document
-    day4_doc_path = day_field_path(week, 4, "06_document_for_sparky.json")
-    if not day4_doc_path.exists():
-        raise ValueError(f"Day 4 document not found for Week {week}. Generate Day 4 first.")
+    # Load Day 4 document directory (now 6 separate .txt files)
+    day4_doc_dir = document_for_sparky_dir(week, 4)
+    if not day4_doc_dir.exists():
+        raise ValueError(f"Day 4 document directory not found for Week {week}. Generate Day 4 first.")
 
-    day4_document = orjson.loads(day4_doc_path.read_bytes())
+    # Read all 6 document files into a dictionary
+    day4_document = {}
+    for doc_file in DOCUMENT_FOR_SPARKY_FILES:
+        doc_path = document_for_sparky_file_path(week, 4, doc_file)
+        if doc_path.exists():
+            key = doc_file.replace(".txt", "")
+            day4_document[key] = doc_path.read_text(encoding="utf-8")
+        else:
+            logger.warning(f"Missing Day 4 document file: {doc_file}")
 
     # Load Day 4 guidelines (optional)
     guidelines_path = day_field_path(week, 4, "05_guidelines_for_sparky.md")

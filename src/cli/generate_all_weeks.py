@@ -17,9 +17,7 @@ from typing import Optional
 from ..config import get_llm_client, settings
 from ..services.generator_week import (
     scaffold_week,
-    generate_week_spec_from_outline,
-    generate_role_context,
-    generate_assets
+    generate_week_planning
 )
 from ..services.generator_day import hydrate_day_from_llm
 from ..services.validator import validate_week
@@ -44,6 +42,10 @@ def generate_week(week_number: int, client, export: bool = True) -> bool:
     """
     Generate a complete week with all days, validate, and optionally export.
 
+    Uses two-phase generation:
+    - Phase 1: Generate week planning documents (internal_documents/)
+    - Phase 2: Generate 4 days using planning documents as source
+
     Args:
         week_number: Week number (1-35)
         client: LLM client instance
@@ -56,37 +58,26 @@ def generate_week(week_number: int, client, export: bool = True) -> bool:
     print(f"WEEK {week_number:02d}")
     print(f"{'─' * 80}")
 
-    # Scaffold week structure
+    # Scaffold week structure (creates internal_documents/ + 4 day folders)
     print(f"  Scaffolding Week {week_number}...")
     week_path = scaffold_week(week_number)
     print(f"  ✓ Created structure at {week_path}")
 
-    # Generate week-level content
-    print(f"\n  Generating week specification...")
+    # PHASE 1: Generate week planning documents
+    print(f"\n  === PHASE 1: Week Planning ===")
+    print(f"  Generating internal_documents/...")
     try:
-        generate_week_spec_from_outline(week_number, client)
-        print(f"    ✓ Week spec generated")
+        planning_paths = generate_week_planning(week_number, client)
+        print(f"    ✓ week_spec.json generated")
+        print(f"    ✓ week_summary.md generated")
+        print(f"    ✓ role_context.json generated")
+        print(f"    ✓ generation_log.json saved")
     except Exception as e:
-        print(f"    ✗ Week spec failed: {e}")
+        print(f"    ✗ Week planning failed: {e}")
         raise
 
-    print(f"  Generating role context...")
-    try:
-        generate_role_context(week_number, client)
-        print(f"    ✓ Role context generated")
-    except Exception as e:
-        print(f"    ✗ Role context failed: {e}")
-        raise
-
-    print(f"  Generating assets...")
-    try:
-        generate_assets(week_number, client)
-        print(f"    ✓ Assets generated")
-    except Exception as e:
-        print(f"    ✗ Assets failed: {e}")
-        raise
-
-    # Generate all 4 days
+    # PHASE 2: Generate all 4 days using planning documents
+    print(f"\n  === PHASE 2: Day Generation ===")
     for day in range(1, 5):
         print(f"\n  Day {day}:")
         try:

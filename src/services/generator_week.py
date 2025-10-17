@@ -210,19 +210,25 @@ def generate_week_spec_from_outline(week: int, client: LLMClient, research_plan:
     return spec_path
 
 
-def generate_week_summary(week: int, client: LLMClient) -> Path:
+def generate_week_summary(week: int, client: LLMClient, research_plan: Dict[str, Any] = None) -> Path:
     """
-    Generate week_summary.md using LLM.
+    Generate week_summary.md using LLM with PHASE 0 research.
+
+    NEW: Uses task_week_summary() prompt with research findings to explain
+    pedagogical decisions and provide comprehensive teacher overview.
 
     Saves to: Week{N}/internal_documents/week_summary.md
 
     Args:
         week: Week number (1-36)
         client: LLM client instance
+        research_plan: Optional PHASE 0 research findings
 
     Returns:
         Path to generated week_summary.md
     """
+    from .prompts.kit_tasks import task_week_summary
+
     # Load week_spec
     week_spec_path = internal_doc_path(week, "week_spec.json")
     if not week_spec_path.exists():
@@ -230,26 +236,40 @@ def generate_week_summary(week: int, client: LLMClient) -> Path:
 
     week_spec = read_json(week_spec_path)
 
-    # TODO: Add task_week_summary prompt
-    # For now, generate simple summary from spec
-    summary_content = f"""# Week {week} Summary
+    # Get prompts from task_week_summary
+    sys, usr, config = task_week_summary(
+        week_number=week,
+        week_spec=week_spec,
+        prior_knowledge_digest=None  # TODO: extract from week_spec if available
+    )
 
-**Title:** {week_spec.get('metadata', {}).get('title', f'Week {week}')}
-**Virtue:** {week_spec.get('metadata', {}).get('virtue', 'N/A')}
-**Faith Phrase:** {week_spec.get('metadata', {}).get('faith_phrase', 'N/A')}
+    # If research available, inject pedagogical explanations
+    if research_plan:
+        pedagogy = research_plan.get("03_pedagogical_research", {})
+        duration = research_plan.get("05_session_duration", {})
 
-## Objectives
-{chr(10).join(f"- {obj}" for obj in week_spec.get('objectives', []))}
+        research_context = f"""
 
-## Grammar Focus
-{week_spec.get('grammar_focus', 'N/A')}
+## PHASE 0 PEDAGOGICAL CONTEXT
 
-## Daily Arc
-- Day 1: {week_spec.get('daily_arc', {}).get('day_1', 'Discovery')}
-- Day 2: {week_spec.get('daily_arc', {}).get('day_2', 'Practice')}
-- Day 3: {week_spec.get('daily_arc', {}).get('day_3', 'Integration')}
-- Day 4: {week_spec.get('daily_arc', {}).get('day_4', 'Assessment')}
+Include these insights in your summary to help teachers understand WHY content was chosen:
+
+- **Pedagogical Approach**: {pedagogy.get('logos_latin_approach', '')[:300]}
+- **Session Duration**: {duration.get('recommended_duration_minutes', 15)} minutes ({duration.get('rationale', '')})
+- **Common Misconceptions**: {', '.join(pedagogy.get('common_misconceptions', [])[:3])}
+
+Explain the pedagogical reasoning behind vocabulary selection, grammar sequencing, and instructional approach.
 """
+        usr += research_context
+
+    # Generate summary
+    response = client.generate(prompt=usr, system=sys)
+
+    # Extract markdown content from response
+    if response.json and 'content' in response.json:
+        summary_content = response.json['content']
+    else:
+        summary_content = response.text
 
     summary_path = internal_doc_path(week, "week_summary.md")
     write_file(summary_path, summary_content)
@@ -258,15 +278,19 @@ def generate_week_summary(week: int, client: LLMClient) -> Path:
     return summary_path
 
 
-def generate_week_role_context(week: int, client: LLMClient) -> Path:
+def generate_week_role_context(week: int, client: LLMClient, research_plan: Dict[str, Any] = None) -> Path:
     """
-    Generate role_context.json using LLM.
+    Generate role_context.json using LLM with PHASE 0 research.
+
+    NEW: Uses research findings to adapt Sparky's behavior based on
+    week difficulty, virtue focus, and student differentiation needs.
 
     Saves to: Week{N}/internal_documents/role_context.json
 
     Args:
         week: Week number (1-36)
         client: LLM client instance
+        research_plan: Optional PHASE 0 research findings
 
     Returns:
         Path to generated role_context.json
@@ -278,8 +302,8 @@ def generate_week_role_context(week: int, client: LLMClient) -> Path:
 
     week_spec = read_json(week_spec_path)
 
-    # Get prompt
-    sys, usr, _ = task_role_context(week_spec)
+    # Get prompt (with research)
+    sys, usr, _ = task_role_context(week_spec, research_plan)
 
     # Generate
     response = client.generate(prompt=usr, system=sys)
@@ -309,13 +333,16 @@ def generate_week_role_context(week: int, client: LLMClient) -> Path:
     return role_path
 
 
-def save_generation_log(week: int, model_info: Dict[str, Any] = None) -> Path:
+def save_generation_log(week: int, model_info: Dict[str, Any] = None, research_plan: Dict[str, Any] = None) -> Path:
     """
     Save generation log with provenance metadata.
+
+    NEW: Includes PHASE 0 metadata for full cost/provenance tracking.
 
     Args:
         week: Week number
         model_info: Optional dict with model/token info
+        research_plan: Optional PHASE 0 research findings with metadata
 
     Returns:
         Path to generation_log.json
@@ -324,9 +351,38 @@ def save_generation_log(week: int, model_info: Dict[str, Any] = None) -> Path:
         "week": week,
         "generated_at": datetime.utcnow().isoformat() + "Z",
         "git_commit": _get_git_commit(),
-        "architecture": "7-field day-centric with internal_documents",
+        "architecture": "PHASE 0 + PHASE 1 + PHASE 2 (v1.1)",
         "model_info": model_info or {}
     }
+
+    # Add PHASE 0 metadata if available
+    if research_plan:
+        phase0_metadata = {
+            "phase0_executed": True,
+            "research_calls": {
+                "backward_analysis": research_plan.get("01_backward_analysis", {}).get("_metadata", {}),
+                "forward_analysis": research_plan.get("02_forward_analysis", {}).get("_metadata", {}),
+                "pedagogical_research": research_plan.get("03_pedagogical_research", {}).get("_metadata", {}),
+                "vocabulary_determination": research_plan.get("04_vocabulary_plan", {}).get("_metadata", {}),
+                "virtue_faith_integration": research_plan.get("06_virtue_faith_strategy", {}).get("_metadata", {}),
+                "assessment_design": research_plan.get("07_assessment_plan", {}).get("_metadata", {}),
+                "differentiation": research_plan.get("08_differentiation_plan", {}).get("_metadata", {}),
+                "master_analysis": research_plan.get("10_master_analysis", {}).get("_metadata", {}),
+                "alignment": research_plan.get("11_alignment_guide", {}).get("_metadata", {})
+            },
+            "models_used": {
+                "reasoning": "o1-mini (or gpt-4o fallback)",
+                "generation": "gpt-4o",
+                "rule_based": ["session_duration", "materials_planning"]
+            },
+            "vocabulary_verified": {
+                "latin_only": research_plan.get("04_vocabulary_plan", {}).get("alignment_check", {}).get("NO_SPANISH_WORDS", False),
+                "alignment_check": research_plan.get("04_vocabulary_plan", {}).get("alignment_check", {})
+            }
+        }
+        log_data["phase0_research"] = phase0_metadata
+    else:
+        log_data["phase0_research"] = {"phase0_executed": False}
 
     log_path = internal_doc_path(week, "generation_log.json")
     write_json(log_path, log_data)
@@ -374,17 +430,17 @@ def generate_week_planning(week: int, client: LLMClient) -> Dict[str, Path]:
     logger.info(f"Generating week_spec.json...")
     week_spec_path = generate_week_spec_from_outline(week, client, research_plan)
 
-    # 2. Generate week_summary.md
+    # 2. Generate week_summary.md (with research context)
     logger.info(f"Generating week_summary.md...")
-    summary_path = generate_week_summary(week, client)
+    summary_path = generate_week_summary(week, client, research_plan)
 
-    # 3. Generate role_context.json
+    # 3. Generate role_context.json (with research context)
     logger.info(f"Generating role_context.json...")
-    role_path = generate_week_role_context(week, client)
+    role_path = generate_week_role_context(week, client, research_plan)
 
-    # 4. Save generation log
+    # 4. Save generation log (with PHASE 0 metadata)
     logger.info(f"Saving generation_log.json...")
-    log_path = save_generation_log(week)
+    log_path = save_generation_log(week, model_info=None, research_plan=research_plan)
 
     logger.info(f"=== Phase 1 complete: Week {week} planning done ===")
 

@@ -1,67 +1,66 @@
 ```markdown
 # Teacher Key – Week 2
 
-Hello, educators! Here is the answer key for the Grade 3 Latin A Week 2 Quiz. This key includes correct answers, explanations, and additional teaching tips to help guide your students through their Latin learning journey.
+Hello, educators! Below is the answer key for the Grade 3 Latin A Week 2 Quiz. This key provides correct answers, explanations, and additional insights to aid in the teaching process. Enjoy guiding your students through the beauty of Latin! 😊
 
 ## Vocabulary (5 points)
 
-1. **Fill in the blank:** "Salve" means _______ in English.  
-   **Correct Answer:** b) Hello  
-   **Explanation:** "Salve" is a common Latin greeting used to say "hello" to one person. It is a friendly and polite way to begin a conversation.
+1. **Fill in the blank:** The Latin word for "girl" is **puella**.  
+   - **Explanation:** "Puella" is the Latin word for "girl," and it is a first declension noun. This word is often used in beginner Latin texts.  
+   - **Correct Answer:** b) puella
 
-2. **Multiple Choice:** What does "vale" mean?  
-   **Correct Answer:** b) Goodbye  
-   **Explanation:** "Vale" is used to say "goodbye" to one person. It is the counterpart to "salve" and is used when parting ways.
+2. **Multiple Choice:** What does "salve" mean in English?  
+   - **Explanation:** "Salve" is a common Latin greeting meaning "hello." It is used when addressing one person.  
+   - **Correct Answer:** b) Hello
 
-3. **Fill in the blank:** "Pax" means _______ in English.  
-   **Correct Answer:** b) Peace  
-   **Explanation:** "Pax" is the Latin word for "peace," often used in both religious and secular contexts to express a state of tranquility or harmony.
+3. **Fill in the blank:** The Latin word for "water" is **aqua**.  
+   - **Explanation:** "Aqua" is a first declension noun meaning "water." It is the root of many English words related to water, such as "aquarium."  
+   - **Correct Answer:** b) aqua
 
-4. **Multiple Choice:** Which word means "king" in Latin?  
-   **Correct Answer:** a) rex  
-   **Explanation:** "Rex" is the Latin term for "king." It is a third declension noun and often appears in historical and literary texts.
+4. **Multiple Choice:** Which word means "road" in Latin?  
+   - **Explanation:** "Via" is the Latin word for "road" or "way." It is a first declension noun and is the root of the English word "via."  
+   - **Correct Answer:** b) via
 
-5. **Fill in the blank:** "Domina" means _______ in English.  
-   **Correct Answer:** a) Lady  
-   **Explanation:** "Domina" is the feminine form meaning "lady" or "mistress," often used to refer to a woman of authority or respect.
+5. **Fill in the blank:** The Latin word for "forest" is **silva**.  
+   - **Explanation:** "Silva" means "forest" in Latin and is a first declension noun. It is the root of the English word "sylvan," which pertains to woods or forests.  
+   - **Correct Answer:** a) silva
 
 ## Grammar & Chant (5 points)
 
-6. **Short Response:** Write the singular endings for the third declension noun chant.  
-   **Correct Answer:** - / is / i / em / e  
-   **Explanation:** These are the singular endings for third declension nouns. They help students recognize and form the correct case endings.  
-   **Chant Tip:** Practice the chant rhythmically: "blank, is, i, em, e" to help students memorize the pattern.
+6. **Short Response:** Write the nominative singular ending for first declension nouns.  
+   - **Explanation:** The nominative singular ending for first declension nouns is "-a." This ending is used for subjects of sentences.  
+   - **Correct Answer:** -a
 
-7. **Multiple Choice:** Which of the following is the correct present tense form of "sum" for "we are"?  
-   **Correct Answer:** a) sumus  
-   **Explanation:** "Sumus" is the first person plural form of "sum," meaning "we are." It is essential for forming sentences about groups including oneself.
+7. **Multiple Choice:** Which of the following is a first declension noun ending?  
+   - **Explanation:** The ending "-a" is characteristic of first declension nouns in the nominative singular form.  
+   - **Correct Answer:** b) -a
 
-8. **Fill in the blank:** The Latin word "puella" is in the _______ declension.  
-   **Correct Answer:** first  
-   **Explanation:** "Puella" is a first declension noun, typically recognized by its -a ending in the nominative singular form.
+8. **Fill in the blank:** The chant for first declension nominative singular endings is **-a**.  
+   - **Explanation:** The chant for first declension nominative singular is simply "-a." A helpful rhythm tip is to say it with a short, clear sound.  
+   - **Correct Answer:** a
 
-9. **Short Response:** What is the plural form of "rex" in the nominative case?  
-   **Correct Answer:** reges  
-   **Explanation:** "Reges" is the nominative plural form of "rex." Third declension nouns often change significantly from singular to plural.
+9. **Short Response:** Parse the word "puella" (identify its case and number).  
+   - **Explanation:** "Puella" is in the nominative case and singular number, used as the subject of a sentence.  
+   - **Correct Answer:** Nominative Singular
 
-10. **Multiple Choice:** Which case is used for the direct object in Latin?  
-    **Correct Answer:** b) Accusative  
-    **Explanation:** The accusative case is used for direct objects in Latin, indicating the noun directly receiving the action of the verb.
+10. **Multiple Choice:** Which of these is NOT a first declension noun?  
+    - **Explanation:** "Puer" is a second declension noun, not a first declension noun.  
+    - **Correct Answer:** c) puer
 
-## Translation (4 points)
+## Translation (5 points)
 
-11. **Translate to English:** "Pax vobiscum."  
-    **Correct Answer:** Peace be with you  
-    **Explanation:** Literally, "Pax vobiscum" translates to "Peace with you," but idiomatically it is rendered as "Peace be with you," a common greeting or farewell in Christian liturgy.
+11. **Translate to English:** "Terra est magna."  
+    - **Explanation:** "Terra" means "land," "est" means "is," and "magna" means "large." The sentence translates to "The land is large."  
+    - **Correct Answer:** The land is large.
 
-12. **Translate to Latin:** "Hello, students!"  
-    **Correct Answer:** Salve, discipuli!  
-    **Explanation:** "Salve" is used for greeting one person, while "discipuli" is the nominative plural form of "student," addressing a group.
+12. **Translate to Latin:** "The girl is happy."  
+    - **Explanation:** "The girl" translates to "puella," "is" translates to "est," and "happy" translates to "laeta." The sentence is "Puella est laeta."  
+    - **Correct Answer:** Puella est laeta.
 
-## Virtue Reflection (1 point)
+## Virtue Reflection (5 points)
 
-13. **Short Written Response:** How can using greetings like "salve" and "vale" show respect to others?  
-    **Sample Student Response:** Using greetings like "salve" and "vale" shows respect by acknowledging the presence and departure of others. It demonstrates politeness and a willingness to engage in friendly communication, reflecting the Christian value of treating others with kindness and respect.
+13. **Short Written Response:** This week, we focused on the virtue of Patience. How can practicing patience help you when learning something new, like Latin? Write a few sentences about a time when being patient helped you learn better.  
+    - **Sample Response:** Practicing patience helps me stay calm and focused when I don't understand something right away. For example, when I was learning a difficult Latin chant, I took my time to repeat it slowly, and eventually, I memorized it. Patience allowed me to enjoy the learning process without feeling rushed.
 
----
+Thank you for guiding your students through this quiz. Your dedication to their learning journey is invaluable!
 ```

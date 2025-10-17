@@ -409,27 +409,93 @@ def task_week_spec(
 
     # INJECT PHASE 0 RESEARCH if available
     if research_plan:
+        # Extract all 12 research outputs
+        week_entry = research_plan.get("00_week_entry", {})
+        backward = research_plan.get("01_backward_analysis", {})
+        forward = research_plan.get("02_forward_analysis", {})
+        pedagogy = research_plan.get("03_pedagogical_research", {})
         vocab_plan = research_plan.get("04_vocabulary_plan", {})
-        alignment_guide = research_plan.get("11_alignment_guide", {})
+        duration = research_plan.get("05_session_duration", {})
+        virtue = research_plan.get("06_virtue_faith_strategy", {})
+        assessment = research_plan.get("07_assessment_plan", {})
+        differentiation = research_plan.get("08_differentiation_plan", {})
+        materials = research_plan.get("09_materials_list", {})
+        masters = research_plan.get("10_master_analysis", {})
+        alignment = research_plan.get("11_alignment_guide", {})
 
         research_injection = f"""
 
-## PHASE 0 RESEARCH FINDINGS
+## PHASE 0 RESEARCH FINDINGS - USE ALL OF THIS DATA
 
-You have access to pedagogical research conducted before generation.
-Use these findings to inform your content decisions:
+You have access to comprehensive pedagogical research conducted before generation.
+ALL of these findings MUST inform your week spec generation:
 
-### Vocabulary Plan (from reasoning model):
-- New Latin Words: {json.dumps([w.get('word', '') for w in vocab_plan.get('new_latin_words', [])], indent=2)}
-- Recycled Words: {json.dumps([w.get('word', '') for w in vocab_plan.get('recycled_latin_words', [])], indent=2)}
-- Alignment Check: {json.dumps(vocab_plan.get('alignment_check', {}), indent=2)}
+### 1. VERIFIED VOCABULARY (MUST USE EXACTLY)
+New Latin Words (verified by reasoning model):
+{json.dumps([{'word': w.get('word', ''), 'english': w.get('english', ''), 'rationale': w.get('rationale', '')} for w in vocab_plan.get('new_latin_words', [])], indent=2)}
 
-### Alignment Guide (style matching gold standard):
-{json.dumps(alignment_guide, indent=2)}
+Recycled Words (for spiral review):
+{json.dumps([{'word': w.get('word', ''), 'originally_taught_week': w.get('originally_taught_week', '')} for w in vocab_plan.get('recycled_latin_words', [])], indent=2)}
 
-CRITICAL: Use the researched vocabulary from the vocabulary_plan.
-These words were verified as Classical Latin by the reasoning model.
-DO NOT generate different vocabulary - use what was researched.
+Alignment Check: {json.dumps(vocab_plan.get('alignment_check', {}), indent=2)}
+
+CRITICAL: Use ONLY these words in 03_vocabulary.json. Do NOT generate different vocabulary.
+
+### 2. PRIOR KNOWLEDGE (for 07_prior_knowledge_digest.json)
+Students entering this week already know:
+- Vocabulary: {json.dumps([v.get('word', '') for v in backward.get('cumulative_latin_vocabulary', [])[:10]], indent=2)}
+- Grammar Concepts: {json.dumps([c.get('concept', '') for c in backward.get('cumulative_grammar_concepts', [])[:5]], indent=2)}
+- Student State: {backward.get('student_knowledge_state', '')}
+- Spiral Target: {backward.get('spiral_review_target_percentage', 0.25)*100}% prior content
+
+### 3. PEDAGOGICAL APPROACH (for 04_grammar_focus.md and 10_teacher_notes.md)
+How classical curricula teach this topic:
+- Logos Latin Approach: {pedagogy.get('logos_latin_approach', '')[:200]}...
+- Time-Tested Chants: {json.dumps(pedagogy.get('time_tested_chants', []), indent=2)}
+- Common Misconceptions: {json.dumps(pedagogy.get('common_misconceptions', []), indent=2)}
+
+### 4. SESSION TIMING (for daily structure)
+- Recommended Duration: {duration.get('recommended_duration_minutes', 15)} minutes
+- Time Breakdown: {json.dumps(duration.get('time_breakdown', {}), indent=2)}
+
+### 5. VIRTUE & FAITH INTEGRATION (for 05_virtue_focus.md and 06_faith_phrase.md)
+- Virtue: {virtue.get('virtue_focus', '')}
+- Connection to Learning: {virtue.get('virtue_connection_to_language_learning', '')[:150]}...
+- Scripture: {virtue.get('scripture_reference', {}).get('passage', '')} - "{virtue.get('scripture_reference', {}).get('text', '')[:100]}..."
+- Faith Phrase: {virtue.get('faith_phrase', '')}
+- Explanation: {virtue.get('faith_phrase_explanation', '')[:150]}...
+
+### 6. ASSESSMENT DESIGN (for 09_assessment_overview.json)
+Day 4 Quiz Components:
+{json.dumps([{'component': c.get('component', ''), 'format': c.get('format', '')} for c in assessment.get('day_4_quiz_components', [])], indent=2)}
+
+### 7. DIFFERENTIATION (for 10_teacher_notes.md)
+- Struggling Students: {json.dumps(differentiation.get('struggling_students', {}).get('scaffolds', [])[:3], indent=2)}
+- Advanced Students: {json.dumps(differentiation.get('advanced_students', {}).get('extensions', [])[:3], indent=2)}
+
+### 8. MATERIALS NEEDED (for 10_teacher_notes.md)
+- Chant Charts: {json.dumps([c.get('title', '') for c in materials.get('chant_charts', [])], indent=2)}
+- Flashcard Sets: {json.dumps([s.get('set_name', '') for s in materials.get('flashcard_sets', [])], indent=2)}
+
+### 9. STYLE GUIDE (from gold standard Week 1 & Week 11)
+Class Name Pattern: {masters.get('class_name_pattern', '')}
+Summary Style: {json.dumps(masters.get('summary_style_guide', {}), indent=2)}
+Vocabulary Format: {json.dumps(masters.get('vocabulary_format', {}), indent=2)}
+
+### 10. ALIGNMENT GUIDANCE (how to combine research with style)
+{json.dumps(alignment, indent=2)}
+
+---
+
+GENERATION INSTRUCTIONS:
+1. Use ONLY the verified vocabulary from section 1
+2. Include spiral review from section 2 in 07_prior_knowledge_digest.json
+3. Use pedagogical approach from section 3 in grammar explanations
+4. Use timing from section 4 to structure daily activities
+5. Use virtue/faith from section 5 in 05_virtue_focus.md and 06_faith_phrase.md
+6. Use assessment design from section 6 in 09_assessment_overview.json
+7. Use differentiation from section 7 in 10_teacher_notes.md
+8. Match style patterns from sections 9 & 10
 """
         user_content += research_injection
 
@@ -584,12 +650,16 @@ def task_week_summary(
     return (system_content, user_content, config)
 
 
-def task_role_context(week_spec: dict) -> Tuple[str, str, Optional[Dict]]:
+def task_role_context(week_spec: dict, research_plan: Optional[Dict[str, Any]] = None) -> Tuple[str, str, Optional[Dict]]:
     """
     Generate prompts for Sparky role context (week-level).
 
+    NEW: Accepts PHASE 0 research to inform Sparky's behavior based on
+    week difficulty, virtue focus, and differentiation needs.
+
     Args:
         week_spec: The week specification data
+        research_plan: Optional PHASE 0 research findings
 
     Returns:
         (system_prompt, user_prompt, json_schema_hint)
@@ -619,6 +689,36 @@ def task_role_context(week_spec: dict) -> Tuple[str, str, Optional[Dict]]:
             option=orjson.OPT_INDENT_2
         ).decode()
     )
+
+    # Inject PHASE 0 research if available
+    if research_plan:
+        virtue = research_plan.get("06_virtue_faith_strategy", {})
+        differentiation = research_plan.get("08_differentiation_plan", {})
+        pedagogy = research_plan.get("03_pedagogical_research", {})
+
+        research_context = f"""
+
+## PHASE 0 RESEARCH - INFORM SPARKY'S BEHAVIOR
+
+Adapt Sparky's role context based on this week's needs:
+
+### Virtue Focus:
+- Virtue: {virtue.get('virtue_focus', '')}
+- How it connects to learning: {virtue.get('virtue_connection_to_language_learning', '')[:200]}
+- Incorporate this virtue into encouragement_triggers and praise language
+
+### Differentiation Needs:
+- Struggling Students Scaffolds: {json.dumps(differentiation.get('struggling_students', {}).get('scaffolds', [])[:2], indent=2)}
+- Advanced Extensions: {json.dumps(differentiation.get('advanced_students', {}).get('extensions', [])[:2], indent=2)}
+- Adjust feedback_style to support both groups
+
+### Common Misconceptions:
+{json.dumps(pedagogy.get('common_misconceptions', [])[:3], indent=2)}
+- Include these in knowledge_recycling and error correction approaches
+
+Generate a Sparky role context that adapts to this week's virtue, difficulty level, and student needs.
+"""
+        usr += research_context
 
     return sys, usr, None
 

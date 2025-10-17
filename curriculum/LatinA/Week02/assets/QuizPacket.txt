@@ -1,61 +1,73 @@
 ```markdown
 # Latin A – Week 2 Quiz
 
-Hello, Grade 3 Latin scholars! Let's see how well you remember your Latin greetings and phrases. Remember to do your best and have fun!
+Hello, Grade 3 Latin learners! Let's see how much you've learned about First Declension Nouns and more. Remember to take your time and do your best. 😊
 
 ## Vocabulary (5 points)
 
-1. **Fill in the blank:** "Salve" means _______ in English. (1 point)
-   - a) Goodbye
-   - b) Hello
-   - c) Please
+1. **Fill in the blank:** The Latin word for "girl" is _______.  
+   a) rosa  
+   b) puella  
+   c) via  
+   **(1 point)**
 
-2. **Multiple Choice:** What does "vale" mean? (1 point)
-   - a) Peace
-   - b) Goodbye
-   - c) Thank you
+2. **Multiple Choice:** What does "salve" mean in English?  
+   a) Goodbye  
+   b) Hello  
+   c) Please  
+   **(1 point)**
 
-3. **Fill in the blank:** "Pax" means _______ in English. (1 point)
-   - a) Love
-   - b) Peace
-   - c) Strength
+3. **Fill in the blank:** The Latin word for "water" is _______.  
+   a) terra  
+   b) aqua  
+   c) silva  
+   **(1 point)**
 
-4. **Multiple Choice:** Which word means "king" in Latin? (1 point)
-   - a) rex
-   - b) mater
-   - c) corpus
+4. **Multiple Choice:** Which word means "road" in Latin?  
+   a) rosa  
+   b) via  
+   c) puella  
+   **(1 point)**
 
-5. **Fill in the blank:** "Domina" means _______ in English. (1 point)
-   - a) Lady
-   - b) Lord
-   - c) Girl
+5. **Fill in the blank:** The Latin word for "forest" is _______.  
+   a) silva  
+   b) aqua  
+   c) terra  
+   **(1 point)**
 
 ## Grammar & Chant (5 points)
 
-6. **Short Response:** Write the singular endings for the third declension noun chant. (1 point)
+6. **Short Response:** Write the nominative singular ending for first declension nouns.  
+   **(1 point)**
 
-7. **Multiple Choice:** Which of the following is the correct present tense form of "sum" for "we are"? (1 point)
-   - a) sumus
-   - b) estis
-   - c) sunt
+7. **Multiple Choice:** Which of the following is a first declension noun ending?  
+   a) -us  
+   b) -a  
+   c) -um  
+   **(1 point)**
 
-8. **Fill in the blank:** The Latin word "puella" is in the _______ declension. (1 point)
+8. **Fill in the blank:** The chant for first declension nominative singular endings is _______.  
+   **(1 point)**
 
-9. **Short Response:** What is the plural form of "rex" in the nominative case? (1 point)
+9. **Short Response:** Parse the word "puella" (identify its case and number).  
+   **(1 point)**
 
-10. **Multiple Choice:** Which case is used for the direct object in Latin? (1 point)
-    - a) Nominative
-    - b) Accusative
-    - c) Ablative
+10. **Multiple Choice:** Which of these is NOT a first declension noun?  
+    a) rosa  
+    b) aqua  
+    c) puer  
+    **(1 point)**
 
-## Translation (4 points)
+## Translation (5 points)
 
-11. **Translate to English:** "Pax vobiscum." (2 points)
+11. **Translate to English:** "Terra est magna."  
+    **(2 points)**
 
-12. **Translate to Latin:** "Hello, students!" (2 points)
+12. **Translate to Latin:** "The girl is happy."  
+    **(3 points)**
 
-## Virtue Reflection (1 point)
+## Virtue Reflection (5 points)
 
-13. **Short Written Response:** How can using greetings like "salve" and "vale" show respect to others? Write a few sentences explaining your thoughts. (1 point)
-
----
+13. **Short Written Response:** This week, we focused on the virtue of Patience. How can practicing patience help you when learning something new, like Latin? Write a few sentences about a time when being patient helped you learn better.  
+    **(5 points)**
+```

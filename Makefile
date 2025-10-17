@@ -1,17 +1,25 @@
-.PHONY: install run test clean gen-week gen-day gen-all validate help
+.PHONY: install run test clean gen gen-week gen-all validate help
 
 help:
-	@echo "TEQUILA: AI Latin A Curriculum Generator (v1.0 Pilot)"
+	@echo "TEQUILA: AI Latin A Curriculum Generator (v1.3.0)"
 	@echo ""
 	@echo "Available targets:"
 	@echo "  install     - Install dependencies (OpenAI GPT-4o only)"
 	@echo "  run         - Run FastAPI server"
 	@echo "  test        - Run test suite"
 	@echo "  clean       - Clean build artifacts and logs"
-	@echo "  gen-all     - Generate all 35 weeks (EXPENSIVE!)"
-	@echo "  gen-range   - Generate week range (FROM=1 TO=5)"
+	@echo ""
+	@echo "Generation commands:"
+	@echo "  gen         - Flexible week generator (see examples below)"
 	@echo "  gen-week    - Generate single week (WEEK=11)"
+	@echo "  gen-all     - Generate all 35 weeks (EXPENSIVE!)"
 	@echo "  validate    - Validate a week structure (WEEK=11)"
+	@echo ""
+	@echo "Examples:"
+	@echo "  make gen WEEKS=3              # Generate Week 3"
+	@echo "  make gen WEEKS=3,5,7          # Generate Weeks 3, 5, and 7"
+	@echo "  make gen WEEKS=3-10           # Generate Weeks 3 through 10"
+	@echo "  make gen WEEKS=1-5,11-15      # Generate Weeks 1-5 and 11-15"
 
 install:
 	pip install -e .
@@ -29,6 +37,19 @@ clean:
 	find . -type d -name "*.egg-info" -exec rm -rf {} + 2>/dev/null || true
 	rm -rf logs/*.log logs/invalid_responses/ 2>/dev/null || true
 	@echo "✓ Cleaned build artifacts and logs"
+
+gen:
+	@if [ -z "$(WEEKS)" ]; then \
+		echo "Usage: make gen WEEKS=<spec>"; \
+		echo ""; \
+		echo "Examples:"; \
+		echo "  make gen WEEKS=3              # Generate Week 3"; \
+		echo "  make gen WEEKS=3,5,7          # Generate Weeks 3, 5, and 7"; \
+		echo "  make gen WEEKS=3-10           # Generate Weeks 3 through 10"; \
+		echo "  make gen WEEKS=1-5,11-15      # Generate Weeks 1-5 and 11-15"; \
+		exit 1; \
+	fi
+	python -m src.cli.gen $(WEEKS)
 
 gen-all:
 	@echo "⚠️  WARNING: This will generate all 35 weeks and may cost \$\$\$"

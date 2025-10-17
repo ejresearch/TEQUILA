@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Convenient wrapper for gen.py that can be called from anywhere
+# Usage: gen 3 | gen 3,5,7 | gen 3-10 | gen 1-5,11-15
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PROJECT_ROOT="$( cd "$SCRIPT_DIR/.." && pwd )"
+
+cd "$PROJECT_ROOT" && python -m src.cli.gen "$@"

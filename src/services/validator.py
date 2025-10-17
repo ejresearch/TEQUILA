@@ -99,6 +99,24 @@ def validate_day_fields(week_number: int, day_number: int) -> ValidationResult:
             result.add_error(location, "Field file missing")
             continue
 
+        # Special handling for 06_document_for_sparky/ directory
+        if field == "06_document_for_sparky/":
+            if not field_path.is_dir():
+                result.add_error(location, "Should be a directory, not a file")
+                continue
+
+            # Validate the 6 document files inside
+            from .storage import DOCUMENT_FOR_SPARKY_FILES
+            for doc_file in DOCUMENT_FOR_SPARKY_FILES:
+                doc_path = field_path / doc_file
+                doc_location = f"{location}{doc_file}"
+
+                if not doc_path.exists():
+                    result.add_error(doc_location, "Document file missing")
+                elif doc_path.stat().st_size == 0:
+                    result.add_warning(doc_location, "Document file is empty")
+            continue
+
         # Validate JSON files
         if field.endswith(".json"):
             try:
@@ -334,13 +352,78 @@ def validate_role_context(week_number: int) -> ValidationResult:
     return result
 
 
+def validate_internal_documents(week_number: int) -> ValidationResult:
+    """
+    Validate the internal_documents/ directory (v1.1 architecture).
+
+    Checks:
+    - All required documents exist (week_spec.json, week_summary.md, role_context.json, generation_log.json)
+    - JSON files are valid
+    - week_spec.json has required fields
+    """
+    result = ValidationResult()
+
+    from .storage import internal_documents_dir, INTERNAL_DOCUMENTS
+    internal_dir = internal_documents_dir(week_number)
+
+    if not internal_dir.exists():
+        result.add_error(
+            f"Week{week_number:02d}/internal_documents",
+            "internal_documents directory does not exist"
+        )
+        return result
+
+    # Check for required files
+    for doc in INTERNAL_DOCUMENTS:
+        doc_path = internal_dir / doc
+        location = f"Week{week_number:02d}/internal_documents/{doc}"
+
+        if not doc_path.exists():
+            result.add_error(location, "Required document missing")
+            continue
+
+        # Validate JSON files
+        if doc.endswith(".json"):
+            try:
+                with doc_path.open("r", encoding="utf-8") as f:
+                    data = json.load(f)
+
+                # Validate week_spec.json structure
+                if doc == "week_spec.json":
+                    required_keys = ["metadata", "objectives", "grammar_focus"]
+                    for key in required_keys:
+                        if key not in data:
+                            result.add_warning(
+                                location,
+                                f"week_spec missing recommended key: {key}"
+                            )
+
+                    # Check metadata
+                    if "metadata" in data:
+                        meta = data["metadata"]
+                        if not meta.get("week") or meta.get("week") != week_number:
+                            result.add_error(
+                                location,
+                                f"week_spec metadata.week should be {week_number}"
+                            )
+
+            except json.JSONDecodeError as e:
+                result.add_error(location, f"Invalid JSON: {e}")
+
+        # Check for empty files
+        if doc_path.stat().st_size == 0:
+            result.add_warning(location, "Document is empty")
+
+    return result
+
+
 def validate_week(week_number: int) -> ValidationResult:
     """
     Perform complete validation of a week.
 
     Validates:
     - All four days and their fields
-    - Week specification
+    - Week specification (v1.0 Week_Spec or v1.1 internal_documents)
     - Role context
     - Day 4 spiral content (for weeks >= 2)
 
@@ -357,6 +440,38 @@ def validate_week(week_number: int) -> ValidationResult:
         )
         return result
 
+    # Detect architecture version
+    from .storage import internal_documents_dir
+    internal_docs_dir = internal_documents_dir(week_number)
+    is_v11_architecture = internal_docs_dir.exists()
+
+    if is_v11_architecture:
+        result.add_info(
+            f"Week{week_number:02d}",
+            "Using v1.1 architecture (internal_documents/)"
+        )
+        # Validate internal_documents/
+        internal_result = validate_internal_documents(week_number)
+        result.errors.extend(internal_result.errors)
+        result.warnings.extend(internal_result.warnings)
+        result.info.extend(internal_result.info)
+    else:
+        result.add_info(
+            f"Week{week_number:02d}",
+            "Using v1.0 architecture (Week_Spec/ + Role_Context/)"
+        )
+        # Validate Week_Spec (v1.0)
+        spec_result = validate_week_spec(week_number)
+        result.errors.extend(spec_result.errors)
+        result.warnings.extend(spec_result.warnings)
+        result.info.extend(spec_result.info)
+
+        # Validate Role_Context (v1.0)
+        context_result = validate_role_context(week_number)
+        result.errors.extend(context_result.errors)
+        result.warnings.extend(context_result.warnings)
+        result.info.extend(context_result.info)
+
     # Validate all days
     for day_num in range(1, 5):
         day_result = validate_day_fields(week_number, day_num)
@@ -369,17 +484,5 @@ def validate_week(week_number: int) -> ValidationResult:
     result.errors.extend(spiral_result.errors)
     result.warnings.extend(spiral_result.warnings)
     result.info.extend(spiral_result.info)
-
-    # Validate Week_Spec
-    spec_result = validate_week_spec(week_number)
-    result.errors.extend(spec_result.errors)
-    result.warnings.extend(spec_result.warnings)
-    result.info.extend(spec_result.info)
-
-    # Validate Role_Context
-    context_result = validate_role_context(week_number)
-    result.errors.extend(context_result.errors)
-    result.warnings.extend(context_result.warnings)
-    result.info.extend(context_result.info)
 
     return result

@@ -1,0 +1,91 @@
+{
+  "identity": "Sparky the Encourager",
+  "audience": "Grade 3 (Grammar Stage, U.S.)",
+  "lesson_slot": {
+    "week": 1,
+    "day": 3,
+    "title": "Week 1 Day 3"
+  },
+  "objectives": [
+    "Identify first declension nouns in singular form.",
+    "Recite the nominative singular chant accurately.",
+    "Use 'Gloria Patri' in a sentence."
+  ],
+  "focus_areas": [
+    "First declension noun endings",
+    "Pronunciation of vocabulary",
+    "Chant recitation",
+    "Virtue of patience",
+    "Faith phrase usage"
+  ],
+  "spiral_hooks": {
+    "vocabulary_spiral": [
+      "puella",
+      "rosa",
+      "via",
+      "salve"
+    ],
+    "grammar_spiral": [
+      "Basic Latin pronunciation",
+      "Nominative singular endings"
+    ]
+  },
+  "virtue_integration": {
+    "virtue": "Patience",
+    "prompt": "Remember, patience helps us learn new words step by step."
+  },
+  "faith_integration": {
+    "phrase": "Gloria Patri",
+    "usage_note": "Use when starting or ending class prayers."
+  },
+  "coaching_cues": [
+    "Great job pronouncing 'puella'!",
+    "Let's try the chant together!",
+    "Remember, 'salve' means hello!",
+    "Patience helps us learn better!",
+    "Can you say 'Gloria Patri' with me?",
+    "Keep practicing, you're doing well!"
+  ],
+  "common_misconceptions": [
+    {
+      "pattern": "Mispronouncing 'puella' as 'pue-ya'",
+      "correction_cue": "Remember, it's 'pwel-la'!"
+    },
+    {
+      "pattern": "Forgetting the chant sequence",
+      "correction_cue": "Try again: a, ae, ae, am, ā."
+    }
+  ],
+  "checks_for_understanding": [
+    "What is the nominative singular ending for 'puella'?",
+    "How do you say 'hello' in Latin?",
+    "Can you recite the chant?",
+    "What does 'Gloria Patri' mean?",
+    "Why is patience important in learning?"
+  ],
+  "success_criteria": [
+    "Correctly identify first declension nouns.",
+    "Recite the chant without errors.",
+    "Use 'Gloria Patri' appropriately.",
+    "Show patience in learning new words."
+  ],
+  "differentiation": {
+    "support": [
+      "Use visual aids for noun endings.",
+      "Practice pronunciation in pairs."
+    ],
+    "extension": [
+      "Create simple sentences using new vocabulary.",
+      "Lead the chant for the class."
+    ]
+  },
+  "classroom_management": [
+    "Keep transitions smooth with clear signals.",
+    "Use a timer for chant practice."
+  ],
+  "constraints": {
+    "time_window_minutes": 25,
+    "tone": "warm-positive-brief",
+    "no_translation_key": true
+  }
+}

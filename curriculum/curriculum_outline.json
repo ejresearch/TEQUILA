@@ -1,137 +1,392 @@
 {
   "course": "Latin A",
   "target_grade": "3-5",
-  "total_weeks": 36,
+  "total_weeks": 35,
   "description": "Classical Latin instruction with virtue formation and spiral learning principles",
+  "source": "35-Week Latin A Schedule.txt",
+  "last_updated": "2025-10-17",
 
   "week_01": {
     "week": 1,
-    "title": "Latin Foundations: Alphabet and Pronunciation",
+    "title": "Introduction to Latin; Pronunciation (Ecclesiastical & Classical)",
     "virtue_focus": "Discipline",
     "faith_phrase": "In principio - In the beginning",
     "new_vocab": ["salve", "vale", "Latin", "lingua", "discipulus"],
-    "grammar_topics": ["Latin alphabet", "Classical pronunciation", "Vowel sounds"],
-    "learning_goals": ["Master Latin alphabet", "Pronounce Latin vowels correctly", "Greet others in Latin"]
+    "grammar_topics": ["Latin alphabet", "pronunciation guide", "simple Latin words"],
+    "learning_goals": ["Master Latin alphabet", "Understand pronunciation rules", "Speak simple Latin words"]
   },
 
   "week_02": {
     "week": 2,
-    "title": "First Words: Greetings and Simple Phrases",
-    "virtue_focus": "Respect",
-    "faith_phrase": "Pax vobiscum - Peace be with you",
-    "new_vocab": ["pax", "sum", "es", "est", "et", "non"],
-    "grammar_topics": ["Present tense of 'sum'", "Simple statements", "Negation with 'non'"],
-    "learning_goals": ["Use 'sum' correctly", "Form basic Latin sentences", "Respond to greetings"],
+    "title": "First Declension Nouns (Singular)",
+    "virtue_focus": "Patience",
+    "faith_phrase": "Gloria Patri - Glory to the Father",
+    "new_vocab": ["puella", "rosa", "via", "aqua", "terra", "silva"],
+    "grammar_topics": ["1st declension endings", "Nominative singular", "Chant: a, ae, ae, am, ā"],
+    "learning_goals": ["Identify 1st declension nouns", "Chant singular endings", "Understand feminine gender"],
     "spiral_from": [1]
   },
 
   "week_03": {
     "week": 3,
-    "title": "First Declension Nouns: Introduction",
-    "virtue_focus": "Patience",
-    "faith_phrase": "Gloria Patri - Glory to the Father",
-    "new_vocab": ["puella", "femina", "aqua", "terra", "via"],
-    "grammar_topics": ["First declension endings", "Nominative case", "Gender (feminine)"],
-    "learning_goals": ["Identify first declension nouns", "Use nominative case", "Understand gender"],
+    "title": "First Declension Nouns (Plural)",
+    "virtue_focus": "Diligence",
+    "faith_phrase": "Deo gratias - Thanks be to God",
+    "new_vocab": ["stella", "luna", "porta", "femina", "nauta"],
+    "grammar_topics": ["1st declension plural endings", "Derivatives", "Translation practice"],
+    "learning_goals": ["Chant plural endings", "Identify derivatives", "Translate simple sentences"],
     "spiral_from": [1, 2]
   },
 
   "week_04": {
     "week": 4,
-    "title": "First Declension: Accusative Case",
-    "virtue_focus": "Diligence",
-    "faith_phrase": "Deo gratias - Thanks be to God",
-    "new_vocab": ["porta", "silva", "stella", "luna", "rosa"],
-    "grammar_topics": ["Accusative case endings", "Direct objects", "Subject vs. object"],
-    "learning_goals": ["Form accusative case", "Identify direct objects", "Translate simple sentences"],
+    "title": "Noun Jobs and Case Review",
+    "virtue_focus": "Understanding",
+    "faith_phrase": "Sapientia Dei - Wisdom of God",
+    "new_vocab": ["poeta", "agricola", "insula", "provincia"],
+    "grammar_topics": ["Nominative", "Genitive", "Accusative", "Ablative", "Sentence patterns A & B"],
+    "learning_goals": ["Understand case functions", "Parse noun jobs", "Apply sentence patterns"],
     "spiral_from": [2, 3]
   },
 
   "week_05": {
     "week": 5,
-    "title": "First and Second Conjugation Verbs",
-    "virtue_focus": "Courage",
-    "faith_phrase": "Veni, Sancte Spiritus - Come, Holy Spirit",
-    "new_vocab": ["amo", "laudo", "porto", "video", "habeo"],
-    "grammar_topics": ["Present tense verb endings", "First conjugation -are", "Second conjugation -ere"],
-    "learning_goals": ["Conjugate present tense verbs", "Match subjects with verbs", "Form complete sentences"],
+    "title": "Second Declension Nouns (Masculine Singular)",
+    "virtue_focus": "Perseverance",
+    "faith_phrase": "Dominus vobiscum - The Lord be with you",
+    "new_vocab": ["servus", "dominus", "filius", "amicus", "puer"],
+    "grammar_topics": ["2nd declension -us endings", "Masculine gender", "Chant: us, ī, ō, um, ō"],
+    "learning_goals": ["Chant 2nd declension singular", "Distinguish masculine from feminine", "Decline -us nouns"],
     "spiral_from": [2, 3, 4]
   },
 
   "week_06": {
     "week": 6,
-    "title": "Second Declension Nouns: Masculine",
-    "virtue_focus": "Wisdom",
-    "faith_phrase": "Verbum Domini - The Word of the Lord",
-    "new_vocab": ["dominus", "servus", "filius", "amicus", "puer"],
-    "grammar_topics": ["Second declension -us endings", "Masculine gender", "Nominative and accusative"],
-    "learning_goals": ["Decline second declension nouns", "Distinguish masculine from feminine", "Use both genders in sentences"],
+    "title": "Second Declension Nouns (Masculine Plural)",
+    "virtue_focus": "Cooperation",
+    "faith_phrase": "Unus Deus - One God",
+    "new_vocab": ["magister", "vir", "ager", "liber"],
+    "grammar_topics": ["2nd declension plural endings", "Vocabulary expansion"],
+    "learning_goals": ["Chant 2nd declension plural", "Practice parsing", "Build vocabulary"],
     "spiral_from": [3, 4, 5]
   },
 
   "week_07": {
     "week": 7,
-    "title": "Second Declension: Neuter Nouns",
+    "title": "Second Declension (Neuter Nouns)",
     "virtue_focus": "Humility",
     "faith_phrase": "Fiat voluntas tua - Thy will be done",
     "new_vocab": ["templum", "donum", "verbum", "bellum", "regnum"],
-    "grammar_topics": ["Second declension -um endings", "Neuter gender rules", "Three genders"],
-    "learning_goals": ["Identify neuter nouns", "Apply neuter endings", "Use all three genders"],
+    "grammar_topics": ["2nd declension -um endings", "Neuter rules", "Three genders"],
+    "learning_goals": ["Identify neuter nouns", "Apply neuter rules", "Understand three genders"],
     "spiral_from": [4, 5, 6]
   },
 
   "week_08": {
     "week": 8,
-    "title": "Adjectives: First-Second Declension",
+    "title": "First and Second Declension Adjectives",
     "virtue_focus": "Justice",
     "faith_phrase": "Justitia et pax - Justice and peace",
     "new_vocab": ["bonus", "magnus", "malus", "parvus", "multus"],
-    "grammar_topics": ["Adjective endings", "Agreement with nouns", "Gender-number-case agreement"],
-    "learning_goals": ["Form adjective endings", "Match adjectives to nouns", "Translate descriptive phrases"],
-    "spiral_from": [3, 6, 7]
+    "grammar_topics": ["Adjective endings", "Agreement rules", "Matching nouns"],
+    "learning_goals": ["Form adjective endings", "Match adjectives to nouns", "Understand agreement"],
+    "spiral_from": [3, 5, 6, 7]
   },
 
   "week_09": {
     "week": 9,
-    "title": "Third Conjugation Verbs",
-    "virtue_focus": "Fortitude",
-    "faith_phrase": "Deus fortitudo mea - God is my strength",
-    "new_vocab": ["dico", "duco", "mitto", "scribo", "lego"],
-    "grammar_topics": ["Third conjugation -ere", "Stem vowel changes", "Present tense forms"],
-    "learning_goals": ["Conjugate third conjugation", "Distinguish conjugation types", "Use multiple verb types"],
+    "title": "Sum, Esse – Present Tense",
+    "virtue_focus": "Truth",
+    "faith_phrase": "Ego sum via, veritas, et vita - I am the way, truth, and life",
+    "new_vocab": ["sum", "es", "est", "sumus", "estis", "sunt"],
+    "grammar_topics": ["Chant: sum, es, est...", "Linking verbs", "Predicate nominatives"],
+    "learning_goals": ["Conjugate sum", "Use linking verbs", "Understand predicate nominatives"],
     "spiral_from": [5, 6, 8]
   },
 
   "week_10": {
     "week": 10,
-    "title": "Genitive and Dative Cases",
-    "virtue_focus": "Charity",
-    "faith_phrase": "Deus caritas est - God is love",
-    "new_vocab": ["filia", "mater", "pater", "liber", "soror"],
-    "grammar_topics": ["Genitive case (possession)", "Dative case (indirect object)", "Five cases"],
-    "learning_goals": ["Form genitive endings", "Form dative endings", "Show possession and giving"],
-    "spiral_from": [3, 4, 6, 7]
+    "title": "Verb Basics: Person, Number, and Tense",
+    "virtue_focus": "Order",
+    "faith_phrase": "Ordo amoris - Order of love",
+    "new_vocab": [],
+    "grammar_topics": ["Subject-verb agreement", "Verb charts", "Person and number"],
+    "learning_goals": ["Understand person and number", "Match subjects with verbs", "Read verb charts"],
+    "spiral_from": [9]
   },
 
   "week_11": {
     "week": 11,
-    "title": "Ablative Case: Introduction",
-    "virtue_focus": "Temperance",
-    "faith_phrase": "In medio stat virtus - Virtue stands in the middle",
-    "new_vocab": ["cum", "in", "ex", "de", "ab"],
-    "grammar_topics": ["Ablative case uses", "Prepositions with ablative", "Means and accompaniment"],
-    "learning_goals": ["Form ablative endings", "Use ablative with prepositions", "Express means and manner"],
-    "spiral_from": [6, 7, 8, 10]
+    "title": "First Conjugation Verbs (Present Tense)",
+    "virtue_focus": "Action",
+    "faith_phrase": "Fac quod debes - Do what you ought",
+    "new_vocab": ["amo", "laudo", "porto", "voco", "specto"],
+    "grammar_topics": ["Chant: ō, ās, at, āmus, ātis, ant", "1st conjugation -are"],
+    "learning_goals": ["Conjugate 1st conjugation", "Chant endings", "Translate verbs"],
+    "spiral_from": [9, 10]
   },
 
   "week_12": {
     "week": 12,
-    "title": "Review and Synthesis: First Quarter",
-    "virtue_focus": "Prudence",
+    "title": "Second Conjugation Verbs (Present Tense)",
+    "virtue_focus": "Wisdom",
     "faith_phrase": "Sapientia aedificavit - Wisdom has built",
-    "new_vocab": ["omnis", "totus", "unus", "duo", "tres"],
-    "grammar_topics": ["All five cases", "Three conjugations", "Full declension review"],
-    "learning_goals": ["Demonstrate mastery of cases", "Translate complex sentences", "Apply all grammar learned"],
-    "spiral_from": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    "new_vocab": ["video", "habeo", "teneo", "debeo", "moneo"],
+    "grammar_topics": ["Chant: eō, ēs, et, ēmus, ētis, ent", "2nd conjugation -ēre"],
+    "learning_goals": ["Conjugate 2nd conjugation", "Distinguish from 1st conjugation", "Translate verbs"],
+    "spiral_from": [10, 11]
+  },
+
+  "week_13": {
+    "week": 13,
+    "title": "Using Nouns and Verbs in Sentences",
+    "virtue_focus": "Synthesis",
+    "faith_phrase": "Verbum Domini manet in aeternum - The word of the Lord remains forever",
+    "new_vocab": [],
+    "grammar_topics": ["Translation practice", "Parsing", "Sentence patterns A–D"],
+    "learning_goals": ["Combine nouns and verbs", "Parse sentences", "Apply patterns"],
+    "spiral_from": [2, 3, 4, 5, 6, 7, 11, 12]
+  },
+
+  "week_14": {
+    "week": 14,
+    "title": "Prepositions with Accusative",
+    "virtue_focus": "Direction",
+    "faith_phrase": "Ad maiorem Dei gloriam - For the greater glory of God",
+    "new_vocab": ["ad", "per", "post", "in", "trans"],
+    "grammar_topics": ["Prepositions + accusative case"],
+    "learning_goals": ["Use accusative prepositions", "Translate prepositional phrases", "Understand direction"],
+    "spiral_from": [4, 13]
+  },
+
+  "week_15": {
+    "week": 15,
+    "title": "Prepositions with Ablative",
+    "virtue_focus": "Place",
+    "faith_phrase": "In Deo speramus - In God we trust",
+    "new_vocab": ["cum", "ex", "de", "ab", "sine"],
+    "grammar_topics": ["Prepositions + ablative case"],
+    "learning_goals": ["Use ablative prepositions", "Distinguish from accusative", "Translate phrases"],
+    "spiral_from": [4, 13, 14]
+  },
+
+  "week_16": {
+    "week": 16,
+    "title": "Semester Review and Assessment",
+    "virtue_focus": "Prudence",
+    "faith_phrase": "Omnia in mensura - All things in measure",
+    "new_vocab": [],
+    "grammar_topics": ["Review chants", "Review vocabulary", "Grammar concepts", "Cumulative quiz"],
+    "learning_goals": ["Demonstrate mastery", "Review all topics", "Assess progress"],
+    "spiral_from": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+  },
+
+  "week_17": {
+    "week": 17,
+    "title": "Imperfect Tense of 1st and 2nd Conjugation Verbs",
+    "virtue_focus": "Memory",
+    "faith_phrase": "Memento mori - Remember you will die",
+    "new_vocab": [],
+    "grammar_topics": ["Chant: bam, bās, bat...", "Past continuous", "Translation with time"],
+    "learning_goals": ["Conjugate imperfect", "Understand past time", "Translate imperfect"],
+    "spiral_from": [11, 12]
+  },
+
+  "week_18": {
+    "week": 18,
+    "title": "Future Tense of 1st and 2nd Conjugation Verbs",
+    "virtue_focus": "Hope",
+    "faith_phrase": "Spes nostra - Our hope",
+    "new_vocab": [],
+    "grammar_topics": ["Chant: bō, bis, bit...", "Future time", "Verb endings review"],
+    "learning_goals": ["Conjugate future", "Distinguish tenses", "Translate future"],
+    "spiral_from": [11, 12, 17]
+  },
+
+  "week_19": {
+    "week": 19,
+    "title": "3rd Conjugation Verbs (Present Tense)",
+    "virtue_focus": "Fortitude",
+    "faith_phrase": "Deus fortitudo mea - God is my strength",
+    "new_vocab": ["duco", "dico", "mitto", "scribo", "lego"],
+    "grammar_topics": ["Chant: ō, is, it...", "3rd conjugation -ere"],
+    "learning_goals": ["Conjugate 3rd conjugation", "Distinguish stem changes", "Parse verbs"],
+    "spiral_from": [11, 12]
+  },
+
+  "week_20": {
+    "week": 20,
+    "title": "3rd Conjugation Verbs (Imperfect & Future)",
+    "virtue_focus": "Constancy",
+    "faith_phrase": "Christus heri, hodie, semper - Christ yesterday, today, forever",
+    "new_vocab": [],
+    "grammar_topics": ["Translation with context", "Recognition and parsing"],
+    "learning_goals": ["Conjugate 3rd conjugation tenses", "Translate in context", "Parse verbs"],
+    "spiral_from": [17, 18, 19]
+  },
+
+  "week_21": {
+    "week": 21,
+    "title": "Personal Pronouns: ego, tū, nōs, vōs",
+    "virtue_focus": "Identity",
+    "faith_phrase": "Ego sum qui sum - I am who I am",
+    "new_vocab": ["ego", "tu", "nos", "vos"],
+    "grammar_topics": ["Chant: ego, nōs... / tū, vōs...", "Usage in context"],
+    "learning_goals": ["Decline personal pronouns", "Use in sentences", "Understand emphasis"],
+    "spiral_from": [9]
+  },
+
+  "week_22": {
+    "week": 22,
+    "title": "Demonstratives: hic, ille, iste",
+    "virtue_focus": "Clarity",
+    "faith_phrase": "Hic est Filius meus - This is my Son",
+    "new_vocab": ["hic", "ille", "iste"],
+    "grammar_topics": ["Chant: hic, haec, hoc...", "Agreement with nouns"],
+    "learning_goals": ["Decline demonstratives", "Match with nouns", "Translate this/that"],
+    "spiral_from": [8, 21]
+  },
+
+  "week_23": {
+    "week": 23,
+    "title": "Pronouns is, ea, id / eī, eae, ea",
+    "virtue_focus": "Reference",
+    "faith_phrase": "Is qui venturus est - He who is to come",
+    "new_vocab": ["is", "ea", "id"],
+    "grammar_topics": ["Usage and translation", "Practice in sentences"],
+    "learning_goals": ["Decline is/ea/id", "Use as pronoun", "Translate he/she/it"],
+    "spiral_from": [21, 22]
+  },
+
+  "week_24": {
+    "week": 24,
+    "title": "Third Declension Nouns (Regular)",
+    "virtue_focus": "Complexity",
+    "faith_phrase": "In multis unum - In many, one",
+    "new_vocab": ["rex", "dux", "miles", "civis", "pax"],
+    "grammar_topics": ["Vocabulary and chant", "Parsing rules"],
+    "learning_goals": ["Identify 3rd declension", "Chant endings", "Parse nouns"],
+    "spiral_from": [2, 3, 4, 5]
+  },
+
+  "week_25": {
+    "week": 25,
+    "title": "Third Declension Nouns (I-stem)",
+    "virtue_focus": "Precision",
+    "faith_phrase": "Veritas liberabit vos - Truth will free you",
+    "new_vocab": ["civis", "navis", "turris", "ignis"],
+    "grammar_topics": ["I-stem rules", "Vocabulary and parsing practice"],
+    "learning_goals": ["Identify i-stems", "Apply special rules", "Parse accurately"],
+    "spiral_from": [24]
+  },
+
+  "week_26": {
+    "week": 26,
+    "title": "Third Declension Neuter Nouns",
+    "virtue_focus": "Balance",
+    "faith_phrase": "Aequitas et veritas - Equity and truth",
+    "new_vocab": ["nomen", "corpus", "tempus", "opus"],
+    "grammar_topics": ["Chant: neuter rules", "Examples and translation"],
+    "learning_goals": ["Apply neuter rules to 3rd declension", "Translate", "Parse"],
+    "spiral_from": [7, 24, 25]
+  },
+
+  "week_27": {
+    "week": 27,
+    "title": "Imperatives and Infinitives (1st–3rd Conjugation)",
+    "virtue_focus": "Authority",
+    "faith_phrase": "Fiat lux - Let there be light",
+    "new_vocab": [],
+    "grammar_topics": ["Command forms", "Derivative connection"],
+    "learning_goals": ["Form imperatives", "Use infinitives", "Connect to English derivatives"],
+    "spiral_from": [11, 12, 19]
+  },
+
+  "week_28": {
+    "week": 28,
+    "title": "Numbers: Cardinal and Ordinal",
+    "virtue_focus": "Count",
+    "faith_phrase": "Unus Deus, Trinitas sancta - One God, Holy Trinity",
+    "new_vocab": ["unus", "duo", "tres", "quattuor", "quinque", "primus", "secundus", "tertius"],
+    "grammar_topics": ["Chant: ūnus, duo, trēs...", "Reading Roman numerals"],
+    "learning_goals": ["Count in Latin", "Read Roman numerals", "Use ordinals"],
+    "spiral_from": []
+  },
+
+  "week_29": {
+    "week": 29,
+    "title": "More Numbers: Declension of duo and trēs",
+    "virtue_focus": "Detail",
+    "faith_phrase": "Tres personae, una substantia - Three persons, one substance",
+    "new_vocab": [],
+    "grammar_topics": ["Genitive and ablative use with numbers"],
+    "learning_goals": ["Decline duo/tres", "Use with nouns", "Understand number agreement"],
+    "spiral_from": [28]
+  },
+
+  "week_30": {
+    "week": 30,
+    "title": "Review of Verbs (Present, Imperfect, Future)",
+    "virtue_focus": "Time",
+    "faith_phrase": "Hodie et in saecula - Today and forever",
+    "new_vocab": [],
+    "grammar_topics": ["Chant review", "Tense translation and parsing"],
+    "learning_goals": ["Master all three tenses", "Parse verbs accurately", "Translate in context"],
+    "spiral_from": [11, 12, 17, 18, 19, 20]
+  },
+
+  "week_31": {
+    "week": 31,
+    "title": "Review of Nouns (All Declensions)",
+    "virtue_focus": "Mastery",
+    "faith_phrase": "Omnia vincit amor - Love conquers all",
+    "new_vocab": [],
+    "grammar_topics": ["Parsing and matching", "Sentence practice"],
+    "learning_goals": ["Parse all declensions", "Match forms", "Demonstrate mastery"],
+    "spiral_from": [2, 3, 4, 5, 6, 7, 24, 25, 26]
+  },
+
+  "week_32": {
+    "week": 32,
+    "title": "Review of Pronouns and Adjectives",
+    "virtue_focus": "Connection",
+    "faith_phrase": "Unum corpus, unus spiritus - One body, one spirit",
+    "new_vocab": [],
+    "grammar_topics": ["Demonstratives", "Personal pronouns", "Agreement"],
+    "learning_goals": ["Review all pronouns", "Match adjectives", "Apply agreement rules"],
+    "spiral_from": [8, 21, 22, 23]
+  },
+
+  "week_33": {
+    "week": 33,
+    "title": "Review of Prepositions and Sentence Patterns",
+    "virtue_focus": "Structure",
+    "faith_phrase": "Ordo et concordia - Order and harmony",
+    "new_vocab": [],
+    "grammar_topics": ["Application in translation", "Syntax focus"],
+    "learning_goals": ["Use all prepositions", "Apply sentence patterns", "Translate accurately"],
+    "spiral_from": [14, 15, 13]
+  },
+
+  "week_34": {
+    "week": 34,
+    "title": "Cumulative Translation Practice and Review",
+    "virtue_focus": "Excellence",
+    "faith_phrase": "Ad astra per aspera - To the stars through difficulties",
+    "new_vocab": [],
+    "grammar_topics": ["Mixed exercises from all topics"],
+    "learning_goals": ["Translate complex sentences", "Apply all grammar", "Demonstrate comprehensive understanding"],
+    "spiral_from": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33]
+  },
+
+  "week_35": {
+    "week": 35,
+    "title": "Final Exam and Recitation",
+    "virtue_focus": "Completion",
+    "faith_phrase": "Consummatum est - It is finished",
+    "new_vocab": [],
+    "grammar_topics": ["Vocabulary", "Chants", "Parsing", "Translation assessment"],
+    "learning_goals": ["Demonstrate mastery of Latin A", "Recite chants", "Translate accurately", "Celebrate completion"],
+    "spiral_from": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34]
   }
 }

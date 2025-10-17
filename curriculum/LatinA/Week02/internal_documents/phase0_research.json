@@ -1,0 +1,483 @@
+{
+  "00_week_entry": {
+    "week": 2,
+    "title": "First Declension Nouns (Singular)",
+    "virtue_focus": "Patience",
+    "faith_phrase": "Gloria Patri - Glory to the Father",
+    "new_vocab": [
+      "puella",
+      "rosa",
+      "via",
+      "aqua",
+      "terra",
+      "silva"
+    ],
+    "grammar_topics": [
+      "1st declension endings",
+      "Nominative singular",
+      "Chant: a, ae, ae, am, ā"
+    ],
+    "learning_goals": [
+      "Identify 1st declension nouns",
+      "Chant singular endings",
+      "Understand feminine gender"
+    ],
+    "spiral_from": [
+      1
+    ],
+    "_metadata": {
+      "extracted_at": "2025-10-17T11:24:59.745283",
+      "source": "curriculum/curriculum_outline.json",
+      "extraction_method": "direct_read"
+    }
+  },
+  "01_backward_analysis": {
+    "prior_weeks_reviewed": [
+      1
+    ],
+    "cumulative_latin_vocabulary": [
+      {
+        "word": "salve",
+        "week_introduced": 1,
+        "part_of_speech": "interjection",
+        "mastery_expected": true
+      },
+      {
+        "word": "vale",
+        "week_introduced": 1,
+        "part_of_speech": "interjection",
+        "mastery_expected": true
+      },
+      {
+        "word": "Latin",
+        "week_introduced": 1,
+        "part_of_speech": "noun",
+        "mastery_expected": true
+      },
+      {
+        "word": "lingua",
+        "week_introduced": 1,
+        "part_of_speech": "noun",
+        "mastery_expected": true
+      },
+      {
+        "word": "discipulus",
+        "week_introduced": 1,
+        "part_of_speech": "noun",
+        "mastery_expected": true
+      }
+    ],
+    "cumulative_grammar_concepts": [
+      {
+        "concept": "Latin alphabet",
+        "week_introduced": 1,
+        "mastery_level": "recognition"
+      },
+      {
+        "concept": "pronunciation guide",
+        "week_introduced": 1,
+        "mastery_level": "understanding"
+      },
+      {
+        "concept": "simple Latin words",
+        "week_introduced": 1,
+        "mastery_level": "speaking"
+      }
+    ],
+    "student_knowledge_state": "Students have been introduced to the Latin alphabet and basic pronunciation rules. They are expected to recognize and pronounce simple Latin words and phrases. Vocabulary includes basic greetings and terms related to language and learning.",
+    "common_mistakes_by_now": [
+      "Confusing pronunciation between Ecclesiastical and Classical Latin",
+      "Mispronouncing vowel sounds"
+    ],
+    "spiral_review_target_percentage": 0.25,
+    "_metadata": {
+      "generated_at": "2025-10-17T11:25:07.116842",
+      "model": "gpt-4o",
+      "temperature": 0.2
+    }
+  },
+  "02_forward_analysis": {
+    "future_weeks_previewed": [
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "upcoming_topics": [
+      {
+        "week": 3,
+        "title": "First Declension Nouns (Plural)",
+        "dependency_on_current_week": "Students must be familiar with singular forms of first declension nouns to understand pluralization."
+      },
+      {
+        "week": 4,
+        "title": "Noun Jobs and Case Review",
+        "dependency_on_current_week": "Understanding of basic noun cases and their functions is crucial for parsing noun jobs."
+      },
+      {
+        "week": 5,
+        "title": "Second Declension Nouns (Masculine Singular)",
+        "dependency_on_current_week": "Basic understanding of declension concepts from first declension is necessary to transition to second declension."
+      },
+      {
+        "week": 6,
+        "title": "Second Declension Nouns (Masculine Plural)",
+        "dependency_on_current_week": "Knowledge of singular forms in second declension is needed to form and understand plural forms."
+      },
+      {
+        "week": 7,
+        "title": "Second Declension (Neuter Nouns)",
+        "dependency_on_current_week": "Understanding of masculine forms in second declension will aid in grasping neuter forms and rules."
+      }
+    ],
+    "prerequisites_this_week_must_establish": [
+      "Mastery of first declension singular forms for Week 3",
+      "Understanding of basic noun cases for Week 4",
+      "Familiarity with declension concepts for Week 5"
+    ],
+    "vocabulary_seeds_for_future": [
+      {
+        "word": "puella",
+        "future_use": "Used in Week 3 plural exercises"
+      }
+    ],
+    "_metadata": {
+      "generated_at": "2025-10-17T11:25:14.400427",
+      "model": "gpt-4o",
+      "temperature": 0.2
+    }
+  },
+  "03_pedagogical_research": {
+    "research_question": "How do classical Latin curricula teach 'First Declension Nouns (Singular)' to Grade 3?",
+    "logos_latin_approach": "Logos Latin typically employs a structured, incremental approach to teaching Latin, focusing on memorization and repetition. For first declension nouns, they introduce the concept through visual aids and chants. Students learn the endings through repetition and are encouraged to practice with simple sentences. The curriculum often includes interactive activities like matching games and fill-in-the-blank exercises to reinforce learning.",
+    "latin_for_children_approach": "Latin for Children by Classical Academic Press uses a more engaging, story-based approach. The curriculum introduces first declension nouns through narratives and characters that students can relate to. The endings are taught using chants and songs, and students practice by translating simple sentences. This approach emphasizes understanding through context and usage, often incorporating visual aids and interactive exercises to solidify the concepts.",
+    "traditional_catholic_school_approach": "Traditional Catholic schools often follow a more classical, rote memorization method. Students are introduced to the first declension endings through chants and recitation. The focus is on memorizing the endings in a specific order: a, ae, ae, am, ā. Teachers may use Latin prayers or hymns to provide context and practice. The curriculum emphasizes repetition and drills, with regular quizzes to ensure retention.",
+    "standard_vocabulary_for_this_topic": [
+      "puella",
+      "terra",
+      "aqua",
+      "silva",
+      "femina"
+    ],
+    "time_tested_chants": [
+      "a, ae, ae, am, ā"
+    ],
+    "common_misconceptions": [
+      "Confusing nominative and accusative endings: Students often mix up 'a' and 'am'. Correction involves emphasizing the role of the subject and object in sentences.",
+      "Assuming all nouns follow the same pattern: Students may apply first declension endings to second declension nouns. Correction involves teaching the distinct characteristics of each declension."
+    ],
+    "reasoning_trace": "To analyze how classical Latin curricula teach first declension nouns, I reviewed the pedagogical approaches of Logos Latin, Latin for Children, and traditional Catholic schools. I focused on their methods for introducing and reinforcing the concept of first declension singular endings. I identified standard vocabulary by examining commonly used words in beginner Latin courses. Time-tested chants were sourced from traditional teaching methods that emphasize memorization. Common misconceptions were identified based on typical challenges faced by students learning Latin declensions, supported by educational literature on Latin pedagogy.",
+    "_metadata": {
+      "generated_at": "2025-10-17T11:25:32.729380",
+      "model": "o1-mini (or gpt-4o fallback)"
+    }
+  },
+  "04_vocabulary_plan": {
+    "vocabulary_reasoning": "The suggested vocabulary aligns well with the grammar topic of 1st declension nouns, focusing on singular forms. All words are Classical Latin and appropriate for Grade 3 students. The vocabulary includes common and easily understandable nouns that are relevant to the students' learning stage. The words also align with classical pedagogy standards, providing a good foundation for understanding Latin noun declensions. The spiral review percentage is calculated based on the inclusion of previously taught words, ensuring reinforcement of prior knowledge.",
+    "new_latin_words": [
+      {
+        "word": "puella",
+        "english": "girl",
+        "part_of_speech": "noun",
+        "declension": "1st",
+        "gender": "feminine",
+        "rationale": "This word is a standard example of a 1st declension noun and will be used in future lessons, making it essential for students to learn early on.",
+        "difficulty": "easy",
+        "future_dependency": "Used in Week 3 plural exercises"
+      },
+      {
+        "word": "rosa",
+        "english": "rose",
+        "part_of_speech": "noun",
+        "declension": "1st",
+        "gender": "feminine",
+        "rationale": "Commonly used in Latin teaching for its simple declension pattern, helping students understand noun endings.",
+        "difficulty": "easy",
+        "future_dependency": "None specified"
+      },
+      {
+        "word": "via",
+        "english": "road",
+        "part_of_speech": "noun",
+        "declension": "1st",
+        "gender": "feminine",
+        "rationale": "Introduces students to vocabulary related to everyday life in ancient Rome, enhancing cultural understanding.",
+        "difficulty": "easy",
+        "future_dependency": "None specified"
+      },
+      {
+        "word": "aqua",
+        "english": "water",
+        "part_of_speech": "noun",
+        "declension": "1st",
+        "gender": "feminine",
+        "rationale": "A fundamental vocabulary word that is easy to remember and relevant to various contexts.",
+        "difficulty": "easy",
+        "future_dependency": "None specified"
+      },
+      {
+        "word": "terra",
+        "english": "earth",
+        "part_of_speech": "noun",
+        "declension": "1st",
+        "gender": "feminine",
+        "rationale": "Helps students connect language learning with geography and nature.",
+        "difficulty": "easy",
+        "future_dependency": "None specified"
+      },
+      {
+        "word": "silva",
+        "english": "forest",
+        "part_of_speech": "noun",
+        "declension": "1st",
+        "gender": "feminine",
+        "rationale": "Expands students' vocabulary related to nature, providing a broader context for language use.",
+        "difficulty": "easy",
+        "future_dependency": "None specified"
+      }
+    ],
+    "recycled_latin_words": [
+      {
+        "word": "salve",
+        "originally_taught_week": 1,
+        "spiral_purpose": "Reinforces basic greetings and conversational skills, ensuring retention of fundamental vocabulary."
+      }
+    ],
+    "alignment_check": {
+      "matches_grammar_topic": true,
+      "supports_faith_integration": true,
+      "age_appropriate": true,
+      "classical_pedagogy_aligned": true,
+      "NO_SPANISH_WORDS": true
+    },
+    "_metadata": {
+      "generated_at": "2025-10-17T11:26:02.686044",
+      "model": "o1-mini (or gpt-4o fallback)"
+    }
+  },
+  "05_session_duration": {
+    "week_number": 2,
+    "recommended_duration_minutes": 13,
+    "rationale": "Weeks 1-8: Novice attention span, building stamina",
+    "time_breakdown": {
+      "greeting_and_spiral": 3,
+      "chant_practice": 3,
+      "grammar_instruction": 3,
+      "guided_practice": 3,
+      "virtue_closure": 1
+    },
+    "_metadata": {
+      "generated_at": "2025-10-17T11:26:02.686069",
+      "method": "rule_based"
+    }
+  },
+  "06_virtue_faith_strategy": {
+    "virtue_focus": "Patience",
+    "virtue_connection_to_language_learning": "Learning Latin requires patience, as it involves understanding complex grammar rules and vocabulary. Patience helps students persist through challenges and gradually build their language skills.",
+    "scripture_reference": {
+      "passage": "James 1:4",
+      "text": "Let perseverance finish its work so that you may be mature and complete, not lacking anything.",
+      "application": "This week, students are encouraged to let patience guide their learning process, understanding that mastery of Latin takes time and effort."
+    },
+    "faith_phrase": "Gloria Patri",
+    "faith_phrase_explanation": "The phrase 'Gloria Patri' translates to 'Glory to the Father' and is used in doxologies to give praise to God. It reminds us to glorify God in all our efforts, including our studies.",
+    "liturgical_connection": "The 'Gloria Patri' is often recited during the Liturgy of the Hours and at the end of Psalms and Canticles, reminding us to offer our work and learning to God.",
+    "virtue_practice_in_lesson": [
+      "Begin each lesson with a moment of silence, asking for the grace of patience.",
+      "Encourage students to take deep breaths and refocus when they encounter difficult concepts."
+    ],
+    "_metadata": {
+      "generated_at": "2025-10-17T11:26:07.796238",
+      "model": "gpt-4o",
+      "temperature": 0.3
+    }
+  },
+  "07_assessment_plan": {
+    "day_4_quiz_components": [
+      {
+        "component": "Vocabulary Recall",
+        "format": "description",
+        "words_tested": [
+          "puella",
+          "rosa",
+          "via",
+          "aqua",
+          "terra",
+          "silva"
+        ],
+        "mastery_target": "Students should be able to recall and write the English meaning of each Latin word with at least 80% accuracy."
+      },
+      {
+        "component": "Grammar Application",
+        "format": "fill-in-the-blank",
+        "words_tested": [
+          "puella",
+          "rosa",
+          "via",
+          "aqua",
+          "terra",
+          "silva"
+        ],
+        "mastery_target": "Students should correctly apply the nominative singular ending to each word with at least 80% accuracy."
+      },
+      {
+        "component": "Chant Recitation",
+        "format": "oral",
+        "words_tested": [
+          "a, ae, ae, am, ā"
+        ],
+        "mastery_target": "Students should be able to recite the chant with correct pronunciation and order."
+      }
+    ],
+    "success_indicators": [
+      "Students can accurately translate the vocabulary words from Latin to English.",
+      "Students can correctly identify and apply the nominative singular endings of first declension nouns.",
+      "Students can confidently recite the first declension chant."
+    ],
+    "preparation_for_next_week": "This assessment ensures students have a solid understanding of first declension singular nouns, which is crucial for Week 3 when plural forms and additional declension cases will be introduced.",
+    "_metadata": {
+      "generated_at": "2025-10-17T11:26:12.195543",
+      "model": "gpt-4o",
+      "temperature": 0.25
+    }
+  },
+  "08_differentiation_plan": {
+    "struggling_students": {
+      "scaffolds": [
+        "Use visual aids like charts and flashcards with images and Latin words.",
+        "Provide fill-in-the-blank exercises with word banks for practice."
+      ],
+      "modified_success_criteria": "Students will correctly identify and use at least three 1st declension nouns in the nominative singular form with 70% accuracy."
+    },
+    "advanced_students": {
+      "extensions": [
+        "Introduce additional 1st declension nouns beyond the core vocabulary.",
+        "Encourage students to create simple sentences using the new nouns."
+      ],
+      "advanced_practice": "Students will write a short paragraph in Latin using at least five 1st declension nouns in the nominative singular form, demonstrating an understanding of their meanings and proper usage."
+    },
+    "english_language_learners": {
+      "pronunciation_support": [
+        "Provide audio recordings of the vocabulary words and chants for students to listen and repeat.",
+        "Use phonetic spellings alongside Latin words to aid pronunciation."
+      ],
+      "vocabulary_support": "Create a bilingual glossary with images and translations for each vocabulary word to reinforce meaning and context."
+    },
+    "_metadata": {
+      "generated_at": "2025-10-17T11:26:17.156758",
+      "model": "gpt-4o",
+      "temperature": 0.3
+    }
+  },
+  "09_materials_list": {
+    "chant_charts": [
+      {
+        "title": "Week Paradigm Chart",
+        "content": "To be determined from grammar topic",
+        "format": "Large poster, laminated"
+      }
+    ],
+    "flashcard_sets": [
+      {
+        "set_name": "New Vocabulary",
+        "cards": [
+          "puella",
+          "rosa",
+          "via",
+          "aqua",
+          "terra",
+          "silva"
+        ],
+        "format": "3x5 index cards, Latin front / English + pronunciation back"
+      },
+      {
+        "set_name": "Review Vocabulary",
+        "cards": [
+          "salve"
+        ],
+        "format": "Same style, marked 'REVIEW'"
+      }
+    ],
+    "worksheets": [
+      {
+        "title": "Practice Sheet",
+        "exercises": [
+          "Fill in the blank",
+          "Translation",
+          "Parsing"
+        ]
+      }
+    ],
+    "visual_aids": [
+      "Picture cards for concrete nouns",
+      "Grammar charts"
+    ],
+    "_metadata": {
+      "generated_at": "2025-10-17T11:26:17.156832",
+      "method": "rule_based"
+    }
+  },
+  "10_master_analysis": {
+    "class_name_pattern": "Latin A \u0013 Week [number] Day [number] : [Theme or Topic] \u0014 [Additional Context or Focus]",
+    "summary_style_guide": {
+      "tone": "Welcoming and instructional, with a focus on faith and discovery.",
+      "structure": "Introduction to the day's theme, key activities, vocabulary introduction, and a concluding faith or reflection phrase.",
+      "opening_pattern": "Welcomes students to the day and introduces the theme or focus.",
+      "closing_pattern": "Ends with a faith phrase or reflection connecting language learning to faith."
+    },
+    "vocabulary_format": {
+      "simple_style": "Word \u0013 Translation",
+      "advanced_style": "Word \u0013 Translation (English derivatives)",
+      "typography_rules": "Use of macrons for long vowels, italics for Latin words."
+    },
+    "sparky_voice_characteristics": [
+      "Engaging",
+      "Interactive",
+      "Encouraging",
+      "Faith-oriented"
+    ],
+    "quality_markers": [
+      "Clear structure",
+      "Consistent tone",
+      "Faith integration",
+      "Interactive elements"
+    ],
+    "_metadata": {
+      "generated_at": "2025-10-17T11:26:23.120348",
+      "model": "gpt-4o",
+      "temperature": 0.2
+    }
+  },
+  "11_alignment_guide": {
+    "aligned_class_names": {
+      "day_1": "Latin A – Week 2 Day 1 : First Declension Nouns (Singular) — Patience",
+      "day_2": "Latin A – Week 2 Day 2 : First Declension Nouns (Singular) — Gloria Patri",
+      "day_3": "Latin A – Week 2 Day 3 : First Declension Nouns (Singular) — Chant Mastery",
+      "day_4": "Latin A – Week 2 Day 4 : First Declension Nouns (Singular) — Assessment and Reflection"
+    },
+    "aligned_summaries": {
+      "day_1": "Sparky begins Week 2 by welcoming students to the exploration of First Declension Nouns in their singular forms. Today's focus is on patience, as students learn the nominative singular endings through engaging chants and interactive activities. We conclude with a reflection on how patience aids our learning journey.",
+      "day_2": "Today, Sparky guides students through the vocabulary of First Declension Nouns, emphasizing the faith phrase 'Gloria Patri'. Students will practice pronunciation and apply their knowledge in simple sentences, ending with a reminder of the importance of glorifying God in our studies.",
+      "day_3": "Sparky leads students in mastering the chant of first declension endings: a, ae, ae, am, ā. Through repetition and practice, students will gain confidence in their recitation skills. The session closes with a reflection on how perseverance in practice leads to mastery.",
+      "day_4": "In the final session of the week, Sparky conducts an assessment to reinforce learning. Students will demonstrate their understanding of vocabulary and grammar through quizzes and oral recitations. We wrap up with a reflection on how our efforts in learning Latin honor our faith."
+    },
+    "aligned_vocabulary_format": [
+      "puella – girl",
+      "rosa – rose",
+      "via – road",
+      "aqua – water",
+      "terra – earth",
+      "silva – forest"
+    ],
+    "sparky_voice_samples": {
+      "greeting": "Salve! Welcome to another exciting day of Latin learning!",
+      "transition": "Excellent! Now we move on to our next activity, where we'll dive deeper into the world of Latin nouns.",
+      "encouragement": "Good work! Remember, patience means taking the time to understand and master each new concept."
+    },
+    "_metadata": {
+      "generated_at": "2025-10-17T11:26:49.498154",
+      "model": "o1-mini (or gpt-4o fallback)"
+    }
+  }
+}

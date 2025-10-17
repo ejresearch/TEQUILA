@@ -1,0 +1,79 @@
+{
+  "metadata": {
+    "week": 1,
+    "day": 1,
+    "title": "Week 1 Day 1: Introduction to Latin",
+    "duration_minutes": 45,
+    "virtue": "Curiosity",
+    "faith_phrase": "In principio erat Verbum"
+  },
+  "prior_knowledge_digest": "Students should have a basic understanding of language structure and be familiar with the concept of grammar. They should be aware that Latin is an ancient language that has influenced many modern languages. This lesson will introduce them to the basics of Latin pronunciation and simple vocabulary.",
+  "yesterday_recap": "This is the first day of the course, so there is no previous lesson to recap.",
+  "spiral_links": {
+    "recycled_vocab": [],
+    "recycled_grammar": [],
+    "prior_day_concepts": [],
+    "prior_weeks": []
+  },
+  "misconception_watchlist": [
+    "Confusing Latin pronunciation with English",
+    "Assuming Latin word order is the same as English"
+  ],
+  "objectives": {
+    "primary": [
+      "Introduce basic Latin pronunciation",
+      "Learn simple Latin greetings",
+      "Understand the significance of Latin in historical context"
+    ],
+    "spiral_review": []
+  },
+  "materials": [
+    "Latin pronunciation guide",
+    "Simple Latin greeting handout",
+    "Audio clips of Latin pronunciation"
+  ],
+  "lesson_flow": [
+    {
+      "type": "greeting",
+      "duration_minutes": 5,
+      "description": "Welcome students and introduce the course.",
+      "student_action": "Listen and ask questions about the course structure.",
+      "teacher_notes": "Set a positive and engaging tone for the class."
+    },
+    {
+      "type": "introduction",
+      "duration_minutes": 10,
+      "description": "Introduce the Latin language and its historical significance.",
+      "student_action": "Listen and take notes on key points.",
+      "teacher_notes": "Highlight the influence of Latin on modern languages."
+    },
+    {
+      "type": "guided_practice",
+      "duration_minutes": 10,
+      "description": "Practice basic Latin pronunciation using audio clips.",
+      "student_action": "Repeat after the audio clips and practice pronunciation.",
+      "teacher_notes": "Correct any pronunciation errors gently."
+    },
+    {
+      "type": "introduction",
+      "duration_minutes": 10,
+      "description": "Teach simple Latin greetings and phrases.",
+      "student_action": "Practice saying greetings with a partner.",
+      "teacher_notes": "Encourage students to use the phrases in a short dialogue."
+    },
+    {
+      "type": "closure",
+      "duration_minutes": 5,
+      "description": "Review the key points of the lesson and answer any questions.",
+      "student_action": "Ask questions and reflect on what they learned.",
+      "teacher_notes": "Reinforce the importance of Latin in understanding language."
+    }
+  ],
+  "behavior": {
+    "tone": "Encouraging and supportive",
+    "loop_behavior": "Revisit pronunciation if errors persist",
+    "hints_max": 3,
+    "wait_seconds": 5,
+    "encouragement_frequency": "Frequent"
+  }
+}

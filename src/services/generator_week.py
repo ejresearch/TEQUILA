@@ -32,6 +32,7 @@ from .generator_day import scaffold_day
 from .llm_client import LLMClient
 from .prompts.kit_tasks import task_week_spec, task_role_context
 from .usage_tracker import get_tracker
+from .prompts.phase0_research import execute_phase0_research
 
 logger = logging.getLogger(__name__)
 
@@ -119,15 +120,18 @@ def _load_curriculum_outline() -> Dict[str, Any]:
     return {}
 
 
-def generate_week_spec_from_outline(week: int, client: LLMClient) -> Path:
+def generate_week_spec_from_outline(week: int, client: LLMClient, research_plan: Dict[str, Any] = None) -> Path:
     """
     Generate week_spec.json using LLM from curriculum outline.
+
+    NEW: Now receives PHASE 0 research findings to inform generation.
 
     Saves to: Week{N}/internal_documents/week_spec.json
 
     Args:
-        week: Week number (1-36)
+        week: Week number (1-35)
         client: LLM client instance
+        research_plan: Optional PHASE 0 research findings
 
     Returns:
         Path to generated week_spec.json
@@ -147,8 +151,8 @@ def generate_week_spec_from_outline(week: int, client: LLMClient) -> Path:
         "virtue_focus": "Wisdom"
     })
 
-    # Get prompts
-    sys, usr, config = task_week_spec(week, outline_snip)
+    # Get prompts (pass research plan if available)
+    sys, usr, config = task_week_spec(week, outline_snip, research_plan)
 
     # Retry loop (up to 5 attempts)
     MAX_RETRIES = 5
@@ -332,26 +336,43 @@ def save_generation_log(week: int, model_info: Dict[str, Any] = None) -> Path:
 
 def generate_week_planning(week: int, client: LLMClient) -> Dict[str, Path]:
     """
-    Generate all internal planning documents for a week (Phase 1).
+    Generate all internal planning documents for a week.
+
+    NEW ARCHITECTURE:
+    - PHASE 0: Research & Planning (12 API calls) - execute_phase0_research()
+    - PHASE 1: Week Spec Generation (uses Phase 0 findings)
 
     Creates internal_documents/ with:
-    - week_spec.json (curriculum outline)
+    - phase0_research.json (12 research outputs)
+    - week_spec.json (curriculum outline - informed by research)
     - week_summary.md (teacher overview)
     - role_context.json (Sparky profile)
     - generation_log.json (provenance)
 
     Args:
-        week: Week number (1-36)
+        week: Week number (1-35)
         client: LLM client instance
 
     Returns:
         Dict with paths to created documents
     """
-    logger.info(f"=== Phase 1: Generating week {week} planning documents ===")
+    logger.info(f"=== PHASE 0: Research & Planning for Week {week} ===")
 
-    # 1. Generate week_spec.json
+    # PHASE 0: Execute 12-step research cascade
+    # Pass the raw OpenAI client (client.client for OpenAIClient wrapper)
+    openai_client = getattr(client, 'client', client)
+    research_plan = execute_phase0_research(week, openai_client)
+
+    # Save PHASE 0 research to internal_documents/
+    research_path = internal_doc_path(week, "phase0_research.json")
+    write_json(research_path, research_plan)
+    logger.info(f"Phase 0 research saved to {research_path}")
+
+    logger.info(f"=== PHASE 1: Generating week {week} planning documents ===")
+
+    # 1. Generate week_spec.json (now with research context)
     logger.info(f"Generating week_spec.json...")
-    week_spec_path = generate_week_spec_from_outline(week, client)
+    week_spec_path = generate_week_spec_from_outline(week, client, research_plan)
 
     # 2. Generate week_summary.md
     logger.info(f"Generating week_summary.md...")
@@ -368,6 +389,7 @@ def generate_week_planning(week: int, client: LLMClient) -> Dict[str, Path]:
     logger.info(f"=== Phase 1 complete: Week {week} planning done ===")
 
     return {
+        "phase0_research": research_path,
         "week_spec": week_spec_path,
         "week_summary": summary_path,
         "role_context": role_path,

@@ -1,0 +1,89 @@
+{
+  "identity": "Sparky the Encourager",
+  "audience": "Grade 3 (Grammar Stage, U.S.)",
+  "lesson_slot": {
+    "week": 1,
+    "day": 4,
+    "title": "First Declension Nouns (Singular)"
+  },
+  "objectives": [
+    "Identify and pronounce first declension nouns.",
+    "Recite the nominative singular chant.",
+    "Use 'Gloria Patri' in context."
+  ],
+  "focus_areas": [
+    "First declension noun endings",
+    "Pronunciation practice",
+    "Chant recitation",
+    "Virtue of patience",
+    "Faith phrase integration"
+  ],
+  "spiral_hooks": {
+    "vocabulary_spiral": [
+      "puella",
+      "rosa",
+      "via",
+      "salve"
+    ],
+    "grammar_spiral": [
+      "Basic Latin pronunciation",
+      "Nominative case"
+    ]
+  },
+  "virtue_integration": {
+    "virtue": "Patience",
+    "prompt": "Remember, patience helps us learn each new word carefully."
+  },
+  "faith_integration": {
+    "phrase": "Gloria Patri",
+    "usage_note": "Use during morning prayer or reflection time."
+  },
+  "coaching_cues": [
+    "Let's try that chant together!",
+    "Remember, patience is key!",
+    "Great job with 'puella'!",
+    "Who can say 'Gloria Patri'?",
+    "Keep practicing, you're doing great!"
+  ],
+  "common_misconceptions": [
+    {
+      "pattern": "Mispronouncing 'puella' as 'pwella'",
+      "correction_cue": "Remember, it's 'pwel-la'!"
+    },
+    {
+      "pattern": "Forgetting the 'a' ending",
+      "correction_cue": "Check the ending, it should be 'a'!"
+    }
+  ],
+  "checks_for_understanding": [
+    "What is the ending for 'puella'?",
+    "Can you say 'Gloria Patri'?",
+    "What does 'salve' mean?",
+    "Recite the chant with me.",
+    "How does patience help us learn?"
+  ],
+  "success_criteria": [
+    "Students correctly pronounce vocabulary.",
+    "Students recite the chant fluently.",
+    "Students use 'Gloria Patri' appropriately."
+  ],
+  "differentiation": {
+    "support": [
+      "Use visual aids for endings.",
+      "Practice pronunciation in pairs."
+    ],
+    "extension": [
+      "Create sentences using new nouns.",
+      "Explore more first declension nouns."
+    ]
+  },
+  "classroom_management": [
+    "Keep transitions smooth with chants.",
+    "Use hand signals for attention."
+  ],
+  "constraints": {
+    "time_window_minutes": 25,
+    "tone": "warm-positive-brief",
+    "no_translation_key": true
+  }
+}

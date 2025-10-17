@@ -41,7 +41,7 @@
   "messages": [
     {
       "role": "system",
-      "content_template": "You are Steel. Generate the **teaching guidelines** for Sparky (AI tutor) for a specific Week/Day in Latin A (Grade 3). Be concrete, minute-by-minute, and classroom-ready. Use the role_context (Field 04) to anchor coaching cues, success criteria, misconception handling, and differentiation. Include specific dialogue lines, chant prompts, parsing worksheets, virtue tie-ins, and checks for understanding. Keep it structured, actionable, and child-safe."
+      "content_template": "You are Steel. Generate the **teaching guidelines** for Sparky (AI tutor) for a specific Week/Day in CLASSICAL LATIN A (Grade 3). Be concrete, minute-by-minute, and classroom-ready. Use the role_context (Field 04) to anchor coaching cues, success criteria, misconception handling, and differentiation. Include specific dialogue lines, chant prompts, parsing worksheets, virtue tie-ins, and checks for understanding. Keep it structured, actionable, and child-safe.\n\nCRITICAL - CLASSICAL LATIN CURRICULUM ONLY:\n1. This is CLASSICAL LATIN instruction (declensions, conjugations, cases).\n2. ALL vocabulary MUST be Classical Latin words (puella, amo, salve, pax, Deus).\n3. ALL grammar topics MUST be Classical Latin (declensions, conjugations, cases, Latin verb forms).\n4. FORBIDDEN vocabulary: Spanish (levantarse, ducharse), reflexive verbs, modern Romance languages.\n5. FORBIDDEN grammar: reflexive verbs, articles (el/la), modern verb tenses, non-Latin topics.\n6. All dialogue, chant prompts, and practice sentences MUST use CLASSICAL LATIN content only.\n\nREASONING CHECK before writing:\n- Are all vocabulary words CLASSICAL LATIN? (YES: puella, amo | NO: levantarse, ducharse)\n- Are all grammar topics LATIN? (YES: declensions, cases | NO: reflexive verbs, articles)\n- Do all activities teach LATIN content? (YES: parsing Latin nouns | NO: daily routines, math)"
     },
     {
       "role": "user",
@@ -84,6 +84,14 @@
         "IMPORTANT:",
         "- Use concrete dialogue lines (quote what Sparky should say).",
         "- Include specific examples (sentences to parse, chant lines, vocab prompts).",
+        "- ALL examples MUST use CLASSICAL LATIN vocabulary and grammar:",
+        "  ✅ CORRECT: puella, amo, salve, Deus (Classical Latin words)",
+        "  ✅ CORRECT: declensions, conjugations, cases (Latin grammar)",
+        "  ❌ FORBIDDEN: levantarse, ducharse (Spanish words)",
+        "  ❌ FORBIDDEN: reflexive verbs, articles, daily routines (non-Latin topics)",
+        "- ALL practice sentences MUST be Classical Latin (e.g., 'Puella est bona', 'Amo Deum').",
+        "- ALL chant lines MUST be Latin paradigms (e.g., 'a/ae/ae/am/ā', 'us/ī/ō/um/ō').",
+        "- ALL vocabulary prompts MUST use Latin words from week_spec.",
         "- Embed virtue and faith cues naturally (from role_context).",
         "- Respect time_window_minutes (20–25 total).",
         "- Respect tone (warm-positive-brief).",

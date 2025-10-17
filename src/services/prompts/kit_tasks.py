@@ -339,10 +339,13 @@ def task_week_validation(
 
 def task_week_spec(
     week_number: int,
-    manifest_entry: Dict[str, Any]
+    manifest_entry: Dict[str, Any],
+    research_plan: Optional[Dict[str, Any]] = None
 ) -> Tuple[str, str, Dict[str, Any]]:
     """
     Generate complete Week Spec kit (12 files) for a single week.
+
+    NEW: Receives PHASE 0 research findings to inform generation.
 
     This prompt produces all Week_Spec files:
     - 01_metadata.json
@@ -361,6 +364,7 @@ def task_week_spec(
     Args:
         week_number: Week number (1-35)
         manifest_entry: Week entry from project_manifest.week_manifest
+        research_plan: Optional PHASE 0 research findings (12 outputs)
 
     Returns:
         (system_prompt, user_prompt, config_dict)
@@ -402,6 +406,32 @@ def task_week_spec(
     vocab_scope = manifest_entry.get("vocabulary_scope", [])
     vocab_json = json.dumps(vocab_scope)
     user_content = user_content.replace("{{week_manifest_entry.vocabulary_scope}}", vocab_json)
+
+    # INJECT PHASE 0 RESEARCH if available
+    if research_plan:
+        vocab_plan = research_plan.get("04_vocabulary_plan", {})
+        alignment_guide = research_plan.get("11_alignment_guide", {})
+
+        research_injection = f"""
+
+## PHASE 0 RESEARCH FINDINGS
+
+You have access to pedagogical research conducted before generation.
+Use these findings to inform your content decisions:
+
+### Vocabulary Plan (from reasoning model):
+- New Latin Words: {json.dumps([w.get('word', '') for w in vocab_plan.get('new_latin_words', [])], indent=2)}
+- Recycled Words: {json.dumps([w.get('word', '') for w in vocab_plan.get('recycled_latin_words', [])], indent=2)}
+- Alignment Check: {json.dumps(vocab_plan.get('alignment_check', {}), indent=2)}
+
+### Alignment Guide (style matching gold standard):
+{json.dumps(alignment_guide, indent=2)}
+
+CRITICAL: Use the researched vocabulary from the vocabulary_plan.
+These words were verified as Classical Latin by the reasoning model.
+DO NOT generate different vocabulary - use what was researched.
+"""
+        user_content += research_injection
 
     system_content = prompt_spec["messages"][0]["content_template"]
 
@@ -565,14 +595,17 @@ def task_role_context(week_spec: dict) -> Tuple[str, str, Optional[Dict]]:
         (system_prompt, user_prompt, json_schema_hint)
     """
     sys = (
-        "Generate Sparky Role Context JSON with these fields:\n"
+        "Generate Sparky Role Context JSON for a LATIN A curriculum week.\n\n"
+        "IMPORTANT: This is Classical Latin instruction (declensions, conjugations, cases).\n"
+        "Sparky teaches LATIN vocabulary and grammar, NOT modern languages.\n\n"
+        "Fields to generate:\n"
         "- identity (Sparky's character and teaching philosophy)\n"
-        "- student_profile (target audience characteristics)\n"
-        "- daily_cycle (typical lesson structure)\n"
-        "- reinforcement_method (how Sparky encourages)\n"
-        "- feedback_style (how Sparky corrects errors)\n"
-        "- success_criteria (what mastery looks like)\n"
-        "- knowledge_recycling (spiral learning approach)\n\n"
+        "- student_profile (Grade 3 students learning Classical Latin)\n"
+        "- daily_cycle (typical Latin lesson structure)\n"
+        "- reinforcement_method (how Sparky encourages Latin practice)\n"
+        "- feedback_style (how Sparky corrects Latin errors)\n"
+        "- success_criteria (what Latin mastery looks like)\n"
+        "- knowledge_recycling (spiral learning approach for Latin)\n\n"
         "Return only valid JSON."
     )
 
@@ -1724,8 +1757,11 @@ def task_day_fields(week_spec: dict, day: int) -> Tuple[str, str, Optional[Dict]
     Returns:
         (system_prompt, user_prompt, json_schema_hint)
     """
+    # Extract week_number from metadata
+    week_number = week_spec.get("01_metadata.json", {}).get("week_number", 0)
+
     sys = (
-        "Generate the THREE metadata fields for a single day lesson in a LATIN LANGUAGE curriculum:\n"
+        "Generate the THREE metadata fields for a single day lesson in a CLASSICAL LATIN curriculum:\n"
         "1. class_name - short lesson title\n"
         "2. summary - 2-3 sentence overview\n"
         "3. grade_level - target grade range\n"
@@ -1735,25 +1771,36 @@ def task_day_fields(week_spec: dict, day: int) -> Tuple[str, str, Optional[Dict]
         "- Field 04 (role_context) is generated separately\n"
         "- Field 05 (guidelines), 06 (document), 07 (greeting) are generated separately\n\n"
         "CRITICAL - LATIN CURRICULUM REQUIREMENTS:\n"
-        "- This is a LATIN LANGUAGE curriculum\n"
-        "- class_name must describe Latin content (grammar, vocabulary, pronunciation, etc.)\n"
-        "- summary must be about Latin learning - NOT math, science, or other subjects\n"
+        "- This is a CLASSICAL LATIN curriculum (declensions, conjugations, cases)\n"
+        "- class_name must describe LATIN content only (grammar, vocabulary, pronunciation)\n"
+        "- summary must be about LATIN learning - NOT math, science, or other subjects\n"
         "- Topic should reference Latin grammar concepts, vocabulary themes, or language skills\n"
         "- DO NOT use topics like 'ecosystems', 'fractions', 'biology', 'math', etc.\n\n"
+        f"WEEK NUMBER VALIDATION:\n"
+        f"- You are generating content for WEEK {week_number} DAY {day}\n"
+        f"- class_name MUST start with exactly: 'Week {week_number} Day {day}:'\n"
+        f"- DO NOT use any other week number - this is Week {week_number}\n"
+        f"- INCORRECT: 'Week 1 Day {day}:' or 'Week {week_number-1} Day {day}:'\n"
+        f"- CORRECT: 'Week {week_number} Day {day}: [Latin Topic]'\n\n"
+        "LATIN CONTENT REASONING:\n"
+        "- Read the week title and grammar_focus to identify the Latin topic\n"
+        "- Generate class_name Topic that matches Classical Latin pedagogy\n"
+        "- CORRECT patterns: declensions, conjugations, cases, Latin vocabulary\n"
+        "- FORBIDDEN patterns: modern languages, daily routines, non-Latin subjects\n\n"
         "INSTRUCTIONS:\n"
-        "- class_name: Format as 'Week X Day Y: Topic' where Topic is a LATIN concept (≤100 chars)\n"
-        "- summary: 2-3 sentences describing LATIN lesson focus (50-500 chars)\n"
+        f"- class_name: MUST start with 'Week {week_number} Day {day}:' followed by LATIN topic (≤100 chars)\n"
+        "- summary: 2-3 sentences describing CLASSICAL LATIN lesson focus (50-500 chars)\n"
         "- grade_level: Format as 'N-M' where N and M are grade numbers (e.g., '3-5', '6-8')\n\n"
         "OUTPUT FORMAT:\n"
         "Return as JSON object with these keys.\n"
         "{\n"
-        "  \"class_name\": \"Week X Day Y: Topic\",\n"
-        "  \"summary\": \"Lesson overview in 2-3 sentences.\",\n"
+        f"  \"class_name\": \"Week {week_number} Day {day}: [Classical Latin Topic]\",\n"
+        "  \"summary\": \"Lesson overview in 2-3 sentences about LATIN.\",\n"
         "  \"grade_level\": \"3-5\"\n"
         "}\n\n"
         "SELF-CHECK:\n"
-        "✓ Is class_name formatted as 'Week X Day Y: Topic'?\n"
-        "✓ Does Topic describe LATIN content (not math/science)?\n"
+        f"✓ Does class_name start with EXACTLY 'Week {week_number} Day {day}:'?\n"
+        "✓ Does Topic describe CLASSICAL LATIN content (not math/science/Spanish)?\n"
         "✓ Is summary 2-3 sentences about LATIN (50-500 chars)?\n"
         "✓ Is grade_level in 'N-M' format (e.g., '3-5')?\n"
     )
@@ -1778,50 +1825,154 @@ def task_day_fields(week_spec: dict, day: int) -> Tuple[str, str, Optional[Dict]
 # Depends on: role_context (04), guidelines (05)
 # ============================================================================
 
-def task_day_document(week_spec: dict, day: int) -> Tuple[str, str, Optional[Dict]]:
+def task_day_document(week_spec: dict, day: int, research_plan: Optional[Dict[str, Any]] = None) -> Tuple[str, str, Optional[Dict]]:
     """
-    Generate prompts for day document_for_sparky (field 06 - structured lesson plan JSON).
+    Generate prompts for day document_for_sparky (field 06 - 6 teacher support documents).
 
-    UPDATED FOR 7-FIELD ARCHITECTURE:
-    - Field 06 (was field 05 in legacy 6-field layout)
-    - Consumes role_context from field 04
-    - Validates against guidelines YAML references
+    UPDATED FOR v1.1 ARCHITECTURE + PHASE 0 INTEGRATION:
+    - Field 06 is now a DIRECTORY with 6 .txt files (not a single JSON)
+    - Returns 6 plain-text documents for teacher support
+    - Each document serves a specific instructional purpose
+    - NOW receives PHASE 0 research findings with verified Latin vocabulary
 
     Args:
-        week_spec: The week specification data
+        week_spec: The week specification data from internal_documents/
         day: Day number (1-4)
+        research_plan: Optional PHASE 0 research findings with verified vocabulary
 
     Returns:
         (system_prompt, user_prompt, json_schema_hint)
     """
-    sys = _load_system_prompt("day_system.txt")
+    sys = """You are Steel, the curriculum architect for TEQUILA CLASSICAL LATIN A.
 
-    metadata = week_spec.get("01_metadata.json", {})
-    objectives = week_spec.get("02_objectives.json", [])
-    vocabulary = week_spec.get("03_vocabulary.json", [])
-    spiral_links = week_spec.get("09_spiral_links.json", {})
-    misconception_watchlist = week_spec.get("11_misconception_watchlist.json", [])
+Generate 6 teacher support documents for field 06_document_for_sparky/.
+Each document is PLAIN TEXT (not JSON) and serves a specific instructional purpose.
 
-    usr = (
-        f"Generate Day {day} document_for_sparky JSON.\n\n"
-        "TASK: Produce field 06_document_for_sparky.json — a complete lesson plan in JSON format.\n\n"
-        "INPUTS (week specification):\n"
-        + orjson.dumps(
-            {
-                "metadata": metadata,
-                "objectives": objectives,
-                "vocabulary": vocabulary,
-                "spiral_links": spiral_links,
-                "misconception_watchlist": misconception_watchlist,
-                "day": day
-            },
-            option=orjson.OPT_INDENT_2
-        ).decode()
-    )
+CRITICAL - CLASSICAL LATIN CURRICULUM ONLY:
+1. This is CLASSICAL LATIN instruction (declensions, conjugations, cases).
+2. ALL vocabulary MUST be Classical Latin words ONLY.
+   ✅ CORRECT: salve, puella, amo, pax, Deus, aqua, terra, sum, es, est
+   ❌ FORBIDDEN: levantarse, ducharse, vestirse, cepillarse (Spanish reflexive verbs)
+   ❌ FORBIDDEN: ANY Spanish, French, Italian, or modern Romance language words
+   ❌ FORBIDDEN: ANY words ending in -arse, -erse, -irse (Spanish infinitives)
+3. ALL grammar topics MUST be Classical Latin.
+   ✅ CORRECT: declensions, conjugations, cases, Latin verb forms
+   ❌ FORBIDDEN: reflexive verbs, articles (el/la/le), modern verb tenses
+4. ALL chants MUST be Latin paradigms (e.g., 'a/ae/ae/am/ā', 'us/ī/ō/um/ō').
+5. ALL example sentences MUST be Classical Latin (e.g., 'Puella est bona', 'Sum discipulus').
 
-    # No structured output schema - let LLM return JSON naturally
-    # The incomplete schema was causing API errors
-    schema = None
+REASONING CHECK before generating vocabulary_key_document:
+- Is EVERY word in this list Classical Latin? (YES: puella, amo | NO: levantarse, ducharse)
+- Does the vocabulary match the week's Latin grammar topic? (YES: Latin nouns for declension week | NO: daily routines)
+- Are there ANY Spanish/modern words? If YES, STOP and replace with Latin.
+
+Focus on clarity, specificity, and pedagogical value for classroom teachers teaching CLASSICAL LATIN."""
+
+    metadata = week_spec.get("metadata", {})
+    grammar_focus = week_spec.get("grammar_focus", "")
+    vocabulary = week_spec.get("vocabulary", {})
+    faith_integration = week_spec.get("faith_integration", {})
+    spiral_links = week_spec.get("spiral_links", {})
+
+    usr = f"""Generate 6 teacher support documents for Week {metadata.get('week', 'X')} Day {day}.
+
+## Week Context
+Grammar Focus: {grammar_focus}
+Vocabulary: {vocabulary.get('core_items', [])}
+Virtue: {faith_integration.get('virtue', '')}
+Faith Phrase: {faith_integration.get('faith_phrase', '')}
+Spiral Links: {spiral_links.get('prior_weeks_referenced', [])}"""
+
+    # INJECT PHASE 0 RESEARCH if available
+    if research_plan:
+        vocab_plan = research_plan.get("04_vocabulary_plan", {})
+        if vocab_plan:
+            new_words = [w.get('word', '') for w in vocab_plan.get('new_latin_words', [])]
+            recycled_words = [w.get('word', '') for w in vocab_plan.get('recycled_latin_words', [])]
+
+            usr += f"""
+
+## PHASE 0 RESEARCH - VERIFIED LATIN VOCABULARY
+
+The following vocabulary was researched and verified as Classical Latin by a reasoning model.
+**YOU MUST USE THESE WORDS EXACTLY** in the vocabulary_key_document:
+
+NEW LATIN WORDS (verified Classical Latin):
+{', '.join(new_words)}
+
+RECYCLED WORDS (spiral review):
+{', '.join(recycled_words)}
+
+CRITICAL: Do NOT generate different vocabulary. Use the researched words above.
+These words were specifically chosen to match the grammar topic and verified as Classical Latin."""
+
+    usr += """
+
+## CRITICAL REQUIREMENTS - READ BEFORE GENERATING
+This is a CLASSICAL LATIN curriculum. You MUST:
+1. Use ONLY Classical Latin vocabulary (puella, amo, salve, pax, Deus, aqua, terra, sum, es, est).
+2. NEVER use Spanish words (levantarse, ducharse, vestirse, cepillarse).
+3. NEVER use words ending in -arse, -erse, -irse (these are Spanish infinitives, NOT Latin).
+4. NEVER use reflexive verbs, articles (el/la), or modern Romance language words.
+5. Use ONLY Latin grammar topics (declensions, conjugations, cases, Latin verb forms).
+6. ALL vocabulary in vocabulary_key_document MUST be Classical Latin words.
+7. ALL chants in chant_chart_document MUST be Latin paradigms.
+8. Read the Grammar Focus to determine appropriate LATIN vocabulary for this week.
+
+## Task
+Return a JSON object with these 6 keys (each value is plain text, NOT nested JSON):
+
+1. **spiral_review_document**: List specific LATIN content from prior weeks to review today (Latin words, Latin grammar)
+2. **weekly_topics_document**: Week overview (LATIN grammar, LATIN skill goals, virtue, mastery indicator)
+3. **virtue_and_faith_document**: How virtue connects to lesson; faith phrase meaning; scripture reference
+4. **vocabulary_key_document**: Today's CLASSICAL LATIN vocabulary ONLY with pronunciation guide and English meanings
+   - REQUIRED: Every word MUST be Classical Latin (e.g., salve, puella, amo, pax)
+   - FORBIDDEN: Spanish (levantarse, ducharse), reflexive verbs, modern languages
+   - Use week's grammar_focus to determine appropriate Latin vocabulary
+5. **chant_chart_document**: Latin paradigm memory chant with rhythm/motions (e.g., 'a/ae/ae/am/ā', 'sum/es/est')
+6. **teacher_voice_tips_document**: Pedagogical coaching for delivering this LATIN lesson
+
+## Output Format
+Return ONLY valid JSON with this structure:
+{{
+  "spiral_review_document": "...",
+  "weekly_topics_document": "...",
+  "virtue_and_faith_document": "...",
+  "vocabulary_key_document": "...",
+  "chant_chart_document": "...",
+  "teacher_voice_tips_document": "..."
+}}
+
+Each value should be a plain text string (use \\n for line breaks).
+
+FINAL CHECK before returning:
+✓ Does vocabulary_key_document contain ONLY Classical Latin words?
+✓ Are there ZERO Spanish words (levantarse, ducharse, etc.)?
+✓ Does chant_chart_document use Latin paradigms?
+✓ Do all documents reference LATIN grammar and vocabulary?
+"""
+
+    # Simple schema to ensure 6 required keys are present
+    schema = {
+        "type": "object",
+        "properties": {
+            "spiral_review_document": {"type": "string"},
+            "weekly_topics_document": {"type": "string"},
+            "virtue_and_faith_document": {"type": "string"},
+            "vocabulary_key_document": {"type": "string"},
+            "chant_chart_document": {"type": "string"},
+            "teacher_voice_tips_document": {"type": "string"}
+        },
+        "required": [
+            "spiral_review_document",
+            "weekly_topics_document",
+            "virtue_and_faith_document",
+            "vocabulary_key_document",
+            "chant_chart_document",
+            "teacher_voice_tips_document"
+        ],
+        "additionalProperties": False
+    }
 
     return sys, usr, schema
 

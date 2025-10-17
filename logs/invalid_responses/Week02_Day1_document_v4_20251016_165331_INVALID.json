@@ -1,0 +1,79 @@
+{
+  "metadata": {
+    "week": 1,
+    "day": 1,
+    "title": "Week 1 Day 1: Introduction to Latin",
+    "duration_minutes": 45,
+    "virtue": "Curiosity",
+    "faith_phrase": "In principio erat Verbum"
+  },
+  "prior_knowledge_digest": "Students are expected to have a basic understanding of language learning concepts, such as vocabulary, grammar, and sentence structure. They should be familiar with the alphabet and the idea of conjugating verbs from previous language studies. This lesson will build on these foundational skills by introducing the Latin language, its significance, and some basic vocabulary and grammar rules.",
+  "yesterday_recap": "N/A - This is the first day of the course.",
+  "spiral_links": {
+    "recycled_vocab": [],
+    "recycled_grammar": [],
+    "prior_day_concepts": [],
+    "prior_weeks": []
+  },
+  "misconception_watchlist": [
+    "Confusing Latin pronunciation with English",
+    "Assuming Latin word order is the same as English"
+  ],
+  "objectives": {
+    "primary": [
+      "Introduce the Latin language and its historical significance",
+      "Learn basic Latin greetings and classroom phrases",
+      "Understand the concept of noun cases in Latin"
+    ],
+    "spiral_review": []
+  },
+  "materials": [
+    "Latin textbook",
+    "Whiteboard and markers",
+    "Flashcards with basic Latin phrases"
+  ],
+  "lesson_flow": [
+    {
+      "type": "greeting",
+      "duration_minutes": 5,
+      "description": "Introduce the class and set expectations for the course.",
+      "student_action": "Listen and ask questions about the course structure.",
+      "teacher_notes": "Engage students with a brief overview of what to expect."
+    },
+    {
+      "type": "introduction",
+      "duration_minutes": 10,
+      "description": "Discuss the historical significance of Latin and its influence on modern languages.",
+      "student_action": "Participate in discussion and take notes.",
+      "teacher_notes": "Highlight the importance of Latin in history and its relevance today."
+    },
+    {
+      "type": "guided_practice",
+      "duration_minutes": 10,
+      "description": "Teach basic Latin greetings and classroom phrases using flashcards.",
+      "student_action": "Repeat phrases and practice pronunciation.",
+      "teacher_notes": "Ensure correct pronunciation and encourage participation."
+    },
+    {
+      "type": "introduction",
+      "duration_minutes": 10,
+      "description": "Introduce the concept of noun cases in Latin.",
+      "student_action": "Listen and take notes on noun cases.",
+      "teacher_notes": "Use examples to illustrate how noun cases work."
+    },
+    {
+      "type": "closure",
+      "duration_minutes": 5,
+      "description": "Review the key points of the lesson and preview the next class.",
+      "student_action": "Ask questions and reflect on what was learned.",
+      "teacher_notes": "Encourage students to think about how Latin connects to their other studies."
+    }
+  ],
+  "behavior": {
+    "tone": "Encouraging and informative",
+    "loop_behavior": "Repeat key points if students seem confused",
+    "hints_max": 3,
+    "wait_seconds": 5,
+    "encouragement_frequency": "Frequent"
+  }
+}

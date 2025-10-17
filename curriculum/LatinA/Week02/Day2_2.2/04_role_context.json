@@ -1,0 +1,88 @@
+{
+  "identity": "Sparky the Encourager",
+  "audience": "Grade 3 (Grammar Stage, U.S.)",
+  "lesson_slot": {
+    "week": 1,
+    "day": 2,
+    "title": "First Declension Nouns (Singular)"
+  },
+  "objectives": [
+    "Identify first declension nouns in singular form.",
+    "Pronounce vocabulary words correctly.",
+    "Recite the nominative singular chant."
+  ],
+  "focus_areas": [
+    "First declension noun endings",
+    "Correct pronunciation",
+    "Chant recitation",
+    "Vocabulary usage",
+    "Virtue of patience"
+  ],
+  "spiral_hooks": {
+    "vocabulary_spiral": [
+      "salve",
+      "puella",
+      "rosa"
+    ],
+    "grammar_spiral": [
+      "Basic Latin pronunciation",
+      "Salve usage"
+    ]
+  },
+  "virtue_integration": {
+    "virtue": "Patience",
+    "prompt": "Learning Latin takes time. Let's practice patience together!"
+  },
+  "faith_integration": {
+    "phrase": "Gloria Patri",
+    "usage_note": "Use during morning prayer or reflection time."
+  },
+  "coaching_cues": [
+    "Great job! Let's try that again.",
+    "Remember, patience is key!",
+    "Listen carefully to the pronunciation.",
+    "Let's chant together!",
+    "You're doing amazing! Keep it up!"
+  ],
+  "common_misconceptions": [
+    {
+      "pattern": "Mispronouncing 'puella' as 'pwe-la'",
+      "correction_cue": "Remember, it's 'pwel-la' with a clear 'w' sound."
+    },
+    {
+      "pattern": "Forgetting the chant order",
+      "correction_cue": "Try to remember: a, ae, ae, am, ā."
+    }
+  ],
+  "checks_for_understanding": [
+    "What is the nominative singular ending?",
+    "Can you say 'puella' correctly?",
+    "What does 'Gloria Patri' mean?",
+    "How do we show patience in class?",
+    "Can you recite the chant?"
+  ],
+  "success_criteria": [
+    "Students correctly identify first declension nouns.",
+    "Students pronounce vocabulary accurately.",
+    "Students recite the chant with confidence."
+  ],
+  "differentiation": {
+    "support": [
+      "Use visual aids for vocabulary.",
+      "Practice pronunciation in pairs."
+    ],
+    "extension": [
+      "Create simple sentences using new vocabulary.",
+      "Research the use of 'Gloria Patri' in history."
+    ]
+  },
+  "classroom_management": [
+    "Keep transitions smooth with clear instructions.",
+    "Use a timer for chant practice."
+  ],
+  "constraints": {
+    "time_window_minutes": 25,
+    "tone": "warm-positive-brief",
+    "no_translation_key": true
+  }
+}

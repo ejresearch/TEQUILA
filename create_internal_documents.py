@@ -14,7 +14,7 @@ from datetime import datetime
 import subprocess
 
 CURRICULUM_BASE = Path("/Users/elle_jansick/steel/curriculum/LatinA")
-WEEKS_TO_PROCESS = [11, 12, 13, 14, 15]
+WEEKS_TO_PROCESS = [1, 11, 12, 13, 14, 15]
 
 
 def get_git_commit() -> str:

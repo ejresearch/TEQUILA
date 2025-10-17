@@ -495,9 +495,9 @@ def generate_day_document(week: int, day: int, client: LLMClient) -> Path:
     Generate the 6 document_for_sparky .txt files for a day by reading from
     internal_documents/ and transforming via LLM with retry logic.
 
-    Phase 2 of generation: Reads week_spec.json and role_context.json from
-    internal_documents/, then uses LLM to transform this data into day-specific
-    instructional documents for Sparky.
+    Phase 2 of generation: Reads week_spec.json, role_context.json, and
+    phase0_research.json from internal_documents/, then uses LLM to transform
+    this data into day-specific instructional documents for Sparky.
 
     Args:
         week: Week number (1-35)
@@ -517,6 +517,7 @@ def generate_day_document(week: int, day: int, client: LLMClient) -> Path:
     # Load week planning documents from internal_documents/
     week_spec_path = internal_doc_path(week, "week_spec.json")
     role_context_path = internal_doc_path(week, "role_context.json")
+    research_path = internal_doc_path(week, "phase0_research.json")
 
     if not week_spec_path.exists():
         raise FileNotFoundError(
@@ -530,10 +531,18 @@ def generate_day_document(week: int, day: int, client: LLMClient) -> Path:
     else:
         week_role_context = read_json(role_context_path)
 
+    # Load PHASE 0 research if available
+    research_plan = None
+    if research_path.exists():
+        research_plan = read_json(research_path)
+        logger.info(f"Loaded PHASE 0 research for Week {week}")
+    else:
+        logger.warning(f"No PHASE 0 research found at {research_path}. Using week_spec only.")
+
     week_spec = read_json(week_spec_path)
 
-    # Get prompts - task_day_document now receives internal_documents data
-    sys, usr, schema = task_day_document(week_spec, day)
+    # Get prompts - task_day_document now receives internal_documents data + research
+    sys, usr, schema = task_day_document(week_spec, day, research_plan)
 
     # Retry loop
     for attempt in range(1, MAX_RETRIES + 1):

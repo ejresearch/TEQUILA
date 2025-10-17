@@ -1,0 +1,215 @@
+{
+  "week_spec_kit": {
+    "week_info": {
+      "week_number": 2,
+      "title": "First Declension Nouns (Singular)",
+      "grammar_focus": "First Declension Nouns",
+      "chant": "Nominative Singular Endings",
+      "virtue_focus": "Patience",
+      "faith_phrase": "Gloria Patri - Glory to the Father",
+      "vocabulary_scope": [
+        "puella",
+        "rosa",
+        "via",
+        "aqua",
+        "terra",
+        "silva",
+        "salve"
+      ]
+    },
+    "generated_files": [
+      {
+        "file_name": "01_metadata.json",
+        "content": {
+          "week_number": 2,
+          "week_title": "First Declension Nouns (Singular)",
+          "grammar_focus": "First Declension Nouns",
+          "chant": "Nominative Singular Endings",
+          "virtue_focus": "Patience",
+          "faith_phrase": "Gloria Patri - Glory to the Father",
+          "vocabulary_summary": "Introduction to first declension nouns in singular form, focusing on vocabulary such as puella, rosa, via, aqua, terra, silva, and reinforcing with salve.",
+          "author_metadata": {
+            "author_name": "Steel Curriculum Generator"
+          },
+          "originality_attestation": true,
+          "license": "CC BY 4.0"
+        }
+      },
+      {
+        "file_name": "02_objectives.json",
+        "content": {
+          "objectives": [
+            "Identify and pronounce first declension nouns in singular form.",
+            "Memorize and recite the chant for first declension nominative singular endings.",
+            "Understand and use the faith phrase 'Gloria Patri' in context.",
+            "Demonstrate patience in learning and applying new vocabulary.",
+            "Connect the virtue of patience with the learning process."
+          ]
+        }
+      },
+      {
+        "file_name": "03_vocabulary.json",
+        "content": {
+          "vocabulary": [
+            {
+              "latin": "puella",
+              "english": "girl",
+              "part_of_speech": "noun",
+              "pronunciation": "pwel-la",
+              "example_phrase": "Puella in horto est."
+            },
+            {
+              "latin": "rosa",
+              "english": "rose",
+              "part_of_speech": "noun",
+              "pronunciation": "ro-sa",
+              "example_phrase": "Rosa pulchra est."
+            },
+            {
+              "latin": "via",
+              "english": "road",
+              "part_of_speech": "noun",
+              "pronunciation": "vee-a",
+              "example_phrase": "Via longa est."
+            },
+            {
+              "latin": "aqua",
+              "english": "water",
+              "part_of_speech": "noun",
+              "pronunciation": "a-kwa",
+              "example_phrase": "Aqua clara est."
+            },
+            {
+              "latin": "terra",
+              "english": "earth",
+              "part_of_speech": "noun",
+              "pronunciation": "ter-ra",
+              "example_phrase": "Terra magna est."
+            },
+            {
+              "latin": "silva",
+              "english": "forest",
+              "part_of_speech": "noun",
+              "pronunciation": "sil-va",
+              "example_phrase": "Silva densa est."
+            },
+            {
+              "latin": "salve",
+              "english": "hello",
+              "part_of_speech": "interjection",
+              "pronunciation": "sal-ve",
+              "example_phrase": "Salve, amice!"
+            }
+          ]
+        }
+      },
+      {
+        "file_name": "04_grammar_focus.md",
+        "content": "### First Declension Nouns (Singular)\n\nIn this week, we focus on the first declension nouns in their singular forms. These nouns typically end in '-a' in the nominative singular case. Understanding the endings is crucial for identifying the role of the noun in a sentence.\n\nThe chant for the first declension nominative singular is:\n\n```\na, ae, ae, am, ā\n```\n\nThis chant helps students remember the endings for the nominative, genitive, dative, accusative, and ablative cases. Building on last week's introduction to Latin pronunciation, students will now apply these endings to new vocabulary words."
+      },
+      {
+        "file_name": "05_virtue_focus.md",
+        "content": "### Patience\n\nPatience is a virtue that helps us persevere through challenges and learn effectively. As we study Latin, patience allows us to take the time to understand each new concept thoroughly. Remember, learning a language is a journey, not a race. As James 1:4 reminds us, \"Let patience have its perfect work, that you may be perfect and complete, lacking nothing.\""
+      },
+      {
+        "file_name": "06_faith_phrase.md",
+        "content": "### Gloria Patri\n\nThe phrase 'Gloria Patri' means 'Glory to the Father'. It is a traditional doxology in Christian liturgy, expressing praise and reverence to God. This week, students will learn to incorporate this phrase into their daily prayers and reflections, connecting their Latin studies with their faith."
+      },
+      {
+        "file_name": "07_prior_knowledge_digest.json",
+        "content": {
+          "prior_knowledge": [
+            {
+              "source_week": 1,
+              "concept": "Basic Latin pronunciation",
+              "reuse_reason": "Foundation for accurate pronunciation of new vocabulary."
+            },
+            {
+              "source_week": 1,
+              "concept": "Salve",
+              "reuse_reason": "Reinforcement of greeting vocabulary."
+            }
+          ]
+        }
+      },
+      {
+        "file_name": "08_chant_chart.txt",
+        "content": "### First Declension Nominative Singular Chant\n\nLeader: a\nClass: a\nLeader: ae\nClass: ae\nLeader: ae\nClass: ae\nLeader: am\nClass: am\nLeader: ā\nClass: ā"
+      },
+      {
+        "file_name": "09_assessment_overview.json",
+        "content": {
+          "quiz_structure": {
+            "sections": [
+              {
+                "type": "Vocabulary Matching",
+                "description": "Match the Latin word to its English meaning.",
+                "sample_items": [
+                  {
+                    "latin": "puella",
+                    "english": "girl"
+                  },
+                  {
+                    "latin": "rosa",
+                    "english": "rose"
+                  }
+                ]
+              },
+              {
+                "type": "Chant Recitation",
+                "description": "Recite the first declension nominative singular chant.",
+                "sample_items": [
+                  "a, ae, ae, am, ā"
+                ]
+              },
+              {
+                "type": "Translation",
+                "description": "Translate simple Latin sentences to English.",
+                "sample_items": [
+                  {
+                    "latin": "Puella in horto est.",
+                    "english": "The girl is in the garden."
+                  }
+                ]
+              }
+            ]
+          },
+          "scoring_notes": "Each correct match and translation is worth 1 point. Chant recitation is scored on accuracy and fluency.",
+          "review_before_quiz": "Review vocabulary and chant before the quiz to ensure understanding and confidence."
+        }
+      },
+      {
+        "file_name": "10_teacher_notes.md",
+        "content": "### Teacher Notes\n\n- **Pronunciation Tips**: Emphasize the ecclesiastical pronunciation, especially the 'ch' sound in 'c' before 'e' or 'i'.\n- **Pacing Advice**: Spend the first two days focusing on vocabulary and pronunciation. Use the chant to reinforce endings.\n- **Connections**: Link the virtue of patience to the learning process, encouraging students to take their time with new material.\n- **Next Week Preview**: Prepare students for plural forms of first declension nouns, building on this week's foundation."
+      },
+      {
+        "file_name": "11_weekly_review_questions.md",
+        "content": "### Weekly Review Questions\n\n1. What is the nominative singular ending for first declension nouns?\n2. Translate 'Puella in horto est.' into English.\n3. What does 'Gloria Patri' mean?\n4. How does patience help us in learning Latin?\n5. Recite the first declension nominative singular chant.\n\n---\n\n**Answer Key**\n\n1. The nominative singular ending is '-a'.\n2. 'The girl is in the garden.'\n3. 'Glory to the Father.'\n4. Patience helps us take the time to understand and master each new concept.\n5. a, ae, ae, am, ā"
+      },
+      {
+        "file_name": "99_compiled_week_spec.json",
+        "content": {
+          "generation_metadata": {
+            "generated_at": "2025-10-17T11:26:49.498154",
+            "model": "o1-mini (or gpt-4o fallback)"
+          },
+          "cost_tokens": null,
+          "license": "CC BY 4.0",
+          "files": [
+            "01_metadata.json",
+            "02_objectives.json",
+            "03_vocabulary.json",
+            "04_grammar_focus.md",
+            "05_virtue_focus.md",
+            "06_faith_phrase.md",
+            "07_prior_knowledge_digest.json",
+            "08_chant_chart.txt",
+            "09_assessment_overview.json",
+            "10_teacher_notes.md",
+            "11_weekly_review_questions.md"
+          ]
+        }
+      }
+    ]
+  }
+}

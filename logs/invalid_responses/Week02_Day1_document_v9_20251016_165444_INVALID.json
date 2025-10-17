@@ -1,0 +1,88 @@
+{
+  "metadata": {
+    "week": 1,
+    "day": 1,
+    "title": "Week 1 Day 1: Introduction to Latin",
+    "duration_minutes": 45,
+    "virtue": "Curiosity",
+    "faith_phrase": "In principio erat Verbum"
+  },
+  "prior_knowledge_digest": "Students are expected to have a basic understanding of language learning principles, such as the importance of vocabulary, grammar, and pronunciation. Familiarity with the concept of language families and the historical significance of Latin as the root of the Romance languages will be beneficial. Students should also be comfortable with classroom routines and expectations for participation and engagement.",
+  "yesterday_recap": "N/A - First day of class",
+  "spiral_links": {
+    "recycled_vocab": [],
+    "recycled_grammar": [],
+    "prior_day_concepts": [],
+    "prior_weeks": []
+  },
+  "misconception_watchlist": [
+    "Latin is a dead language and not useful",
+    "Pronunciation is not important in Latin",
+    "Latin grammar is the same as English grammar"
+  ],
+  "objectives": {
+    "primary": [
+      "Introduce students to the Latin language and its historical context",
+      "Teach basic Latin pronunciation rules",
+      "Familiarize students with classroom routines and expectations"
+    ],
+    "spiral_review": []
+  },
+  "materials": [
+    "Latin textbook",
+    "Whiteboard and markers",
+    "Pronunciation audio clips",
+    "Handouts with basic Latin phrases"
+  ],
+  "lesson_flow": [
+    {
+      "type": "greeting",
+      "duration_minutes": 5,
+      "description": "Welcome students and introduce the course.",
+      "student_action": "Listen and ask any initial questions.",
+      "teacher_notes": "Set a positive tone and encourage curiosity."
+    },
+    {
+      "type": "introduction",
+      "duration_minutes": 10,
+      "description": "Discuss the historical significance of Latin and its influence on modern languages.",
+      "student_action": "Engage with the discussion and take notes.",
+      "teacher_notes": "Highlight the relevance of Latin in today's world."
+    },
+    {
+      "type": "introduction",
+      "duration_minutes": 10,
+      "description": "Introduce basic Latin pronunciation rules using audio clips.",
+      "student_action": "Listen to audio clips and practice pronunciation.",
+      "teacher_notes": "Ensure students repeat after the audio for practice."
+    },
+    {
+      "type": "guided_practice",
+      "duration_minutes": 10,
+      "description": "Practice basic Latin phrases with the class.",
+      "student_action": "Participate in choral repetition and pair practice.",
+      "teacher_notes": "Monitor pronunciation and provide corrective feedback."
+    },
+    {
+      "type": "closure",
+      "duration_minutes": 5,
+      "description": "Review key points and answer any remaining questions.",
+      "student_action": "Reflect on the lesson and ask questions.",
+      "teacher_notes": "Encourage students to think about what they learned."
+    },
+    {
+      "type": "faith_reflection",
+      "duration_minutes": 5,
+      "description": "Discuss the faith phrase 'In principio erat Verbum' and its significance.",
+      "student_action": "Reflect on the phrase and its meaning.",
+      "teacher_notes": "Connect the phrase to the importance of language."
+    }
+  ],
+  "behavior": {
+    "tone": "Encouraging and supportive",
+    "loop_behavior": "Repeat key phrases and concepts as needed",
+    "hints_max": 3,
+    "wait_seconds": 5,
+    "encouragement_frequency": "Frequent"
+  }
+}

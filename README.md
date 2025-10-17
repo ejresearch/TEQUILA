@@ -1,256 +1,365 @@
-TEQUILA: AI-Powered Latin A Curriculum Generator (v1.3.0)
+# TEQUILA v1.3.0
 
-Not the quantum TEQUILA project.
-This is an AI curriculum system for Latin A, not related to quantum computing.
+**AI-Powered Latin A Curriculum Generator**
 
-⸻
+> *Not the quantum TEQUILA project. This is an educational AI system for classical Latin instruction.*
 
-Overview
+Generate a complete 35-week Latin A curriculum with AI-powered pedagogy, automatic spiral review, and integrated virtue formation. Built for classical educators who need high-quality, coherent lesson plans.
 
-TEQUILA (or Steel) is a provider-agnostic curriculum engine that auto-generates a full 35-week Latin A course (4 lessons per week, 7 fields per lesson). It enforces pedagogical rules (spiral review, ≥ 25% recall, virtue alignment, single tutor voice) and produces exportable teaching materials with provenance metadata.
+---
 
-**New in v1.3.0**: Universal metadata extraction fix ensures all 4 days stay focused on the week's grammar topic. Added format-agnostic helper function supporting v1.0, v1.1, and custom week spec structures. Successfully tested with Weeks 2-3 generation.
+## What It Does
 
-**New in v1.1**: Two-phase generation architecture with master curriculum outline integration. Weeks are now planned first (internal_documents/), then days are generated from those planning documents, ensuring consistent scope & sequence across all 35 weeks.
+TEQUILA automatically generates:
+- **35 weeks** of Latin A instruction (140 lessons total)
+- **4 days per week** following a Discovery → Practice → Review → Quiz pattern
+- **7 structured fields per day** including class materials, teacher support documents, and Sparky (AI tutor) content
+- **Integrated virtue & faith** connections throughout
+- **Automatic spiral review** ensuring ≥25% retention from prior weeks
 
-⸻
+Each week is pedagogically sound, follows classical Latin teaching methods, and maintains a consistent "tutor voice" through an AI persona named Sparky.
 
-Architecture & Flow
+---
 
-flowchart TD
-  CurriculumOutline[curriculum_outline.json] --> Phase1[Phase 1: Week Planning]
-  Phase1 --> InternalDocs[internal_documents/]
-  InternalDocs --> Phase2[Phase 2: Day Generation]
-  Phase2 --> GeneratorDay
-  GeneratorDay --> Validator
-  Validator -- valid --> Exporter
-  Validator -- invalid --> RetryLoop
-  RetryLoop --> Validator
-  Exporter --> ZIPArchive
-  ZIPArchive --> exports/WeekXX.zip
+## Quick Start
 
-**Two-Phase Generation (v1.1)**:
-
-**Phase 1 - Week Planning**:
-1. **curriculum_outline.json**: Master 35-week scope & sequence (2 bullets per week)
-   - Session duration per week (30min → 12-15min → 20-25min)
-   - Grammar focus, vocabulary domains, prerequisites
-2. **GeneratorWeek**: Creates week planning documents in `internal_documents/`:
-   - `week_spec.json` - Complete week specification from outline
-   - `week_summary.md` - Human-readable overview
-   - `role_context.json` - AI tutor persona
-   - `generation_log.json` - Provenance tracking
-
-**Phase 2 - Day Generation**:
-3. **GeneratorDay**: Reads from internal_documents/ to generate 4 days (7 fields each)
-4. **Validator**: Pydantic schema + pedagogical checks (≥ 25% prior content on Day 4)
-5. **RetryLoop**: Up to 10 attempts if validation fails
-6. **Exporter**: Packages each week into a zip with manifest + metadata
-
-⸻
-
-Directory Layout
-
-TEQUILA/
-├── curriculum/
-│   └── LatinA/
-│       ├── Week01/
-│       │   ├── internal_documents/          # ← NEW in v1.1
-│       │   │   ├── week_spec.json           # Week planning from outline
-│       │   │   ├── week_summary.md          # Human-readable overview
-│       │   │   ├── role_context.json        # AI tutor persona
-│       │   │   └── generation_log.json      # Provenance tracking
-│       │   ├── Day1_1.1/                    # ← NEW naming: Day{N}_{W}.{N}
-│       │   │   ├── 01_class_name.txt
-│       │   │   ├── 02_summary.md
-│       │   │   ├── 03_grade_level.txt
-│       │   │   ├── 04_role_context.json
-│       │   │   ├── 05_guidelines_for_sparky.json
-│       │   │   ├── 06_document_for_sparky/  # ← NEW: directory with 6 .txt files
-│       │   │   │   ├── spiral_review_document.txt
-│       │   │   │   ├── weekly_topics_document.txt
-│       │   │   │   ├── virtue_and_faith_document.txt
-│       │   │   │   ├── vocabulary_key_document.txt
-│       │   │   │   ├── chant_chart_document.txt
-│       │   │   │   └── teacher_voice_tips_document.txt
-│       │   │   └── 07_sparkys_greeting.txt
-│       │   ├── Day2_1.2/
-│       │   ├── Day3_1.3/
-│       │   ├── Day4_1.4/
-│       │   └── assets/
-│       └── … up to Week35/
-├── curriculum_outline.json          # ← NEW: Master 35-week outline
-├── exports/
-│   ├── Week01.zip
-│   ├── Week02.zip
-│   └── … Week35.zip
-├── logs/
-│   ├── generation.log
-│   └── validation_failures/
-├── src/
-│   ├── cli/
-│   │   └── generate_all_weeks.py
-│   ├── services/
-│   │   ├── curriculum_outline.py    # ← NEW: Outline service
-│   │   ├── generator_week.py        # Rewritten for two-phase
-│   │   ├── generator_day.py         # Reads from internal_documents/
-│   │   ├── validator.py
-│   │   ├── exporter.py
-│   │   ├── storage.py               # Updated with internal_documents support
-│   │   └── llm_client.py  (OpenAI only)
-│   └── models/
-│       └── schemas_day_week.py
-├── .github/
-│   └── workflows/ci.yml
-├── .env.example
-├── README.md
-├── CHANGELOG.md                     # ← NEW
-├── ARCHITECTURE.md
-└── LICENSE
-
-
-⸻
-
-Quickstart Guide
-
-**1. Clone the repository**
-
+### 1. Install
 ```bash
 git clone https://github.com/ejresearch/TEQUILA.git
 cd TEQUILA
-```
-
-**2. Environment setup**
-
-Copy `.env.example` to `.env` and fill in:
-
-```bash
-OPENAI_API_KEY=your_openai_key
-MODEL_NAME=gpt-4o
-```
-
-**3. Install dependencies**
-
-```bash
 make install
-# OR
-pip install -e .
 ```
 
-**4. Generate a single week** (recommended for testing)
+### 2. Configure
+```bash
+cp .env.example .env
+# Edit .env and add your OPENAI_API_KEY
+```
+
+### 3. Generate Your First Week
+```bash
+make gen WEEKS=1
+```
+
+### 4. View the Results
+```bash
+make view WEEK=1
+```
+
+That's it! Week 1 is now in `curriculum/LatinA/Week01/` with all 4 days, internal planning documents, and exportable ZIP.
+
+---
+
+## Commands
+
+### Generate Curriculum
 
 ```bash
-# Generate Week 1 (no prerequisites)
-make gen-week WEEK=1
+# Single week
+make gen WEEKS=3
 
-# Generate Week 2 (requires Week 1)
-make gen-week WEEK=2
+# Multiple specific weeks
+make gen WEEKS=3,5,7
+
+# Range of weeks
+make gen WEEKS=3-10
+
+# Mixed notation
+make gen WEEKS=1-5,11-15
 ```
 
-**5. Generate multiple weeks**
+### View Generated Content
 
 ```bash
-# Generate Weeks 1-5
-python -m src.cli.generate_all_weeks --from 1 --to 5
+# View full week
+make view WEEK=1
 
-# Generate single week with flag
-python -m src.cli.generate_all_weeks --week 11
+# View specific day
+make view WEEK=7.2
+
+# View internal planning docs
+make view WEEK=7 SCOPE=internal
+
+# View assets (quiz packets, etc.)
+make view WEEK=8 SCOPE=assets
+
+# View classroom content only
+make view WEEK=19 SCOPE=class
 ```
 
-**6. Inspect output**
+### Other Commands
 
 ```bash
-# View week structure
-tree curriculum/LatinA/Week01/
-
-# Check internal planning documents
-cat curriculum/LatinA/Week01/internal_documents/week_spec.json
-cat curriculum/LatinA/Week01/internal_documents/week_summary.md
-
-# View exported zip
-unzip -l exports/Week01.zip
+make help        # Show all available commands
+make clean       # Clean build artifacts
+make validate WEEK=11    # Validate week structure
 ```
 
-**What Gets Generated**:
-- **Phase 1**: `internal_documents/` with week planning (week_spec.json, week_summary.md, role_context.json)
-- **Phase 2**: 4 days with 7 fields each (28 files total per week)
-- **Export**: `exports/WeekXX.zip` with manifest and SHA-256 hashes
+See [GEN_COMMAND.md](GEN_COMMAND.md) and [VIEW_COMMAND.md](VIEW_COMMAND.md) for detailed documentation.
 
-⸻
+---
 
-Validation & Retry Behavior
+## How It Works
 
-- Each lesson must pass the Pydantic schemas in `src/models/schemas_day_week.py`
-- **Prerequisite validation**: Week N cannot be generated without Weeks 1 through N-1 existing
-- **Spiral review check**: Day 4 must include ≥25% content from prior weeks
-- **Retry logic**: Up to 10 attempts per field if validation fails
-- **User confirmation**: After 10 failures, system pauses for manual intervention
-- **Version suffixes**: Successful regeneration appends `_v2`, `_v3` rather than overwriting
+### Two-Phase Architecture
 
-⸻
+**Phase 1: Week Planning**
+1. Reads master curriculum outline (`curriculum_outline.json`)
+2. Generates comprehensive planning documents:
+   - `week_spec.json` - Complete week specification
+   - `week_summary.md` - Human-readable overview
+   - `role_context.json` - AI tutor persona for the week
+3. Saves to `internal_documents/` folder
 
-Export Format & Metadata
+**Phase 2: Day Generation**
+1. Reads planning documents from Phase 1
+2. Generates 4 days (Discovery, Practice, Review, Quiz)
+3. Each day includes 7 structured fields:
+   - Class name, summary, grade level
+   - Role context, guidelines for Sparky
+   - 6 teacher support documents (vocabulary, chants, spiral review, etc.)
+   - Sparky's greeting
+4. Validates content (Pydantic schemas + pedagogical rules)
+5. Exports to ZIP with manifest and SHA-256 hashes
 
-Each week's ZIP archive (`exports/WeekXX.zip`) includes:
-- **internal_documents/**: Week planning documents (Phase 1 output)
-- **Day folders**: 4 days with 7 fields each (Phase 2 output)
-- **assets/**: ChantChart, Copywork, Glossary, QuizPacket, TeacherKey, VirtueEntry
-- **manifest.json**: File paths and SHA-256 hashes for integrity verification
-- **Provenance metadata**: Model used, timestamp, tokens consumed, git commit hash
+### Quality Assurance
 
-Logs of failures, retries, and generation status are stored in `logs/`.
+- **Automatic validation**: Pydantic schemas ensure structural correctness
+- **Spiral review enforcement**: Day 4 must include ≥25% prior content
+- **Grammar focus consistency**: v1.3.0 fix ensures all 4 days stay on topic
+- **Prerequisite checking**: Can't generate Week N without Weeks 1-N-1
+- **Up to 10 retries**: With automatic correction attempts
+- **Gold standard weeks**: Weeks 1, 11-15 serve as quality benchmarks
 
-⸻
+---
 
-CI / Testing
-	•	A GitHub Actions workflow (.github/workflows/ci.yml) runs on each push:
-	•	Linting (e.g. ruff / black)
-	•	Schema validation tests with a sample week (Week11)
-	•	A small pytest suite ensures no regressions in schema definitions or directory structure.
+## Project Structure
 
-⸻
+```
+TEQUILA/
+├── curriculum/
+│   └── LatinA/
+│       ├── Week01/                    # Gold standard (tracked in git)
+│       ├── Week02-10/                 # Generated locally (gitignored)
+│       ├── Week11-15/                 # Gold standards (tracked in git)
+│       └── Week16-35/                 # Generated locally (gitignored)
+├── curriculum_outline.json            # Master 35-week scope & sequence
+├── src/
+│   ├── cli/
+│   │   ├── gen.py                     # NEW: Flexible week generator
+│   │   ├── view.py                    # NEW: Content viewer
+│   │   ├── generate_all_weeks.py     # Core generator
+│   │   ├── create_internal_documents.py
+│   │   └── import_sample_weeks.py
+│   ├── services/
+│   │   ├── curriculum_outline.py      # Outline service
+│   │   ├── generator_week.py          # Phase 1: Week planning
+│   │   ├── generator_day.py           # Phase 2: Day generation
+│   │   ├── prompts/
+│   │   │   └── kit_tasks.py           # v1.3.0: Universal metadata extraction
+│   │   ├── validator.py
+│   │   ├── exporter.py
+│   │   └── storage.py
+│   └── models/
+│       └── schemas_day_week.py        # Pydantic validation
+├── bin/
+│   ├── gen                            # Shell wrapper for gen command
+│   └── view                           # Shell wrapper for view command
+├── logs/                              # Generation logs (gitignored)
+├── Makefile
+├── README.md
+├── GEN_COMMAND.md
+├── VIEW_COMMAND.md
+└── ARCHITECTURE.md
+```
 
-Key Features (v1.3.0)
+---
 
-**Universal Metadata Extraction**:
-- Format-agnostic `_extract_from_week_spec()` helper function
-- Supports v1.0 (flat keys), v1.1 (nested generated_files array), and custom formats
-- Ensures all 4 days stay focused on week's grammar topic
-- Prevents topic drift that occurred when metadata extraction failed
+## Week Structure
 
-**Two-Phase Architecture**:
-- Phase 1 generates week planning documents from master curriculum outline
-- Phase 2 generates 4 days using planning documents as single source of truth
-- Reduces redundant LLM calls and ensures consistency
+Each generated week follows this structure:
 
-**Master Curriculum Outline**:
-- 35-week scope & sequence with prerequisite chains
-- Dynamic session duration (30min Week 1 → 12-15min Week 11 → 20-25min Week 16)
-- Tracks what each week introduces for the first time
-- Sequential validation prevents generating Week N without Weeks 1-N-1
+```
+Week01/
+├── internal_documents/
+│   ├── week_spec.json           # Complete week specification
+│   ├── week_summary.md          # Human-readable overview
+│   ├── role_context.json        # AI tutor persona
+│   └── generation_log.json      # Provenance tracking
+├── Day1_1.1/
+│   ├── 01_class_name.txt
+│   ├── 02_summary.md
+│   ├── 03_grade_level.txt
+│   ├── 04_role_context.json
+│   ├── 05_guidelines_for_sparky.md
+│   ├── 06_document_for_sparky/  # Directory with 6 teacher support files
+│   │   ├── vocabulary_key_document.txt
+│   │   ├── chant_chart_document.txt
+│   │   ├── spiral_review_document.txt
+│   │   ├── teacher_voice_tips_document.txt
+│   │   ├── virtue_and_faith_document.txt
+│   │   └── weekly_topics_document.txt
+│   └── 07_sparkys_greeting.txt
+├── Day2_1.2/
+├── Day3_1.3/
+├── Day4_1.4/
+└── assets/
+    ├── QuizPacket.txt
+    └── TeacherKey.txt
+```
 
-**Enhanced Day Structure**:
-- Field 06 as directory with 6 teacher support documents
-- Day naming convention includes week context (`Day1_11.1`)
-- Spiral review automatically populated from prerequisite weeks
+---
 
-**Quality Standards**:
-- Gold standard reference weeks (1, 11-15) establish expected quality
-- Proper Latin macrons (amō not amo)
-- Minute-by-minute timing precision
-- Deep virtue and faith integration
+## Key Features
 
-Future & Roadmap (post-v1.1)
-- Add human editing overlays with diff / accept-reject UI
-- Expand to multi-subject curricula (e.g. Greek A, Bible A)
-- Add dashboards & usage analytics
-- Ollama local LLM integration (gpt-oss:120b)
-- Incorporate educational feedback loops (teacher edits → model fine-tuning)
-- Automated quality validation against reference weeks
+### v1.3.0 (Latest)
+- **Universal metadata extraction** with format-agnostic helper function
+- Fixes topic drift bug where Days 2-4 went off-topic
+- Supports v1.0, v1.1, and custom week spec structures
+- `gen` command for flexible week generation
+- `view` command for inspecting generated content
 
-⸻
+### v1.1
+- Two-phase architecture (planning → generation)
+- Master curriculum outline with 35-week scope & sequence
+- Dynamic session duration (30min → 12-15min → 20-25min)
+- Prerequisite validation
 
-License & Attribution
+### Core Features
+- **Pedagogically sound**: Follows classical Latin teaching methods
+- **Spiral review**: Automatic integration of prior weeks (≥25%)
+- **Virtue & faith**: Deep integration throughout curriculum
+- **Consistent voice**: Single AI tutor persona (Sparky)
+- **Quality benchmarks**: Gold standard weeks establish expected quality
+- **Proper Latin**: Macrons, pronunciation, derivatives
+- **Export-ready**: ZIP archives with manifests and SHA-256 hashes
 
-This project is licensed under the MIT License.
+---
+
+## Costs & Performance
+
+- **Cost per week**: ~$1-2 in OpenAI API calls
+- **Time per week**: ~3-5 minutes for Phase 1 + Phase 2
+- **Model**: OpenAI GPT-4o (only supported provider currently)
+- **Total for 35 weeks**: ~$35-70 in API costs
+
+---
+
+## Gold Standard Weeks
+
+The following weeks are tracked in git as quality benchmarks:
+- **Week 1**: Introduction to Latin & Pronunciation
+- **Week 11**: First Conjugation Verbs (-āre family)
+- **Week 12**: First Conjugation Practice
+- **Week 13**: First Conjugation Review
+- **Week 14**: First Conjugation Assessment
+- **Week 15**: First Conjugation Integration
+
+All other weeks are generated locally and gitignored.
+
+---
+
+## Validation Rules
+
+1. **Schema validation**: Pydantic models ensure correct structure
+2. **Prerequisite check**: Week N requires Weeks 1 through N-1
+3. **Spiral review**: Day 4 must include ≥25% prior content
+4. **Grammar focus**: All 4 days must stay on the week's grammar topic (v1.3.0 fix)
+5. **Field completeness**: All 7 fields must be present per day
+6. **Retry logic**: Up to 10 attempts with automatic corrections
+
+---
+
+## Advanced Usage
+
+### Generate Multiple Weeks in Sequence
+```bash
+# Generate Weeks 1-10 in order
+make gen WEEKS=1-10
+
+# This will take ~30-50 minutes and cost ~$10-20
+```
+
+### Inspect Internal Planning
+```bash
+# View the week spec before days are generated
+make view WEEK=5 SCOPE=internal
+```
+
+### Export to ZIP
+```bash
+# ZIPs are automatically created in curriculum/LatinA/exports/
+ls curriculum/LatinA/exports/
+```
+
+### Compare Weeks
+```bash
+# View two different weeks side-by-side
+make view WEEK=1 > week1.txt
+make view WEEK=2 > week2.txt
+diff week1.txt week2.txt
+```
+
+---
+
+## Development
+
+### Run Tests
+```bash
+make test
+```
+
+### Clean Artifacts
+```bash
+make clean
+```
+
+### Validate Specific Week
+```bash
+make validate WEEK=11
+```
+
+### CI/CD
+GitHub Actions runs automatically on push:
+- Linting (ruff/black)
+- Schema validation
+- Test suite
+
+---
+
+## Roadmap
+
+- [ ] Human editing UI with diff/accept-reject workflow
+- [ ] Multi-subject support (Greek A, Bible A)
+- [ ] Dashboard & analytics
+- [ ] Anthropic Claude support (in addition to OpenAI)
+- [ ] Ollama local LLM integration
+- [ ] Teacher feedback loop → model fine-tuning
+- [ ] Automated quality scoring against gold standards
+
+---
+
+## Contributing
+
+This is a private research project. Contact ejresearch for collaboration inquiries.
+
+---
+
+## License
+
+MIT License - See [LICENSE](LICENSE) for details.
+
 © 2025 ejresearch
+
+---
+
+## Links
+
+- **Documentation**: See [ARCHITECTURE.md](ARCHITECTURE.md) for technical details
+- **Commands**: See [GEN_COMMAND.md](GEN_COMMAND.md) and [VIEW_COMMAND.md](VIEW_COMMAND.md)
+- **Changelog**: See [CHANGELOG.md](CHANGELOG.md)
+- **Issues**: https://github.com/ejresearch/TEQUILA/issues
+
+---
+
+**Built with Claude Code**

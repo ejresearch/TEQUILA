@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Convenient wrapper for view.py that can be called from anywhere
+# Usage: view 3 | view 7.2 | view 7 internal | view 8 assets | view 19 class | view 22.2 class
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PROJECT_ROOT="$( cd "$SCRIPT_DIR/.." && pwd )"
+
+cd "$PROJECT_ROOT" && python -m src.cli.view "$@"

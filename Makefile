@@ -1,4 +1,4 @@
-.PHONY: install run test clean gen gen-week gen-all validate help
+.PHONY: install run test clean gen view gen-week gen-all validate help
 
 help:
 	@echo "TEQUILA: AI Latin A Curriculum Generator (v1.3.0)"
@@ -10,16 +10,25 @@ help:
 	@echo "  clean       - Clean build artifacts and logs"
 	@echo ""
 	@echo "Generation commands:"
-	@echo "  gen         - Flexible week generator (see examples below)"
+	@echo "  gen         - Flexible week generator"
+	@echo "  view        - View generated curriculum content"
 	@echo "  gen-week    - Generate single week (WEEK=11)"
 	@echo "  gen-all     - Generate all 35 weeks (EXPENSIVE!)"
 	@echo "  validate    - Validate a week structure (WEEK=11)"
 	@echo ""
-	@echo "Examples:"
+	@echo "Generation Examples:"
 	@echo "  make gen WEEKS=3              # Generate Week 3"
 	@echo "  make gen WEEKS=3,5,7          # Generate Weeks 3, 5, and 7"
 	@echo "  make gen WEEKS=3-10           # Generate Weeks 3 through 10"
 	@echo "  make gen WEEKS=1-5,11-15      # Generate Weeks 1-5 and 11-15"
+	@echo ""
+	@echo "View Examples:"
+	@echo "  make view WEEK=1                     # View all Week 1 content"
+	@echo "  make view WEEK=7.2                   # View Week 7 Day 2 only"
+	@echo "  make view WEEK=7 SCOPE=internal      # View Week 7 internal docs"
+	@echo "  make view WEEK=8 SCOPE=assets        # View Week 8 assets"
+	@echo "  make view WEEK=19 SCOPE=class        # View Week 19 class material"
+	@echo "  make view WEEK=22.2 SCOPE=class      # View Week 22 Day 2 class"
 
 install:
 	pip install -e .
@@ -51,18 +60,26 @@ gen:
 	fi
 	python -m src.cli.gen $(WEEKS)
 
+view:
+	@if [ -z "$(WEEK)" ]; then \
+		echo "Usage: make view WEEK=<spec> [SCOPE=<scope>]"; \
+		echo ""; \
+		echo "Examples:"; \
+		echo "  make view WEEK=1                    # View all Week 1 content"; \
+		echo "  make view WEEK=7.2                  # View Week 7 Day 2 only"; \
+		echo "  make view WEEK=7 SCOPE=internal     # View Week 7 internal docs"; \
+		echo "  make view WEEK=8 SCOPE=assets       # View Week 8 assets"; \
+		echo "  make view WEEK=19 SCOPE=class       # View Week 19 class material"; \
+		echo "  make view WEEK=22.2 SCOPE=class     # View Week 22 Day 2 class material"; \
+		exit 1; \
+	fi
+	python -m src.cli.view $(WEEK) $(SCOPE)
+
 gen-all:
-	@echo "⚠️  WARNING: This will generate all 35 weeks and may cost \$\$\$"
+	@echo "⚠️  WARNING: This will generate all 35 weeks and may cost $$$"
 	@echo "Press Ctrl+C to cancel, or wait 5 seconds to continue..."
 	@sleep 5
 	python -m src.cli.generate_all_weeks --from 1 --to 35
-
-gen-range:
-	@if [ -z "$(FROM)" ] || [ -z "$(TO)" ]; then \
-		echo "Usage: make gen-range FROM=1 TO=5"; \
-		exit 1; \
-	fi
-	python -m src.cli.generate_all_weeks --from $(FROM) --to $(TO)
 
 gen-week:
 	@if [ -z "$(WEEK)" ]; then \

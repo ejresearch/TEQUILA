@@ -349,7 +349,9 @@ This is a private research project. Contact ejresearch for collaboration inquiri
 
 MIT License - See [LICENSE](LICENSE) for details.
 
-© 2025 ejresearch
+**Copyright © 2025 Elle Jansick and YT Research LLC**
+
+All rights reserved. This software and associated curriculum content are the property of Elle Jansick and YT Research LLC.
 
 ---
 

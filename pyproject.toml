@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "latin-a-curriculum"
-version = "1.1.0"
-description = "35-week Latin A curriculum generation and management system with two-phase architecture"
+version = "1.3.0"
+description = "AI-Powered Latin A Curriculum Generator - Property of Elle Jansick and YT Research LLC"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [

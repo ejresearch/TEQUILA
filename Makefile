@@ -1,7 +1,7 @@
 .PHONY: install run test clean gen view gen-week gen-all validate help
 
 help:
-	@echo "TEQUILA: AI Latin A Curriculum Generator (v1.3.0)"
+	@echo "TEQUILA: AI Latin A Curriculum Generator (v1.2.0)"
 	@echo ""
 	@echo "Available targets:"
 	@echo "  install     - Install dependencies (OpenAI GPT-4o only)"

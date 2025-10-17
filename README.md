@@ -1,4 +1,4 @@
-# TEQUILA v1.3.0
+# TEQUILA v1.2.0
 
 **AI-Powered Latin A Curriculum Generator**
 
@@ -126,7 +126,7 @@ See [GEN_COMMAND.md](GEN_COMMAND.md) and [VIEW_COMMAND.md](VIEW_COMMAND.md) for 
 
 - **Automatic validation**: Pydantic schemas ensure structural correctness
 - **Spiral review enforcement**: Day 4 must include ≥25% prior content
-- **Grammar focus consistency**: v1.3.0 fix ensures all 4 days stay on topic
+- **Grammar focus consistency**: v1.2.0 fix ensures all 4 days stay on topic
 - **Prerequisite checking**: Can't generate Week N without Weeks 1-N-1
 - **Up to 10 retries**: With automatic correction attempts
 - **Gold standard weeks**: Weeks 1, 11-15 serve as quality benchmarks
@@ -156,7 +156,7 @@ TEQUILA/
 │   │   ├── generator_week.py          # Phase 1: Week planning
 │   │   ├── generator_day.py           # Phase 2: Day generation
 │   │   ├── prompts/
-│   │   │   └── kit_tasks.py           # v1.3.0: Universal metadata extraction
+│   │   │   └── kit_tasks.py           # v1.2.0: Universal metadata extraction
 │   │   ├── validator.py
 │   │   ├── exporter.py
 │   │   └── storage.py
@@ -212,7 +212,7 @@ Week01/
 
 ## Key Features
 
-### v1.3.0 (Latest)
+### v1.2.0 (Latest)
 - **Universal metadata extraction** with format-agnostic helper function
 - Fixes topic drift bug where Days 2-4 went off-topic
 - Supports v1.0, v1.1, and custom week spec structures
@@ -264,7 +264,7 @@ All other weeks are generated locally and gitignored.
 1. **Schema validation**: Pydantic models ensure correct structure
 2. **Prerequisite check**: Week N requires Weeks 1 through N-1
 3. **Spiral review**: Day 4 must include ≥25% prior content
-4. **Grammar focus**: All 4 days must stay on the week's grammar topic (v1.3.0 fix)
+4. **Grammar focus**: All 4 days must stay on the week's grammar topic (v1.2.0 fix)
 5. **Field completeness**: All 7 fields must be present per day
 6. **Retry logic**: Up to 10 attempts with automatic corrections
 
@@ -341,7 +341,9 @@ GitHub Actions runs automatically on push:
 
 ## Contributing
 
-This is a private research project. Contact ejresearch for collaboration inquiries.
+This is a private research project. For questions or collaboration inquiries, contact:
+
+**Elle Jansick**: ellejansickresearch@gmail.com
 
 ---
 

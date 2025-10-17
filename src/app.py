@@ -10,8 +10,8 @@ from .config import settings, get_llm_client
 from .services.generator_week import (
     scaffold_week,
     generate_week_spec_from_outline,
-    generate_role_context,
-    generate_assets
+    generate_week_role_context,
+    generate_week_planning
 )
 from .services.generator_day import (
     scaffold_day,
@@ -95,6 +95,60 @@ def root():
         "version": "1.0.0",
         "docs": "/docs"
     }
+
+
+@app.get("/api/v1/weeks")
+def list_weeks():
+    """List all weeks with their current status."""
+    curriculum_path = settings.curriculum_base_path / "LatinA"
+    weeks = []
+
+    for week_num in range(1, 36):
+        week_path = curriculum_path / f"Week{week_num:02d}"
+
+        # Check if week exists
+        if not week_path.exists():
+            weeks.append({
+                "week_number": week_num,
+                "status": "not_generated",
+                "has_spec": False,
+                "has_days": 0,
+                "last_modified": None
+            })
+            continue
+
+        # Check for internal_documents/week_spec.json
+        spec_path = week_path / "internal_documents" / "week_spec.json"
+        has_spec = spec_path.exists()
+
+        # Count day folders
+        day_folders = list(week_path.glob("Day*"))
+        day_count = len([d for d in day_folders if d.is_dir()])
+
+        # Determine status
+        if day_count == 4 and has_spec:
+            status = "complete"
+        elif day_count > 0 or has_spec:
+            status = "partial"
+        else:
+            status = "not_generated"
+
+        # Get last modified time
+        last_modified = None
+        if week_path.exists():
+            last_modified = week_path.stat().st_mtime
+            from datetime import datetime
+            last_modified = datetime.fromtimestamp(last_modified).isoformat()
+
+        weeks.append({
+            "week_number": week_num,
+            "status": status,
+            "has_spec": has_spec,
+            "has_days": day_count,
+            "last_modified": last_modified
+        })
+
+    return {"weeks": weeks}
 
 
 @app.get("/api/v1/usage")
@@ -212,6 +266,98 @@ def update_day_field(
             write_file(field_path, content.get("content", ""))
 
         return {"message": f"Field {field} updated successfully"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/v1/weeks/{week}/days/{day}")
+def get_day_info(
+    week: int = PathParam(..., ge=1, le=36),
+    day: int = PathParam(..., ge=1, le=4)
+):
+    """Get all day information including all field contents."""
+    try:
+        # Find the day folder (try both naming conventions)
+        curriculum_path = settings.curriculum_base_path / "LatinA" / f"Week{week:02d}"
+        day_folder = None
+
+        # Try new format: Day1_W.D
+        possible_day_folder = curriculum_path / f"Day{day}_{week}.{day}"
+        if possible_day_folder.exists():
+            day_folder = possible_day_folder
+        else:
+            # Try old format: Day{day}
+            possible_day_folder = curriculum_path / f"Day{day}"
+            if possible_day_folder.exists():
+                day_folder = possible_day_folder
+
+        if not day_folder:
+            raise HTTPException(status_code=404, detail=f"Day {day} not found for Week {week}")
+
+        # Read all the fields
+        result = {
+            "week": week,
+            "day": day,
+            "class_name": None,
+            "summary": None,
+            "grade_level": None,
+            "role_context": None,
+            "guidelines_for_sparky": None,
+        }
+
+        # Try to read each field
+        class_name_file = day_folder / "01_class_name.txt"
+        if class_name_file.exists():
+            result["class_name"] = read_file(class_name_file).strip()
+
+        summary_file = day_folder / "02_summary.md"
+        if summary_file.exists():
+            result["summary"] = read_file(summary_file).strip()
+
+        grade_file = day_folder / "03_grade_level.txt"
+        if grade_file.exists():
+            result["grade_level"] = read_file(grade_file).strip()
+
+        # Read role context JSON
+        role_context_file = day_folder / "04_role_context.json"
+        if role_context_file.exists():
+            result["role_context"] = read_json(role_context_file)
+
+        # Read guidelines for Sparky (try both .md and .json)
+        guidelines_md = day_folder / "05_guidelines_for_sparky.md"
+        guidelines_json = day_folder / "05_guidelines_for_sparky.json"
+        if guidelines_md.exists():
+            result["guidelines_for_sparky"] = read_file(guidelines_md).strip()
+        elif guidelines_json.exists():
+            result["guidelines_for_sparky"] = read_json(guidelines_json)
+
+        # Read Sparky's greeting
+        greeting_file = day_folder / "07_sparkys_greeting.txt"
+        if greeting_file.exists():
+            result["sparkys_greeting"] = read_file(greeting_file).strip()
+
+        # Read teacher support documents from 06_document_for_sparky/
+        docs_folder = day_folder / "06_document_for_sparky"
+        result["documents"] = {}
+        if docs_folder.exists():
+            doc_files = {
+                "vocabulary_key": "vocabulary_key_document.txt",
+                "chant_chart": "chant_chart_document.txt",
+                "spiral_review": "spiral_review_document.txt",
+                "teacher_voice_tips": "teacher_voice_tips_document.txt",
+                "virtue_and_faith": "virtue_and_faith_document.txt",
+                "weekly_topics": "weekly_topics_document.txt",
+            }
+            for key, filename in doc_files.items():
+                doc_file = docs_folder / filename
+                if doc_file.exists():
+                    result["documents"][key] = read_file(doc_file).strip()
+                else:
+                    result["documents"][key] = None
+
+        return result
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -392,38 +538,7 @@ def generate_week_spec_endpoint(
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.post("/api/v1/gen/weeks/{week}/role-context")
-def generate_role_context_endpoint(
-    week: int = PathParam(..., ge=1, le=36),
-    _auth: None = Depends(require_api_key)
-):
-    """Generate Sparky role context using LLM. Requires API key."""
-    try:
-        client = get_llm_client()
-        context_path = generate_role_context(week, client)
-        return {
-            "message": f"Week {week} role context generated successfully",
-            "context_path": str(context_path)
-        }
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-
-@app.post("/api/v1/gen/weeks/{week}/assets")
-def generate_assets_endpoint(
-    week: int = PathParam(..., ge=1, le=36),
-    _auth: None = Depends(require_api_key)
-):
-    """Generate week assets using LLM. Requires API key."""
-    try:
-        client = get_llm_client()
-        asset_paths = generate_assets(week, client)
-        return {
-            "message": f"Week {week} assets generated successfully",
-            "asset_paths": [str(p) for p in asset_paths]
-        }
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+# NOTE: Generation endpoints temporarily disabled - use CLI tools instead
 
 
 @app.post("/api/v1/gen/weeks/{week}/days/{day}/fields")
@@ -462,53 +577,88 @@ def generate_day_document_endpoint(
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.post("/api/v1/gen/weeks/{week}/hydrate")
-def hydrate_week_endpoint(
+@app.post("/api/v1/gen/weeks/{week}/generate")
+async def generate_week_full(
     week: int = PathParam(..., ge=1, le=36),
     _auth: None = Depends(require_api_key)
 ):
     """
-    Hydrate complete week using LLM (spec, role context, assets, all days). Requires API key.
-
-    This generates everything in order:
-    1. Week spec
-    2. Role context
-    3. Assets
-    4. All 4 days (fields + documents)
+    Generate complete week using CLI script.
+    Executes generate_all_weeks.py and returns results.
     """
+    import subprocess
+    import sys
+
     try:
-        client = get_llm_client()
-        results = {"week": week, "components": {}}
+        # Run the generation CLI script
+        result = subprocess.run(
+            [sys.executable, "-m", "src.cli.generate_all_weeks", "--week", str(week)],
+            capture_output=True,
+            text=True,
+            timeout=600  # 10 minute timeout
+        )
 
-        # Generate week components
-        spec_path = generate_week_spec_from_outline(week, client)
-        results["components"]["spec"] = str(spec_path)
-
-        role_path = generate_role_context(week, client)
-        results["components"]["role_context"] = str(role_path)
-
-        asset_paths = generate_assets(week, client)
-        results["components"]["assets"] = [str(p) for p in asset_paths]
-
-        # Generate all days
-        results["components"]["days"] = []
-        for day in range(1, 5):
-            day_result = hydrate_day_from_llm(week, day, client)
-            results["components"]["days"].append(day_result)
-
-        # Run validation
-        from .services.validator import validate_week
-        validation = validate_week(week)
-        results["validation"] = {
-            "is_valid": validation.is_valid(),
-            "summary": validation.summary(),
-            "error_count": len(validation.errors),
-            "warning_count": len(validation.warnings)
+        return {
+            "week": week,
+            "success": result.returncode == 0,
+            "stdout": result.stdout,
+            "stderr": result.stderr,
+            "return_code": result.returncode
         }
-
-        return results
+    except subprocess.TimeoutExpired:
+        raise HTTPException(status_code=504, detail="Generation timed out after 10 minutes")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+# NOTE: Hydrate endpoint temporarily disabled - use CLI tools instead
+# @app.post("/api/v1/gen/weeks/{week}/hydrate")
+# def hydrate_week_endpoint(
+#     week: int = PathParam(..., ge=1, le=36),
+#     _auth: None = Depends(require_api_key)
+# ):
+#     """
+#     Hydrate complete week using LLM (spec, role context, assets, all days). Requires API key.
+#
+#     This generates everything in order:
+#     1. Week spec
+#     2. Role context
+#     3. Assets
+#     4. All 4 days (fields + documents)
+#     """
+#     try:
+#         client = get_llm_client()
+#         results = {"week": week, "components": {}}
+#
+#         # Generate week components
+#         spec_path = generate_week_spec_from_outline(week, client)
+#         results["components"]["spec"] = str(spec_path)
+#
+#         role_path = generate_role_context(week, client)
+#         results["components"]["role_context"] = str(role_path)
+#
+#         asset_paths = generate_assets(week, client)
+#         results["components"]["assets"] = [str(p) for p in asset_paths]
+#
+#         # Generate all days
+#         results["components"]["days"] = []
+#         for day in range(1, 5):
+#             day_result = hydrate_day_from_llm(week, day, client)
+#             results["components"]["days"].append(day_result)
+#
+#         # Run validation
+#         from .services.validator import validate_week
+#         validation = validate_week(week)
+#         results["validation"] = {
+#             "is_valid": validation.is_valid(),
+#             "summary": validation.summary(),
+#             "error_count": len(validation.errors),
+#             "warning_count": len(validation.warnings)
+#         }
+#
+#         return results
+#     except Exception as e:
+#         raise HTTPException(status_code=500, detail=str(e))
 
 
 if __name__ == "__main__":

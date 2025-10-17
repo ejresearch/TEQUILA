@@ -8,9 +8,110 @@ PROMPT ENGINEERING ARCHITECTURE (7-field day structure):
 - Optimized for OpenAI GPT-4o
 """
 from pathlib import Path
-from typing import Dict, Optional, Tuple, Any
+from typing import Dict, Optional, Tuple, Any, List
 import json
 import orjson
+
+
+# ============================================================================
+# WEEK SPEC DATA EXTRACTION HELPERS (v1.0 and v1.1 compatible)
+# ============================================================================
+
+def _extract_from_week_spec(week_spec: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Extract data from week_spec in a format-agnostic way.
+
+    Supports both:
+    - v1.0 format: flat structure with keys like "01_metadata.json"
+    - v1.1 format: nested "week_spec_kit.generated_files" structure
+    - Custom formats: root-level metadata/grammar_focus
+
+    Returns:
+        Dictionary with standardized keys: metadata, objectives, vocabulary,
+        grammar_focus, chant, virtue_focus, faith_phrase, etc.
+    """
+    result = {
+        "metadata": {},
+        "objectives": [],
+        "vocabulary": [],
+        "grammar_focus": "",
+        "chant": "",
+        "virtue_focus": "",
+        "faith_phrase": "",
+        "week_number": 0,
+        "week_title": "",
+    }
+
+    # v1.1 structure: week_spec_kit
+    if "week_spec_kit" in week_spec:
+        week_info = week_spec["week_spec_kit"].get("week_info", {})
+        result["week_number"] = week_info.get("week_number", 0)
+        result["week_title"] = week_info.get("title", "")
+        result["grammar_focus"] = week_info.get("grammar_focus", "")
+        result["chant"] = week_info.get("chant", "")
+        result["virtue_focus"] = week_info.get("virtue_focus", "")
+        result["faith_phrase"] = week_info.get("faith_phrase", "")
+
+        # Extract from generated_files array
+        generated_files = week_spec["week_spec_kit"].get("generated_files", [])
+        for file_obj in generated_files:
+            file_name = file_obj.get("file_name", "")
+            content = file_obj.get("content", {})
+
+            if file_name == "01_metadata.json":
+                result["metadata"] = content
+                if not result["week_number"]:
+                    result["week_number"] = content.get("week_number", 0)
+                if not result["week_title"]:
+                    result["week_title"] = content.get("week_title", "")
+                if not result["grammar_focus"]:
+                    result["grammar_focus"] = content.get("grammar_focus", "")
+
+            elif file_name == "02_objectives.json":
+                result["objectives"] = content.get("objectives", [])
+
+            elif file_name == "03_vocabulary.json":
+                result["vocabulary"] = content.get("vocabulary", [])
+
+    # v1.0 structure: flat keys
+    elif "01_metadata.json" in week_spec:
+        metadata = week_spec.get("01_metadata.json", {})
+        result["metadata"] = metadata
+        result["week_number"] = metadata.get("week_number", 0)
+        result["week_title"] = metadata.get("week_title", "")
+        result["grammar_focus"] = metadata.get("grammar_focus", "")
+        result["chant"] = metadata.get("chant", "")
+        result["virtue_focus"] = metadata.get("virtue_focus", "")
+        result["faith_phrase"] = metadata.get("faith_phrase", "")
+        result["objectives"] = week_spec.get("02_objectives.json", [])
+        result["vocabulary"] = week_spec.get("03_vocabulary.json", [])
+
+    # Custom format: root-level keys (Week 1 style)
+    else:
+        metadata = week_spec.get("metadata", {})
+        result["metadata"] = metadata
+        result["week_number"] = metadata.get("week", 0)
+        result["week_title"] = metadata.get("title", "")
+        result["grammar_focus"] = week_spec.get("grammar_focus", "")
+        result["chant"] = week_spec.get("chant", "")
+
+        faith_integration = week_spec.get("faith_integration", {})
+        result["virtue_focus"] = faith_integration.get("virtue", week_spec.get("virtue_focus", ""))
+        result["faith_phrase"] = faith_integration.get("faith_phrase", week_spec.get("faith_phrase", ""))
+
+        vocabulary_data = week_spec.get("vocabulary", {})
+        if isinstance(vocabulary_data, dict):
+            result["vocabulary"] = vocabulary_data.get("core_items", [])
+        elif isinstance(vocabulary_data, list):
+            result["vocabulary"] = vocabulary_data
+
+        objectives = week_spec.get("objectives", {})
+        if isinstance(objectives, dict):
+            result["objectives"] = objectives.get("skill_goals", [])
+        elif isinstance(objectives, list):
+            result["objectives"] = objectives
+
+    return result
 
 
 def _load_system_prompt(filename: str) -> str:
@@ -1857,13 +1958,25 @@ def task_day_fields(week_spec: dict, day: int) -> Tuple[str, str, Optional[Dict]
     Returns:
         (system_prompt, user_prompt, json_schema_hint)
     """
-    # Extract week_number from metadata
-    week_number = week_spec.get("01_metadata.json", {}).get("week_number", 0)
+    # Extract week data using helper function (supports v1.0, v1.1, and custom formats)
+    week_data = _extract_from_week_spec(week_spec)
+    week_number = week_data["week_number"]
+    week_title = week_data["week_title"]
+    grammar_focus = week_data["grammar_focus"]
+
+    # Map day number to pedagogical intent (gold standard pattern)
+    day_intents = {
+        1: "Discovery",  # or "Learn"
+        2: "Practice",
+        3: "Review",
+        4: "Quiz"
+    }
+    day_intent = day_intents.get(day, "Learn")
 
     sys = (
         "Generate the THREE metadata fields for a single day lesson in a CLASSICAL LATIN curriculum:\n"
-        "1. class_name - short lesson title\n"
-        "2. summary - 2-3 sentence overview\n"
+        "1. class_name - engaging, narrative lesson title\n"
+        "2. summary - narrative 3-5 sentence overview with italicized Latin terms\n"
         "3. grade_level - target grade range\n"
         "\n"
         "FIELD NUMBERING (7-field architecture):\n"
@@ -1878,39 +1991,62 @@ def task_day_fields(week_spec: dict, day: int) -> Tuple[str, str, Optional[Dict]
         "- DO NOT use topics like 'ecosystems', 'fractions', 'biology', 'math', etc.\n\n"
         f"WEEK NUMBER VALIDATION:\n"
         f"- You are generating content for WEEK {week_number} DAY {day}\n"
-        f"- class_name MUST start with exactly: 'Week {week_number} Day {day}:'\n"
-        f"- DO NOT use any other week number - this is Week {week_number}\n"
-        f"- INCORRECT: 'Week 1 Day {day}:' or 'Week {week_number-1} Day {day}:'\n"
-        f"- CORRECT: 'Week {week_number} Day {day}: [Latin Topic]'\n\n"
+        f"- class_name MUST start with exactly: 'Latin A – Week {week_number:02d} Day {day} :'\n"
+        f"- DO NOT use any other week number - this is Week {week_number}\n\n"
+        "CLASS NAME STYLE (GOLD STANDARD PATTERN):\n"
+        "- Format: 'Latin A – Week NN Day N : Engaging Subtitle – Pedagogical Intent'\n"
+        "- Use en-dash (–) not hyphen (-)\n"
+        "- Engaging subtitle should be narrative and exciting (not 'Introduction to...')\n"
+        "- Examples from gold standard:\n"
+        "  * 'Latin A – Week 11 Day 1 : Discovery – Meet the –āre Family'\n"
+        "  * 'Latin A – Week 05 Day 2 : Practice – Building with –us Nouns'\n"
+        "  * 'Latin A – Week 03 Day 3 : Review – Mastering First Declension'\n\n"
+        "SUMMARY STYLE (GOLD STANDARD PATTERN):\n"
+        "- Write in narrative present tense (\"Sparky begins...\", \"Students now meet...\")\n"
+        "- Italicize ALL Latin words using *asterisks* (e.g., *puella*, *sum, esse*)\n"
+        "- Connect to prior knowledge and preview future lessons\n"
+        "- Include virtue and faith phrase\n"
+        "- 3-5 sentences, flowing narrative (not bullet points)\n"
+        "- Example: 'Sparky begins Week 2 by recalling *salve* from last week. Students now meet the **First Declension (–a)** nouns and chant endings showing case patterns. Familiar words such as *puella*, *rosa*, and *aqua* appear, building vocabulary foundations. The virtue **Patientia – Patience** reminds us to practice carefully. Tomorrow they'll strengthen accuracy and explore more noun forms.'\n\n"
         "LATIN CONTENT REASONING:\n"
         "- Read the week title and grammar_focus to identify the Latin topic\n"
-        "- Generate class_name Topic that matches Classical Latin pedagogy\n"
+        "- Generate class_name subtitle that matches Classical Latin pedagogy\n"
         "- CORRECT patterns: declensions, conjugations, cases, Latin vocabulary\n"
         "- FORBIDDEN patterns: modern languages, daily routines, non-Latin subjects\n\n"
         "INSTRUCTIONS:\n"
-        f"- class_name: MUST start with 'Week {week_number} Day {day}:' followed by LATIN topic (≤100 chars)\n"
-        "- summary: 2-3 sentences describing CLASSICAL LATIN lesson focus (50-500 chars)\n"
+        f"- class_name: Format 'Latin A – Week {week_number:02d} Day {day} : [Engaging Subtitle] – {day_intent}' (≤100 chars)\n"
+        "- summary: Narrative 3-5 sentences with *italicized* Latin terms, connecting prior/future (150-300 chars)\n"
         "- grade_level: Format as 'N-M' where N and M are grade numbers (e.g., '3-5', '6-8')\n\n"
         "OUTPUT FORMAT:\n"
         "Return as JSON object with these keys.\n"
         "{\n"
-        f"  \"class_name\": \"Week {week_number} Day {day}: [Classical Latin Topic]\",\n"
-        "  \"summary\": \"Lesson overview in 2-3 sentences about LATIN.\",\n"
+        f"  \"class_name\": \"Latin A – Week {week_number:02d} Day {day} : [Engaging Subtitle] – {day_intent}\",\n"
+        "  \"summary\": \"Narrative paragraph with *italicized* Latin terms connecting prior knowledge and future lessons.\",\n"
         "  \"grade_level\": \"3-5\"\n"
         "}\n\n"
         "SELF-CHECK:\n"
-        f"✓ Does class_name start with EXACTLY 'Week {week_number} Day {day}:'?\n"
-        "✓ Does Topic describe CLASSICAL LATIN content (not math/science/Spanish)?\n"
-        "✓ Is summary 2-3 sentences about LATIN (50-500 chars)?\n"
+        f"✓ Does class_name start with EXACTLY 'Latin A – Week {week_number:02d} Day {day} :'?\n"
+        "✓ Does subtitle use en-dash (–) before day intent (Discovery/Practice/Review/Quiz)?\n"
+        "✓ Is subtitle engaging and narrative (not 'Introduction to...')?\n"
+        "✓ Does summary use *asterisks* for ALL Latin words?\n"
+        "✓ Is summary narrative present tense (3-5 sentences)?\n"
+        "✓ Does summary connect prior knowledge and preview tomorrow?\n"
         "✓ Is grade_level in 'N-M' format (e.g., '3-5')?\n"
     )
 
+    # Use helper to extract data
+    week_data = _extract_from_week_spec(week_spec)
+
     usr = (
         f"Week metadata and objectives for Day {day}:\n\n"
+        f"CRITICAL: This week is about '{week_data['grammar_focus']}'. ALL 4 days must focus on this same grammar topic.\n"
+        f"Do NOT introduce new topics (verbs, other declensions, etc.). Stay on '{week_data['grammar_focus']}'.\n\n"
         + orjson.dumps(
             {
-                "metadata": week_spec.get("01_metadata.json", {}),
-                "objectives": week_spec.get("02_objectives.json", []),
+                "metadata": week_data["metadata"],
+                "objectives": week_data["objectives"],
+                "grammar_focus": week_data["grammar_focus"],
+                "week_number": week_data["week_number"],
                 "day": day
             },
             option=orjson.OPT_INDENT_2
@@ -1968,20 +2104,16 @@ REASONING CHECK before generating vocabulary_key_document:
 
 Focus on clarity, specificity, and pedagogical value for classroom teachers teaching CLASSICAL LATIN."""
 
-    metadata = week_spec.get("metadata", {})
-    grammar_focus = week_spec.get("grammar_focus", "")
-    vocabulary = week_spec.get("vocabulary", {})
-    faith_integration = week_spec.get("faith_integration", {})
-    spiral_links = week_spec.get("spiral_links", {})
+    # Use helper to extract data (supports v1.0, v1.1, custom formats)
+    week_data = _extract_from_week_spec(week_spec)
 
-    usr = f"""Generate 6 teacher support documents for Week {metadata.get('week', 'X')} Day {day}.
+    usr = f"""Generate 6 teacher support documents for Week {week_data['week_number']} Day {day}.
 
 ## Week Context
-Grammar Focus: {grammar_focus}
-Vocabulary: {vocabulary.get('core_items', [])}
-Virtue: {faith_integration.get('virtue', '')}
-Faith Phrase: {faith_integration.get('faith_phrase', '')}
-Spiral Links: {spiral_links.get('prior_weeks_referenced', [])}"""
+Grammar Focus: {week_data['grammar_focus']}
+Vocabulary: {[v.get('word', v) if isinstance(v, dict) else v for v in week_data['vocabulary'][:7]]}
+Virtue: {week_data['virtue_focus']}
+Faith Phrase: {week_data['faith_phrase']}"""
 
     # INJECT PHASE 0 RESEARCH if available
     if research_plan:
@@ -2025,10 +2157,21 @@ Return a JSON object with these 6 keys (each value is plain text, NOT nested JSO
 1. **spiral_review_document**: List specific LATIN content from prior weeks to review today (Latin words, Latin grammar)
 2. **weekly_topics_document**: Week overview (LATIN grammar, LATIN skill goals, virtue, mastery indicator)
 3. **virtue_and_faith_document**: How virtue connects to lesson; faith phrase meaning; scripture reference
-4. **vocabulary_key_document**: Today's CLASSICAL LATIN vocabulary ONLY with pronunciation guide and English meanings
+4. **vocabulary_key_document**: Today's CLASSICAL LATIN vocabulary with pronunciation, English meaning, AND English derivatives
+   - REQUIRED FORMAT (GOLD STANDARD): "amō – I love (amiable, amorous)"
    - REQUIRED: Every word MUST be Classical Latin (e.g., salve, puella, amo, pax)
+   - REQUIRED: Include 2-4 English derivatives in parentheses (e.g., portable, transport)
    - FORBIDDEN: Spanish (levantarse, ducharse), reflexive verbs, modern languages
    - Use week's grammar_focus to determine appropriate Latin vocabulary
+   - Example format:
+     ```
+     VOCABULARY KEY – Week NN Core [Topic]
+
+     amō – I love (amiable, amorous)
+     portō – I carry (portable, transport)
+     laudō – I praise (laudatory, applaud)
+     vocō – I call (vocal, vocation, advocate)
+     ```
 5. **chant_chart_document**: Latin paradigm memory chant with rhythm/motions (e.g., 'a/ae/ae/am/ā', 'sum/es/est')
 6. **teacher_voice_tips_document**: Pedagogical coaching for delivering this LATIN lesson
 

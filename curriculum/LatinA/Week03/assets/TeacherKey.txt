@@ -1,0 +1,70 @@
+```markdown
+# Teacher Key – Week 3
+
+Hello, educators! Below you'll find the answer key for the Grade 3 Latin A quiz for Week 3. This key provides correct answers, brief explanations, and examples to help guide your students in their understanding of Latin vocabulary, grammar, and translation.
+
+## Vocabulary (5 points)
+
+1. **Fill in the blank:** The Latin word for "girl" is **puella**.  
+   - **Correct Answer:** b) puella  
+   - **Explanation:** "Puella" is the Latin word for "girl," a common noun used in many introductory Latin texts.
+
+2. **Multiple Choice:** What is the Latin word for "star"?  
+   - **Correct Answer:** c) stella  
+   - **Explanation:** "Stella" means "star" in Latin, and it is often used in both classical and ecclesiastical contexts.
+
+3. **Fill in the blank:** "Salve" means **hello** in English.  
+   - **Correct Answer:** b) hello  
+   - **Explanation:** "Salve" is a common Latin greeting, used to say "hello" to one person.
+
+4. **Multiple Choice:** Which word means "rose" in Latin?  
+   - **Correct Answer:** a) rosa  
+   - **Explanation:** "Rosa" is the Latin word for "rose," a first declension noun.
+
+5. **Fill in the blank:** The Latin word for "moon" is **luna**.  
+   - **Correct Answer:** b) luna  
+   - **Explanation:** "Luna" is the Latin term for "moon," and it is the root of many related words in English, such as "lunar."
+
+## Grammar & Chant (5 points)
+
+6. **Chant Recall:** What are the plural endings for first declension nouns?  
+   - **Correct Answer:** -ae, -arum, -is, -as, -is  
+   - **Explanation:** These endings are used for first declension nouns in the nominative, genitive, dative, accusative, and ablative plural cases, respectively.  
+   - **Chant Tip:** Practice chanting with a rhythm: "ae, arum, is, as, is" to help memorize the endings.
+
+7. **Parsing:** Identify the case and number of "puellae" in the sentence: "Puellae in horto ludunt."  
+   - **Correct Answer:** nominative plural  
+   - **Explanation:** "Puellae" is in the nominative plural because it is the subject of the sentence, indicating that multiple girls are playing.
+
+8. **Short Response:** What is the genitive plural ending for first declension nouns?  
+   - **Correct Answer:** -arum  
+   - **Explanation:** The genitive plural ending "-arum" indicates possession or association, often translated as "of the" in English.
+
+9. **Chant Recall:** Recite the first declension plural endings chant.  
+   - **Correct Answer:** -ae, -arum, -is, -as, -is  
+   - **Explanation:** These endings are essential for forming plural nouns in the first declension.  
+   - **Chant Tip:** Use a simple melody or clap rhythm to reinforce memorization.
+
+10. **Parsing:** What is the case and number of "rosas" in the sentence: "Rosas amo."  
+    - **Correct Answer:** accusative plural  
+    - **Explanation:** "Rosas" is in the accusative plural because it is the direct object of the verb "amo," indicating what is being loved.
+
+## Translation (5 points)
+
+11. **Translate to English:** "Puellae rosas amant."  
+    - **Correct Answer:** The girls love roses.  
+    - **Explanation:** "Puellae" is the subject (nominative plural), "rosas" is the direct object (accusative plural), and "amant" is the verb meaning "love."
+
+12. **Translate to Latin:** "The stars are beautiful."  
+    - **Correct Answer:** Stellae sunt pulchrae.  
+    - **Explanation:** "Stellae" is the subject (nominative plural), "sunt" is the verb "are," and "pulchrae" is the predicate adjective agreeing with "stellae."
+
+## Virtue Reflection (5 points)
+
+13. **Written Response:** This week, we focused on the virtue of diligence. How can being diligent help you learn Latin better? Write a few sentences about how you can use diligence in your studies.  
+    - **Sample Response:** "Being diligent means consistently practicing my Latin vocabulary and grammar chants every day. By doing this, I can remember the words and endings better, which will help me read and understand Latin texts more easily."
+
+---
+```
+
+This key provides educators with a comprehensive guide to assessing student understanding and offers strategies for reinforcing learning through chants and practice.

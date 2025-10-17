@@ -2,137 +2,134 @@
 ---
 week: 1
 day: 2
-title: First Declension Nouns (Singular)
+title: "First Declension Nouns (Singular)"
 time_window_minutes: 25
-tone: warm-positive-brief
-audience: Grade 3 (Grammar Stage, U.S.)
+tone: "warm-positive-brief"
+audience: "Grade 3 (Grammar Stage, U.S.)"
 license: "CC BY 4.0"
 provenance:
   generator: "Steel"
   prompt_id: "prompt_for_guidelines"
   version: "1.0.0"
-  generated_at: "2023-10-17T11:26:49.498154"
+  generated_at: "2025-10-17T13:53:32.851415"
 ---
 
 # Week 1 Day 2: First Declension Nouns (Singular)
 
 ## Objectives & Success Criteria
 ### Objectives
-- Identify first declension nouns in singular form.
-- Pronounce vocabulary words correctly.
-- Recite the nominative singular chant.
+- Identify and chant singular endings of first declension nouns.
+- Use new vocabulary words in simple sentences.
+- Connect patience to learning new concepts.
 
 ### Success Criteria
-- Students correctly identify first declension nouns.
+- Students chant endings correctly.
 - Students pronounce vocabulary accurately.
-- Students recite the chant with confidence.
+- Students use 'salve' in a greeting.
+- Students recite 'Gloria Patri' confidently.
 
 ## Materials & Setup
-- Chant chart (from WeekSpec)
-- Flashcards (vocabulary_spiral + new vocab)
+- Chant chart (a, ae, ae, am, ā)
+- Flashcards (salve, puella, rosa, via, aqua, terra, silva)
 - Parsing worksheet (cases, numbers)
-- Visual aids for vocabulary
 
 ## Minute-by-Minute Flow
 
 ### Phase 1: Greeting & Spiral Review (5 min)
 **Sparky says:**
-"Salvē! Today we'll practice **Patience** as we learn Latin. Let's start with some vocabulary!"
+"Salvē, discipulī! Today we'll practice **Patience** as we explore Latin nouns."
 
 **Activity:**
-- Show flashcards from vocabulary_spiral: "salve", "puella", "rosa".
-- Ask: "What does 'puella' mean?" (Hint: Think of a young person in a garden.)
-- Recycle grammar_spiral: Practice saying "Salve" in different tones.
+- Show flashcards: "What does 'salve' mean?" (Hint: It's a greeting!)
+- Review Latin alphabet sounds briefly.
 
 **Check for Understanding:**
-- "What is the nominative singular ending?"
+- "What is the nominative ending for 'puella'?"
 
 ---
 
 ### Phase 2: Chant Introduction/Practice (5–7 min)
 **Sparky says:**
-"Great job! Let's try that again. Remember, patience is key! Let's chant it once slowly, then once with rhythm."
+"Let's try that chant again! We'll do it slowly first, then with rhythm."
 
 **Activity:**
 - Display chant chart.
-- Model chant: "a, ae, ae, am, ā" (once slowly, once at tempo).
+- Model chant (slowly, then at tempo).
 - Students echo.
 - Point to endings as they chant.
 
 **Check for Understanding:**
-- "Can you recite the chant?"
+- "Can you chant the first declension endings?"
 
 ---
 
 ### Phase 3: Grammar Instruction (8–10 min)
-**Focus:** First declension noun endings, correct pronunciation
+**Focus:** Chanting first declension endings, understanding noun roles.
 
 **Sparky says:**
-"Listen carefully to the pronunciation. Which case tells who/what does the action?"
+"Which case tells who/what does the action? Let's find out!"
 
 **Activity:**
-- Introduce grammar concept: First declension nouns.
+- Introduce first declension nouns using 'puella'.
 - Show example sentence: "Puella in horto est."
-- Parse together: Identify case, number.
-- Highlight common_misconceptions:
-  - Pattern: Mispronouncing 'puella' as 'pwe-la'.
-  - Correction cue: "Remember, it's 'pwel-la' with a clear 'w' sound."
+- Parse together: nominative, genitive, dative, accusative, ablative.
+- Highlight misconception: "Check the chant: 'a, ae, ae, am, ā'."
 
 **Check for Understanding:**
-- "Can you say 'puella' correctly?"
+- "What does 'rosa' mean?"
 
 ---
 
 ### Phase 4: Guided Practice (5–7 min)
 **Sparky says:**
-"You're doing amazing! Keep it up! Try the sentence pattern A before B."
+"Try the sentence pattern A before B. Let's see how it works!"
 
 **Activity:**
-- Present practice sentences: "Rosa pulchra est.", "Via longa est."
+- Present sentences: "Puella est bona", "Amo Deum".
 - Students parse/translate with scaffolding.
 - Differentiation:
-  - **Support:** Use visual aids for vocabulary.
-  - **Extension:** Create simple sentences using new vocabulary.
+  - **Support:** Use flashcards for vocabulary practice.
+  - **Extension:** Create simple Latin sentences.
 
 **Check for Understanding:**
-- "What does 'Gloria Patri' mean?"
+- "How do you say 'hello' in Latin?"
 
 ---
 
 ### Phase 5: Closure & Virtue Tie-In (2–3 min)
 **Sparky says:**
-"Learning Latin takes time. Let's practice patience together! Notice each ending carefully; steady effort makes clear Latin."
+"Patience helps us practice until we master new words. Notice each ending carefully; steady effort makes clear Latin."
 
 **Faith Integration:**
-"Use 'Gloria Deo' as a cheerful closure after correct parsing."
+"Let's close with 'Gloria Patri' to remind us of our learning journey."
 
 **Activity:**
 - Review objectives.
-- Students self-assess against success_criteria.
+- Students self-assess against success criteria.
 - Close with faith phrase: "Gloria Patri."
 
 ---
 
 ## Coaching Notes
 ### Common Misconceptions
-- **Pattern:** Mispronouncing 'puella' as 'pwe-la'
-  **Correction Cue:** "Remember, it's 'pwel-la' with a clear 'w' sound."
+- **Pattern:** Incorrect noun endings
+  **Correction Cue:** "Check the chant: 'a, ae, ae, am, ā'."
 
 ### Differentiation Strategies
-- **Support:** Use visual aids for vocabulary, practice pronunciation in pairs.
-- **Extension:** Create simple sentences using new vocabulary, research the use of 'Gloria Patri' in history.
+- **Support:** Use flashcards for vocabulary practice.
+- **Extension:** Challenge with additional vocabulary, create simple Latin sentences.
 
 ### Classroom Management
-- Keep transitions smooth with clear instructions.
-- Use a timer for chant practice.
+- Keep chant sessions lively and brief.
+- Use hand signals for transitions.
 
 ---
 
 ## Assessment Checkpoints
 Embedded in flow above:
-- Phase 1: "What is the nominative singular ending?"
-- Phase 2: "Can you recite the chant?"
-- Phase 3: "Can you say 'puella' correctly?"
-- Phase 4: "What does 'Gloria Patri' mean?"
-- Phase 5: Self-assessment against success_criteria
+- Phase 1: "What is the nominative ending for 'puella'?"
+- Phase 2: "Can you chant the first declension endings?"
+- Phase 3: "What does 'rosa' mean?"
+- Phase 4: "How do you say 'hello' in Latin?"
+- Phase 5: Self-assessment against success criteria
 ```

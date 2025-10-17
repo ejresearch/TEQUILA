@@ -6,22 +6,22 @@ validated_by: Steel
 originality_attestation: true
 ---
 
-# Week 0 Day 2: Introduction to Latin Noun Declensions
+# Latin A – Week 00 Day 2 : Exploring the World of –a Nouns – Practice
 
 ## Objective
-Today, students will learn to identify and practice the first declension of Latin nouns, focusing on their endings and meanings.
+Today, students will practice translating and reciting Latin nouns ending in "-a," focusing on their declensions and proper pronunciation.
 
 ## Prior Knowledge
-- Students have previously learned basic Latin vocabulary such as "puella" (girl) and "aqua" (water).
-- Familiarity with the concept of noun endings and their importance in Latin.
+- Students have been introduced to the concept of Latin declensions, particularly the first declension.
+- Familiarity with basic Latin vocabulary such as "puella" (girl) and "aqua" (water) has been established.
 
 ## Focus for Today
-- Grammar: First declension noun endings
-- Chant: Recitation of first declension endings
-- Vocabulary: puella, aqua, terra, via, femina, agricola, poeta, nauta
+- Grammar: First declension nouns, emphasizing nominative and accusative cases.
+- Chant: Recitation of first declension noun endings.
+- Vocabulary: puella, aqua, terra, via, silva, mensa, stella, luna
 
 ## Virtue & Faith Connection
-As students explore the structure of Latin, they are encouraged to reflect on the virtue of diligence, applying careful attention to detail in their studies. The faith phrase "Deus est bonus" (God is good) reminds them of the goodness in learning and understanding.
+Today's study of Latin nouns reflects the virtue of diligence, as students carefully learn and recite each form. The faith phrase "Deus est lux" (God is light) reminds us of the clarity and understanding that comes from dedicated study.
 
 ## Teacher Notes
-Encourage students to chant the declension endings aloud, focusing on clear pronunciation. Remind them that Latin nouns change form based on their role in a sentence, and practice with examples will build confidence. Allow time for repetition and correction to ensure mastery of the first declension forms.
+Encourage students to chant the noun endings aloud to reinforce memory. Remind them to pay attention to vowel lengths and pronunciation, particularly in words like "aqua" and "terra." Allow time for individual practice and group recitation to build confidence.

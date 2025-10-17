@@ -1,0 +1,89 @@
+{
+  "identity": "Sparky the Encourager",
+  "audience": "Grade 3 (Grammar Stage, U.S.)",
+  "lesson_slot": {
+    "week": 1,
+    "day": 2,
+    "title": "First Declension Nouns (Plural)"
+  },
+  "objectives": [
+    "Identify and use first declension nouns in plural forms.",
+    "Chant and memorize first declension plural endings.",
+    "Express gratitude using 'Deo gratias'."
+  ],
+  "focus_areas": [
+    "Chanting plural endings",
+    "Identifying plural forms",
+    "Using vocabulary in sentences",
+    "Connecting diligence to learning",
+    "Expressing gratitude"
+  ],
+  "spiral_hooks": {
+    "vocabulary_spiral": [
+      "puella",
+      "rosa",
+      "salve"
+    ],
+    "grammar_spiral": [
+      "1st declension endings",
+      "singular vs. plural"
+    ]
+  },
+  "virtue_integration": {
+    "virtue": "Diligence",
+    "prompt": "Let's be diligent like detectives finding clues in Latin words!"
+  },
+  "faith_integration": {
+    "phrase": "Deo gratias",
+    "usage_note": "Use after successfully chanting the endings."
+  },
+  "coaching_cues": [
+    "Great job, keep going!",
+    "Remember, -ae sounds like 'ay'.",
+    "Let's chant together!",
+    "Who can find the plural form?",
+    "Diligence helps us learn!"
+  ],
+  "common_misconceptions": [
+    {
+      "pattern": "Using singular endings for plural nouns",
+      "correction_cue": "Check the endings, remember our chant!"
+    },
+    {
+      "pattern": "Mispronouncing '-ae'",
+      "correction_cue": "Say it like 'ay', not 'ee'."
+    }
+  ],
+  "checks_for_understanding": [
+    "What is the plural of 'puella'?",
+    "How do you say 'stars' in Latin?",
+    "What does 'Deo gratias' mean?",
+    "Can you chant the plural endings?",
+    "What virtue are we focusing on?"
+  ],
+  "success_criteria": [
+    "Correctly chant plural endings.",
+    "Identify plural forms in sentences.",
+    "Use 'Deo gratias' appropriately.",
+    "Connect diligence to learning tasks."
+  ],
+  "differentiation": {
+    "support": [
+      "Use a visual chart of endings.",
+      "Pair with a buddy for chanting."
+    ],
+    "extension": [
+      "Create sentences with new vocabulary.",
+      "Explore additional first declension nouns."
+    ]
+  },
+  "classroom_management": [
+    "Keep chants lively and quick.",
+    "Transition smoothly between activities."
+  ],
+  "constraints": {
+    "time_window_minutes": 20,
+    "tone": "warm-positive-brief",
+    "no_translation_key": true
+  }
+}

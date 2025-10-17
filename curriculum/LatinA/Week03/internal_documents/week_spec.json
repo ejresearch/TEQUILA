@@ -1,0 +1,287 @@
+{
+  "week_spec_kit": {
+    "week_info": {
+      "week_number": 3,
+      "title": "First Declension Nouns (Plural)",
+      "grammar_focus": "First Declension Nouns in Plural",
+      "chant": "-ae, -arum, -is, -as, -is",
+      "virtue_focus": "Diligence",
+      "faith_phrase": "Deo gratias - Thanks be to God",
+      "vocabulary_scope": [
+        "puella",
+        "stella",
+        "luna",
+        "porta",
+        "femina",
+        "nauta",
+        "salve",
+        "rosa"
+      ]
+    },
+    "generated_files": [
+      {
+        "file_name": "01_metadata.json",
+        "content": {
+          "week_number": 3,
+          "week_title": "First Declension Nouns (Plural)",
+          "grammar_focus": "First Declension Nouns in Plural",
+          "chant": "-ae, -arum, -is, -as, -is",
+          "virtue_focus": "Diligence",
+          "faith_phrase": "Deo gratias - Thanks be to God",
+          "vocabulary_summary": "This week focuses on first declension nouns in their plural forms, including words like puella, stella, and luna.",
+          "author_metadata": {
+            "author_name": "TEQUILA Curriculum Team"
+          },
+          "originality_attestation": true,
+          "license": "CC BY 4.0"
+        }
+      },
+      {
+        "file_name": "02_objectives.json",
+        "content": {
+          "objectives": [
+            "Students will be able to identify and use first declension nouns in their plural forms.",
+            "Students will chant and memorize the first declension plural endings.",
+            "Students will connect the virtue of diligence to their study of Latin grammar.",
+            "Students will express gratitude using the phrase 'Deo gratias'.",
+            "Students will demonstrate understanding through translation and application exercises."
+          ]
+        }
+      },
+      {
+        "file_name": "03_vocabulary.json",
+        "content": {
+          "vocabulary": [
+            {
+              "word": "puella",
+              "english": "girl",
+              "part_of_speech": "noun",
+              "pronunciation": "poo-EL-la",
+              "example_phrase": "Puellae in horto ludunt.",
+              "recycled_from_week": 1
+            },
+            {
+              "word": "stella",
+              "english": "star",
+              "part_of_speech": "noun",
+              "pronunciation": "STEL-la",
+              "example_phrase": "Stellae in caelo fulgent."
+            },
+            {
+              "word": "luna",
+              "english": "moon",
+              "part_of_speech": "noun",
+              "pronunciation": "LOO-na",
+              "example_phrase": "Lunae clarae sunt."
+            },
+            {
+              "word": "porta",
+              "english": "gate",
+              "part_of_speech": "noun",
+              "pronunciation": "POR-ta",
+              "example_phrase": "Portae magnae sunt."
+            },
+            {
+              "word": "femina",
+              "english": "woman",
+              "part_of_speech": "noun",
+              "pronunciation": "FEH-mi-na",
+              "example_phrase": "Feminae in foro sunt."
+            },
+            {
+              "word": "nauta",
+              "english": "sailor",
+              "part_of_speech": "noun",
+              "pronunciation": "NOW-ta",
+              "example_phrase": "Nautae in mari navigant."
+            },
+            {
+              "word": "salve",
+              "english": "hello",
+              "part_of_speech": "interjection",
+              "pronunciation": "SAL-veh",
+              "example_phrase": "Salve, discipuli!",
+              "recycled_from_week": 1
+            },
+            {
+              "word": "rosa",
+              "english": "rose",
+              "part_of_speech": "noun",
+              "pronunciation": "RO-sa",
+              "example_phrase": "Rosae pulchrae sunt.",
+              "recycled_from_week": 2
+            }
+          ]
+        }
+      },
+      {
+        "file_name": "04_grammar_focus.md",
+        "content": "### Grammar Focus: First Declension Nouns (Plural)\n\nThis week, we explore the plural forms of first declension nouns. In Latin, first declension nouns typically end in '-a' in the singular and are mostly feminine. The plural forms use the endings '-ae, -arum, -is, -as, -is'.\n\nTo help students remember these endings, we use the chant:\n\n```\n-ae, -arum, -is, -as, -is\n```\n\nWe begin by reviewing the singular forms to ensure a solid foundation, then move to the plural. Visual aids and repetitive chanting are key strategies to help students differentiate between singular and plural endings. By understanding these endings, students can form and translate simple sentences, enhancing their grasp of Latin grammar."
+      },
+      {
+        "file_name": "05_virtue_focus.md",
+        "content": "### Virtue Focus: Diligence\n\nDiligence is the steady, earnest, and energetic effort we put into our studies. In learning Latin, diligence helps us master complex grammatical structures and vocabulary. Proverbs 13:4 reminds us, \"The soul of the sluggard craves and gets nothing, while the soul of the diligent is richly supplied.\" By being diligent, we honor God with our efforts and grow in knowledge."
+      },
+      {
+        "file_name": "06_faith_phrase.md",
+        "content": "### Faith Phrase: Deo gratias\n\nThe phrase 'Deo gratias' means 'Thanks be to God'. It is a simple yet profound expression of gratitude. In our studies, we use this phrase to remind ourselves to be thankful for the opportunity to learn and grow in wisdom."
+      },
+      {
+        "file_name": "07_prior_knowledge_digest.json",
+        "content": {
+          "prior_knowledge": [
+            {
+              "source_week": 1,
+              "concept": "salve",
+              "reuse_reason": "Reinforce greeting vocabulary"
+            },
+            {
+              "source_week": 2,
+              "concept": "rosa",
+              "reuse_reason": "Review of first declension nouns"
+            },
+            {
+              "source_week": 2,
+              "concept": "1st declension endings",
+              "reuse_reason": "Foundation for plural forms"
+            }
+          ]
+        }
+      },
+      {
+        "file_name": "08_chant_chart.txt",
+        "content": "Chant for First Declension Plural Endings:\n\nTeacher: -ae\nStudents: -ae\nTeacher: -arum\nStudents: -arum\nTeacher: -is\nStudents: -is\nTeacher: -as\nStudents: -as\nTeacher: -is\nStudents: -is"
+      },
+      {
+        "file_name": "09_assessment_overview.json",
+        "content": {
+          "quiz_structure": {
+            "sections": [
+              {
+                "type": "Vocabulary Recall",
+                "description": "Students will recall and write the English meanings of Latin words.",
+                "sample_items": [
+                  "puella",
+                  "stella",
+                  "luna"
+                ]
+              },
+              {
+                "type": "Grammar Application",
+                "description": "Students will fill in the blanks with the correct plural endings.",
+                "sample_items": [
+                  "puellae",
+                  "portae"
+                ]
+              },
+              {
+                "type": "Derivatives",
+                "description": "Students will match Latin words with their English derivatives.",
+                "sample_items": [
+                  "stella - stellar",
+                  "luna - lunar"
+                ]
+              },
+              {
+                "type": "Translation Practice",
+                "description": "Students will translate short Latin sentences into English.",
+                "sample_items": [
+                  "Puellae in horto ludunt."
+                ]
+              }
+            ]
+          },
+          "scoring_notes": "Each section is scored out of 10 points, with a total of 40 points possible.",
+          "review_before_quiz": "Review vocabulary and plural endings using chants and flashcards."
+        }
+      },
+      {
+        "file_name": "10_teacher_notes.md",
+        "content": "### Teacher Notes\n\n**Pronunciation Cues:**\n- Emphasize the pronunciation of '-ae' as 'ay' in Church Latin.\n\n**Pacing Advice:**\n- Spend 3 minutes on each activity: greeting, chant practice, grammar instruction, guided practice, and virtue closure.\n\n**Differentiation:**\n- For struggling students, provide a visual chart of 1st declension plural endings with examples. Use color-coding to highlight the endings.\n- For advanced students, introduce additional vocabulary from the 1st declension and have them create complex sentences.\n\n**Materials Needed:**\n- Week Paradigm Chart\n- Flashcard Sets for New and Review Vocabulary\n\n**Connections:**\n- This week builds on the singular forms learned in Week 2 and prepares students for more complex sentence structures."
+      },
+      {
+        "file_name": "11_weekly_review_questions.md",
+        "content": "### Weekly Review Questions\n\n1. What is the plural form of 'puella'?\n2. How do you say 'stars' in Latin?\n3. What does 'Deo gratias' mean?\n4. Provide the plural endings for first declension nouns.\n5. Translate: 'Feminae in foro sunt.'\n6. What virtue are we focusing on this week?\n7. How does diligence help us in our studies?\n\n---\n\n**Answer Key**\n\n1. Puellae\n2. Stellae\n3. Thanks be to God\n4. -ae, -arum, -is, -as, -is\n5. The women are in the market.\n6. Diligence\n7. Diligence helps us by ensuring consistent effort and attention to detail."
+      },
+      {
+        "file_name": "99_compiled_week_spec.json",
+        "content": {
+          "week_info": {
+            "week_number": 3,
+            "title": "First Declension Nouns (Plural)",
+            "grammar_focus": "First Declension Nouns in Plural",
+            "chant": "-ae, -arum, -is, -as, -is",
+            "virtue_focus": "Diligence",
+            "faith_phrase": "Deo gratias - Thanks be to God",
+            "vocabulary_scope": [
+              "puella",
+              "stella",
+              "luna",
+              "porta",
+              "femina",
+              "nauta",
+              "salve",
+              "rosa"
+            ]
+          },
+          "generated_files": [
+            {
+              "file_name": "01_metadata.json",
+              "content": "<FULL JSON OBJECT HERE>"
+            },
+            {
+              "file_name": "02_objectives.json",
+              "content": "<FULL JSON OBJECT HERE>"
+            },
+            {
+              "file_name": "03_vocabulary.json",
+              "content": "<FULL JSON OBJECT HERE>"
+            },
+            {
+              "file_name": "04_grammar_focus.md",
+              "content": "<FULL MARKDOWN STRING HERE>"
+            },
+            {
+              "file_name": "05_virtue_focus.md",
+              "content": "<FULL MARKDOWN STRING HERE>"
+            },
+            {
+              "file_name": "06_faith_phrase.md",
+              "content": "<FULL MARKDOWN STRING HERE>"
+            },
+            {
+              "file_name": "07_prior_knowledge_digest.json",
+              "content": "<FULL JSON OBJECT HERE>"
+            },
+            {
+              "file_name": "08_chant_chart.txt",
+              "content": "<FULL TEXT STRING HERE>"
+            },
+            {
+              "file_name": "09_assessment_overview.json",
+              "content": "<FULL JSON OBJECT HERE>"
+            },
+            {
+              "file_name": "10_teacher_notes.md",
+              "content": "<FULL MARKDOWN STRING HERE>"
+            },
+            {
+              "file_name": "11_weekly_review_questions.md",
+              "content": "<FULL MARKDOWN STRING HERE>"
+            },
+            {
+              "file_name": "99_compiled_week_spec.json",
+              "content": "<FULL JSON OBJECT HERE>"
+            }
+          ],
+          "generation_metadata": {
+            "generated_at": "2025-10-17T14:09:58.748437",
+            "model": "o1-mini (or gpt-4o fallback)"
+          },
+          "cost_tokens": null,
+          "license": "CC BY 4.0"
+        }
+      }
+    ]
+  }
+}

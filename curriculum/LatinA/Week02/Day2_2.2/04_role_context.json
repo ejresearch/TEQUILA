@@ -7,16 +7,16 @@
     "title": "First Declension Nouns (Singular)"
   },
   "objectives": [
-    "Identify first declension nouns in singular form.",
-    "Pronounce vocabulary words correctly.",
-    "Recite the nominative singular chant."
+    "Identify and chant singular endings of first declension nouns.",
+    "Use new vocabulary words in simple sentences.",
+    "Connect patience to learning new concepts."
   ],
   "focus_areas": [
-    "First declension noun endings",
-    "Correct pronunciation",
-    "Chant recitation",
-    "Vocabulary usage",
-    "Virtue of patience"
+    "Chanting first declension endings",
+    "Pronouncing vocabulary words",
+    "Understanding noun roles in sentences",
+    "Connecting virtue of patience",
+    "Reciting 'Gloria Patri'"
   ],
   "spiral_hooks": {
     "vocabulary_spiral": [
@@ -25,60 +25,61 @@
       "rosa"
     ],
     "grammar_spiral": [
-      "Basic Latin pronunciation",
-      "Salve usage"
+      "Latin alphabet",
+      "pronunciation guide"
     ]
   },
   "virtue_integration": {
     "virtue": "Patience",
-    "prompt": "Learning Latin takes time. Let's practice patience together!"
+    "prompt": "Patience helps us practice until we master new words."
   },
   "faith_integration": {
     "phrase": "Gloria Patri",
-    "usage_note": "Use during morning prayer or reflection time."
+    "usage_note": "Recite at the start of class to set a reflective tone."
   },
   "coaching_cues": [
-    "Great job! Let's try that again.",
-    "Remember, patience is key!",
-    "Listen carefully to the pronunciation.",
-    "Let's chant together!",
-    "You're doing amazing! Keep it up!"
+    "Let's try that chant again!",
+    "Remember, patience is our friend today.",
+    "Great job with 'puella'!",
+    "Keep practicing, you're getting it!",
+    "Can you say 'Gloria Patri' with me?"
   ],
   "common_misconceptions": [
     {
-      "pattern": "Mispronouncing 'puella' as 'pwe-la'",
-      "correction_cue": "Remember, it's 'pwel-la' with a clear 'w' sound."
+      "pattern": "Incorrect noun endings",
+      "correction_cue": "Check the chant: 'a, ae, ae, am, ā'."
     },
     {
-      "pattern": "Forgetting the chant order",
-      "correction_cue": "Try to remember: a, ae, ae, am, ā."
+      "pattern": "Mispronouncing 'aqua'",
+      "correction_cue": "Remember, it's 'ah-kwah'."
     }
   ],
   "checks_for_understanding": [
-    "What is the nominative singular ending?",
-    "Can you say 'puella' correctly?",
-    "What does 'Gloria Patri' mean?",
-    "How do we show patience in class?",
-    "Can you recite the chant?"
+    "What is the nominative ending for 'puella'?",
+    "Can you chant the first declension endings?",
+    "What does 'rosa' mean?",
+    "How do you say 'hello' in Latin?",
+    "What does 'Gloria Patri' mean?"
   ],
   "success_criteria": [
-    "Students correctly identify first declension nouns.",
+    "Students chant endings correctly.",
     "Students pronounce vocabulary accurately.",
-    "Students recite the chant with confidence."
+    "Students use 'salve' in a greeting.",
+    "Students recite 'Gloria Patri' confidently."
   ],
   "differentiation": {
     "support": [
-      "Use visual aids for vocabulary.",
-      "Practice pronunciation in pairs."
+      "Use flashcards for vocabulary practice.",
+      "Pair students for chant practice."
     ],
     "extension": [
-      "Create simple sentences using new vocabulary.",
-      "Research the use of 'Gloria Patri' in history."
+      "Challenge with additional vocabulary.",
+      "Create simple Latin sentences."
     ]
   },
   "classroom_management": [
-    "Keep transitions smooth with clear instructions.",
-    "Use a timer for chant practice."
+    "Keep chant sessions lively and brief.",
+    "Use hand signals for transitions."
   ],
   "constraints": {
     "time_window_minutes": 25,

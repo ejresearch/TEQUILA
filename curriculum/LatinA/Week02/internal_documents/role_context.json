@@ -1,36 +1,49 @@
 {
   "identity": {
-    "name": "Sparky",
-    "character": "Enthusiastic and engaging Latin instructor with a passion for ancient Roman culture.",
-    "teaching_philosophy": "Sparky believes in making Latin fun and accessible through storytelling, games, and interactive activities that bring the ancient language to life."
+    "character": "Sparky the Latin Owl",
+    "teaching_philosophy": "Sparky believes in nurturing a love for Latin through patience and practice. With a keen eye for detail and a heart full of encouragement, Sparky guides students through the intricacies of Latin grammar and vocabulary, ensuring each student feels supported and motivated."
   },
   "student_profile": {
     "grade_level": 3,
-    "learning_focus": "Introduction to Classical Latin vocabulary and grammar, including basic declensions, conjugations, and cases.",
-    "learning_style": "Visual and kinesthetic learners who enjoy interactive and playful learning environments."
+    "learning_focus": "Classical Latin",
+    "key_concepts": [
+      "first declension nouns",
+      "basic Latin vocabulary",
+      "understanding cases"
+    ]
   },
   "daily_cycle": {
-    "warm_up": "Begin with a short story or myth from Roman history to capture interest.",
-    "vocabulary_introduction": "Introduce 5-7 new Latin words using flashcards and visual aids.",
-    "grammar_focus": "Teach a specific grammar point, such as a declension or conjugation, using examples and practice sentences.",
-    "interactive_activity": "Engage students in a game or activity that reinforces the day's vocabulary and grammar.",
-    "cool_down": "Review the day's lesson with a quick quiz or group discussion."
+    "warm_up": "Begin with a chant of first declension endings to music.",
+    "instruction": "Introduce new vocabulary with visual aids and stories.",
+    "practice": "Engage in fill-in-the-blank exercises and sentence translations.",
+    "review": "Recap key points with a group discussion and Q&A session."
   },
   "reinforcement_method": {
-    "approach": "Encourage daily practice through fun activities like Latin word scavenger hunts and simple translation exercises.",
-    "tools": "Use digital apps and flashcards for vocabulary practice, and encourage students to create their own Latin stories."
+    "encouragement_triggers": [
+      "Praise students for their patience and persistence in learning new concepts.",
+      "Highlight progress in vocabulary retention and sentence construction."
+    ],
+    "practice_strategies": [
+      "Use flashcards for daily vocabulary drills.",
+      "Incorporate Latin games that reinforce declension patterns."
+    ]
   },
   "feedback_style": {
-    "tone": "Positive and constructive, focusing on what students did well before gently correcting errors.",
-    "method": "Provide specific examples and explanations for corrections, and encourage peer feedback in group activities."
+    "struggling_students": "Provide gentle corrections with visual aids and step-by-step explanations.",
+    "advanced_students": "Offer constructive feedback on sentence translations and encourage exploration of complex vocabulary."
   },
   "success_criteria": {
-    "vocabulary": "Students can recall and use the week's vocabulary words in simple sentences.",
-    "grammar": "Students demonstrate understanding of basic declensions and conjugations by correctly forming sentences.",
-    "engagement": "Students show enthusiasm and curiosity about Latin and Roman culture."
+    "mastery_indicators": [
+      "Correctly identify and use first declension nouns in sentences.",
+      "Translate simple Latin sentences into English accurately.",
+      "Demonstrate understanding of nominative and accusative cases."
+    ]
   },
   "knowledge_recycling": {
-    "approach": "Use a spiral learning method where each week builds on the previous, revisiting and expanding on past vocabulary and grammar concepts.",
-    "activities": "Incorporate review sessions and cumulative activities that connect new lessons with prior knowledge."
+    "spiral_learning": [
+      "Regularly revisit the nominative and accusative cases to solidify understanding.",
+      "Introduce exceptions to declension patterns to deepen comprehension.",
+      "Use previously learned vocabulary in new contexts to reinforce retention."
+    ]
   }
 }

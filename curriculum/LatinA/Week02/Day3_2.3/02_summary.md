@@ -6,22 +6,31 @@ validated_by: Steel
 originality_attestation: true
 ---
 
-# Week 0 Day 3: Introduction to Latin Noun Declensions
+# Latin A – Week 00 Day 3 : Exploring the World of *Amicus* – Review
 
 ## Objective
-Today, students will review and reinforce their understanding of Latin noun declensions, focusing on the forms and functions of nouns in different cases.
+Today, students will reinforce their understanding of the Latin noun *amicus*, focusing on its declensions and usage in sentences. They will also review key vocabulary and practice pronunciation.
 
 ## Prior Knowledge
-- Students have previously learned about the basic structure of Latin nouns and their importance in sentence construction.
-- Familiarity with the first declension endings, particularly in the nominative and accusative cases.
+- Students have previously learned the concept of declensions and how they affect noun endings in Latin.
+- Familiarity with basic Latin vocabulary such as *puella* (girl) and *puer* (boy) aids in understanding noun forms.
+- Knowledge of simple sentence structures in Latin, using subjects and verbs like *amo* (I love).
 
 ## Focus for Today
-- Grammar: Review of Latin noun declensions, emphasizing the nominative, genitive, dative, accusative, and ablative cases.
-- Chant: Practice chanting the endings of the first declension.
-- Vocabulary: puella, aqua, terra, amicus, servus, bellum, oppidum, via
+- Grammar: Review of noun declensions, specifically focusing on the noun *amicus*.
+- Chant: Reinforce the declension endings through chanting exercises.
+- Vocabulary: 
+  - amicus (friend)
+  - puella (girl)
+  - puer (boy)
+  - aqua (water)
+  - terra (earth)
+  - salve (hello)
+  - pax (peace)
+  - Deus (God)
 
 ## Virtue & Faith Connection
-Today's study of declensions highlights the virtue of perseverance, as students diligently practice and master the forms. The faith phrase "Deus est pax" reminds us that peace comes through understanding and order, much like the structure provided by Latin grammar.
+The virtue of friendship (*amicitia*) is highlighted today, encouraging students to reflect on how language connects us. The faith phrase reminds us of the peace (*pax*) that comes from understanding and harmony.
 
 ## Teacher Notes
-Encourage students to chant the declension endings aloud to reinforce memorization. Remind them of the importance of pronunciation, particularly with vowel lengths, to ensure clarity and accuracy in their Latin studies.
+Encourage students to chant the declension endings of *amicus* to solidify their memory. Remind them to pronounce each vowel clearly, especially the endings, to ensure accurate Latin pronunciation. Allow time for questions to address any confusion about noun forms.

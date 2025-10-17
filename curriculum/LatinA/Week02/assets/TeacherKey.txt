@@ -1,66 +1,67 @@
 ```markdown
 # Teacher Key – Week 2
 
-Hello, educators! Below is the answer key for the Grade 3 Latin A Week 2 Quiz. This key provides correct answers, explanations, and additional insights to aid in the teaching process. Enjoy guiding your students through the beauty of Latin! 😊
+Hello, educators! Below you'll find the answer key for the Grade 3 Latin A quiz for Week 2. Each answer includes explanations to help guide your students in their understanding of Latin vocabulary, grammar, and translation. Let's encourage our young learners as they explore the beauty of Latin!
 
 ## Vocabulary (5 points)
 
 1. **Fill in the blank:** The Latin word for "girl" is **puella**.  
-   - **Explanation:** "Puella" is the Latin word for "girl," and it is a first declension noun. This word is often used in beginner Latin texts.  
-   - **Correct Answer:** b) puella
+   - **Explanation:** "Puella" is the Latin word for "girl," distinguishing it from other nouns like "rosa" (rose) and "via" (road).
 
-2. **Multiple Choice:** What does "salve" mean in English?  
-   - **Explanation:** "Salve" is a common Latin greeting meaning "hello." It is used when addressing one person.  
-   - **Correct Answer:** b) Hello
+2. **Multiple Choice:** What does "aqua" mean in English?  
+   - **Correct Answer:** b) Water  
+   - **Explanation:** "Aqua" translates directly to "water" in English, a common Latin word that students will encounter often.
 
-3. **Fill in the blank:** The Latin word for "water" is **aqua**.  
-   - **Explanation:** "Aqua" is a first declension noun meaning "water." It is the root of many English words related to water, such as "aquarium."  
-   - **Correct Answer:** b) aqua
+3. **Fill in the blank:** The Latin word "terra" means **Earth** in English.  
+   - **Explanation:** "Terra" is used to refer to the Earth or land, highlighting its importance in both ancient and modern contexts.
 
-4. **Multiple Choice:** Which word means "road" in Latin?  
-   - **Explanation:** "Via" is the Latin word for "road" or "way." It is a first declension noun and is the root of the English word "via."  
-   - **Correct Answer:** b) via
+4. **Multiple Choice:** Which Latin word means "road"?  
+   - **Correct Answer:** c) via  
+   - **Explanation:** "Via" is the Latin term for "road," often used in phrases like "via media" (middle road).
 
-5. **Fill in the blank:** The Latin word for "forest" is **silva**.  
-   - **Explanation:** "Silva" means "forest" in Latin and is a first declension noun. It is the root of the English word "sylvan," which pertains to woods or forests.  
-   - **Correct Answer:** a) silva
+5. **Fill in the blank:** "Silva" translates to **forest** in English.  
+   - **Explanation:** "Silva" refers to a forest or woods, a term that appears in many classical texts.
 
 ## Grammar & Chant (5 points)
 
-6. **Short Response:** Write the nominative singular ending for first declension nouns.  
-   - **Explanation:** The nominative singular ending for first declension nouns is "-a." This ending is used for subjects of sentences.  
-   - **Correct Answer:** -a
+6. **Chant Recall:** Write the first declension singular endings in order.  
+   - **Correct Answer:** a, ae, ae, am, ā  
+   - **Explanation:** These endings are crucial for understanding how first declension nouns change based on their grammatical case.  
+   - **Chant Tip:** Practice chanting these endings to a simple melody to help students memorize them.
 
-7. **Multiple Choice:** Which of the following is a first declension noun ending?  
-   - **Explanation:** The ending "-a" is characteristic of first declension nouns in the nominative singular form.  
-   - **Correct Answer:** b) -a
+7. **Parsing:** What case is "puellae" in the phrase "puellae aquam amant"?  
+   - **Correct Answer:** nominative  
+   - **Explanation:** In this context, "puellae" is nominative plural, indicating the subject of the sentence.
 
-8. **Fill in the blank:** The chant for first declension nominative singular endings is **-a**.  
-   - **Explanation:** The chant for first declension nominative singular is simply "-a." A helpful rhythm tip is to say it with a short, clear sound.  
-   - **Correct Answer:** a
+8. **Short Response:** What is the nominative singular form of "rosa"?  
+   - **Correct Answer:** rosa  
+   - **Explanation:** "Rosa" is both the nominative singular form and the base form of the noun, used when the noun is the subject of the sentence.
 
-9. **Short Response:** Parse the word "puella" (identify its case and number).  
-   - **Explanation:** "Puella" is in the nominative case and singular number, used as the subject of a sentence.  
-   - **Correct Answer:** Nominative Singular
+9. **Chant Recall:** What is the accusative singular ending for first declension nouns?  
+   - **Correct Answer:** am  
+   - **Explanation:** The accusative singular ending "am" is used for direct objects in first declension nouns.  
+   - **Chant Tip:** Emphasize the "am" ending with a clap to reinforce its role as the direct object marker.
 
-10. **Multiple Choice:** Which of these is NOT a first declension noun?  
-    - **Explanation:** "Puer" is a second declension noun, not a first declension noun.  
-    - **Correct Answer:** c) puer
+10. **Parsing:** Identify the case and number of "aquam" in the sentence "Puella aquam portat."  
+    - **Correct Answer:** accusative singular  
+    - **Explanation:** "Aquam" is accusative singular, indicating it is the direct object of the verb "portat" (carries).
 
-## Translation (5 points)
+## Translation (6 points)
 
-11. **Translate to English:** "Terra est magna."  
-    - **Explanation:** "Terra" means "land," "est" means "is," and "magna" means "large." The sentence translates to "The land is large."  
-    - **Correct Answer:** The land is large.
+11. **Translate to English:** "Puella rosam videt."  
+    - **Correct Answer:** The girl sees the rose.  
+    - **Explanation:** "Puella" is the subject (nominative), "rosam" is the direct object (accusative), and "videt" is the verb (sees).
 
-12. **Translate to Latin:** "The girl is happy."  
-    - **Explanation:** "The girl" translates to "puella," "is" translates to "est," and "happy" translates to "laeta." The sentence is "Puella est laeta."  
-    - **Correct Answer:** Puella est laeta.
+12. **Translate to Latin:** "The girl loves the water."  
+    - **Correct Answer:** Puella aquam amat.  
+    - **Explanation:** "Puella" is the subject, "aquam" is the direct object, and "amat" is the verb (loves).
 
-## Virtue Reflection (5 points)
+## Virtue Reflection (4 points)
 
-13. **Short Written Response:** This week, we focused on the virtue of Patience. How can practicing patience help you when learning something new, like Latin? Write a few sentences about a time when being patient helped you learn better.  
-    - **Sample Response:** Practicing patience helps me stay calm and focused when I don't understand something right away. For example, when I was learning a difficult Latin chant, I took my time to repeat it slowly, and eventually, I memorized it. Patience allowed me to enjoy the learning process without feeling rushed.
+13. **Short Written Response:** This week, we focused on the virtue of perseverance. How can practicing patience and perseverance help you when learning new Latin words and grammar?  
+    - **Sample Response:** Practicing patience and perseverance helps me to not give up when I find Latin challenging. By being patient, I can take the time to understand each word and grammar rule, which helps me improve over time.
 
-Thank you for guiding your students through this quiz. Your dedication to their learning journey is invaluable!
+Thank you for guiding your students through this quiz. Remember, each step in learning Latin is a step towards greater understanding and mastery. Keep encouraging your students to persevere in their studies!
+
+---
 ```

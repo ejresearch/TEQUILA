@@ -6,27 +6,27 @@ validated_by: Steel
 originality_attestation: true
 ---
 
-# Week 0 Day 1: Introduction to Latin Nouns and Declensions
+# Latin A – Week 00 Day 1 : Discovering the World of Nouns – Discovery
 
 ## Objective
-Today, students will be introduced to the concept of Latin nouns and their declensions, focusing on understanding how nouns change form to express different grammatical cases.
+Today, students will begin their journey into the world of Latin nouns, focusing on understanding noun declensions and expanding their vocabulary with key Latin words.
 
 ## Prior Knowledge
-- Students have previously learned basic Latin vocabulary such as "puella" (girl) and "aqua" (water).
-- Familiarity with simple Latin greetings like "salve" (hello) will aid in pronunciation practice.
+Students have previously been introduced to basic Latin greetings such as "salve" and "vale," and have learned simple vocabulary like "puella" (girl) and "puer" (boy), which will aid in understanding noun forms.
 
 ## Focus for Today
-- **Grammar:** Introduction to the first declension of Latin nouns.
-- **Chant:** A rhythmic chant to help memorize the first declension endings.
-- **Vocabulary:**
+- Grammar: Introduction to noun declensions, focusing on the first declension.
+- Chant: A rhythmic chant to help memorize the endings of the first declension.
+- Vocabulary: 
   - puella (girl)
-  - aqua (water)
   - terra (earth)
-  - via (road)
+  - aqua (water)
+  - nauta (sailor)
   - agricola (farmer)
+  - femina (woman)
 
 ## Virtue & Faith Connection
-Today's study of Latin declensions highlights the virtue of diligence, as students learn to carefully observe the changes in noun endings. The faith phrase "Deus est bonus" (God is good) reminds us of the constancy and goodness in our studies.
+Today's study of nouns reflects the virtue of clarity, as understanding the structure of language brings clarity to communication. The faith phrase "Deus est lux" (God is light) reminds us that learning illuminates our path.
 
 ## Teacher Notes
-Encourage students to practice the pronunciation of each noun carefully, emphasizing the vowel sounds. Use the chant to reinforce the pattern of endings in the first declension, and remind students that repetition will aid in memorization.
+Encourage students to chant the declension endings aloud to reinforce memory. Remind them to pronounce each vowel clearly, as Latin pronunciation relies on distinct vowel sounds. Pacing should allow time for repetition and practice of both vocabulary and declension forms.

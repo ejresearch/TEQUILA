@@ -1,7 +1,7 @@
 ```markdown
 # Latin A – Week 2 Quiz
 
-Hello, Grade 3 Latin learners! Let's see how much you've learned about First Declension Nouns and more. Remember to take your time and do your best. 😊
+Hello, Grade 3 Latin learners! It's time to show what you've learned this week. Remember to take your time and do your best. Let's get started!
 
 ## Vocabulary (5 points)
 
@@ -11,63 +11,54 @@ Hello, Grade 3 Latin learners! Let's see how much you've learned about First Dec
    c) via  
    **(1 point)**
 
-2. **Multiple Choice:** What does "salve" mean in English?  
-   a) Goodbye  
-   b) Hello  
-   c) Please  
+2. **Multiple Choice:** What does "aqua" mean in English?  
+   a) Earth  
+   b) Water  
+   c) Forest  
    **(1 point)**
 
-3. **Fill in the blank:** The Latin word for "water" is _______.  
-   a) terra  
-   b) aqua  
-   c) silva  
+3. **Fill in the blank:** The Latin word "terra" means _______ in English.  
    **(1 point)**
 
-4. **Multiple Choice:** Which word means "road" in Latin?  
-   a) rosa  
-   b) via  
-   c) puella  
-   **(1 point)**
-
-5. **Fill in the blank:** The Latin word for "forest" is _______.  
+4. **Multiple Choice:** Which Latin word means "road"?  
    a) silva  
-   b) aqua  
-   c) terra  
+   b) rosa  
+   c) via  
+   **(1 point)**
+
+5. **Fill in the blank:** "Silva" translates to _______ in English.  
    **(1 point)**
 
 ## Grammar & Chant (5 points)
 
-6. **Short Response:** Write the nominative singular ending for first declension nouns.  
+6. **Chant Recall:** Write the first declension singular endings in order.  
    **(1 point)**
 
-7. **Multiple Choice:** Which of the following is a first declension noun ending?  
-   a) -us  
-   b) -a  
-   c) -um  
+7. **Parsing:** What case is "puellae" in the phrase "puellae aquam amant"?  
    **(1 point)**
 
-8. **Fill in the blank:** The chant for first declension nominative singular endings is _______.  
+8. **Short Response:** What is the nominative singular form of "rosa"?  
    **(1 point)**
 
-9. **Short Response:** Parse the word "puella" (identify its case and number).  
+9. **Chant Recall:** What is the accusative singular ending for first declension nouns?  
    **(1 point)**
 
-10. **Multiple Choice:** Which of these is NOT a first declension noun?  
-    a) rosa  
-    b) aqua  
-    c) puer  
+10. **Parsing:** Identify the case and number of "aquam" in the sentence "Puella aquam portat."  
     **(1 point)**
 
-## Translation (5 points)
+## Translation (6 points)
 
-11. **Translate to English:** "Terra est magna."  
-    **(2 points)**
-
-12. **Translate to Latin:** "The girl is happy."  
+11. **Translate to English:** "Puella rosam videt."  
     **(3 points)**
 
-## Virtue Reflection (5 points)
+12. **Translate to Latin:** "The girl loves the water."  
+    **(3 points)**
 
-13. **Short Written Response:** This week, we focused on the virtue of Patience. How can practicing patience help you when learning something new, like Latin? Write a few sentences about a time when being patient helped you learn better.  
-    **(5 points)**
-```
+## Virtue Reflection (4 points)
+
+13. **Short Written Response:** This week, we focused on the virtue of perseverance. How can practicing patience and perseverance help you when learning new Latin words and grammar?  
+    **(4 points)**
+
+Great job completing the quiz! Remember, every step you take in learning Latin is a step towards becoming a master. Keep up the good work!
+
+---

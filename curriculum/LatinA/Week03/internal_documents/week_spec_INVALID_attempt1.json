@@ -1,0 +1,401 @@
+```json
+{
+  "week_spec_kit": {
+    "week_info": {
+      "week_number": 3,
+      "title": "First Declension Nouns (Plural)",
+      "grammar_focus": "First Declension Plural Endings",
+      "chant": "-ae, -arum, -is, -as, -is",
+      "virtue_focus": "Diligence",
+      "faith_phrase": "Deo gratias - Thanks be to God",
+      "vocabulary_scope": [
+        "puella",
+        "stella",
+        "luna",
+        "porta",
+        "femina",
+        "nauta",
+        "salve",
+        "rosa"
+      ]
+    },
+    "generated_files": [
+      {
+        "file_name": "01_metadata.json",
+        "content": {
+          "week_number": 3,
+          "week_title": "First Declension Nouns (Plural)",
+          "grammar_focus": "First Declension Plural Endings",
+          "chant": "-ae, -arum, -is, -as, -is",
+          "virtue_focus": "Diligence",
+          "faith_phrase": "Deo gratias - Thanks be to God",
+          "vocabulary_summary": "Focus on first declension nouns in their plural forms, integrating the virtue of diligence and the faith phrase 'Deo gratias'.",
+          "author_metadata": {
+            "author_name": "TEQUILA Curriculum Team"
+          },
+          "originality_attestation": true,
+          "license": "CC BY 4.0"
+        }
+      },
+      {
+        "file_name": "02_objectives.json",
+        "content": {
+          "objectives": [
+            "Students will be able to chant and identify the plural endings of first declension nouns.",
+            "Students will demonstrate understanding of the virtue of diligence in their studies.",
+            "Students will use the faith phrase 'Deo gratias' in context.",
+            "Students will translate simple sentences using first declension plural nouns.",
+            "Students will recognize and apply first declension plural endings in written exercises."
+          ]
+        }
+      },
+      {
+        "file_name": "03_vocabulary.json",
+        "content": {
+          "vocabulary": [
+            {
+              "word": "puella",
+              "english": "girl",
+              "part_of_speech": "noun",
+              "pronunciation": "pweh-lah",
+              "example_phrase": "Puellae in horto ludunt.",
+              "recycled_from_week": 2
+            },
+            {
+              "word": "stella",
+              "english": "star",
+              "part_of_speech": "noun",
+              "pronunciation": "steh-lah",
+              "example_phrase": "Stellae in caelo fulgent."
+            },
+            {
+              "word": "luna",
+              "english": "moon",
+              "part_of_speech": "noun",
+              "pronunciation": "loo-nah",
+              "example_phrase": "Lunae clarae sunt."
+            },
+            {
+              "word": "porta",
+              "english": "gate",
+              "part_of_speech": "noun",
+              "pronunciation": "por-tah",
+              "example_phrase": "Portae magnae sunt."
+            },
+            {
+              "word": "femina",
+              "english": "woman",
+              "part_of_speech": "noun",
+              "pronunciation": "feh-mee-nah",
+              "example_phrase": "Feminae in foro sunt."
+            },
+            {
+              "word": "nauta",
+              "english": "sailor",
+              "part_of_speech": "noun",
+              "pronunciation": "now-tah",
+              "example_phrase": "Nautae in mari navigant."
+            },
+            {
+              "word": "salve",
+              "english": "hello",
+              "part_of_speech": "interjection",
+              "pronunciation": "sal-veh",
+              "example_phrase": "Salve, amice!",
+              "recycled_from_week": 1
+            },
+            {
+              "word": "rosa",
+              "english": "rose",
+              "part_of_speech": "noun",
+              "pronunciation": "roh-sah",
+              "example_phrase": "Rosae pulchrae sunt.",
+              "recycled_from_week": 2
+            }
+          ]
+        }
+      },
+      {
+        "file_name": "04_grammar_focus.md",
+        "content": "### Grammar Focus: First Declension Nouns (Plural)\n\nThis week, we focus on the plural forms of first declension nouns. In Latin, first declension nouns typically end in '-a' in the singular nominative case and are mostly feminine. The plural endings for these nouns are '-ae' for nominative, '-arum' for genitive, '-is' for dative and ablative, and '-as' for accusative.\n\n#### Chant for First Declension Plural Endings\n```\n-ae, -arum, -is, -as, -is\n```\n\nWe will build on our knowledge of singular forms by practicing these plural endings through chants and exercises. Understanding these endings will help students form and translate simple Latin sentences accurately."
+      },
+      {
+        "file_name": "05_virtue_focus.md",
+        "content": "### Virtue Focus: Diligence\n\nDiligence is the careful and persistent effort to achieve a goal. In learning Latin, diligence means consistently practicing vocabulary and grammar. Proverbs 13:4 reminds us, \"The soul of the sluggard craves and gets nothing, while the soul of the diligent is richly supplied.\" As we study, let us be diligent, knowing that our efforts will lead to greater understanding and skill."
+      },
+      {
+        "file_name": "06_faith_phrase.md",
+        "content": "### Faith Phrase: Deo gratias\n\n'**Deo gratias**' means 'Thanks be to God'. This phrase is used to express gratitude and is a reminder to thank God for the opportunity to learn and grow. As we study Latin, let us say 'Deo gratias' for the knowledge we gain and the diligence we practice."
+      },
+      {
+        "file_name": "07_prior_knowledge_digest.json",
+        "content": {
+          "prior_knowledge": [
+            {
+              "source_week": 1,
+              "concept": "salve",
+              "reuse_reason": "Reinforce greeting vocabulary"
+            },
+            {
+              "source_week": 2,
+              "concept": "rosa",
+              "reuse_reason": "Review first declension noun"
+            },
+            {
+              "source_week": 2,
+              "concept": "1st declension endings",
+              "reuse_reason": "Foundation for plural forms"
+            }
+          ]
+        }
+      },
+      {
+        "file_name": "08_chant_chart.txt",
+        "content": "Chant for First Declension Plural Endings:\nLeader: -ae\nClass: -ae\nLeader: -arum\nClass: -arum\nLeader: -is\nClass: -is\nLeader: -as\nClass: -as\nLeader: -is\nClass: -is"
+      },
+      {
+        "file_name": "09_assessment_overview.json",
+        "content": {
+          "quiz_structure": {
+            "sections": [
+              {
+                "type": "Vocabulary Recall",
+                "description": "Students will recall and write the meanings of the week's vocabulary words.",
+                "sample_items": [
+                  "Write the English meaning of 'puella'.",
+                  "What does 'stella' mean?"
+                ]
+              },
+              {
+                "type": "Grammar Application",
+                "description": "Fill in the blanks with the correct plural endings for first declension nouns.",
+                "sample_items": [
+                  "Puellae in horto _____.",
+                  "Portae magnae _____."
+                ]
+              },
+              {
+                "type": "Derivatives",
+                "description": "Match Latin words with their English derivatives.",
+                "sample_items": [
+                  "Match 'luna' with 'lunar'.",
+                  "Match 'nauta' with 'nautical'."
+                ]
+              },
+              {
+                "type": "Translation Practice",
+                "description": "Translate short Latin sentences into English.",
+                "sample_items": [
+                  "Translate: 'Feminae in foro sunt.'",
+                  "Translate: 'Nautae in mari navigant.'"
+                ]
+              }
+            ]
+          },
+          "scoring_notes": "Each section is worth 25 points, with a total of 100 points possible. Partial credit is available for partially correct answers.",
+          "review_before_quiz": "Review the chant for plural endings and practice vocabulary flashcards."
+        }
+      },
+      {
+        "file_name": "10_teacher_notes.md",
+        "content": "### Teacher Notes\n\n**Pronunciation Cues:**\n- Emphasize the long vowels in words like 'fēmina' and 'lūna'.\n\n**Pacing Advice:**\n- Spend extra time on the chant to ensure students are comfortable with the plural endings.\n\n**Connections to Prior Weeks:**\n- Review singular forms from Week 2 to reinforce the transition to plural forms.\n\n**Differentiation Strategies:**\n- For struggling students, use visual aids and color-coded charts to highlight plural endings.\n- Encourage advanced students to create sentences using additional first declension nouns.\n\n**Materials Needed:**\n- Chant charts and flashcards for vocabulary review."
+      },
+      {
+        "file_name": "11_weekly_review_questions.md",
+        "content": "### Weekly Review Questions\n\n1. What is the plural nominative ending for first declension nouns?\n2. Translate 'Puellae in horto ludunt.'\n3. What does 'Deo gratias' mean?\n4. Match 'stella' with its English derivative.\n5. How does diligence help in learning Latin?\n\n---\n\n**Answer Key**\n\n1. -ae\n2. The girls play in the garden.\n3. Thanks be to God.\n4. Star\n5. Diligence helps by ensuring consistent practice and mastery of the material."
+      },
+      {
+        "file_name": "99_compiled_week_spec.json",
+        "content": {
+          "week_info": {
+            "week_number": 3,
+            "title": "First Declension Nouns (Plural)",
+            "grammar_focus": "First Declension Plural Endings",
+            "chant": "-ae, -arum, -is, -as, -is",
+            "virtue_focus": "Diligence",
+            "faith_phrase": "Deo gratias - Thanks be to God",
+            "vocabulary_scope": [
+              "puella",
+              "stella",
+              "luna",
+              "porta",
+              "femina",
+              "nauta",
+              "salve",
+              "rosa"
+            ]
+          },
+          "generated_files": [
+            {
+              "file_name": "01_metadata.json",
+              "content": {
+                "week_number": 3,
+                "week_title": "First Declension Nouns (Plural)",
+                "grammar_focus": "First Declension Plural Endings",
+                "chant": "-ae, -arum, -is, -as, -is",
+                "virtue_focus": "Diligence",
+                "faith_phrase": "Deo gratias - Thanks be to God",
+                "vocabulary_summary": "Focus on first declension nouns in their plural forms, integrating the virtue of diligence and the faith phrase 'Deo gratias'.",
+                "author_metadata": {
+                  "author_name": "TEQUILA Curriculum Team"
+                },
+                "originality_attestation": true,
+                "license": "CC BY 4.0"
+              }
+            },
+            {
+              "file_name": "02_objectives.json",
+              "content": {
+                "objectives": [
+                  "Students will be able to chant and identify the plural endings of first declension nouns.",
+                  "Students will demonstrate understanding of the virtue of diligence in their studies.",
+                  "Students will use the faith phrase 'Deo gratias' in context.",
+                  "Students will translate simple sentences using first declension plural nouns.",
+                  "Students will recognize and apply first declension plural endings in written exercises."
+                ]
+              }
+            },
+            {
+              "file_name": "03_vocabulary.json",
+              "content": {
+                "vocabulary": [
+                  {
+                    "word": "puella",
+                    "english": "girl",
+                    "part_of_speech": "noun",
+                    "pronunciation": "pweh-lah",
+                    "example_phrase": "Puellae in horto ludunt.",
+                    "recycled_from_week": 2
+                  },
+                  {
+                    "word": "stella",
+                    "english": "star",
+                    "part_of_speech": "noun",
+                    "pronunciation": "steh-lah",
+                    "example_phrase": "Stellae in caelo fulgent."
+                  },
+                  {
+                    "word": "luna",
+                    "english": "moon",
+                    "part_of_speech": "noun",
+                    "pronunciation": "loo-nah",
+                    "example_phrase": "Lunae clarae sunt."
+                  },
+                  {
+                    "word": "porta",
+                    "english": "gate",
+                    "part_of_speech": "noun",
+                    "pronunciation": "por-tah",
+                    "example_phrase": "Portae magnae sunt."
+                  },
+                  {
+                    "word": "femina",
+                    "english": "woman",
+                    "part_of_speech": "noun",
+                    "pronunciation": "feh-mee-nah",
+                    "example_phrase": "Feminae in foro sunt."
+                  },
+                  {
+                    "word": "nauta",
+                    "english": "sailor",
+                    "part_of_speech": "noun",
+                    "pronunciation": "now-tah",
+                    "example_phrase": "Nautae in mari navigant."
+                  },
+                  {
+                    "word": "salve",
+                    "english": "hello",
+                    "part_of_speech": "interjection",
+                    "pronunciation": "sal-veh",
+                    "example_phrase": "Salve, amice!",
+                    "recycled_from_week": 1
+                  },
+                  {
+                    "word": "rosa",
+                    "english": "rose",
+                    "part_of_speech": "noun",
+                    "pronunciation": "roh-sah",
+                    "example_phrase": "Rosae pulchrae sunt.",
+                    "recycled_from_week": 2
+                  }
+                ]
+              }
+            },
+            {
+              "file_name": "04_grammar_focus.md",
+              "content": "### Grammar Focus: First Declension Nouns (Plural)\n\nThis week, we focus on the plural forms of first declension nouns. In Latin, first declension nouns typically end in '-a' in the singular nominative case and are mostly feminine. The plural endings for these nouns are '-ae' for nominative, '-arum' for genitive, '-is' for dative and ablative, and '-as' for accusative.\n\n#### Chant for First Declension Plural Endings\n```\n-ae, -arum, -is, -as, -is\n```\n\nWe will build on our knowledge of singular forms by practicing these plural endings through chants and exercises. Understanding these endings will help students form and translate simple Latin sentences accurately."
+            },
+            {
+              "file_name": "05_virtue_focus.md",
+              "content": "### Virtue Focus: Diligence\n\nDiligence is the careful and persistent effort to achieve a goal. In learning Latin, diligence means consistently practicing vocabulary and grammar. Proverbs 13:4 reminds us, \"The soul of the sluggard craves and gets nothing, while the soul of the diligent is richly supplied.\" As we study, let us be diligent, knowing that our efforts will lead to greater understanding and skill."
+            },
+            {
+              "file_name": "06_faith_phrase.md",
+              "content": "### Faith Phrase: Deo gratias\n\n'**Deo gratias**' means 'Thanks be to God'. This phrase is used to express gratitude and is a reminder to thank God for the opportunity to learn and grow. As we study Latin, let us say 'Deo gratias' for the knowledge we gain and the diligence we practice."
+            },
+            {
+              "file_name": "07_prior_knowledge_digest.json",
+              "content": {
+                "prior_knowledge": [
+                  {
+                    "source_week": 1,
+                    "concept": "salve",
+                    "reuse_reason": "Reinforce greeting vocabulary"
+                  },
+                  {
+                    "source_week": 2,
+                    "concept": "rosa",
+                    "reuse_reason": "Review first declension noun"
+                  },
+                  {
+                    "source_week": 2,
+                    "concept": "1st declension endings",
+                    "reuse_reason": "Foundation for plural forms"
+                  }
+                ]
+              }
+            },
+            {
+              "file_name": "08_chant_chart.txt",
+              "content": "Chant for First Declension Plural Endings:\nLeader: -ae\nClass: -ae\nLeader: -arum\nClass: -arum\nLeader: -is\nClass: -is\nLeader: -as\nClass: -as\nLeader: -is\nClass: -is"
+            },
+            {
+              "file_name": "09_assessment_overview.json",
+              "content": {
+                "quiz_structure": {
+                  "sections": [
+                    {
+                      "type": "Vocabulary Recall",
+                      "description": "Students will recall and write the meanings of the week's vocabulary words.",
+                      "sample_items": [
+                        "Write the English meaning of 'puella'.",
+                        "What does 'stella' mean?"
+                      ]
+                    },
+                    {
+                      "type": "Grammar Application",
+                      "description": "Fill in the blanks with the correct plural endings for first declension nouns.",
+                      "sample_items": [
+                        "Puellae in horto _____.",
+                        "Portae magnae _____."
+                      ]
+                    },
+                    {
+                      "type": "Derivatives",
+                      "description": "Match Latin words with their English derivatives.",
+                      "sample_items": [
+                        "Match 'luna' with 'lunar'.",
+                        "Match 'nauta' with 'nautical'."
+                      ]
+                    },
+                    {
+                      "type": "Translation Practice",
+                      "description": "Translate short Latin sentences into English.",
+                      "sample_items": [
+                        "Translate: 'Feminae in foro sunt.'",
+                        "Translate: 'Nautae in mari navigant.'"
+                      ]
+                    }
+                  ]
+                },
+                "scoring_notes": "Each section is worth 25

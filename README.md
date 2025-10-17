@@ -1,4 +1,4 @@
-TEQUILA: AI-Powered Latin A Curriculum Generator (v1.1)
+TEQUILA: AI-Powered Latin A Curriculum Generator (v1.3.0)
 
 Not the quantum TEQUILA project.
 This is an AI curriculum system for Latin A, not related to quantum computing.
@@ -8,6 +8,8 @@ This is an AI curriculum system for Latin A, not related to quantum computing.
 Overview
 
 TEQUILA (or Steel) is a provider-agnostic curriculum engine that auto-generates a full 35-week Latin A course (4 lessons per week, 7 fields per lesson). It enforces pedagogical rules (spiral review, ≥ 25% recall, virtue alignment, single tutor voice) and produces exportable teaching materials with provenance metadata.
+
+**New in v1.3.0**: Universal metadata extraction fix ensures all 4 days stay focused on the week's grammar topic. Added format-agnostic helper function supporting v1.0, v1.1, and custom week spec structures. Successfully tested with Weeks 2-3 generation.
 
 **New in v1.1**: Two-phase generation architecture with master curriculum outline integration. Weeks are now planned first (internal_documents/), then days are generated from those planning documents, ensuring consistent scope & sequence across all 35 weeks.
 
@@ -208,7 +210,13 @@ CI / Testing
 
 ⸻
 
-Key Features (v1.1)
+Key Features (v1.3.0)
+
+**Universal Metadata Extraction**:
+- Format-agnostic `_extract_from_week_spec()` helper function
+- Supports v1.0 (flat keys), v1.1 (nested generated_files array), and custom formats
+- Ensures all 4 days stay focused on week's grammar topic
+- Prevents topic drift that occurred when metadata extraction failed
 
 **Two-Phase Architecture**:
 - Phase 1 generates week planning documents from master curriculum outline

@@ -15,9 +15,6 @@ __pycache__/
 .coverage
 htmlcov/
 
-# Curriculum exports
-/curriculum/exports/
-
 # Environment
 .env
 
@@ -26,8 +23,78 @@ htmlcov/
 .idea/
 *.swp
 *.swo
+.DS_Store
 
 # Build
 build/
 dist/
 *.egg-info/
+
+# Logs (keep directory structure, ignore content)
+logs/*.log
+logs/**/*.log
+logs/invalid_responses/*.json
+
+# Curriculum - Generated Content Strategy:
+# Keep: Gold standard weeks (1, 11-15) as reference
+# Ignore: All other generated weeks (2-10, 16-35)
+curriculum/LatinA/Week02/
+curriculum/LatinA/Week03/
+curriculum/LatinA/Week04/
+curriculum/LatinA/Week05/
+curriculum/LatinA/Week06/
+curriculum/LatinA/Week07/
+curriculum/LatinA/Week08/
+curriculum/LatinA/Week09/
+curriculum/LatinA/Week10/
+curriculum/LatinA/Week16/
+curriculum/LatinA/Week17/
+curriculum/LatinA/Week18/
+curriculum/LatinA/Week19/
+curriculum/LatinA/Week20/
+curriculum/LatinA/Week21/
+curriculum/LatinA/Week22/
+curriculum/LatinA/Week23/
+curriculum/LatinA/Week24/
+curriculum/LatinA/Week25/
+curriculum/LatinA/Week26/
+curriculum/LatinA/Week27/
+curriculum/LatinA/Week28/
+curriculum/LatinA/Week29/
+curriculum/LatinA/Week30/
+curriculum/LatinA/Week31/
+curriculum/LatinA/Week32/
+curriculum/LatinA/Week33/
+curriculum/LatinA/Week34/
+curriculum/LatinA/Week35/
+
+# Exports (ZIP files)
+curriculum/LatinA/exports/
+
+# Usage tracking
+curriculum/usage/
+
+# Invalid generation attempts
+**/internal_documents/*INVALID*.json
+**/internal_documents/week_spec_INVALID*.json
+
+# Frontend (if applicable)
+frontend/node_modules/
+frontend/dist/
+frontend/.next/
+frontend/build/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
+commit_*.sh
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Dev docs (temporary notes)
+dev_docs/
